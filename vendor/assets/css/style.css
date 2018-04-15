@@ -251,7 +251,7 @@ a {
   z-index: 999; }
 
 .headerbar .headerbar-left {
-    background: #4980b5;
+    background: #8f574a;
     float: left;
     text-align: center;
     height: 50px;
@@ -267,7 +267,7 @@ a {
 }
 	  
 .navbar-custom {
-  background-color: #4980b5 ;
+  background-color: #8f574a ;
   border-radius: 0;
   margin-bottom: 0;
   padding: 0 10px;
@@ -449,7 +449,7 @@ body.adminbody .main-sidebar.left {
 
 #sidebar-menu > ul > li > a.active {
   color: #ffffff !important;
-  background-color: #6194c1; }
+  background-color: #a86454; }
 
 .menu-title {
   padding: 12px 20px !important;

@@ -10,11 +10,10 @@ $( document ).ready(function() {
 
 !function($) {
     "use strict";
-	
     var Sidemenu = function() {
         this.$body = $("body"),
         this.$openLeftBtn = $(".open-left"),
-        this.$menuItem = $("#sidebar-menu a")
+        this.$menuItem = $("#sidebar-menu")
     };
     Sidemenu.prototype.openLeftBar = function() {
       $("#main").toggleClass("enlarged");
@@ -43,7 +42,7 @@ $( document ).ready(function() {
           // hide any open menus and remove all other classes
           $("ul",$(this).parents("ul:first")).slideUp(350);
           $("a",$(this).parents("ul:first")).removeClass("subdrop");
-          $("#sidebar-menu .pull-right i").removeClass("md-remove").addClass("md-add");
+          $("#sidebar-menu").find(".pull-right i").removeClass("md-remove").addClass("md-add");
 
           // open our new menu and add the open class
           $(this).next("ul").slideDown(350);
@@ -75,13 +74,13 @@ $( document ).ready(function() {
       $this.$menuItem.on(event, $this.menuItemClick);
 
       // NAVIGATION HIGHLIGHT & OPEN PARENT
-      $("#sidebar-menu ul li.submenu a.active").parents("li:last").children("a:first").addClass("active").trigger("click");
+      $("#sidebar-menu").find("ul li.submenu a.active").parents("li:last").children("a:first").addClass("active").trigger("click");
     },
 
     //init Sidemenu
     $.Sidemenu = new Sidemenu, $.Sidemenu.Constructor = Sidemenu
 
-}(window.jQuery),
+}(window.$),
 
 
 //main app module
@@ -123,13 +122,13 @@ $( document ).ready(function() {
 
     $.App = new App, $.App.Constructor = App
 
-}(window.jQuery),
+}(window.$),
 
 //initializing main application module
 function($) {
     "use strict";
     $.App.init();
-}(window.jQuery);
+}(window.$);
 
 
 function executeFunctionByName(functionName, context) {
@@ -148,7 +147,7 @@ var changeptype = function(){
     dw = $(document).width();
     dh = $(document).height();
 
-    if(jQuery.browser.mobile === true){
+    if($.support.mobile === true){
         $("body").addClass("mobile").removeClass("adminbody");
     }
 

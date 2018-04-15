@@ -3,7 +3,7 @@ function initThemeChooser(settings) {
 	var isInitialized = false;
 	var $currentStylesheet = $();
 	var $loading = $('#loading');
-	var $systemSelect = $('#theme-system-selector select')
+	var $systemSelect = $('#theme-system-selector').find('select')
 		.on('change', function() {
 			setThemeSystem(this.value);
 		});
