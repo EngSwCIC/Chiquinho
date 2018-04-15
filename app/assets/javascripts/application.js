@@ -17,3 +17,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require pike-index
+//= require counterup/jquery.counterup.min.js
+//= require waypoints/lib/jquery.waypoints.min.js
