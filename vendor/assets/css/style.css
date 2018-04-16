@@ -348,7 +348,7 @@ body.adminbody .main-sidebar.left {
 #sidebar-menu, #sidebar-menu ul, #sidebar-menu li, #sidebar-menu a {
   border: 0;
   font-weight: normal;
-  line-height: 2.5 !important;
+  line-height: 2.0 !important;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -359,7 +359,7 @@ body.adminbody .main-sidebar.left {
   padding-bottom: 30px;
   width: 100%; }
   #sidebar-menu a {
-    line-height: 2.3; }
+    line-height: 2.0; }
   #sidebar-menu ul li .menu-arrow {
     -webkit-transition: -webkit-transform .15s;
     -o-transition: -o-transform .15s;
@@ -370,7 +370,7 @@ body.adminbody .main-sidebar.left {
     display: inline-block;
     font-family: 'FontAwesome';
     text-rendering: auto;
-    line-height: 2.5;
+    line-height: 2.0;
     font-size: 1.1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -436,7 +436,7 @@ body.adminbody .main-sidebar.left {
 #sidebar-menu ul li a i {
   display: inline-block;
   font-size: 1.1rem !important;
-  line-height: 2.5;
+  line-height: 2.0;
   margin-left: 3px;
   margin-right: 15px;
   text-align: center;
