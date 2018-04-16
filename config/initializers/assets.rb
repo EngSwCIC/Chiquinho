@@ -11,6 +11,7 @@ Rails.application.config.assets.precompile += %w( pikeadmin.js)
 Rails.application.config.assets.precompile += %w( pike-index.js)
 Rails.application.config.assets.precompile += %w( counterup/jquery.counterup.min.js )
 Rails.application.config.assets.precompile += %w( waypoints/lib/jquery.waypoints.min.js )
+Rails.application.config.assets.precompile += %w( favicon.ico )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
