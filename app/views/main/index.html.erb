@@ -9,9 +9,7 @@
     <div class="headerbar-left">
       <a href="index.html" class="logo"><img alt="L" src='<%= image_path "chiquinho.jpg"%>' /> <span>Chiquinho</span></a>
     </div>
-
     <nav class="navbar-custom">
-
       <ul class="list-inline float-right mb-0">
 
         <li class="list-inline-item dropdown notif">
@@ -47,7 +45,6 @@
 
           </div>
         </li>
-
         <li class="list-inline-item dropdown notif">
           <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
             <i class="fa fa-fw fa-envelope-o"></i><span class="notif-bullet"></span>
@@ -173,10 +170,9 @@
             </a>
           </div>
         </li>
-
       </ul>
 
-      <ul class="list-inline menu-left mb-0">
+      <ul class="list-inline float-left mb-0">
         <li class="float-left">
           <button class="button-menu-mobile open-left">
             <i class="fa fa-fw fa-bars"></i>
@@ -208,7 +204,7 @@
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-fw fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+            <a href="#" id="table-dropdown"><i class="fa fa-fw fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
             <ul class="list-unstyled">
               <li><a href="tables-basic.html">Basic Tables</a></li>
               <li><a href="tables-datatable.html">Data Tables</a></li>
@@ -216,7 +212,7 @@
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-fw fa-tv"></i> <span> User Interface </span> <span class="menu-arrow"></span></a>
+            <a href="#" id="table-dropdown2"><i class="fa fa-fw fa-tv"></i> <span> User Interface </span> <span class="menu-arrow"></span></a>
             <ul class="list-unstyled">
               <li><a href="ui-alerts.html">Alerts</a></li>
               <li><a href="ui-buttons.html">Buttons</a></li>
@@ -230,7 +226,7 @@
           </li>
 
           <li class="submenu">
-            <a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+            <a href="#" id="table-dropdown3"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
             <ul class="list-unstyled">
               <li><a href="forms-general.html">General Elements</a></li>
               <li><a href="forms-select2.html">Select2</a></li>
@@ -242,72 +238,6 @@
             </ul>
           </li>
 
-          <li class="submenu">
-            <a href="#"><i class="fa fa-fw fa-th"></i> <span> Plugins </span> <span class="menu-arrow"></span></a>
-            <ul class="list-unstyled">
-              <li><a href="star-rating.html">Star Rating</a></li>
-              <li><a href="range-sliders.html">Range Sliders</a></li>
-              <li><a href="tree-view.html">Tree View</a></li>
-              <li><a href="sweetalert.html">SweetAlert</a></li>
-              <li><a href="calendar.html">Calendar</a></li>
-              <li><a href="gmaps.html">GMaps</a></li>
-              <li><a href="counter-up.html">Counter-Up</a></li>
-            </ul>
-          </li>
-
-          <li class="submenu">
-            <a href="#"><i class="fa fa-fw fa-image"></i> <span> Images and Galleries </span> <span class="menu-arrow"></span></a>
-            <ul class="list-unstyled">
-              <li><a href="media-fancybox.html"><span class="label radius-circle bg-danger float-right">cool</span> Fancybox </a></li>
-              <li><a href="media-masonry.html">Masonry</a></li>
-              <li><a href="media-lightbox.html">Lightbox</a></li>
-              <li><a href="media-owl-carousel.html">Owl Carousel</a></li>
-              <li><a href="media-image-magnifier.html">Image Magnifier</a></li>
-
-            </ul>
-          </li>
-
-          <li class="submenu">
-            <a href="#"><span class="label radius-circle bg-danger float-right">20</span><i class="fa fa-fw fa-copy"></i><span> Example Pages </span></a>
-            <ul class="list-unstyled">
-              <li><a href="page-pricing-tables.html">Pricing Tables</a></li>
-              <li><a target="_blank" href="page-coming-soon.html">Countdown</a></li>
-              <li><a href="page-invoice.html">Invoice</a></li>
-              <li><a href="page-login.html">Login / Register</a></li>
-              <li><a href="page-blank.html">Blank Page</a></li>
-            </ul>
-          </li>
-
-          <li class="submenu">
-            <a href="#"><span class="label radius-circle bg-primary float-right">9</span><i class="fa fa-fw fa-indent"></i><span> Menu Levels </span></a>
-            <ul>
-              <li>
-                <a href="#"><span>Second Level</span></a>
-              </li>
-              <li class="submenu">
-                <a href="#"><span>Third Level</span> <span class="menu-arrow"></span> </a>
-                <ul style="">
-                  <li><a href="#"><span>Third Level Item</span></a></li>
-                  <li><a href="#"><span>Third Level Item</span></a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <li class="submenu">
-            <a class="pro" href="#"><i class="fa fa-fw fa-star"></i><span> Pike Admin PRO </span> <span class="menu-arrow"></span></a>
-            <ul class="list-unstyled">
-              <li><a target="_blank" href="https://www.pikeadmin.com/pike-admin-pro">Admin PRO features</a></li>
-              <li><a href="pro-settings.html">Settings</a></li>
-              <li><a href="pro-profile.html">My Profile</a></li>
-              <li><a href="pro-users.html">Users</a></li>
-              <li><a href="pro-articles.html">Articles</a></li>
-              <li><a href="pro-categories.html">Categories</a></li>
-              <li><a href="pro-pages.html">Pages</a></li>
-              <li><a href="pro-contact-messages.html">Contact Messages</a></li>
-              <li><a href="pro-slider.html">Slider</a></li>
-            </ul>
-          </li>
 
         </ul>
 
@@ -912,6 +842,78 @@
 
     });
 </script>
+
+  <script>
+      document.getElementById("table-dropdown").addEventListener("click", function(e) {
+          if(!$("#main").hasClass("enlarged")){
+              if($(this).parent().hasClass("submenu")) {
+
+              }
+              if(!$(this).hasClass("subdrop")) {
+                  // hide any open menus and remove all other classes
+                  $("ul",$(this).parents("ul:first")).slideUp(350);
+                  $("a",$(this).parents("ul:first")).removeClass("subdrop");
+                  $("#sidebar-menu").find(".pull-right i").removeClass("md-remove").addClass("md-add");
+
+                  // open our new menu and add the open class
+                  $(this).next("ul").slideDown(350);
+                  $(this).addClass("subdrop");
+                  $(".pull-right i",$(this).parents(".submenu:last")).removeClass("md-add").addClass("md-remove");
+                  $(".pull-right i",$(this).siblings("ul")).removeClass("md-remove").addClass("md-add");
+              }else if($(this).hasClass("subdrop")) {
+                  $(this).removeClass("subdrop");
+                  $(this).next("ul").slideUp(350);
+                  $(".pull-right i",$(this).parent()).removeClass("md-remove").addClass("md-add");
+              }
+          }
+      });
+      document.getElementById("table-dropdown2").addEventListener("click", function(e) {
+          if(!$("#main").hasClass("enlarged")){
+              if($(this).parent().hasClass("submenu")) {
+
+              }
+              if(!$(this).hasClass("subdrop")) {
+                  // hide any open menus and remove all other classes
+                  $("ul",$(this).parents("ul:first")).slideUp(350);
+                  $("a",$(this).parents("ul:first")).removeClass("subdrop");
+                  $("#sidebar-menu").find(".pull-right i").removeClass("md-remove").addClass("md-add");
+
+                  // open our new menu and add the open class
+                  $(this).next("ul").slideDown(350);
+                  $(this).addClass("subdrop");
+                  $(".pull-right i",$(this).parents(".submenu:last")).removeClass("md-add").addClass("md-remove");
+                  $(".pull-right i",$(this).siblings("ul")).removeClass("md-remove").addClass("md-add");
+              }else if($(this).hasClass("subdrop")) {
+                  $(this).removeClass("subdrop");
+                  $(this).next("ul").slideUp(350);
+                  $(".pull-right i",$(this).parent()).removeClass("md-remove").addClass("md-add");
+              }
+          }
+      });
+      document.getElementById("table-dropdown3").addEventListener("click", function(e) {
+          if(!$("#main").hasClass("enlarged")){
+              if($(this).parent().hasClass("submenu")) {
+
+              }
+              if(!$(this).hasClass("subdrop")) {
+                  // hide any open menus and remove all other classes
+                  $("ul",$(this).parents("ul:first")).slideUp(350);
+                  $("a",$(this).parents("ul:first")).removeClass("subdrop");
+                  $("#sidebar-menu").find(".pull-right i").removeClass("md-remove").addClass("md-add");
+
+                  // open our new menu and add the open class
+                  $(this).next("ul").slideDown(350);
+                  $(this).addClass("subdrop");
+                  $(".pull-right i",$(this).parents(".submenu:last")).removeClass("md-add").addClass("md-remove");
+                  $(".pull-right i",$(this).siblings("ul")).removeClass("md-remove").addClass("md-add");
+              }else if($(this).hasClass("subdrop")) {
+                  $(this).removeClass("subdrop");
+                  $(this).next("ul").slideUp(350);
+                  $(".pull-right i",$(this).parent()).removeClass("md-remove").addClass("md-add");
+              }
+          }
+      });
+  </script>
 <!-- END Java Script for this page -->
   <%= javascript_include_tag "pike-index" %>
 <%= javascript_include_tag "counterup/jquery.counterup.min.js" %>

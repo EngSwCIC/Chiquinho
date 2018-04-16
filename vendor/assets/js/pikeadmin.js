@@ -34,7 +34,8 @@ $( document ).ready(function() {
     },
     //menu item click
     Sidemenu.prototype.menuItemClick = function(e) {
-       if(!$("#main").hasClass("enlarged")){
+        e.stopPropagation();
+        if(!$("#main").hasClass("enlarged")){
         if($(this).parent().hasClass("submenu")) {
 
         }
