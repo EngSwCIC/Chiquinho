@@ -150,6 +150,10 @@ img {
   max-width: 250px;
   margin-top: 25px;
 }
+
+.img-side-menu {
+  display: none;
+}
   
 .breadcrumb-holder {
   background-color: #ffffff;

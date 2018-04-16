@@ -18,6 +18,7 @@ $( document ).ready(function() {
     Sidemenu.prototype.openLeftBar = function() {
       $("#main").toggleClass("enlarged");
       $("#main").addClass("forced");
+      $("#chiquinho_alt").toggleClass("img-side-menu");
 
       if($("#main").hasClass("enlarged") && $("body").hasClass("adminbody")) {
         $("body").removeClass("adminbody").addClass("adminbody-void");
