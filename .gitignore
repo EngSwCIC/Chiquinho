@@ -24,3 +24,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
