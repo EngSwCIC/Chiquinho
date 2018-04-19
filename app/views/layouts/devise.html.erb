@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chiquinho</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+  <%= favicon_link_tag %>
+</head>
+<body class="adminbody">
+<div id="main">
+  <%= render 'layouts/header' %>
+  <div class="content-page">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+  <%= render 'layouts/footer' %>
+</div>
+</body>
+</html>

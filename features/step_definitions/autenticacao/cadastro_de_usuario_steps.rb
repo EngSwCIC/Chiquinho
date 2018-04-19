@@ -11,7 +11,7 @@ end
 
 Quando("preencher o formulário com:") do |table|
   # table is a Cucumber::MultilineArgument::DataTable
-  table.hash_rows.each do |field,value|
+  table.rows_hash.each do |field,value|
     fill_in field, with: value
   end
 end
@@ -21,7 +21,7 @@ Quando("clicar no botão {string}") do |btn_cadastrar|
 end
 
 Então("eu devo ser redirecionado para página inicial") do
-  exepect(current_path).to eq("/")
+  expect(current_path).to eq("/")
 end
 
 Então("devo ver os conteúdos {string} e meu primeiro nome {string}") do |success_message,first_name|
