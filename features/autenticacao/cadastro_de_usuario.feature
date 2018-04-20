@@ -8,7 +8,8 @@ Funcionalidade: Cadastro de Usuário
 
   Cenário: Cadastro efetuado com sucesso
     Dado que eu esteja na página inicial
-    Quando eu clicar no link "Cadastrar"
+    Quando eu clicar no link "Entrar"
+    E eu clicar no link "Novo usuário? Cadastre-se"
     E preencher o formulário com:
     |user_email|nicknish@hotmail.com     |
     |user_matricula |150019343           |

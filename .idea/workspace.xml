@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50f42df3-92f2-478d-9187-4b455834d384" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/vendor/assets/css/login-style.css" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" />
       <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
       <change beforePath="$PROJECT_DIR$/app/views/devise/shared/_links.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/shared/_links.html.erb" />
       <change beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/devise.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/devise.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/main.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/main.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/main/index.html.erb" afterPath="$PROJECT_DIR$/app/views/main/index.html.erb" />
-      <change beforePath="$PROJECT_DIR$/config/initializers/assets.rb" afterPath="$PROJECT_DIR$/config/initializers/assets.rb" />
+      <change beforePath="$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature" afterPath="$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature" />
+      <change beforePath="$PROJECT_DIR$/vendor/assets/css/login-style.css" afterPath="$PROJECT_DIR$/vendor/assets/css/login-style.css" />
+      <change beforePath="$PROJECT_DIR$/vendor/assets/css/style.css" afterPath="$PROJECT_DIR$/vendor/assets/css/style.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,14 +21,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="devise.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/devise.html.erb">
+      <file leaf-file-name="cadastro_de_usuario.feature" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="30" column="43" lean-forward="false" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-              <folding>
-                <element signature="e#943#950#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="352">
+              <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -39,8 +34,8 @@
       <file leaf-file-name="new.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="199">
+              <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -49,8 +44,18 @@
       <file leaf-file-name="_links.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devise/shared/_links.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+            <state relative-caret-position="110">
+              <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/devise/sessions/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="34" column="62" lean-forward="false" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -59,31 +64,8 @@
       <file leaf-file-name="login-style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/assets/css/login-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="13637" column="8" lean-forward="false" selection-start-line="13637" selection-start-column="8" selection-end-line="13637" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_header.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#form#0;n#li#1;n#ul#2;n#nav#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="39" />
+            <state relative-caret-position="463">
+              <caret line="13653" column="0" lean-forward="false" selection-start-line="13653" selection-start-column="0" selection-end-line="13653" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,6 +81,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="custom.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/main.html.erb">
+      <file leaf-file-name="_header.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+            <state relative-caret-position="387">
+              <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -133,18 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>content</find>
-      <find>width</find>
-      <find>card-bo</find>
-      <find>px-5</find>
-      <find>py-5</find>
-      <find>ol</find>
-      <find>col-lg-4</find>
-      <find>card-b</find>
-      <find>background-col</find>
-      <find>card</find>
-      <find>@media (min-width: 992</find>
-      <find>script</find>
       <find>float-le</find>
       <find>form-control</find>
       <find>footer</find>
@@ -161,8 +141,20 @@
       <find>Chiquin</find>
       <find>Chiqui</find>
       <find>chiquin</find>
-      <find>chiquinho</find>
       <find>javascr</find>
+      <find>procurar'</find>
+      <find>log in</find>
+      <find>ja</find>
+      <find>j</find>
+      <find>já</find>
+      <find>l</find>
+      <find>btn-primar</find>
+      <find>chiquinho</find>
+      <find>primary</find>
+      <find>btn-prim</find>
+      <find>cadast</find>
+      <find>btn-cada</find>
+      <find>novo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,7 +170,6 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/footer.html.erb" />
         <option value="$PROJECT_DIR$/vendor/assets/js/pikeadmin.js" />
-        <option value="$PROJECT_DIR$/vendor/assets/css/style.css" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/_forms.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/_variables.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/_search.scss" />
@@ -196,20 +187,22 @@
         <option value="$PROJECT_DIR$/config/locales/devise.pt-BR.yml" />
         <option value="$PROJECT_DIR$/app/controllers/registrations/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" />
         <option value="$PROJECT_DIR$/config/initializers/assets.rb" />
         <option value="$PROJECT_DIR$/app/controllers/main_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/devise/shared/_links.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
-        <option value="$PROJECT_DIR$/vendor/assets/css/login-style.css" />
-        <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
         <option value="$PROJECT_DIR$/app/views/main/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/devise.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/main.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/devise/shared/_links.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
+        <option value="$PROJECT_DIR$/vendor/assets/css/style.css" />
+        <option value="$PROJECT_DIR$/vendor/assets/css/login-style.css" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.scss" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
+        <option value="$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature" />
       </list>
     </option>
   </component>
@@ -227,7 +220,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -264,6 +257,21 @@
               <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="devise" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="devise" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
@@ -322,7 +330,43 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="chiquinho" type="cbb8eebc:String" user="chiquinho" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="chiquinho" type="cbb8eebc:String" user="chiquinho" />
+              <item name="app" type="cbb8eebc:String" user="app" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="chiquinho" type="cbb8eebc:String" user="chiquinho" />
+              <item name="app" type="cbb8eebc:String" user="app" />
+              <item name="views" type="cbb8eebc:String" user="views" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="chiquinho" type="cbb8eebc:String" user="chiquinho" />
+              <item name="app" type="cbb8eebc:String" user="app" />
+              <item name="views" type="cbb8eebc:String" user="views" />
+              <item name="devise" type="cbb8eebc:String" user="devise" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="chiquinho" type="cbb8eebc:String" user="chiquinho" />
+              <item name="app" type="cbb8eebc:String" user="app" />
+              <item name="views" type="cbb8eebc:String" user="views" />
+              <item name="devise" type="cbb8eebc:String" user="devise" />
+              <item name="shared" type="cbb8eebc:String" user="shared" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scratches">
         <subPane>
           <expand>
@@ -506,12 +550,12 @@
       <workItem from="1524097996542" duration="1362000" />
       <workItem from="1524140497094" duration="6504000" />
       <workItem from="1524152432379" duration="1331000" />
-      <workItem from="1524164814614" duration="10381000" />
+      <workItem from="1524164814614" duration="12407000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59718000" />
+    <option name="totallyTimeSpent" value="61744000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -558,13 +602,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/assets/plugins/jquery-ui/jquery-ui.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/assets/plugins/waypoints/lib/jquery.waypoints.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
@@ -655,13 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/assets/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="1216" column="0" lean-forward="false" selection-start-line="1216" selection-start-column="0" selection-end-line="1216" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -780,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -820,14 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/main.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -836,61 +850,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/main.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#li#1;n#ul#2;n#nav#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/assets/css/login-style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="13637" column="8" lean-forward="false" selection-start-line="13637" selection-start-column="8" selection-end-line="13637" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/shared/_links.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="59" column="40" lean-forward="false" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="69" lean-forward="false" selection-start-line="1" selection-start-column="69" selection-end-line="1" selection-end-column="69" />
+        <state relative-caret-position="420">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -903,20 +866,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="69" lean-forward="false" selection-start-line="1" selection-start-column="69" selection-end-line="1" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/devise.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="30" column="43" lean-forward="false" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+        <state relative-caret-position="176">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="9" />
           <folding>
-            <element signature="e#943#950#1#HTML" expanded="true" />
+            <element signature="e#943#950#1#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/main.html.erb">
+    <entry file="file://$PROJECT_DIR$/vendor/assets/css/login-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+        <state relative-caret-position="463">
+          <caret line="13653" column="0" lean-forward="false" selection-start-line="13653" selection-start-column="0" selection-end-line="13653" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/main/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="59" column="40" lean-forward="false" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="842" column="6" lean-forward="false" selection-start-line="842" selection-start-column="6" selection-end-line="842" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/sessions/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="34" column="62" lean-forward="false" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/shared/_links.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
           <folding />
         </state>
       </provider>
