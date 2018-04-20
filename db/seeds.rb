@@ -108,7 +108,7 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
 
 Course.delete_all
 
-Puts "Populando Cursos..."
+puts "Populando Cursos..."
 courses.each do |course|
   @course = Course.new
   course.each do |key,value|
@@ -116,4 +116,4 @@ courses.each do |course|
   end
   @course.save
 end
-Puts "Cursos Populados"
+puts "Cursos Populados"
