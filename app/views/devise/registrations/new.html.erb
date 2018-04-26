@@ -9,45 +9,55 @@
   <div class="container-fluid">
     <div class="row">
       <div class="content-wrapper full-page-wrapper d-flex align-items-center auth-pages">
-        <div class="card col-lg-4 mx-auto">
+        <div class="card col-lg-6 mx-auto">
           <div class="card-body px-5 py-5">
-            <h3 class="card-title text-center mb-3">Registro</h3>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= devise_error_messages! %>
 
+                <h3 class="card-title text-center mb-3">Registro</h3>
+                <div class="form-group">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "Email",placeholder: "Email",class: "form-control p_input",required: true %>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :senha %>
+                      <% if @minimum_password_length %>
+
+                      <% end %><br />
+                      <%= f.password_field :password, autocomplete: "off",placeholder: "Senha",class: "form-control p_input",required: true %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :confirmar_senha %><br />
+                      <%= f.password_field :password_confirmation, autocomplete: "off",placeholder: "Confirmar Senha",class: "form-control p_input",required: true %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :nome %><br />
+                      <%= f.text_field :first_name, autofocus: true,placeholder: "Nome",class: "form-control p_input",required: true%>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :sobrenome %><br />
+                      <%= f.text_field :last_name, autofocus: true,placeholder: "Sobrenome",class: "form-control p_input",required: true%>
+                    </div>
+                  </div>
+                </div>
               <div class="form-group">
-                <%#= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "Email",placeholder: "Email",class: "form-control p_input" %>
+                <%= f.label :matricula %><br />
+                <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",class: "form-control p_input",required: true%>
               </div>
-
               <div class="form-group">
-                <%#= f.label :matricula %><br />
-                <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",class: "form-control p_input"%>
+                <%= f.label :curso %><br />
+                <%= f.collection_select :course_id, Course.order(:name),:id,:name,{include_blank: true}, class: "form-control select2" %>
               </div>
-
-              <div class="form-group">
-                <%#= f.label :nome %><br />
-                <%= f.text_field :first_name, autofocus: true,placeholder: "Nome",class: "form-control p_input"%>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :sobrenome %><br />
-                <%= f.text_field :last_name, autofocus: true,placeholder: "Sobrenome",class: "form-control p_input"%>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :password %>
-                <% if @minimum_password_length %>
-
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off",placeholder: "Senha",class: "form-control p_input" %>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off",placeholder: "Confirmar Senha",class: "form-control p_input" %>
-              </div>
-
               <div class="actions">
                 <%= f.submit "Cadastrar-se",class: "btn btn-primary btn-block enter-btn",style: "margin-bottom: 5px; margin-top: 18px;" %>
               </div>
@@ -61,4 +71,8 @@
     </div>
   </div>
 </div>
-
+<script>
+  $(document).ready(function() {
+    $('.select2').select2();
+  });
+</script>

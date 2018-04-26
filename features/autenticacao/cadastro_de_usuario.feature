@@ -17,6 +17,7 @@ Funcionalidade: Cadastro de Usuário
     |user_last_name       |Marques       |
     |user_password  |123456              |
     |user_password_confirmation|123456   |
+    E selecionar o meu curso "CIÊNCIA DA COMPUTAÇÃO"
     E clicar no botão "Cadastrar-se"
     Então eu devo ser redirecionado para página inicial
     E devo ver os conteúdos "Login efetuado com sucesso. Se não foi autorizado, a confirmação será enviada por e-mail." e meu primeiro nome "Nicholas Marques"
