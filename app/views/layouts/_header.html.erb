@@ -158,9 +158,6 @@
             <%= link_to "<i class='fa fa-power-off'></i> <span>Logout</span>".html_safe,destroy_user_session_path,method: :delete,class: "dropdown-item notify-item"%>
 
             <!-- item-->
-            <a target="_blank" href="#" class="dropdown-item notify-item">
-              <i class="fa fa-university"></i> <span><%= current_user.course.name.downcase.capitalize %></span>
-            </a>
           </div>
         </li>
       </ul>
@@ -205,6 +202,9 @@
             <li><a href="tables-basic.html">Todos os Cursos</a></li>
             <li><a href="tables-datatable.html">Humanas</a></li>
             <li><a href="tables-datatable.html">Exatas</a></li>
+            <% if user_signed_in? %>
+              <li><a href="<%= course_path(current_user.course.id) %>"><%= current_user.course.name.downcase.capitalize %></a></li>
+            <% end %>
           </ul>
         </li>
 
