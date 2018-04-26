@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50f42df3-92f2-478d-9187-4b455834d384" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/main.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/courses.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/courses.scss" />
       <change beforePath="$PROJECT_DIR$/app/views/courses/index.html.erb" afterPath="$PROJECT_DIR$/app/views/courses/index.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/courses/show.html.erb" afterPath="$PROJECT_DIR$/app/views/courses/show.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/main.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/main.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/assets.rb" afterPath="$PROJECT_DIR$/config/initializers/assets.rb" />
+      <change beforePath="$PROJECT_DIR$/vendor/assets/js/pike-index.js" afterPath="$PROJECT_DIR$/vendor/assets/js/pike-index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +22,8 @@
       <file leaf-file-name="cadastro_de_usuario_steps.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/step_definitions/autenticacao/cadastro_de_usuario_steps.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="30" column="3" lean-forward="false" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+            <state relative-caret-position="256">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -32,28 +32,18 @@
       <file leaf-file-name="index.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/courses/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+            <state relative-caret-position="66">
+              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/main.html.erb">
+      <file leaf-file-name="courses.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/courses.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="34" column="7" lean-forward="false" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_javascripttags.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="90" lean-forward="false" selection-start-line="0" selection-start-column="90" selection-end-line="0" selection-end-column="90" />
+            <state relative-caret-position="44">
+              <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,7 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>chiquin</find>
       <find>javascr</find>
       <find>procurar'</find>
       <find>log in</find>
@@ -93,6 +82,7 @@
       <find>olá</find>
       <find>current_user</find>
       <find>current_use</find>
+      <find>panel-titl</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,8 +94,6 @@
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/vendor/assets/pike-index.js" />
         <option value="$PROJECT_DIR$/vendor/assets/js/jquery.slimscroll.js" />
-        <option value="$PROJECT_DIR$/vendor/assets/js/pike-index.js" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/footer.html.erb" />
         <option value="$PROJECT_DIR$/vendor/assets/js/pikeadmin.js" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/_forms.scss" />
@@ -123,7 +111,6 @@
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/config/locales/devise.pt-BR.yml" />
         <option value="$PROJECT_DIR$/app/controllers/registrations/registrations_controller.rb" />
-        <option value="$PROJECT_DIR$/config/initializers/assets.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/devise.html.erb" />
         <option value="$PROJECT_DIR$/app/views/devise/shared/_links.html.erb" />
         <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
@@ -139,15 +126,20 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/models/course.rb" />
-        <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/features/autenticacao/cadastro_de_usuario.feature" />
         <option value="$PROJECT_DIR$/features/step_definitions/autenticacao/cadastro_de_usuario_steps.rb" />
         <option value="$PROJECT_DIR$/app/views/courses/show.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/main.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/main.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb" />
+        <option value="$PROJECT_DIR$/vendor/assets/js/pike-index.js" />
+        <option value="$PROJECT_DIR$/config/initializers/assets.rb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/courses.scss" />
+        <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/courses/index.html.erb" />
       </list>
     </option>
@@ -180,6 +172,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="RailsProjectView" />
       <pane id="Scratches">
         <subPane>
           <expand>
@@ -219,56 +212,12 @@
               <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
-              <item name="main.coffee" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="cursos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chiquinho" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chiquinho" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="RailsProjectView" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -459,11 +408,12 @@
       <workItem from="1524152432379" duration="1331000" />
       <workItem from="1524164814614" duration="16229000" />
       <workItem from="1524188214488" duration="3183000" />
+      <workItem from="1524745292839" duration="2089000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77018000" />
+    <option name="totallyTimeSpent" value="79127000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -478,34 +428,25 @@
     <frame x="90" y="-5" width="1831" height="1086" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34069043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34634975" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43157893" sideWeight="0.50650823" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.49575552" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35894737" sideWeight="0.4934918" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39157894" sideWeight="0.4934918" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43157893" sideWeight="0.50650823" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39157894" sideWeight="0.4934918" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.49575552" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34069043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,21 +462,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/_variables.scss" />
-    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="266" column="12" lean-forward="true" selection-start-line="266" selection-start-column="12" selection-end-line="266" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.ruby-version">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="611">
@@ -614,13 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_footer.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/locales/devise.pt-BR.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -632,13 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/assets.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -728,7 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -751,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -767,7 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -775,15 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="51" column="5" lean-forward="false" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -791,7 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="65" column="60" lean-forward="false" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,7 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
           <caret line="40" column="49" lean-forward="false" selection-start-line="40" selection-start-column="49" selection-end-line="40" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -807,7 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -815,7 +712,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -823,7 +719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="195" column="13" lean-forward="false" selection-start-line="195" selection-start-column="13" selection-end-line="195" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,31 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="2" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/step_definitions/autenticacao/cadastro_de_usuario_steps.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="30" column="3" lean-forward="false" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -863,7 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -877,26 +746,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb">
+    <entry file="file://$PROJECT_DIR$/public/assets/pike-index-2acc3cd67eff373446e2e8f728d9a133167473226a94d3c39025de6849abf5cf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="90" lean-forward="false" selection-start-line="0" selection-start-column="90" selection-end-line="0" selection-end-column="90" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_javascripttags.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="183" column="2" lean-forward="false" selection-start-line="183" selection-start-column="2" selection-end-line="183" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/assets/js/pike-index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/main.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
+        <state relative-caret-position="366">
           <caret line="34" column="7" lean-forward="false" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/assets.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_footer.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="84" lean-forward="false" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/courses.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/step_definitions/autenticacao/cadastro_de_usuario_steps.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/courses/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+        <state relative-caret-position="66">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="33" />
           <folding />
         </state>
       </provider>

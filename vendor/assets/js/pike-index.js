@@ -1,1 +1,12 @@
-//= require_tree .
+//= require countdown
+//= require jquery.nicescroll
+//= require jquery.slimscroll
+//= require fastclick
+//= require detect
+//= require bootstrap.bundle.js
+//= require jquery.scrollTo.min.js
+//= require jquery.validate.min.js
+//= require jquery-ui.min.js
+//= require moment.min.js
+//= require pikeadmin
+//= require transition.js
