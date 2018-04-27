@@ -19,8 +19,8 @@
         <div class="card-box noradius noborder bg-default">
           <i class="fa fa-university float-right text-white"></i>
           <h6 class="text-white text-uppercase m-b-20">Cursos</h6>
-          <h1 class="m-b-20 text-white counter">137</h1>
-          <span class="text-white"><%= link_to "<span class='fa fa-paper-plane'></span> Explorar Cursos".html_safe,"#",class: "text-white" %></span>
+          <h1 class="m-b-20 text-white counter"><%= @courses.length %></h1>
+          <span class="text-white"><%= link_to "<span class='fa fa-paper-plane'></span> Explorar Cursos".html_safe, courses_path,class: "text-white" %></span>
         </div>
       </div>
 

@@ -91,7 +91,7 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Presencial", :code=>"1431", :name=>"SAÚDE COLETIVA", :turn=>"Noturno"},
            {:kind=>"Presencial", :code=>"272", :name=>"SERVIÇO SOCIAL", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"1490", :name=>"SERVIÇO SOCIAL", :turn=>"Noturno"},
-           {:kind=>"Presencial", :code=>"1554", :name=>"TEORIA", :turn=>" CRÍTICA E HISTÓRIA DA ARTE"},
+           {:kind=>"Presencial", :code=>"1554", :name=>"TEORIA CRÍTICA E HISTÓRIA DA ARTE", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"1520", :name=>"TURISMO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1112", :name=>"ADMINISTRAÇÃO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1546", :name=>"ADMINISTRAÇÃO PÚBLICA", :turn=>"Diurno"},
@@ -108,7 +108,7 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
 
 Course.delete_all
 
-Puts "Populando Cursos..."
+puts "Populando Cursos..."
 courses.each do |course|
   @course = Course.new
   course.each do |key,value|
@@ -116,4 +116,4 @@ courses.each do |course|
   end
   @course.save
 end
-Puts "Cursos Populados"
+puts "Cursos Populados"

@@ -158,9 +158,6 @@
             <%= link_to "<i class='fa fa-power-off'></i> <span>Logout</span>".html_safe,destroy_user_session_path,method: :delete,class: "dropdown-item notify-item"%>
 
             <!-- item-->
-            <a target="_blank" href="https://www.pikeadmin.com" class="dropdown-item notify-item">
-              <i class="fa fa-external-link"></i> <span>Pike Admin</span>
-            </a>
           </div>
         </li>
       </ul>
@@ -196,15 +193,18 @@
       <ul>
 
         <li class="submenu">
-          <a class="active" href="index.html"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+          <a class="active" href="/"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
         </li>
 
         <li class="submenu">
           <a href="#" id="table-dropdown"><i class="fa fa-fw fa-university  "></i> <span> Cursos </span> <span class="menu-arrow"></span></a>
           <ul class="list-unstyled">
-            <li><a href="tables-basic.html">Todos os Cursos</a></li>
+            <li><a href="<%= courses_path %>">Todos os Cursos</a></li>
             <li><a href="tables-datatable.html">Humanas</a></li>
             <li><a href="tables-datatable.html">Exatas</a></li>
+            <% if user_signed_in? %>
+              <li><a href="<%= course_path(current_user.course.id) %>"><%= current_user.course.name.downcase.capitalize %></a></li>
+            <% end %>
           </ul>
         </li>
 
@@ -216,9 +216,10 @@
           </ul>
         </li>
 
-        <li class="submenu">
-          <a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>
-        </li>
+        <!--<li class="submenu">-->
+          <!--<a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>-->
+        <!--</li>-->
+
         <!--<li class="submenu">-->
           <!--<a href="#" id="table-dropdown3"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>-->
           <!--<ul class="list-unstyled">-->

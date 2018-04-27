@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w( counterup/jquery.counterup.min
 Rails.application.config.assets.precompile += %w( waypoints/lib/jquery.waypoints.min.js )
 Rails.application.config.assets.precompile += %w( favicon.ico )
 Rails.application.config.assets.precompile += %w( login-style.css )
+Rails.application.config.assets.precompile += %w( courses.css )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

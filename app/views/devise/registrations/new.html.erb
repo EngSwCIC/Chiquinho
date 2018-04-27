@@ -9,45 +9,55 @@
   <div class="container-fluid">
     <div class="row">
       <div class="content-wrapper full-page-wrapper d-flex align-items-center auth-pages">
-        <div class="card col-lg-4 mx-auto">
+        <div class="card col-lg-6 mx-auto">
           <div class="card-body px-5 py-5">
-            <h3 class="card-title text-center mb-3">Registro</h3>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= devise_error_messages! %>
 
+                <h3 class="card-title text-center mb-3">Registro</h3>
+                <div class="form-group">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "Email",placeholder: "Email",class: "form-control p_input",required: true %>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :senha %>
+                      <% if @minimum_password_length %>
+
+                      <% end %><br />
+                      <%= f.password_field :password, autocomplete: "off",placeholder: "Senha",class: "form-control p_input",required: true %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :confirmar_senha %><br />
+                      <%= f.password_field :password_confirmation, autocomplete: "off",placeholder: "Confirmar Senha",class: "form-control p_input",required: true %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :nome %><br />
+                      <%= f.text_field :first_name, autofocus: true,placeholder: "Nome",class: "form-control p_input",required: true%>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :sobrenome %><br />
+                      <%= f.text_field :last_name, autofocus: true,placeholder: "Sobrenome",class: "form-control p_input",required: true%>
+                    </div>
+                  </div>
+                </div>
               <div class="form-group">
-                <%#= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "Email",placeholder: "Email",class: "form-control p_input" %>
+                <%= f.label :matricula %><br />
+                <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",onkeypress: "mascara(this, '##/#######')", maxlength:"10",class: "form-control p_input",required: true%>
               </div>
-
               <div class="form-group">
-                <%#= f.label :matricula %><br />
-                <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",class: "form-control p_input"%>
+                <%= f.label :curso %><br />
+                <%= f.collection_select :course_id, Course.order(:name),:id,:name,{include_blank: true}, class: "form-control select2" %>
               </div>
-
-              <div class="form-group">
-                <%#= f.label :nome %><br />
-                <%= f.text_field :first_name, autofocus: true,placeholder: "Nome",class: "form-control p_input"%>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :sobrenome %><br />
-                <%= f.text_field :last_name, autofocus: true,placeholder: "Sobrenome",class: "form-control p_input"%>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :password %>
-                <% if @minimum_password_length %>
-
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "off",placeholder: "Senha",class: "form-control p_input" %>
-              </div>
-
-              <div class="form-group">
-                <%#= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "off",placeholder: "Confirmar Senha",class: "form-control p_input" %>
-              </div>
-
               <div class="actions">
                 <%= f.submit "Cadastrar-se",class: "btn btn-primary btn-block enter-btn",style: "margin-bottom: 5px; margin-top: 18px;" %>
               </div>
@@ -61,4 +71,34 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $('.select2').select2();
+  });
+</script>
+<script language="JavaScript">
+    /*
+    A função Mascara tera como valores no argumento os dados inseridos no input (ou no evento onkeypress)
+    onkeypress="mascara(this, '## ####-####')"
+    onkeypress = chama uma função quando uma tecla é pressionada, no exemplo acima, chama a função mascara e define os valores do argumento na função
+    O primeiro valor é o this, é o Apontador/Indicador da Mascara, o '## ####-####' é o modelo / formato da mascara
+    no exemplo acima o # indica os números, e o - (hifen) o caracter que será inserido entre os números, ou seja, no exemplo acima o telefone ficara assim: 11-4000-3562
+    para o celular de são paulo o modelo deverá ser assim: '## #####-####' [11 98563-1254]
+    para o RG '##.###.###.# [40.123.456.7]
+    para o CPF '###.###.###.##' [789.456.123.10]
+    Ou seja esta mascara tem como objetivo inserir o hifen ou espaço automáticamente quando o usuário inserir o número do celular, cpf, rg, etc
 
+    lembrando que o hifen ou qualquer outro caracter é contado tambem, como: 11-4561-6543 temos 10 números e 2 hifens, por isso o valor de maxlength será 12
+    <input type="text" name="telefone" onkeypress="mascara(this, '## ####-####')" maxlength="12">
+    neste código não é possivel inserir () ou [], apenas . (ponto), - (hifén) ou espaço
+    */
+
+    function mascara(t, mask){
+        var i = t.value.length;
+        var saida = mask.substring(1,0);
+        var texto = mask.substring(i)
+        if (texto.substring(0,1) != saida){
+            t.value += texto.substring(0,1);
+        }
+    }
+</script>
