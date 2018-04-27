@@ -15,7 +15,7 @@
 
 # Ignore uploaded files in development
 /storage/*
-
+.idea/
 /node_modules
 /yarn-error.log
 
