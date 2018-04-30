@@ -141,7 +141,7 @@
 
         <li class="list-inline-item dropdown notif">
           <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-            <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="Perfil" class="avatar-rounded">
+            <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="" class="avatar-rounded">
           </a>
           <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
             <!-- item-->
@@ -200,8 +200,8 @@
           <a href="#" id="table-dropdown"><i class="fa fa-fw fa-university  "></i> <span> Cursos </span> <span class="menu-arrow"></span></a>
           <ul class="list-unstyled">
             <li><a href="<%= courses_path %>">Todos os Cursos</a></li>
-            <li><a href="tables-datatable.html">Humanas</a></li>
-            <li><a href="tables-datatable.html">Exatas</a></li>
+            <li><a href="#">Humanas</a></li>
+            <li><a href="#">Exatas</a></li>
             <% if user_signed_in? %>
               <li><a href="<%= course_path(current_user.course.id) %>"><%= current_user.course.name.downcase.capitalize %></a></li>
             <% end %>
@@ -211,11 +211,15 @@
         <li class="submenu">
           <a href="#" id="table-dropdown2"><i class="fa fa-fw fa-book"></i> <span> Matérias </span> <span class="menu-arrow"></span></a>
           <ul class="list-unstyled">
-            <li><a href="ui-alerts.html">Todas as Matérias</a></li>
-            <li><a href="ui-buttons.html">Mais procuradas</a></li>
+            <li><a href="#">Todas as Matérias</a></li>
+            <li><a href="#">Mais procuradas</a></li>
           </ul>
         </li>
-
+        <% if user_signed_in? %>
+        <li class="submenu">
+          <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>
+        </li>
+        <% end %>
         <!--<li class="submenu">-->
           <!--<a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>-->
         <!--</li>-->
