@@ -1,6 +1,10 @@
 <style>
-  th{
+  #table-grade th{
     text-align: center;
+    width: 14.28%;
+  }
+  #table-grade td:hover{
+    cursor: pointer;
   }
   .th-gray {
     background-color: #d1d2d3;
@@ -56,7 +60,7 @@
           Grade Horária
         </h5>
         <div class="card-body" style="padding: 15px;">
-          <table class="table table-hover">
+          <table class="table table-bordered" id="table-grade">
             <tr>
               <th class="th-gray">Horários</th>
               <th>Segunda</th>
@@ -146,4 +150,10 @@
             t.value += texto.substring(0,1);
         }
     }
+</script>
+
+<script>
+  $("#table-grade").on("click","td",function () {
+      console.log(this);
+  })
 </script>
