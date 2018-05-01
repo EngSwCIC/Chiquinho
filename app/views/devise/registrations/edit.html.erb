@@ -78,66 +78,66 @@
             </tr>
             <tr>
               <th class="th-gray">8:00h</th>
-              <td id="0" time="8"></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="00" time="8" column="0"></td>
+              <td id="01" time="8" column="1"></td>
+              <td id="02" time="8" column="2"></td>
+              <td id="03" time="8" column="3"></td>
+              <td id="04" time="8" column="4"></td>
+              <td id="05" time="8" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">10:00h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="10" time="10" column="0"></td>
+              <td id="11" time="10" column="1"></td>
+              <td id="12" time="10" column="2"></td>
+              <td id="13" time="10" column="3"></td>
+              <td id="14" time="10" column="4"></td>
+              <td id="15" time="10" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">12:00h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="20" time="12" column="0"></td>
+              <td id="21" time="12" column="1"></td>
+              <td id="22" time="12" column="2"></td>
+              <td id="23" time="12" column="3"></td>
+              <td id="24" time="12" column="4"></td>
+              <td id="25" time="12" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">14:00h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="30" time="14" column="0"></td>
+              <td id="31" time="14" column="1"></td>
+              <td id="32" time="14" column="2"></td>
+              <td id="33" time="14" column="3"></td>
+              <td id="34" time="14" column="4"></td>
+              <td id="35" time="14" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">16:00h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="40" time="16" column="0"></td>
+              <td id="41" time="16" column="1"></td>
+              <td id="42" time="16" column="2"></td>
+              <td id="43" time="16" column="3"></td>
+              <td id="44" time="16" column="4"></td>
+              <td id="45" time="16" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">19:00h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="50" time="19" column="0"></td>
+              <td id="51" time="19" column="1"></td>
+              <td id="52" time="19" column="2"></td>
+              <td id="53" time="19" column="3"></td>
+              <td id="54" time="19" column="4"></td>
+              <td id="55" time="19" column="5"></td>
             </tr>
             <tr>
               <th class="th-gray">20:50h</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td id="60" time="21" column="0"></td>
+              <td id="61" time="21" column="1"></td>
+              <td id="62" time="21" column="2"></td>
+              <td id="63" time="21" column="3"></td>
+              <td id="64" time="21" column="4"></td>
+              <td id="65" time="21" column="5"></td>
             </tr>
           </table>
         </div>
@@ -165,6 +165,7 @@
   var materias;
 
   var id_td;
+  var column_td;
   var time_td;
   var materia_name;
   $.get(url,function (data) {
@@ -176,6 +177,7 @@
       console.log(this);
       id_td = $(this).attr("id");
       time_td = $(this).attr("time");
+      column_td = $(this).attr("column");
       var self = this;
       swal({
           text: 'Adicione uma Matéria',
@@ -200,16 +202,8 @@
             $(self).html($("#materia-search").val());
             swal.stopLoading();
             swal.close();
-            // return fetch(url_schedule, {
-            //     method: "POST",
-            //     body: {
-            //       name: $(self).html($("#materia-search").val()),
-            //     }
-            // });
-            //return $.post("/update_user_schedule",{name: $(self).html($("#materia-search").val())});
 
           }
-          //return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
 
       })
 
@@ -237,6 +231,8 @@
       console.log("oiers");
       console.log(time_td);
       console.log(id_td);
+      console.log(column_td);
+      materia_name = $("#"+id_td).html();
       console.log(materia_name);
       $.ajax({
           type: "POST",
@@ -246,8 +242,8 @@
               'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
           },
           data: {
-              name: "no",
-              day: id_td,
+              name: materia_name,
+              day: column_td,
               time: time_td,
           }
       });

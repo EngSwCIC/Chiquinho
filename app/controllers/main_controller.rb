@@ -11,10 +11,17 @@ class MainController < ApplicationController
     current_user.schedule ||= Schedule.new
     puts params[:name]
 
+    current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = params[:name]
     respond_to do |format|
-      format.html
-      format.js { @subject = "ola" }
-      format.json
+      if current_user.schedule.save
+        format.html { redirect_to edit_user_registration_path, notice: "Grade Atualizada."}
+        format.js { @subject = "ola" }
+        format.json
+      else
+        format.html { redirect_to edit_user_registration_path, danger: "Erro ao Atualizar."}
+        format.js { @subject = "ola" }
+        format.json
+      end
     end
   end
 
