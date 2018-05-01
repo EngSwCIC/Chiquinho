@@ -78,66 +78,45 @@
             </tr>
             <tr>
               <th class="th-gray">8:00h</th>
-              <td id="00" time="8" column="0"></td>
-              <td id="01" time="8" column="1"></td>
-              <td id="02" time="8" column="2"></td>
-              <td id="03" time="8" column="3"></td>
-              <td id="04" time="8" column="4"></td>
-              <td id="05" time="8" column="5"></td>
+              <% current_user.schedule.time_8.each_with_index do |materia,idx| %>
+                <td id="0<%= idx %>" time="8" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">10:00h</th>
-              <td id="10" time="10" column="0"></td>
-              <td id="11" time="10" column="1"></td>
-              <td id="12" time="10" column="2"></td>
-              <td id="13" time="10" column="3"></td>
-              <td id="14" time="10" column="4"></td>
-              <td id="15" time="10" column="5"></td>
+              <% current_user.schedule.time_10.each_with_index do |materia,idx| %>
+                <td id="1<%= idx %>" time="10" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">12:00h</th>
-              <td id="20" time="12" column="0"></td>
-              <td id="21" time="12" column="1"></td>
-              <td id="22" time="12" column="2"></td>
-              <td id="23" time="12" column="3"></td>
-              <td id="24" time="12" column="4"></td>
-              <td id="25" time="12" column="5"></td>
+              <% current_user.schedule.time_12.each_with_index do |materia,idx| %>
+                <td id="2<%= idx %>" time="12" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">14:00h</th>
-              <td id="30" time="14" column="0"></td>
-              <td id="31" time="14" column="1"></td>
-              <td id="32" time="14" column="2"></td>
-              <td id="33" time="14" column="3"></td>
-              <td id="34" time="14" column="4"></td>
-              <td id="35" time="14" column="5"></td>
+              <% current_user.schedule.time_14.each_with_index do |materia,idx| %>
+                <td id="3<%= idx %>" time="14" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">16:00h</th>
-              <td id="40" time="16" column="0"></td>
-              <td id="41" time="16" column="1"></td>
-              <td id="42" time="16" column="2"></td>
-              <td id="43" time="16" column="3"></td>
-              <td id="44" time="16" column="4"></td>
-              <td id="45" time="16" column="5"></td>
+              <% current_user.schedule.time_16.each_with_index do |materia,idx| %>
+                <td id="4<%= idx %>" time="16" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">19:00h</th>
-              <td id="50" time="19" column="0"></td>
-              <td id="51" time="19" column="1"></td>
-              <td id="52" time="19" column="2"></td>
-              <td id="53" time="19" column="3"></td>
-              <td id="54" time="19" column="4"></td>
-              <td id="55" time="19" column="5"></td>
+              <% current_user.schedule.time_19.each_with_index do |materia,idx| %>
+                <td id="5<%= idx %>" time="19" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
             <tr>
               <th class="th-gray">20:50h</th>
-              <td id="60" time="21" column="0"></td>
-              <td id="61" time="21" column="1"></td>
-              <td id="62" time="21" column="2"></td>
-              <td id="63" time="21" column="3"></td>
-              <td id="64" time="21" column="4"></td>
-              <td id="65" time="21" column="5"></td>
+              <% current_user.schedule.time_21.each_with_index do |materia,idx| %>
+                <td id="6<%= idx %>" time="21" column="<%= idx %>"><%= materia %></td>
+              <% end %>
             </tr>
           </table>
         </div>
