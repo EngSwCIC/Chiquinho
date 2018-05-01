@@ -20,3 +20,15 @@ Funcionalidade: Sistema de Matérias
       |117536|PROJETO ANÁLISE DE ALGORITMOS |004 000 000 004|AC  |
   #show
   Cenário: Mostrar uma materia
+    Dado que eu tenha uma matéria criada com os atributos:
+      |code   |116327                 |
+      |name   |ORGANIZAÇÃO DE ARQUIVOS|
+      |credits|002 002 000 004        |
+      |area   |AC                     |
+    E que eu esteja na página de matérias
+    Quando eu clicar no link para detalhes daquela matéria
+    Então eu devo ver a página de matéria com "Ranking de Dificuldade", "Professores que Ministram" e os dados dela:
+      |code   |116327                 |
+      |name   |ORGANIZAÇÃO DE ARQUIVOS|
+      |credits|002 002 000 004        |
+      |area   |AC                     |

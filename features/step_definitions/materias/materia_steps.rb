@@ -13,10 +13,32 @@ Então("eu devo ver a lista completa com as matérias {string}, {string}, {strin
   expect(page).to have_content area
 end
 
-#create steps
-
 #show steps
+Dado("que eu tenha uma matéria criada com os atributos:") do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  @subject = Subject.new
+  table.rows_hash.each do |field,value|
+    @subject[field] = value
+  end
+  @subject.save
+end
 
-#edit steps
+Dado("que eu esteja na página de matérias") do
+  visit subjects_path
+end
 
-#destroy steps
+Quando("eu clicar no link para detalhes daquela matéria") do
+  path = subject_path(@subject.id)
+  link = "a[href=\'#{path}\']"
+  find(link).click
+end
+
+Então("eu devo ver a página de matéria com {string}, {string} e os dados dela:") do |ranking_str, professores_str, table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  expect(page).to have_content ranking_str
+  expect(page).to have_content professores_str
+  table.rows_hash.each do |field,value|
+    expect(page).to have_content value
+  end
+end
+
