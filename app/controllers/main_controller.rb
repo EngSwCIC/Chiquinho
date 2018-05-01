@@ -17,6 +17,9 @@ class MainController < ApplicationController
     end
     if mater.length == 1
       current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = mater.first.name
+      if !(current_user.schedule.subjects.any?{ |m| m.name == mater.first.name })
+        current_user.schedule.subjects << mater.first
+      end
       respond_to do |format|
         if current_user.schedule.save
           format.html { redirect_to edit_user_registration_path, notice: "Grade Atualizada."}
