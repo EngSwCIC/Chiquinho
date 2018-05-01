@@ -1,4 +1,9 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
 <style>
+  .ui-front {
+    opacity: 1 !important;
+  }
   #table-grade th{
     text-align: center;
     width: 14.28%;
@@ -154,6 +159,7 @@
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
 <script>
   var url = '<%= subjects_path %>.json';
   var materias;
@@ -184,7 +190,8 @@
             swal.stopLoading();
             swal.close();
           } else {
-            $(self).html(name);
+              console.log(name);
+            $(self).html($("#materia-search").val());
             swal.stopLoading();
             swal.close();
           }
@@ -194,14 +201,18 @@
       $("#materia-search").on("keypress",function () {
           var self = this;
           function searchMateria(value){
-              console.log("Materia:"+value['name']);
-              console.log("Self: "+$(self).val());
               return value['name'].toLowerCase().includes($(self).val().toLowerCase());
           }
 
-          var filtrados = materias.filter(searchMateria);
+          var filtrados = materias.filter(searchMateria).map(function (obj) {
+              return obj.name;
+          });
           console.log($(this).val());
           console.log(filtrados);
+          $("#materia-search").autocomplete({
+              source: filtrados
+          })
+          $(".ui-menu").addClass("ui-front");
       });
   });
 
