@@ -5,6 +5,7 @@
   }
   #table-grade td:hover{
     cursor: pointer;
+    background-color: #d1d2d3;
   }
   .th-gray {
     background-color: #d1d2d3;
@@ -151,9 +152,36 @@
         }
     }
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+  var url = '<%= subjects_path %>.json';
+  var materias;
+  $.get(url,function (data) {
+      console.log(data);
+      materias = data;
+  });
+  console.log(materias);
   $("#table-grade").on("click","td",function () {
       console.log(this);
+      var self = this;
+      swal({
+          text: 'Adicione uma Matéria',
+          content: "input",
+          button: {
+              text: "Adicionar",
+              closeModal: false,
+          },
+      }).then(name => {
+          if (!name){
+            swal("Erro", "Matéria não encontrada", "error");
+            swal.stopLoading();
+            swal.close();
+          }
+          //return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+          $(self).html(name);
+          swal.stopLoading();
+          swal.close();
+      })
   })
 </script>
