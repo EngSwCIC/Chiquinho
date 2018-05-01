@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_01_014616) do
+ActiveRecord::Schema.define(version: 2018_05_01_045804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 2018_05_01_014616) do
     t.integer "classification", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "time_8", default: [], array: true
+    t.string "time_10", default: [], array: true
+    t.string "time_12", default: [], array: true
+    t.string "time_14", default: [], array: true
+    t.string "time_16", default: [], array: true
+    t.string "time_19", default: [], array: true
+    t.string "time_21", default: [], array: true
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -56,5 +70,6 @@ ActiveRecord::Schema.define(version: 2018_05_01_014616) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "schedules", "users"
   add_foreign_key "users", "courses"
 end

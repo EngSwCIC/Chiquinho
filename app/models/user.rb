@@ -9,4 +9,5 @@ class User < ApplicationRecord
   end
 
   belongs_to :course
+  has_one :schedule
 end

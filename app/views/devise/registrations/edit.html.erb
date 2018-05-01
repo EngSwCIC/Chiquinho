@@ -78,7 +78,7 @@
             </tr>
             <tr>
               <th class="th-gray">8:00h</th>
-              <td></td>
+              <td id="0" time="8"></td>
               <td></td>
               <td></td>
               <td></td>
@@ -159,17 +159,23 @@
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
 <script>
   var url = '<%= subjects_path %>.json';
+  var url_schedule = '<%= update_user_schedule_path %>';
   var materias;
+
+  var id_td;
+  var time_td;
+  var materia_name;
   $.get(url,function (data) {
       console.log(data);
       materias = data;
   });
-  console.log(materias);
+  // console.log(materias);
   $("#table-grade").on("click","td",function () {
       console.log(this);
+      id_td = $(this).attr("id");
+      time_td = $(this).attr("time");
       var self = this;
       swal({
           text: 'Adicione uma Matéria',
@@ -194,10 +200,20 @@
             $(self).html($("#materia-search").val());
             swal.stopLoading();
             swal.close();
+            // return fetch(url_schedule, {
+            //     method: "POST",
+            //     body: {
+            //       name: $(self).html($("#materia-search").val()),
+            //     }
+            // });
+            //return $.post("/update_user_schedule",{name: $(self).html($("#materia-search").val())});
+
           }
           //return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
 
       })
+
+      materia_name = $("#materia-search").val();
       $("#materia-search").on("keypress",function () {
           var self = this;
           function searchMateria(value){
@@ -208,11 +224,32 @@
               return obj.name;
           });
           console.log($(this).val());
-          console.log(filtrados);
+          //console.log(filtrados);
           $("#materia-search").autocomplete({
               source: filtrados
-          })
+          });
           $(".ui-menu").addClass("ui-front");
+      });
+
+  })
+
+  $("#table-grade").bind("DOMSubtreeModified",function(){
+      console.log("oiers");
+      console.log(time_td);
+      console.log(id_td);
+      console.log(materia_name);
+      $.ajax({
+          type: "POST",
+          url: url_schedule,
+          headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+              name: "no",
+              day: id_td,
+              time: time_td,
+          }
       });
   });
 
