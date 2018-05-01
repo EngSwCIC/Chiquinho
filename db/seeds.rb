@@ -145,6 +145,7 @@ materias = [
 ]
 
 Course.delete_all
+Subject.delete_all
 
 puts "Populando Cursos..."
 courses.each do |course|
@@ -159,7 +160,7 @@ puts "Cursos Populados"
 puts "Populando Matérias..."
 
 materias.each do |materia|
-  @materia = Subject.create()
+  @materia = Subject.create(code: materia[1].to_i, name: materia[2].strip, credits: materia[3],area: materia[4])
 end
 
 puts "Matérias Populadas"
