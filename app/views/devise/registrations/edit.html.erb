@@ -64,6 +64,7 @@
       <div class="card">
         <h5 class="card-header">
           Grade Horária
+          <span style="float: right"><%= link_to "Limpar Grade <i class='fa fa-trash'></i>".html_safe, clean_user_schedule_path, class: "btn btn-secondary",data: {confirm: "Tem certeza que deseja apagar sua grade?"} %></span>
         </h5>
         <div class="card-body" style="padding: 15px;">
           <table class="table table-bordered" id="table-grade">
