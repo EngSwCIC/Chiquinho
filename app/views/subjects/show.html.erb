@@ -1,24 +1,77 @@
-<p id="notice"><%= notice %></p>
+<div class="margin-all" style="margin: 30px;">
+  <h2><%= @subject.name %></h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <h5 class="card-header">
+          Dados da Matéria
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table">
+            <tr>
+              <th>
+                Código
+              </th>
+              <td>
+                <%= @subject.code %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Nome
+              </th>
+              <td>
+                <%= @subject.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Créditos
+              </th>
+              <td>
+                <%= @subject.credits %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Área
+              </th>
+              <td>
+                <%= @subject.area %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Ranking de Dificuldade
+              </th>
+              <td>
+                #16
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-header">
+          Conteúdos
+        </h5>
+        <div class="card-body" style="padding: 15px;">
 
-<p>
-  <strong>Code:</strong>
-  <%= @subject.code %>
-</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <h5 class="card-header">
+          Professores que Ministram
+        </h5>
+        <div class="card-body" style="padding: 15px;">
 
-<p>
-  <strong>Name:</strong>
-  <%= @subject.name %>
-</p>
-
-<p>
-  <strong>Credits:</strong>
-  <%= @subject.credits %>
-</p>
-
-<p>
-  <strong>Area:</strong>
-  <%= @subject.area %>
-</p>
-
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

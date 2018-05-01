@@ -27,7 +27,7 @@ Funcionalidade: Sistema de Matérias
       |area   |AC                     |
     E que eu esteja na página de matérias
     Quando eu clicar no link para detalhes daquela matéria
-    Então eu devo ver a página de matéria com "Ranking de Dificuldade", "Professores que Ministram" e os dados dela:
+    Então eu devo ver a página de matéria com "Ranking de Dificuldade","Conteúdos", "Professores que Ministram" e os dados dela:
       |code   |116327                 |
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |

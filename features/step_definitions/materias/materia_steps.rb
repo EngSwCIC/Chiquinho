@@ -33,10 +33,11 @@ Quando("eu clicar no link para detalhes daquela matéria") do
   find(link).click
 end
 
-Então("eu devo ver a página de matéria com {string}, {string} e os dados dela:") do |ranking_str, professores_str, table|
+Então("eu devo ver a página de matéria com {string},{string}, {string} e os dados dela:") do |ranking_str, conteudo_str, professores_str, table|
   # table is a Cucumber::MultilineArgument::DataTable
   expect(page).to have_content ranking_str
   expect(page).to have_content professores_str
+  expect(page).to have_content conteudo_str
   table.rows_hash.each do |field,value|
     expect(page).to have_content value
   end
