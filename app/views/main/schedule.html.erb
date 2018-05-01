@@ -27,7 +27,7 @@
           Matérias
         </h5>
         <div class="card-body" style="padding: 15px;">
-          <span style="font-size: 14px; margin-bottom: 10px">Total: 8 créditos</span>
+          <% total_credits = 0 %>
           <table class="table">
             <thead>
             <tr>
@@ -43,11 +43,13 @@
               <% current_user.schedule.subjects.each do |materia| %>
                 <tr>
                   <td><%= materia.name %></td>
-                  <td><%= materia.credits %></td>
+                  <td><%= materia.credits[2].to_i + materia.credits[6].to_i %></td>
                 </tr>
+                <% total_credits += (materia.credits[2].to_i + materia.credits[6].to_i) %>
               <% end %>
             </tbody>
           </table>
+          <span style="font-size: 14px; margin-bottom: 10px">Total: <%= total_credits %> créditos</span>
         </div>
       </div>
     </div>
