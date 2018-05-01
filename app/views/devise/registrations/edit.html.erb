@@ -167,21 +167,42 @@
       var self = this;
       swal({
           text: 'Adicione uma Matéria',
-          content: "input",
+          content: {
+              element: "input",
+              attributes: {
+                  placeholder: "Matéria...",
+                  id: "materia-search",
+              },
+          },
           button: {
               text: "Adicionar",
               closeModal: false,
           },
       }).then(name => {
           if (!name){
-            swal("Erro", "Matéria não encontrada", "error");
+            //swal("Erro", "Matéria não encontrada", "error");
+            swal.stopLoading();
+            swal.close();
+          } else {
+            $(self).html(name);
             swal.stopLoading();
             swal.close();
           }
           //return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
-          $(self).html(name);
-          swal.stopLoading();
-          swal.close();
+
       })
-  })
+      $("#materia-search").on("keypress",function () {
+          var self = this;
+          function searchMateria(value){
+              console.log("Materia:"+value['name']);
+              console.log("Self: "+$(self).val());
+              return value['name'].toLowerCase().includes($(self).val().toLowerCase());
+          }
+
+          var filtrados = materias.filter(searchMateria);
+          console.log($(this).val());
+          console.log(filtrados);
+      });
+  });
+
 </script>
