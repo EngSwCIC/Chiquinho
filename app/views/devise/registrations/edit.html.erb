@@ -1,57 +1,142 @@
+<style>
+  th{
+    text-align: center;
+  }
+  .th-gray {
+    background-color: #d1d2d3;
+  }
+</style>
+
 <div class="margin-all" style="margin: 30px;">
   <h2>Perfil</h2>
   <hr>
   <div class="row">
-    <div class="col-md-5">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= devise_error_messages! %>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= f.label "Nome" %>
-              <%= f.text_field :first_name, autofocus: true, autocomplete: "off", class: "form-control",placeholder: "Nome",id: "inlineFormInputGroup" %>
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-header">
+          Dados de Usuário
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label "Nome" %>
+                  <%= f.text_field :first_name, autofocus: true, autocomplete: "off", class: "form-control",placeholder: "Nome",id: "inlineFormInputGroup" %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label "Sobrenome" %>
+                  <%= f.text_field :last_name, autofocus: true, autocomplete: "off", class: "form-control",placeholder: "Nome",id: "inlineFormInputGroup" %>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= f.label "Sobrenome" %>
-              <%= f.text_field :last_name, autofocus: true, autocomplete: "off", class: "form-control",placeholder: "Nome",id: "inlineFormInputGroup" %>
-            </div>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <%= f.label :matricula %><br />
-          <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",onkeypress: "mascara(this, '##/#######')", maxlength:"10",class: "form-control p_input",required: true%>
+            <div class="form-group">
+              <%= f.label :matrícula %><br />
+              <%= f.text_field :matricula, autofocus: true,placeholder: "Matrícula",onkeypress: "mascara(this, '##/#######')", maxlength:"10",class: "form-control p_input",required: true%>
+            </div>
+            <div class="form-group">
+              <%= f.label :curso %><br />
+              <%= f.collection_select :course_id, Course.order(:name),:id,:name,{include_blank: true}, class: "form-control select2" %>
+            </div>
+            <br>
+            <div class="actions">
+              <%= f.submit "Atualizar Dados",class: "btn btn-primary btn-lg btn-block" %>
+            </div>
+          <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label :curso %><br />
-          <%= f.collection_select :course_id, Course.order(:name),:id,:name,{include_blank: true}, class: "form-control select2" %>
+      </div>
+    </div>
+    <div class="col-xs-8 col-md-8 col-lg-8 col-xl-8">
+      <div class="card">
+        <h5 class="card-header">
+          Grade Horária
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table table-hover">
+            <tr>
+              <th class="th-gray">Horários</th>
+              <th>Segunda</th>
+              <th>Terça</th>
+              <th>Quarta</th>
+              <th>Quinta</th>
+              <th>Sexta</th>
+              <th>Sábado</th>
+            </tr>
+            <tr>
+              <th class="th-gray">8:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">10:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">12:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">14:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">16:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">19:00h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class="th-gray">20:50h</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
         </div>
-        <div class="actions">
-          <%= f.submit "Atualizar Dados",class: "btn btn-primary btn-lg" %>
-        </div>
-      <% end %>
+      </div>
     </div>
   </div>
 
 </div>
 <script language="JavaScript">
-    /*
-    A função Mascara tera como valores no argumento os dados inseridos no input (ou no evento onkeypress)
-    onkeypress="mascara(this, '## ####-####')"
-    onkeypress = chama uma função quando uma tecla é pressionada, no exemplo acima, chama a função mascara e define os valores do argumento na função
-    O primeiro valor é o this, é o Apontador/Indicador da Mascara, o '## ####-####' é o modelo / formato da mascara
-    no exemplo acima o # indica os números, e o - (hifen) o caracter que será inserido entre os números, ou seja, no exemplo acima o telefone ficara assim: 11-4000-3562
-    para o celular de são paulo o modelo deverá ser assim: '## #####-####' [11 98563-1254]
-    para o RG '##.###.###.# [40.123.456.7]
-    para o CPF '###.###.###.##' [789.456.123.10]
-    Ou seja esta mascara tem como objetivo inserir o hifen ou espaço automáticamente quando o usuário inserir o número do celular, cpf, rg, etc
-
-    lembrando que o hifen ou qualquer outro caracter é contado tambem, como: 11-4561-6543 temos 10 números e 2 hifens, por isso o valor de maxlength será 12
-    <input type="text" name="telefone" onkeypress="mascara(this, '## ####-####')" maxlength="12">
-    neste código não é possivel inserir () ou [], apenas . (ponto), - (hifén) ou espaço
-    */
 
     function mascara(t, mask){
         var i = t.value.length;
