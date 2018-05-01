@@ -193,9 +193,12 @@
           </ul>
         </li>
         <% if user_signed_in? %>
-        <li class="submenu">
-          <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>
-        </li>
+          <li class="submenu">
+            <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>
+          </li>
+          <li class="submenu">
+            <a href="<%= user_schedule_path %>"><i class="fa fa-fw fa-calendar"></i> <span> Grade Horária </span></a>
+          </li>
         <% end %>
         <!--<li class="submenu">-->
           <!--<a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>-->

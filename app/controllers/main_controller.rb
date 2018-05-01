@@ -8,12 +8,16 @@ class MainController < ApplicationController
     @courses = Course.all
   end
 
+  def schedule
+
+  end
+
   def clean_user_schedule
     current_user.schedule.delete
     current_user.schedule = Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
 
     flash[:notice] = "Grade horária apagada."
-    redirect_to edit_user_registration_path
+    redirect_to user_schedule_path
   end
 
   def update_user_schedule
@@ -30,11 +34,11 @@ class MainController < ApplicationController
       end
       respond_to do |format|
         if current_user.schedule.save
-          format.html { redirect_to edit_user_registration_path, notice: "Grade Atualizada."}
+          format.html { redirect_to user_schedule_path, notice: "Grade Atualizada."}
           format.js { @subject = "ola" }
           format.json
         else
-          format.html { redirect_to edit_user_registration_path, danger: "Erro ao Atualizar."}
+          format.html { redirect_to user_schedule_path, danger: "Erro ao Atualizar."}
           format.js { @subject = "ola" }
           format.json
         end
@@ -42,11 +46,11 @@ class MainController < ApplicationController
     else
       if mater.length == 0
         respond_to do |format|
-          format.html { redirect_to edit_user_registration_path,flash: {danger: "Matéria não encontrada."} }
+          format.html { redirect_to user_schedule_path,flash: {danger: "Matéria não encontrada."} }
         end
       else
         respond_to do |format|
-          format.html { redirect_to edit_user_registration_path,flash: {danger: "Mais de uma matéria encontrada. Tente especificar mais o nome."} }
+          format.html { redirect_to user_schedule_path,flash: {danger: "Mais de uma matéria encontrada. Tente especificar mais o nome."} }
         end
       end
     end
