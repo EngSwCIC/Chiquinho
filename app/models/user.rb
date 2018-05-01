@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  before_create :create_user_schedule
+  belongs_to :course
+  has_one :schedule
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,5 +12,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  belongs_to :course
+  def create_user_schedule
+    self.schedule = Schedule.new
+    self.schedule.time_8 = Array.new(6)
+    self.schedule.time_10 = Array.new(6)
+    self.schedule.time_12 = Array.new(6)
+    self.schedule.time_14 = Array.new(6)
+    self.schedule.time_16 = Array.new(6)
+    self.schedule.time_19 = Array.new(6)
+    self.schedule.time_21 = Array.new(6)
+  end
 end
