@@ -8,19 +8,34 @@ class MainController < ApplicationController
   end
 
   def update_user_schedule
-    current_user.schedule ||= Schedule.new
-    puts params[:name]
+    current_user.schedule ||= Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
 
-    current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = params[:name]
-    respond_to do |format|
-      if current_user.schedule.save
-        format.html { redirect_to edit_user_registration_path, notice: "Grade Atualizada."}
-        format.js { @subject = "ola" }
-        format.json
+    mater = Subject.where('lower(name) LIKE ?', "%#{params[:name].downcase}%")
+    mater.each do |mat|
+      puts mat.name
+    end
+    if mater.length == 1
+      current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = mater.first.name
+      respond_to do |format|
+        if current_user.schedule.save
+          format.html { redirect_to edit_user_registration_path, notice: "Grade Atualizada."}
+          format.js { @subject = "ola" }
+          format.json
+        else
+          format.html { redirect_to edit_user_registration_path, danger: "Erro ao Atualizar."}
+          format.js { @subject = "ola" }
+          format.json
+        end
+      end
+    else
+      if mater.length == 0
+        respond_to do |format|
+          format.html { redirect_to edit_user_registration_path,flash: {danger: "Matéria não encontrada."} }
+        end
       else
-        format.html { redirect_to edit_user_registration_path, danger: "Erro ao Atualizar."}
-        format.js { @subject = "ola" }
-        format.json
+        respond_to do |format|
+          format.html { redirect_to edit_user_registration_path,flash: {danger: "Mais de uma matéria encontrada. Tente especificar mais o nome."} }
+        end
       end
     end
   end
