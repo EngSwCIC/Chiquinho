@@ -120,7 +120,30 @@
           Conteúdos
         </h5>
         <div class="card-body" style="padding: 15px;">
-
+          <table class="table" id="example1">
+            <thead>
+              <tr>
+                <th>
+                  Arquivo
+                </th>
+                <th>
+                  Descrição
+                </th>
+                <th>
+                  Baixar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 20.times do %>
+                <tr>
+                  <td>Resumo de OAC</td>
+                  <td>Resumo de 7 páginas sobre Assembly e o Processador MIPS</td>
+                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe,"#",class: "btn btn-success btn-sm btn-rounded" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -129,9 +152,9 @@
         <h5 class="card-header">
           Comentários
         </h5>
-        <div class="card-body" style="padding: 15px;">
+        <div class="card-body">
           <div class="comentario-header">
-            <i class="fa fa-user"></i> Nicholas Marques
+            <i class="fa fa-user-circle"></i> Nicholas Marques
             <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
           </div>
           <div class="comentario-body">
@@ -327,4 +350,25 @@
         }
     });
 
+</script>
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#example1').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ por página",
+                "sZeroRecords": "Nenhum registro encontrado - sorry",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "Nenhum campo encontrado",
+                "sInfoFiltered": "(filtrando de _MAX_ total de campos)",
+                "sSearch": "Procurar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
+    });
 </script>
