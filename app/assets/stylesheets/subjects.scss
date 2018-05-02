@@ -21,3 +21,37 @@
   border-radius: 50px;
   margin-right: 0.5em;
 }
+.comentario-header{
+  font-size: 1.5em;
+  font-weight: 400px;
+  border: 1px solid #cccdce;
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 2px;
+  padding: 8px;
+}
+
+.comentario-header i{
+  margin-right: 7px;
+}
+
+.comentario-header a{
+  color: #93c3f2;
+}
+
+.comentario-header a:hover{
+  color: #639cd3;
+}
+
+.comentario-body {
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #cccdce;
+}
+
+.comentario-body p{
+  text-align: justify;
+}
+
+.comentario-body {
+
+}
