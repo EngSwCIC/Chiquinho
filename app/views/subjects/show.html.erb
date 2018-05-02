@@ -51,25 +51,73 @@
             </tr>
           </table>
         </div>
-        <div class="card-body-graph" style="margin-right: 10px;">
+        <div class="card-body-graph">
           <canvas id="barChart"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <h5 class="card-header">
-          Conteúdos
-        </h5>
-        <div class="card-body" style="padding: 15px;">
-
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-7">
       <div class="card">
         <h5 class="card-header">
           Professores que Ministram
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="teacher-header">
+                <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
+                <p>Genaína Rodrigues</p>
+              </div>
+              <div class="card-body-graph">
+                <canvas id="barChartGenaina"></canvas>
+              </div>
+              <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe,"#",class: "btn btn-primary btn-sm"%>
+            </div>
+            <div class="col-md-6">
+              <div class="teacher-header">
+                <img src="http://www.cic.unb.br/wp-content/uploads/2016/05/flavio2-150x150.jpg" alt="Flavio" class="image-thumbnail"/>
+                <p>Flávio Moura</p>
+              </div>
+              <div class="card-body-graph">
+                <canvas id="barChartFlavio"></canvas>
+              </div>
+              <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe,"#",class: "btn btn-primary btn-sm" %>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="teacher-header">
+                <img src="http://www.cic.unb.br/wp-content/uploads/2016/03/lamar-150x150.png" alt="Lamar" class="image-thumbnail"/>
+                <p>Lamar</p>
+              </div>
+              <div class="card-body-graph">
+                <canvas id="barChartLamar"></canvas>
+              </div>
+              <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe,"#",class: "btn btn-primary btn-sm" %>
+            </div>
+            <div class="col-md-6">
+              <div class="teacher-header">
+                <img src="http://www.cic.unb.br/wp-content/uploads/2017/03/vinicius_siteCIC-150x150.png" alt="Vinicius" class="image-thumbnail"/>
+                <p>Vinicius Ruela</p>
+              </div>
+              <div class="card-body-graph">
+                <canvas id="barChartVinicius"></canvas>
+              </div>
+              <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe,"#",class: "btn btn-primary btn-sm" %>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <h5 class="card-header">
+          Conteúdos
         </h5>
         <div class="card-body" style="padding: 15px;">
 
@@ -90,7 +138,7 @@
             labels: ["Trabalhos","Provas","Tarefas"],
             datasets: [{
                 label: '',
-                data: [2,10,9],
+                data: [5.5,8,7.5],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -111,7 +159,152 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx2 = document.getElementById("barChartGenaina").getContext('2d');
+    var barChartGenaina = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [5,9,8],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx3 = document.getElementById("barChartFlavio").getContext('2d');
+    var barChartFlavio = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [6,7,7],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx4 = document.getElementById("barChartLamar").getContext('2d');
+    var barChartLamar = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [10,10,10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx5 = document.getElementById("barChartVinicius").getContext('2d');
+    var barChartVinicius = new Chart(ctx5, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [6,6,9],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
                     }
                 }]
             }
