@@ -13,8 +13,8 @@ Funcionalidade: listar todos os professores do sistema
     Entao eu devo ver a lista completa com os professores "<name>"
 
     Exemplos:
-    |name   |
-    |Genaina|
-    |Ladeira|
-    |Lucero |
-    |Li     |
+    |name    |
+    |Maria   |
+    |Joao    |
+    |Jose    |
+    |Fernanda|
