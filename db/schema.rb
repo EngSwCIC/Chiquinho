@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_155536) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
 
   create_table "courses_subjects", id: false, force: :cascade do |t|
     t.bigint "subject_id", null: false
