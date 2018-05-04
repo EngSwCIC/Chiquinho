@@ -5,6 +5,6 @@ Dado("que exitam professores que ministrem essa materia com campos {string}") do
   @subject.professors << @professor
 end
 Entao("devo ver cards com todos os professores que ministram aquela materia {string}") do |name|
-  page.should have_xpath('.//div[@class="card"]', count: @professors.size)
+  page.should have_xpath('.//div[@class="teacher-header"]', count: @subject.professors.size)
   expect(page).to have_content(name)
 end

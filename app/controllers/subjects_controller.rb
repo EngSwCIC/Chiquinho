@@ -14,6 +14,7 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+
   end
 
   # GET /subjects/new
