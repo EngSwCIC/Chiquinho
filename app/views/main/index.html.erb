@@ -36,9 +36,9 @@
       <div class="col-xs-12 col-md-6 col-lg-6 col-xl-6">
         <div class="card-box noradius noborder bg-info">
           <i class="fa fa-graduation-cap float-right text-white"></i>
-          <h6 class="text-white text-uppercase m-b-20">Alunos</h6>
-          <h1 class="m-b-20 text-white counter"><%= @users.length %></h1>
-          <span class="text-white">felizes</span>
+          <h6 class="text-white text-uppercase m-b-20">Professores</h6>
+          <h1 class="m-b-20 text-white counter"><%= @professors.length %></h1>
+          <span class="text-white"><%= link_to "<span class='fa fa-paper-plane'></span> Ver Professores".html_safe, professors_path, class: "text-white" %></span>
         </div>
       </div>
 
