@@ -98,7 +98,7 @@
             <!-- item-->
             <a href="#" class="dropdown-item notify-item">
               <div class="notify-icon bg-faded">
-                <img src="assets/images/avatars/avatar2.png" alt="img" class="rounded-circle img-fluid">
+                <img src="#" alt="img" class="rounded-circle img-fluid">
               </div>
               <p class="notify-details">
                 <b>John Doe</b>
@@ -107,29 +107,6 @@
               </p>
             </a>
 
-            <!-- item-->
-            <a href="#" class="dropdown-item notify-item">
-              <div class="notify-icon bg-faded">
-                <img src="assets/images/avatars/avatar3.png" alt="img" class="rounded-circle img-fluid">
-              </div>
-              <p class="notify-details">
-                <b>Michael Cox</b>
-                <span>Task 2 completed</span>
-                <small class="text-muted">12 minutes ago</small>
-              </p>
-            </a>
-
-            <!-- item-->
-            <a href="#" class="dropdown-item notify-item">
-              <div class="notify-icon bg-faded">
-                <img src="assets/images/avatars/avatar4.png" alt="img" class="rounded-circle img-fluid">
-              </div>
-              <p class="notify-details">
-                <b>Michelle Dolores</b>
-                <span>New job completed</span>
-                <small class="text-muted">35 minutes ago</small>
-              </p>
-            </a>
 
             <!-- All-->
             <a href="#" class="dropdown-item notify-item notify-all">
@@ -141,7 +118,7 @@
 
         <li class="list-inline-item dropdown notif">
           <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-            <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="Perfil" class="avatar-rounded">
+            <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="" class="avatar-rounded">
           </a>
           <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
             <!-- item-->
@@ -150,7 +127,7 @@
             </div>
 
             <!-- item-->
-            <a href="pro-profile.html" class="dropdown-item notify-item">
+            <a href="#" class="dropdown-item notify-item">
               <i class="fa fa-user"></i> <span>Profile</span>
             </a>
 
@@ -158,9 +135,6 @@
             <%= link_to "<i class='fa fa-power-off'></i> <span>Logout</span>".html_safe,destroy_user_session_path,method: :delete,class: "dropdown-item notify-item"%>
 
             <!-- item-->
-            <a target="_blank" href="https://www.pikeadmin.com" class="dropdown-item notify-item">
-              <i class="fa fa-external-link"></i> <span>Pike Admin</span>
-            </a>
           </div>
         </li>
       </ul>
@@ -196,29 +170,40 @@
       <ul>
 
         <li class="submenu">
-          <a class="active" href="index.html"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+          <a class="active" href="/"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
         </li>
 
         <li class="submenu">
           <a href="#" id="table-dropdown"><i class="fa fa-fw fa-university  "></i> <span> Cursos </span> <span class="menu-arrow"></span></a>
           <ul class="list-unstyled">
-            <li><a href="tables-basic.html">Todos os Cursos</a></li>
-            <li><a href="tables-datatable.html">Humanas</a></li>
-            <li><a href="tables-datatable.html">Exatas</a></li>
+            <li><a href="<%= courses_path %>">Todos os Cursos</a></li>
+            <li><a href="#">Humanas</a></li>
+            <li><a href="#">Exatas</a></li>
+            <% if user_signed_in? %>
+              <li><a href="<%= course_path(current_user.course.id) %>"><%= current_user.course.name.downcase.capitalize %></a></li>
+            <% end %>
           </ul>
         </li>
 
         <li class="submenu">
           <a href="#" id="table-dropdown2"><i class="fa fa-fw fa-book"></i> <span> Matérias </span> <span class="menu-arrow"></span></a>
           <ul class="list-unstyled">
-            <li><a href="ui-alerts.html">Todas as Matérias</a></li>
-            <li><a href="ui-buttons.html">Mais procuradas</a></li>
+            <li><a href="#">Todas as Matérias</a></li>
+            <li><a href="#">Mais procuradas</a></li>
           </ul>
         </li>
+        <% if user_signed_in? %>
+          <li class="submenu">
+            <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>
+          </li>
+          <li class="submenu">
+            <a href="<%= user_schedule_path %>"><i class="fa fa-fw fa-calendar"></i> <span> Grade Horária </span></a>
+          </li>
+        <% end %>
+        <!--<li class="submenu">-->
+          <!--<a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>-->
+        <!--</li>-->
 
-        <li class="submenu">
-          <a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>
-        </li>
         <!--<li class="submenu">-->
           <!--<a href="#" id="table-dropdown3"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>-->
           <!--<ul class="list-unstyled">-->

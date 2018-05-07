@@ -91,7 +91,7 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Presencial", :code=>"1431", :name=>"SAÚDE COLETIVA", :turn=>"Noturno"},
            {:kind=>"Presencial", :code=>"272", :name=>"SERVIÇO SOCIAL", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"1490", :name=>"SERVIÇO SOCIAL", :turn=>"Noturno"},
-           {:kind=>"Presencial", :code=>"1554", :name=>"TEORIA", :turn=>" CRÍTICA E HISTÓRIA DA ARTE"},
+           {:kind=>"Presencial", :code=>"1554", :name=>"TEORIA CRÍTICA E HISTÓRIA DA ARTE", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"1520", :name=>"TURISMO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1112", :name=>"ADMINISTRAÇÃO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1546", :name=>"ADMINISTRAÇÃO PÚBLICA", :turn=>"Diurno"},
@@ -106,9 +106,48 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
-Course.delete_all
+materias = [
+  ["", "113107", "ALGEBRA 1                       ", "002 002 000 006", "DC"],
+  ["", "113476", "ALGORITMOS PROGR COMPUTADORES   ", "004 002 000 006", "AC"],
+  ["", "116882", "AUTÔMATOS E COMPUTABILIDADE     ", "006 000 000 008", "DC"],
+  ["", "116378", "BANCOS DE DADOS                 ", "004 000 000 004", "AC"],
+  ["", "113034", "CÁLCULO 1                       ", "002 004 000 006", "DC"],
+  ["", "113042", "CÁLCULO 2                       ", "004 002 000 006", "DC"],
+  ["", "113417", "CALCULO NUMERICO                ", "004 000 000 006", "DC"],
+  ["", "116351", "CIRCUITOS DIGITAIS              ", "004 002 000 006", "AC"],
+  ["", "117951", "COMPILADORES                    ", "004 000 000 000", "AC"],
+  ["", "117943", "COMPUTAÇÃO EXPERIMENTAL         ", "002 002 000 000", "AC"],
+  ["", "116441", "ENGENHARIA DE SOFTWARE          ", "004 000 000 004", "AC"],
+  ["", "116319", "ESTRUTURAS DE DADOS             ", "004 000 000 004", "AC"],
+  ["", "117960", "FUNDAMENTOS SIST OPERACIONAIS   ", "004 000 000 000", "AC"],
+  ["", "113450", "FUNDAMENTOS TEÓR DA COMPUTAÇÃO  ", "002 002 000 004", "AC"],
+  ["", "116726", "INFORMATICA E SOCIEDADE         ", "002 000 000 000", "AC"],
+  ["", "116653", "INTRO INTELIGENCIA ARTIFICIAL   ", "004 000 000 004", "AC"],
+  ["", "113468", "INTROD SISTEMAS COMPUTACIONAIS  ", "002 002 000 004", "AC"],
+  ["", "113093", "INTRODUCAO A ALGEBRA LINEAR     ", "002 002 000 006", "AC"],
+  ["", "116343", "LINGUAGENS DE PROGRAMACAO       ", "004 000 000 004", "AC"],
+  ["", "117366", "LÓGICA COMPUTACIONAL 1          ", "002 002 000 004", "AC"],
+  ["", "117919", "METODOLOGIA CIENTÍFICA          ", "000 002 000 000", "AC"],
+  ["", "116394", "ORG ARQ DE COMPUTADORES         ", "004 000 000 004", "AC"],
+  ["", "116327", "ORGANIZAÇÃO DE ARQUIVOS         ", "002 002 000 004", "AC"],
+  ["", "115045", "PROBABILIDADE E ESTATÍSTICA     ", "002 002 000 006", "DC"],
+  ["", "117935", "PROGRAMAÇÃO CONCORRENTE         ", "002 002 000 000", "AC"],
+  ["", "117536", "PROJETO ANÁLISE DE ALGORITMOS   ", "004 000 000 004", "AC"],
+  ["", "116572", "REDES DE COMPUTADORES           ", "002 002 000 004", "AC"],
+  ["", "117927", "SEGURANÇA COMPUTACIONAL         ", "004 000 000 004", "AC"],
+  ["", "116416", "SISTEMAS DE INFORMACAO          ", "004 000 000 004", "AC"],
+  ["", "116432", "SOFTWARE BASICO                 ", "004 000 000 004", "AC"],
+  ["", "117901", "TEORIA E APLICAÇÃO DE GRAFOS    ", "002 002 000 004", "AC"],
+  ["", "116912", "TRABALHO DE GRADUAÇÃO 1         ", "000 002 000 002", "DC"],
+  ["", "116921", "TRABALHO DE GRADUAÇÃO 2         ", "000 004 000 004", "DC"],
+  ["", "117889", "TECNICAS DE PROGRAMAÇÃO 1       ", "002 002 000 000", "AC"],
+  ["", "117897", "TECNICAS DE PROGRAMAÇÃO 2       ", "002 002 000 000", "AC"],
+]
 
-Puts "Populando Cursos..."
+Course.delete_all
+Subject.delete_all
+
+puts "Populando Cursos..."
 courses.each do |course|
   @course = Course.new
   course.each do |key,value|
@@ -116,4 +155,12 @@ courses.each do |course|
   end
   @course.save
 end
-Puts "Cursos Populados"
+puts "Cursos Populados"
+
+puts "Populando Matérias..."
+
+materias.each do |materia|
+  @materia = Subject.create(code: materia[1].to_i, name: materia[2].strip, credits: materia[3],area: materia[4])
+end
+
+puts "Matérias Populadas"

@@ -1,0 +1,341 @@
+<div class="margin-all" style="margin: 30px;">
+  <h2><%= @subject.name %></h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <h5 class="card-header">
+          Dados da Matéria
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table">
+            <tr>
+              <th>
+                Código
+              </th>
+              <td>
+                <%= @subject.code %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Nome
+              </th>
+              <td>
+                <%= @subject.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Créditos
+              </th>
+              <td>
+                <%= @subject.credits %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Área
+              </th>
+              <td>
+                <%= @subject.area %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Ranking de Dificuldade
+              </th>
+              <td>
+                #16
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-body-graph">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <h5 class="card-header">
+          Professores que Ministram
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <% @subject.professors.each do |professor|%>
+            <div class="col-md-6">
+              <div class="teacher-header">
+                <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
+                <p><%= professor.name%></p>
+              </div>
+              <div class="card-body-graph">
+                <canvas id="barChartGenaina"></canvas>
+              </div>
+              <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe,"#",class: "btn btn-primary btn-sm"%>
+            </div>
+          <% end %>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card">
+        <h5 class="card-header">
+          Conteúdos
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table" id="example1">
+            <thead>
+              <tr>
+                <th>
+                  Arquivo
+                </th>
+                <th>
+                  Descrição
+                </th>
+                <th>
+                  Baixar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 20.times do %>
+                <tr>
+                  <td>Resumo de OAC</td>
+                  <td>Resumo de 7 páginas sobre Assembly e o Processador MIPS</td>
+                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe,"#",class: "btn btn-success btn-sm btn-rounded" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <h5 class="card-header">
+          Comentários
+        </h5>
+        <div class="card-body">
+          <div class="comentario-header">
+            <i class="fa fa-user-circle"></i> Nicholas Marques
+            <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
+          </div>
+          <div class="comentario-body">
+            <p>Test message subject I interest with your script, i wanna buy your script, but i need some change, please replay this email ASAP...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script>
+    // barChart
+    var ctx1 = document.getElementById("barChart").getContext('2d');
+    var barChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [5.5,8,7.5],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+              display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx2 = document.getElementById("barChartGenaina").getContext('2d');
+    var barChartGenaina = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [5,9,8],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx3 = document.getElementById("barChartFlavio").getContext('2d');
+    var barChartFlavio = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [6,7,7],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx4 = document.getElementById("barChartLamar").getContext('2d');
+    var barChartLamar = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [10,10,10],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx5 = document.getElementById("barChartVinicius").getContext('2d');
+    var barChartVinicius = new Chart(ctx5, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [6,6,9],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#example1').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ por página",
+                "sZeroRecords": "Nenhum registro encontrado - sorry",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "Nenhum campo encontrado",
+                "sInfoFiltered": "(filtrando de _MAX_ total de campos)",
+                "sSearch": "Procurar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
+    });
+</script>
