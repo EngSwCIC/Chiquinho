@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_04_123817) do
+ActiveRecord::Schema.define(version: 2018_05_07_221421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "professor_subject_id"
+    t.index ["professor_subject_id"], name: "index_comments_on_professor_subject_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "kind"
@@ -98,6 +108,8 @@ ActiveRecord::Schema.define(version: 2018_05_04_123817) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "professor_subjects"
+  add_foreign_key "comments", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
   add_foreign_key "schedules", "users"

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :subjects
   resources :courses
   resources :professors
+  resources :comments
   devise_for :users, :controllers => { registrations: 'registrations/registrations' }
   root to: 'main#index'
   post '/update_user_schedule',to: "main#update_user_schedule",as: "update_user_schedule"
