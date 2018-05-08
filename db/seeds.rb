@@ -104,6 +104,7 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
+CourseSubject.delete_all
 Course.delete_all
 Subject.delete_all
 
@@ -137,6 +138,7 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
   puts filename
   file = File.new(filename, "r")
   contador = 1
+  tipo = 0
   while (line = file.gets)
     if contador == 1
       line.slice!("Curso")
@@ -145,13 +147,23 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
     end
     if contador > 11 && line[1] == '"'
       arr = JSON.parse(line)
-      Subject.create!(code: arr[1], name: arr[2], credits: arr[3],area: arr[4])
+      @subject = Subject.find_or_create_by(code: arr[1]) do |subject|
+        subject.name = arr[2]
+        subject.credits = arr[3]
+        subject.area = arr[4]
+      end
       @course = Course.find_by(opcode: codigo_curso)
       if @course
-        @course.subjects << Subject.last
-        p "#{Subject.last.name} criada com relacionamento para #{@course.name}"
+        CourseSubject.create(subject_id: @subject.id, course_id: @course.id,kind: tipo)
+        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}"
       else
         puts "curso nao encontrado..."
+        break
+      end
+    else
+      if line[2] == 't'
+        p "optativas:"
+        tipo = 1
       end
     end
 

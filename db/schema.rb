@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_08_022010) do
+ActiveRecord::Schema.define(version: 2018_05_08_031958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "course_subjects", force: :cascade do |t|
+    t.bigint "subject_id"
+    t.bigint "course_id"
+    t.integer "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_subjects_on_course_id"
+    t.index ["subject_id"], name: "index_course_subjects_on_subject_id"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "kind"
@@ -99,6 +109,8 @@ ActiveRecord::Schema.define(version: 2018_05_08_022010) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "course_subjects", "courses"
+  add_foreign_key "course_subjects", "subjects"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
   add_foreign_key "schedules", "users"
