@@ -106,6 +106,20 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
+file = File.new("db/codigos_cursos_mw.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line)
+  @curso = Course.find_by(code: codigo[0])
+  if @curso
+    puts @curso
+    @curso.opcode = JSON.parse(codigo[1])
+    @curso.save
+    puts "#{@curso.name} att"
+  else
+    puts "não encontrado"
+  end
+end
+
 materias = [
   ["", "113107", "ALGEBRA 1                       ", "002 002 000 006", "DC"],
   ["", "113476", "ALGORITMOS PROGR COMPUTADORES   ", "004 002 000 006", "AC"],
@@ -144,23 +158,23 @@ materias = [
   ["", "117897", "TECNICAS DE PROGRAMAÇÃO 2       ", "002 002 000 000", "AC"],
 ]
 
-Course.delete_all
-Subject.delete_all
-
-puts "Populando Cursos..."
-courses.each do |course|
-  @course = Course.new
-  course.each do |key,value|
-    @course[key] = value
-  end
-  @course.save
-end
-puts "Cursos Populados"
-
-puts "Populando Matérias..."
-
-materias.each do |materia|
-  @materia = Subject.create(code: materia[1].to_i, name: materia[2].strip, credits: materia[3],area: materia[4])
-end
-
-puts "Matérias Populadas"
+# Course.delete_all
+# Subject.delete_all
+#
+# puts "Populando Cursos..."
+# courses.each do |course|
+#   @course = Course.new
+#   course.each do |key,value|
+#     @course[key] = value
+#   end
+#   @course.save
+# end
+# puts "Cursos Populados"
+#
+# puts "Populando Matérias..."
+#
+# materias.each do |materia|
+#   @materia = Subject.create(code: materia[1].to_i, name: materia[2].strip, credits: materia[3],area: materia[4])
+# end
+#
+# puts "Matérias Populadas"
