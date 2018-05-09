@@ -14,7 +14,9 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-
+    @comment = Comment.new
+    @comments = Comment.all
+    @professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
   end
 
   # GET /subjects/new
