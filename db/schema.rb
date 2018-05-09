@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 2018_05_08_031958) do
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "professor_subject_id"
+    t.index ["professor_subject_id"], name: "index_comments_on_professor_subject_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "course_subjects", force: :cascade do |t|
     t.bigint "subject_id"
     t.bigint "course_id"
@@ -109,6 +119,8 @@ ActiveRecord::Schema.define(version: 2018_05_08_031958) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "professor_subjects"
+  add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "professor_subjects", "professors"

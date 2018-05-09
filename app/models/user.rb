@@ -2,6 +2,8 @@ class User < ApplicationRecord
   before_create :create_user_schedule
   belongs_to :course
   has_one :schedule
+  has_many :comments
+  has_many :professor_subjects, through: :comments
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
