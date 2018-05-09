@@ -1,10 +1,6 @@
 # This is the steps file referred to materias_por_curso feature
 # Place your code relative to that feature here
 
-Dado("que eu esteja na página de cursos") do
-  visit courses_path
-end
-
 Dado("tenha um curso criado:") do |table|
   # table is a Cucumber::MultilineArgument::DataTable
   @course = Course.new
@@ -14,6 +10,10 @@ Dado("tenha um curso criado:") do |table|
     end
   end
   @course.save
+end
+
+Dado("que eu esteja na página de cursos") do
+  visit courses_path
 end
 
 Dado("com as matérias dele:") do |table|

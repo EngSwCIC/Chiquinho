@@ -7,10 +7,10 @@ Funcionalidade: Listar matérias do curso na página de curso
   Eu quero abrir a página do meu curso e ver a lista de matérias, constando obrigatórias e optativas.
 
   Cenário: Ver todas as matérias ao acessar curso desejado
-    Dado que eu esteja na página de cursos
-    E tenha um curso criado:
-    |kind        |code|name           |turn     |classification|
-    |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|exatas   |
+    Dado tenha um curso criado:
+      |kind        |code|name           |turn     |classification|
+      |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|exatas   |
+    E que eu esteja na página de cursos
     E com as matérias dele:
     |code|name  |credits          |area|
     |25  |"Algo"|"002 002 004 008"|"AC"|
