@@ -63,7 +63,7 @@
         </h5>
         <div class="card-body" style="padding: 15px;">
           <div class="row">
-            <% @subject.professors.each do |professor|%>
+            <% @subject.professors.uniq.each do |professor|%>
               <div class="col-md-6">
                 <div class="teacher-header">
                   <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="<%= professor.name %>" class="image-thumbnail"/>
