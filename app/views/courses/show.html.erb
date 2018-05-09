@@ -1,27 +1,178 @@
-<p>
-  <strong>Kind:</strong>
-  <%= @course.kind %>
-</p>
+<%= stylesheet_link_tag "courses" %>
 
-<p>
-  <strong>Code:</strong>
-  <%= @course.code %>
-</p>
+<div class="row">
+  <div class="col-md-5">
+    <div class="card" style="margin-bottom: 15px;">
+      <h5 class="card-header">
+        Dados do Curso
+      </h5>
+      <div class="card-body" style="padding: 15px;">
+        <table class="table">
+          <tr>
+            <th>
+              Código
+            </th>
+            <td>
+              <%= @course.code %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Tipo
+            </th>
+            <td>
+              <%= @course.kind %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Nome
+            </th>
+            <td>
+              <%= @course.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Turno
+            </th>
+            <td>
+              <%= @course.turn %>
+            </td>
+          </tr>
+            <th>
+              Classificação
+            </th>
+            <td>
+              <%= @course.classification.capitalize %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-white">
+      <div class="panel-heading clearfix">
+        <h2 class="panel-title">Obrigatórias</h2>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="example1" class="table table-bordered table-hover display">
+            <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Créditos</th>
+              <th>Área</th>
+              <th>Detalhes</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Credits</th>
+              <th>Area</th>
+              <th>Detalhes</th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <% @obrigatorias.each do |subject| %>
+              <tr>
+                <td><%= subject.code %></td>
+                <td><%= subject.name %></td>
+                <td><%= subject.credits %></td>
+                <td><%= subject.area %></td>
+                <td><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, subject,class: "label label-info" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-white">
+      <div class="panel-heading clearfix">
+        <h2 class="panel-title">Optativas</h2>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="example2" class="table table-bordered table-hover display">
+            <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Créditos</th>
+              <th>Área</th>
+              <th>Detalhes</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Credits</th>
+              <th>Area</th>
+              <th>Detalhes</th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <% @optativas.each do |subject| %>
+              <tr>
+                <td><%= subject.code %></td>
+                <td><%= subject.name %></td>
+                <td><%= subject.credits %></td>
+                <td><%= subject.area %></td>
+                <td><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, subject,class: "label label-info" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Turn:</strong>
-  <%= @course.turn %>
-</p>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#example1').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ matérias por página",
+                "sZeroRecords": "Nenhum registro encontrado - sorry",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "Nenhum campo encontrado",
+                "sInfoFiltered": "(filtrando de _MAX_ total de campos)",
+                "sSearch": "Procurar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
+        $('#example2').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ matérias por página",
+                "sZeroRecords": "Nenhum registro encontrado - sorry",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "Nenhum campo encontrado",
+                "sInfoFiltered": "(filtrando de _MAX_ total de campos)",
+                "sSearch": "Procurar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
+    });
+</script>
 
-<p>
-  <strong>Type:</strong>
-  <%= @course.classification %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to 'Voltar', courses_path,class: "btn btn-primary" %>

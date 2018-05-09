@@ -7,6 +7,7 @@ class MainController < ApplicationController
     @users = User.all
     @courses = Course.all
     @professors = Professor.all
+    @subjects = Subject.all
   end
 
   def schedule
