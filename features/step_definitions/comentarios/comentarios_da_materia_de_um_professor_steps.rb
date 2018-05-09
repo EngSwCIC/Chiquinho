@@ -15,6 +15,12 @@ Dado("que eu esteja na pagina de vizualização dessa materia") do
   visit subject_path(id: @subject.id)
 end
 
+Dado("eu clicar no link {string} do professor {string}") do |string, string2|
+  path = subject_professor_path(@subject.id, @professor.id)
+  link = "a[href=\'#{path}\']"
+  first(link).click
+end
+
 Quando("eu preencher o campo de comentario com:") do |table|
   table.rows_hash.each do |field,value|
     fill_in field, with: value, visible: false
@@ -22,5 +28,7 @@ Quando("eu preencher o campo de comentario com:") do |table|
 end
 
 Então("devo ver o meu comentario {string} na pagina de vizualização da matéria") do |comment|
-  extend(page).to have_content(comment)
+  expect(page).to have_content(comment)
 end
+
+

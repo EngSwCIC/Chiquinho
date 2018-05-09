@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_07_221421) do
+ActiveRecord::Schema.define(version: 2018_05_08_031958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2018_05_07_221421) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "course_subjects", force: :cascade do |t|
+    t.bigint "subject_id"
+    t.bigint "course_id"
+    t.integer "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_subjects_on_course_id"
+    t.index ["subject_id"], name: "index_course_subjects_on_subject_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "kind"
     t.integer "code"
@@ -34,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_05_07_221421) do
     t.integer "classification", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "opcode"
   end
 
   create_table "courses_subjects", id: false, force: :cascade do |t|
@@ -110,6 +121,8 @@ ActiveRecord::Schema.define(version: 2018_05_07_221421) do
 
   add_foreign_key "comments", "professor_subjects"
   add_foreign_key "comments", "users"
+  add_foreign_key "course_subjects", "courses"
+  add_foreign_key "course_subjects", "subjects"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
   add_foreign_key "schedules", "users"

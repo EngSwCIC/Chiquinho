@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = current_user.comments.new(comments_params)
-    @comment.professor_subject_id = params[:professor_subject_id]
     if @comment.save
       redirect_to request.referrer
     else
@@ -13,6 +12,6 @@ class CommentsController < ApplicationController
   private
 
   def comments_params
-    params.require(:comments).permit(:content)
+    params.require(:comment).permit(:content, :professor_subject_id)
   end
 end

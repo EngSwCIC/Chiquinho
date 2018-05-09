@@ -16,13 +16,7 @@ class SubjectsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = Comment.all
-    @users = User.all
-    @comments.each do |comment|
-       comment.user_name = @users.select do |user|
-        user.id == comment.user_id
-      end
-    end
-    @professors_subject = ProfessorSubject.find_by(subject_id: @subject.id)
+    @professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
   end
 
   # GET /subjects/new

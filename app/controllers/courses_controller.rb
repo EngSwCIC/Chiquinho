@@ -10,6 +10,17 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @subjects = @course.subjects
+    @obrigatorias = []
+    @optativas = []
+    @subjects.each do |subject|
+      if subject.course_subjects.find_by(course_id: @course.id).kind == "obrigatória"
+        @obrigatorias << subject
+      else
+        @optativas << subject
+      end
+    end
+
   end
 
   # GET /courses/new

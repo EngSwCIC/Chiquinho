@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :subjects
+  resources :subjects do
+    resources :professors, :controller => :professor_subjects
+  end
   resources :courses
   resources :professors
   resources :comments
