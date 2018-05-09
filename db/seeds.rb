@@ -104,7 +104,9 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
+ProfessorSubject.delete_all
 CourseSubject.delete_all
+Professor.delete_all
 Course.delete_all
 Subject.delete_all
 
@@ -148,7 +150,7 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
     if contador > 11 && line[1] == '"'
       arr = JSON.parse(line)
       @subject = Subject.find_or_create_by(code: arr[1]) do |subject|
-        subject.name = arr[2]
+        subject.name = arr[2].strip
         subject.credits = arr[3]
         subject.area = arr[4]
       end
@@ -172,3 +174,19 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
 end
 
 puts "Matérias Populadas"
+
+puts "Populando professores..."
+
+file = File.new("db/professores_materias.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line.gsub("\n",""))
+  @materia = Subject.find_by(code: codigo[1])
+  @professor = Professor.find_or_create_by(name: codigo[0])
+  if @materia
+    ProfessorSubject.create(professor_id: @professor.id,subject_id: @materia.id)
+    puts "Professor #{@professor.name} criado para matéria #{@materia.name}"
+  else
+    puts "não encontrada materia"
+  end
+end
+puts "Professores populados"
