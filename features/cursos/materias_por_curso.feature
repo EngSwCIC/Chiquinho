@@ -18,7 +18,7 @@ Funcionalidade: Listar matérias do curso na página de curso
     Quando eu clicar no link para detalhes daquele curso
     Então eu devo ver os dados do curso:
       |kind        |code|name           |turn     |classification|
-      |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|exatas   |
+      |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|Exatas   |
     E eu devo ver a lista completa das matérias deste curso:
       |code|name  |credits          |area|
       |25  |"Algo"|"002 002 004 008"|"AC"|
