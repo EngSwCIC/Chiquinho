@@ -14,7 +14,15 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
-
+    @comment = Comment.new
+    @comments = Comment.all
+    @users = User.all
+    @comments.each do |comment|
+       comment.user_name = @users.select do |user|
+        user.id == comment.user_id
+      end
+    end
+    @professors_subject = ProfessorSubject.find_by(subject_id: @subject.id)
   end
 
   # GET /subjects/new

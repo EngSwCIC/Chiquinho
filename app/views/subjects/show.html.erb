@@ -120,14 +120,21 @@
           Comentários
         </h5>
         <div class="card-body">
-          <div class="comentario-header">
-            <i class="fa fa-user-circle"></i> Nicholas Marques
-            <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
-          </div>
-          <div class="comentario-body">
-            <p>Test message subject I interest with your script, i wanna buy your script, but i need some change, please replay this email ASAP...</p>
-          </div>
+          <% @comments.each do |comment| %>
+            <div class="comentario-header">
+              <i class="fa fa-user-circle"></i> <%= comment.user_name %>
+              <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
+            </div>
+            <div class="comentario-body">
+              <p><%= comment.content %></p>
+            </div>
+          <% end %>
         </div>
+        <%= form_with model: @comment, professor_subject_id: 1  do |t|%>
+          <%= t.label :Comente_aqui %><br>
+          <%= t.text_area :content %><br>
+          <%= t.submit "Eviar Comentario", class: "btn btn-md" %>
+        <% end %>
       </div>
     </div>
   </div>
