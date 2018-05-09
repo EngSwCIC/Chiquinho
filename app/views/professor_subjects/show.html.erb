@@ -1,27 +1,87 @@
-<div>
-  <div class="card">
-    <h5 class="card-header">
-      Comentários
-    </h5>
-    <div class="card-body">
-      <% @comments.each do |comment| %>
-        <div class="comentario-header">
-          <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
-          <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
-        </div>
-        <div class="comentario-body">
-          <p><%= comment.content %></p>
-        </div>
-      <% end %>
-
-    <%= form_with model: Comment,url: comments_path,method: :created, local: true do |t|%>
-      <div class="form-group">
-        <%= t.label :Comente_aqui %><br>
-        <%= t.text_area :content, class:  "form-control"%><br>
-        <%= t.number_field :professor_subject_id, class: "form-hidden", value: @professor_subject.id, style: "display: none;" %>
-        <%= t.submit "Enviar Comentario", class: "btn btn-primary btn-md" %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h5 class="card-header">
+        Dados da Matéria
+      </h5>
+      <div class="card-body" style="padding: 15px;">
+        <table class="table">
+          <tr>
+            <th>Professor</th>
+            <td><%= @professor.name%></td>
+          </tr>
+          <tr>
+            <th>
+              Código
+            </th>
+            <td>
+              <%= @subject.code %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Nome
+            </th>
+            <td>
+              <%= @subject.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Créditos
+            </th>
+            <td>
+              <%= @subject.credits %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Área
+            </th>
+            <td>
+              <%= @subject.area %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Ranking de Dificuldade
+            </th>
+            <td>
+              #16
+            </td>
+          </tr>
+        </table>
       </div>
-    <% end %>
+      <div class="card-body-graph">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <h5 class="card-header">
+        Comentários
+      </h5>
+      <div class="card-body">
+        <% @comments.each do |comment| %>
+          <div class="comentario-header">
+            <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
+            <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
+          </div>
+          <div class="comentario-body">
+            <p><%= comment.content %></p>
+          </div>
+        <% end %>
+
+        <%= form_with model: Comment,url: comments_path,method: :created, local: true do |t|%>
+          <div class="form-group">
+            <%= t.label :Comente_aqui %><br>
+            <%= t.text_area :content, class:  "form-control"%><br>
+            <%= t.number_field :professor_subject_id, class: "form-hidden", value: @professor_subject.id, style: "display: none;" %>
+            <%= t.submit "Enviar Comentario", class: "btn btn-primary btn-md" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
