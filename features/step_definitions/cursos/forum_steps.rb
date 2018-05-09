@@ -1,6 +1,7 @@
-Dado("que eu esteja na página do curso") do
-    pending # Write code here that turns the phrase above into concrete actions
+Dado("que eu esteja na página do curso {string}") do |page|
+    visit page
 end
+  
   
 Dado("que exista um link para o fórum do curso") do
     pending # Write code here that turns the phrase above into concrete actions
