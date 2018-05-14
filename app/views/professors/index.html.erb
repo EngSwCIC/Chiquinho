@@ -22,7 +22,7 @@
             <% @professors.each do |professor| %>
               <tr>
                 <td><%= professor.name %></td>
-                <td align="center"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, professor,class: "label label-info" %></td>
+                <td align="center"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, professor_path(professor),class: "label label-info" %></td>
               </tr>
             <% end %>
             </tbody>
