@@ -33,8 +33,6 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Presencial", :code=>"698", :name=>"DESIGN", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"43", :name=>"DIREITO", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"817", :name=>"DIREITO", :turn=>"Noturno"},
-           {:kind=>"Presencial", :code=>"612", :name=>"EDUCAÇÃO ARTÍSTICA", :turn=>"Diurno"},
-           {:kind=>"Presencial", :code=>"795", :name=>"EDUCAÇÃO ARTÍSTICA", :turn=>"Noturno"},
            {:kind=>"Presencial", :code=>"329", :name=>"EDUCAÇÃO FÍSICA", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"1589", :name=>"EDUCAÇÃO FÍSICA", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"442", :name=>"ENFERMAGEM", :turn=>"Diurno"},
@@ -106,44 +104,9 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
-materias = [
-  ["", "113107", "ALGEBRA 1                       ", "002 002 000 006", "DC"],
-  ["", "113476", "ALGORITMOS PROGR COMPUTADORES   ", "004 002 000 006", "AC"],
-  ["", "116882", "AUTÔMATOS E COMPUTABILIDADE     ", "006 000 000 008", "DC"],
-  ["", "116378", "BANCOS DE DADOS                 ", "004 000 000 004", "AC"],
-  ["", "113034", "CÁLCULO 1                       ", "002 004 000 006", "DC"],
-  ["", "113042", "CÁLCULO 2                       ", "004 002 000 006", "DC"],
-  ["", "113417", "CALCULO NUMERICO                ", "004 000 000 006", "DC"],
-  ["", "116351", "CIRCUITOS DIGITAIS              ", "004 002 000 006", "AC"],
-  ["", "117951", "COMPILADORES                    ", "004 000 000 000", "AC"],
-  ["", "117943", "COMPUTAÇÃO EXPERIMENTAL         ", "002 002 000 000", "AC"],
-  ["", "116441", "ENGENHARIA DE SOFTWARE          ", "004 000 000 004", "AC"],
-  ["", "116319", "ESTRUTURAS DE DADOS             ", "004 000 000 004", "AC"],
-  ["", "117960", "FUNDAMENTOS SIST OPERACIONAIS   ", "004 000 000 000", "AC"],
-  ["", "113450", "FUNDAMENTOS TEÓR DA COMPUTAÇÃO  ", "002 002 000 004", "AC"],
-  ["", "116726", "INFORMATICA E SOCIEDADE         ", "002 000 000 000", "AC"],
-  ["", "116653", "INTRO INTELIGENCIA ARTIFICIAL   ", "004 000 000 004", "AC"],
-  ["", "113468", "INTROD SISTEMAS COMPUTACIONAIS  ", "002 002 000 004", "AC"],
-  ["", "113093", "INTRODUCAO A ALGEBRA LINEAR     ", "002 002 000 006", "AC"],
-  ["", "116343", "LINGUAGENS DE PROGRAMACAO       ", "004 000 000 004", "AC"],
-  ["", "117366", "LÓGICA COMPUTACIONAL 1          ", "002 002 000 004", "AC"],
-  ["", "117919", "METODOLOGIA CIENTÍFICA          ", "000 002 000 000", "AC"],
-  ["", "116394", "ORG ARQ DE COMPUTADORES         ", "004 000 000 004", "AC"],
-  ["", "116327", "ORGANIZAÇÃO DE ARQUIVOS         ", "002 002 000 004", "AC"],
-  ["", "115045", "PROBABILIDADE E ESTATÍSTICA     ", "002 002 000 006", "DC"],
-  ["", "117935", "PROGRAMAÇÃO CONCORRENTE         ", "002 002 000 000", "AC"],
-  ["", "117536", "PROJETO ANÁLISE DE ALGORITMOS   ", "004 000 000 004", "AC"],
-  ["", "116572", "REDES DE COMPUTADORES           ", "002 002 000 004", "AC"],
-  ["", "117927", "SEGURANÇA COMPUTACIONAL         ", "004 000 000 004", "AC"],
-  ["", "116416", "SISTEMAS DE INFORMACAO          ", "004 000 000 004", "AC"],
-  ["", "116432", "SOFTWARE BASICO                 ", "004 000 000 004", "AC"],
-  ["", "117901", "TEORIA E APLICAÇÃO DE GRAFOS    ", "002 002 000 004", "AC"],
-  ["", "116912", "TRABALHO DE GRADUAÇÃO 1         ", "000 002 000 002", "DC"],
-  ["", "116921", "TRABALHO DE GRADUAÇÃO 2         ", "000 004 000 004", "DC"],
-  ["", "117889", "TECNICAS DE PROGRAMAÇÃO 1       ", "002 002 000 000", "AC"],
-  ["", "117897", "TECNICAS DE PROGRAMAÇÃO 2       ", "002 002 000 000", "AC"],
-]
-
+ProfessorSubject.delete_all
+CourseSubject.delete_all
+Professor.delete_all
 Course.delete_all
 Subject.delete_all
 
@@ -157,10 +120,73 @@ courses.each do |course|
 end
 puts "Cursos Populados"
 
+file = File.new("db/codigos_cursos_mw.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line)
+  @curso = Course.find_by(code: codigo[0])
+  if @curso
+    puts @curso
+    @curso.opcode = JSON.parse(codigo[1])
+    @curso.save
+    puts "#{@curso.name} att"
+  else
+    puts "não encontrado"
+  end
+end
+
 puts "Populando Matérias..."
 
-materias.each do |materia|
-  @materia = Subject.create(code: materia[1].to_i, name: materia[2].strip, credits: materia[3],area: materia[4])
+Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
+  puts filename
+  file = File.new(filename, "r")
+  contador = 1
+  tipo = 0
+  while (line = file.gets)
+    if contador == 1
+      line.slice!("Curso")
+      codigo_curso = JSON.parse(line)[1]
+      puts "codigo_curso: #{codigo_curso}"
+    end
+    if contador > 11 && line[1] == '"'
+      arr = JSON.parse(line)
+      @subject = Subject.find_or_create_by(code: arr[1]) do |subject|
+        subject.name = arr[2].strip
+        subject.credits = arr[3]
+        subject.area = arr[4]
+      end
+      @course = Course.find_by(opcode: codigo_curso)
+      if @course
+        CourseSubject.create(subject_id: @subject.id, course_id: @course.id,kind: tipo)
+        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}"
+      else
+        puts "curso nao encontrado..."
+        break
+      end
+    else
+      if line[2] == 't'
+        p "optativas:"
+        tipo = 1
+      end
+    end
+
+    contador+= 1
+  end
 end
 
 puts "Matérias Populadas"
+
+puts "Populando professores..."
+
+file = File.new("db/professores_materias.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line.gsub("\n",""))
+  @materia = Subject.find_by(code: codigo[1])
+  @professor = Professor.find_or_create_by(name: codigo[0])
+  if @materia
+    ProfessorSubject.create(professor_id: @professor.id,subject_id: @materia.id)
+    puts "Professor #{@professor.name} criado para matéria #{@materia.name}"
+  else
+    puts "não encontrada materia"
+  end
+end
+puts "Professores populados"
