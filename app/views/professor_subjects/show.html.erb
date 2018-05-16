@@ -1,3 +1,8 @@
+<%= stylesheet_link_tag "star-rating/star-rating.min" %>
+<%= stylesheet_link_tag "star-rating/theme" %>
+<%= javascript_include_tag "star-rating/star-rating.min" %>
+<%= javascript_include_tag "star-rating/theme" %>
+
 <div class="row">
   <div class="col-md-4">
     <div class="card">
@@ -60,6 +65,26 @@
   <div class="col-md-8">
     <div class="card">
       <h5 class="card-header">
+        Sua avaliação
+      </h5>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Trabalhos</label>
+          <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+        </div>
+        <div class="form-group">
+          <label>Provas</label>
+          <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+        </div>
+        <div class="form-group">
+          <label>Tarefas</label>
+          <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <h5 class="card-header">
         Comentários
       </h5>
       <div class="card-body">
@@ -85,3 +110,64 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+    jQuery(function ($) {
+        $('.fa-theme2').rating({
+            theme: 'krajee-fa',
+            step: 1,
+            starCaptions: {0.5: 'De boassa',1: 'De boa',1.5: 'Bem fácil', 2: 'Fácil',2.5: 'Razoável', 3: 'Ok',3.5: 'Chatinho',4: 'Trabalhoso',4.5: 'Difícil', 5: 'Lamar'},
+            starCaptionClasses: {0.5: 'label label-success badge-success',
+                1: 'label label-success badge-success',
+                1.5: 'label label-primary badge-primary',
+                2: 'label label-primary badge-primary',
+                2.5: 'label label-info badge-info',
+                3: 'label label-info badge-info',
+                3.5: 'label label-warning badge-warning',
+                4: 'label label-warning badge-warning',
+                4.5: 'label label-danger badge-danger',
+                5: 'label label-danger badge-danger'}
+        });
+    });
+</script>
+
+<script>
+    // barChart
+    var ctx1 = document.getElementById("barChart").getContext('2d');
+    var barChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [5,8,6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+</script>
