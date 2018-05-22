@@ -73,6 +73,8 @@
                   <canvas id="barChart<%= professor.name %>"></canvas>
                 </div>
                 <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe, subject_professor_path(@subject.id, professor.id),class: "btn btn-primary btn-sm"%>
+                <% professor_subject_id =  ProfessorSubject.where(subject_id: @subject.id).find_by(professor_id: professor).id %>
+                <p style="margin-top: 0.5em;"><strong><%=number_with_delimiter(( ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).count), :delimiter => '.')%></strong> avaliações totais</p>
               </div>
             <% end %>
           </div>
