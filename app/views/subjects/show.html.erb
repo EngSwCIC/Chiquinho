@@ -108,7 +108,7 @@
                 <tr>
                   <td><%= studyMaterial.name%></td>
                   <td><%= studyMaterial.description %></td>
-                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe,"#",class: "btn btn-success btn-sm btn-rounded" %></td>
+                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe, url_for(studyMaterial.file) ,class: "btn btn-success btn-sm btn-rounded" %></td>
                 </tr>
               <% end %>
             </tbody>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :subjects do
     resources :professors, :controller => :professor_subjects
   end
+  resources :professors
   resources :courses
   resources :subjects do
     resources :study_materials, only: [:create, :new]
