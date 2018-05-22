@@ -83,7 +83,7 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
       <div class="card">
         <h5 class="card-header">
           Conteúdos
@@ -155,6 +155,42 @@
 
 <script>
     // barChart
+    var ctx1 = document.getElementById("barChart").getContext('2d');
+    var barChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ["Trabalhos","Provas","Tarefas"],
+            datasets: [{
+                label: '',
+                data: [5,8,6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 10
+                    }
+                }]
+            }
+        }
+    });
+    //professors charts
     <% @subject.professors.each do |professor| %>
       var ctx1 = document.getElementById("barChart"+'<%= professor.name %>').getContext('2d');
       var barChart = new Chart(ctx1, {

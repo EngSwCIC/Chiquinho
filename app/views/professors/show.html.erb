@@ -10,17 +10,29 @@
   </div>
   <hr style="width: 50%;">
   <h2 style="text-align: center;"><%= @professor.name %></h2>
-  <div class="professor-subjects" style="margin-top: 10%;">
-    <h4>Materias Ministradas</h4>
+  <div class="professor-subjects" style="margin-top: 5%;">
+    <h4>Matérias Ministradas</h4>
+    <hr>
     <div class="row">
-      <% @professor.subjects.each do |subject|%>
-        <div class="col-md-3">
-          <div class="card" style="width: 18rem;">
+      <% @professor.subjects.order(name: "ASC").each do |subject|%>
+        <div class="col-md-4" style="margin-bottom: 1em;">
+          <div class="card">
             <div class="card-body">
               <h6 class="card-title"><%= subject.name %></h6>
-              <p>codigo: <%=subject.code%></p>
-              <p>area: <%=subject.area%></p>
-              <p>creditos: <%=subject.credits%></p>
+              <table class="table">
+                <tr>
+                  <th>código</th>
+                  <td><%= subject.code%></td>
+                </tr>
+                <tr>
+                  <th>área</th>
+                  <td><%= subject.area%></td>
+                </tr>
+                <tr>
+                  <th>créditos</th>
+                  <td><%= subject.credits%></td>
+                </tr>
+              </table>
               <%= link_to 'Explorar', subject_path(subject), class: "btn btn-md btn-primary" %>
             </div>
           </div>
