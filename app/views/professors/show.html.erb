@@ -14,7 +14,7 @@
     <h4>Matérias Ministradas</h4>
     <hr>
     <div class="row">
-      <% @professor.subjects.order(name: "ASC").each do |subject|%>
+      <% @professor.subjects.order(name: "ASC").uniq.each do |subject|%>
         <div class="col-md-4" style="margin-bottom: 1em;">
           <div class="card">
             <div class="card-body">
