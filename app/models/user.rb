@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :course
   has_one :schedule
   has_many :comments
+  has_many :study_materials
   has_many :professor_subjects, through: :comments
   has_many :professor_subject_users
   has_many :professor_subjects, through: :professor_subject_users

@@ -115,17 +115,19 @@
         Comentários
       </h5>
       <div class="card-body">
-        <% @comments.each do |comment| %>
-          <div class="comentario-header">
-            <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
-            <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
-          </div>
-          <div class="comentario-body">
-            <p><%= comment.content %></p>
-          </div>
-        <% end %>
+        <div class="comments">
+          <% @comments.each do |comment| %>
+            <div class="comentario-header">
+              <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
+              <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
+            </div>
+            <div class="comentario-body">
+              <p><%= comment.content %></p>
+            </div>
+          <% end %>
+        </div>
 
-        <%= form_with model: Comment,url: comments_path,method: :created, local: true do |t|%>
+        <%= form_with model: Comment,url: comments_path,method: :created, local: true, remote: true do |t|%>
           <div class="form-group">
             <%= t.label :Comente_aqui %><br>
             <%= t.text_area :content, class:  "form-control"%><br>
@@ -136,6 +138,9 @@
       </div>
     </div>
   </div>
+</div>
+
+<%javascript_include_tag "comment_ajax" %>
 </div>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -16,7 +16,8 @@ class SubjectsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = Comment.all
-    @professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
+    #@professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
+    @studyMaterials = StudyMaterial.where(subject_id: @subject.id)
   end
 
   # GET /subjects/new
