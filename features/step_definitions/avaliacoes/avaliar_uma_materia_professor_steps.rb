@@ -18,7 +18,7 @@ Dado("que eu tenha me cadastrado e me autenticado") do
   }
 end
 
-Dado("que exita uma matéria criada com um professor") do
+Dado("que exista uma matéria criada com um professor") do
   @professor = Professor.create(name: "Genaína")
   @subject = Subject.create(code: "113034",name: "CÁLCULO 1",credits: "002 004 000 006",area: "AC")
   @professor_subject = ProfessorSubject.create!(professor_id: @professor.id, subject_id: @subject.id)
