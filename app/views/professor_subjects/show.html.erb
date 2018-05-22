@@ -76,32 +76,38 @@
       <h5 class="card-header">
         Sua avaliação
       </h5>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Trabalhos</label>
-          <% if @rating %>
-            <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.trabalhos || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
-          <% else %>
-            <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
-          <% end %>
+      <% if user_signed_in? %>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Trabalhos</label>
+            <% if @rating %>
+              <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.trabalhos || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
+            <% else %>
+              <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+            <% end %>
+          </div>
+          <div class="form-group">
+            <label>Provas</label>
+            <% if @rating %>
+              <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.provas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
+            <% else %>
+              <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+            <% end %>
+          </div>
+          <div class="form-group">
+            <label>Tarefas</label>
+            <% if @rating %>
+              <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.tarefas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
+            <% else %>
+              <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+            <% end %>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Provas</label>
-          <% if @rating %>
-            <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.provas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
-          <% else %>
-            <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
-          <% end %>
+      <% else %>
+        <div class="card-body">
+          <p>Autentique-se para avaliar: <a href="<%= new_user_session_path %>">autenticar</a></p>
         </div>
-        <div class="form-group">
-          <label>Tarefas</label>
-          <% if @rating %>
-            <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.tarefas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
-          <% else %>
-            <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     </div>
     <br>
     <div class="card">

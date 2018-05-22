@@ -9,7 +9,7 @@ class ProfessorSubjectsController < ApplicationController
     if user_signed_in?
       @rating = ProfessorSubjectUser.where(user_id: current_user.id).find_by(professor_subject_id: @professor_subject.id)
     else
-      @rating = {trabalhos: 1,provas: 1,tarefas:1}
+      @rating = false
     end
     #@comment = Comment.new(professor_subject_id: @professor_subject.id)
   end
