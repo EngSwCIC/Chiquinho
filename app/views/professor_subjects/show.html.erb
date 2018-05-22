@@ -79,15 +79,15 @@
       <div class="card-body">
         <div class="form-group">
           <label>Trabalhos</label>
-          <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+          <input id="trabalhos-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.trabalhos || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
         </div>
         <div class="form-group">
           <label>Provas</label>
-          <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+          <input id="provas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.provas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
         </div>
         <div class="form-group">
           <label>Tarefas</label>
-          <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="1" dir="ltr" data-size="xs" data-step="0.5">
+          <input id="tarefas-stars" name="input-1-ltr-star-xs" class="fa-theme2 rating-loading" value="<%= (@rating.tarefas || 2)/2.0 %>" dir="ltr" data-size="xs" data-step="0.5">
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
   </div>
 </div>
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>
     jQuery(function ($) {
@@ -142,6 +142,63 @@
     });
 </script>
 
+<script>
+  var url_rating = '<%= update_user_professor_subject_rating_path %>';
+  var trabalhos = 5;
+  var provas = 5;
+  var tarefas = 5;
+  var professor_subject_id = '<%= @professor_subject.id %>';
+  $("#trabalhos-stars").change(function () {
+      console.log(parseInt(($(this).val()*2)));
+      trabalhos = parseInt(($(this).val()*2));
+      $.ajax({
+          type: "POST",
+          url: url_rating,
+          headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+              trabalhos: trabalhos,
+              professor_subject_id: professor_subject_id,
+          }
+      });
+  });
+
+  $("#provas-stars").change(function () {
+      console.log(parseInt(($(this).val()*2)));
+      provas = parseInt(($(this).val()*2));
+      $.ajax({
+          type: "POST",
+          url: url_rating,
+          headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+              provas: provas,
+              professor_subject_id: professor_subject_id,
+          }
+      });
+  });
+
+  $("#tarefas-stars").change(function () {
+      console.log(parseInt(($(this).val()*2)));
+      tarefas = parseInt(($(this).val()*2));
+      $.ajax({
+          type: "POST",
+          url: url_rating,
+          headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+              tarefas: tarefas,
+              professor_subject_id: professor_subject_id,
+          }
+      });
+  });
+</script>
 <script>
     // barChart
     var ctx1 = document.getElementById("barChart").getContext('2d');
