@@ -7,14 +7,23 @@
   <div class="col-md-4">
     <div class="card">
       <h5 class="card-header">
+        Professor
+      </h5>
+      <div class="card-body" style="padding: 15px;">
+        <div class="teacher-header professor-profile-image" align="center">
+          <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
+          <hr>
+          <h5><%= @professor.name%></h5>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <h5 class="card-header">
         Dados da Matéria
       </h5>
       <div class="card-body" style="padding: 15px;">
         <table class="table">
-          <tr>
-            <th>Professor</th>
-            <td><%= @professor.name%></td>
-          </tr>
           <tr>
             <th>
               Código
