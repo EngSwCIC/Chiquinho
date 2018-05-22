@@ -192,6 +192,10 @@
             <li><a href="#">Mais procuradas</a></li>
           </ul>
         </li>
+
+        <li class="submenu">
+          <a href="<%= professors_path %>"><i class="fa fa-fw fa-graduation-cap"></i><span> Professores </span> </a>
+        </li>
         <% if user_signed_in? %>
           <li class="submenu">
             <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>

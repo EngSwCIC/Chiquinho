@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :update_resource, if: :devise_controller?
   # before_action :after_update_path_for, if: :devise_controller?
+  #protect_from_forgery
   include ApplicationHelper
 
   def configure_permitted_parameters

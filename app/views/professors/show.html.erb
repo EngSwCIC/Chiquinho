@@ -1,0 +1,43 @@
+<div class="container" style="margin-top: 5%">
+  <div class="teacher-header professor-profile-image">
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <div class="col-md-4 offset-2">
+          <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr style="width: 50%;">
+  <h2 style="text-align: center;"><%= @professor.name %></h2>
+  <div class="professor-subjects" style="margin-top: 5%;">
+    <h4>Matérias Ministradas</h4>
+    <hr>
+    <div class="row">
+      <% @professor.subjects.order(name: "ASC").each do |subject|%>
+        <div class="col-md-4" style="margin-bottom: 1em;">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title"><%= subject.name %></h6>
+              <table class="table">
+                <tr>
+                  <th>código</th>
+                  <td><%= subject.code%></td>
+                </tr>
+                <tr>
+                  <th>área</th>
+                  <td><%= subject.area%></td>
+                </tr>
+                <tr>
+                  <th>créditos</th>
+                  <td><%= subject.credits%></td>
+                </tr>
+              </table>
+              <%= link_to 'Explorar', subject_path(subject), class: "btn btn-md btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
