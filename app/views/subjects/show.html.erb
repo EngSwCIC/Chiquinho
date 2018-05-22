@@ -104,15 +104,21 @@
               </tr>
             </thead>
             <tbody>
-              <% 20.times do %>
+              <% @studyMaterials.each do |studyMaterial| %>
                 <tr>
-                  <td>Resumo de OAC</td>
-                  <td>Resumo de 7 páginas sobre Assembly e o Processador MIPS</td>
+                  <td><%= studyMaterial.name%></td>
+                  <td><%= studyMaterial.description %></td>
                   <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe,"#",class: "btn btn-success btn-sm btn-rounded" %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+          <div class="row">
+            <div class="col-md-3"></div>
+              <div class="col-md-4 m-4">
+                <%= link_to 'Compartilhar material de estudo', new_subject_study_material_path(subject_id: @subject.id), class: 'btn btn-md btn-primary' %>
+              </div>
+          </div>
         </div>
       </div>
     </div>

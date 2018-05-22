@@ -1,0 +1,15 @@
+<%= form_for @studyMaterial, url: subject_study_materials_path do |f|%>
+  <div class="form-group" >
+    <%= f.label :Nome_do_arquivo %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Descrição_do_arquivo %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.file_field :file %>
+  </div>
+  <%= f.number_field :subject_id, class: "form-hidden", value: @subject_id, style: "display: none;" %>
+  <%= f.submit 'Compartilhar', class: 'btn btn-md btn-success'%>
+<% end %>

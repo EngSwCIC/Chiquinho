@@ -15,6 +15,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require activestorage
 //= require popper
 //= require bootstrap-sprockets
 //= require counterup/jquery.counterup.min.js

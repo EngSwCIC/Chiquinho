@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :course
   has_one :schedule
   has_many :comments
+  has_many :study_materials
   has_many :professor_subjects, through: :comments
 
   # Include default devise modules. Others available are:
