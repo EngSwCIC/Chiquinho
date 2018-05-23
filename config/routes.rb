@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :subjects
-  resources :courses
+  resources :courses do
+    resource :forums, only: [:show] do
+      resource :topics
+    end
+  end
   resources :professors
   devise_for :users, :controllers => { registrations: 'registrations/registrations' }
   root to: 'main#index'

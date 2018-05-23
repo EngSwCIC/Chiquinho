@@ -1,0 +1,9 @@
+<%= form_for @topic, url: course_forums_topics_path do |f| %>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+
+    <%= f.submit 'Enviar' %>
+<% end %>
