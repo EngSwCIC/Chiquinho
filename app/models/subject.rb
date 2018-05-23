@@ -18,9 +18,11 @@ class Subject < ApplicationRecord
       tarefas += ProfessorSubjectUser.get_avg(professor_subject,:tarefas)
     end
     length_professors = self.professors.uniq.length
-    trabalhos /= length_professors
-    provas /= length_professors
-    tarefas /= length_professors
+    if length_professors != 0
+      trabalhos /= length_professors
+      provas /= length_professors
+      tarefas /= length_professors
+    end
 
     {trabalhos: trabalhos.round(2), provas: provas.round(2), tarefas: tarefas.round(2)}
   end
