@@ -24,4 +24,9 @@ class Subject < ApplicationRecord
 
     {trabalhos: trabalhos.round(2), provas: provas.round(2), tarefas: tarefas.round(2)}
   end
+
+  def dificuldade_geral
+    averages = self.get_avg
+    (averages[:trabalhos] + averages[:provas] + averages[:tarefas])/3.0
+  end
 end

@@ -46,7 +46,15 @@
                 Ranking de Dificuldade
               </th>
               <td>
-                #16
+                #<%= @subject.id %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Dificuldade Geral
+              </th>
+              <td>
+                <%= @subject.dificuldade_geral %>
               </td>
             </tr>
           </table>
