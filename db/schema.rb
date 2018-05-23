@@ -85,6 +85,12 @@ ActiveRecord::Schema.define(version: 2018_05_22_192236) do
     t.index ["professor_subject_id"], name: "index_professor_subject_users_on_professor_subject_id"
     t.index ["user_id"], name: "index_professor_subject_users_on_user_id"
   end
+  create_table "forums", force: :cascade do |t|
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_forums_on_course_id"
+  end
 
   create_table "professor_subjects", force: :cascade do |t|
     t.bigint "professor_id"
@@ -141,6 +147,15 @@ ActiveRecord::Schema.define(version: 2018_05_22_192236) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "forum_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["forum_id"], name: "index_topics_on_forum_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -174,5 +189,10 @@ ActiveRecord::Schema.define(version: 2018_05_22_192236) do
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"
+  add_foreign_key "forums", "courses"
+  add_foreign_key "professor_subjects", "professors"
+  add_foreign_key "professor_subjects", "subjects"
+  add_foreign_key "schedules", "users"
+  add_foreign_key "topics", "forums"
   add_foreign_key "users", "courses"
 end

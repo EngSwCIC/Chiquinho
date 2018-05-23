@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :subjects do
     resources :professors, :controller => :professor_subjects
+  resources :subjects
+  
+  resources :courses do
+    resource :forums, only: [:show] do
+      resource :topics
+    end
   end
   resources :professors
   resources :courses
