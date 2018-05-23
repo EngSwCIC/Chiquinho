@@ -3,5 +3,6 @@ class Subject < ApplicationRecord
   has_many :course_subjects
   has_many :courses,through: :course_subjects
   has_many :professor_subjects
+  has_many :study_materials
   has_many :professors, through: :professor_subjects
 end

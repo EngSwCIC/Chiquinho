@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_08_031958) do
+ActiveRecord::Schema.define(version: 2018_05_22_192236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
@@ -53,6 +74,18 @@ ActiveRecord::Schema.define(version: 2018_05_08_031958) do
     t.index ["subject_id", "course_id"], name: "index_courses_subjects_on_subject_id_and_course_id"
   end
 
+  create_table "professor_subject_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "professor_subject_id"
+    t.integer "trabalhos"
+    t.integer "provas"
+    t.integer "tarefas"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["professor_subject_id"], name: "index_professor_subject_users_on_professor_subject_id"
+    t.index ["user_id"], name: "index_professor_subject_users_on_user_id"
+  end
+
   create_table "professor_subjects", force: :cascade do |t|
     t.bigint "professor_id"
     t.bigint "subject_id"
@@ -86,6 +119,17 @@ ActiveRecord::Schema.define(version: 2018_05_08_031958) do
     t.bigint "subject_id", null: false
     t.bigint "schedule_id", null: false
     t.index ["subject_id", "schedule_id"], name: "index_schedules_subjects_on_subject_id_and_schedule_id"
+  end
+
+  create_table "study_materials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "subject_id"
+    t.string "description"
+    t.bigint "user_id"
+    t.index ["subject_id"], name: "index_study_materials_on_subject_id"
+    t.index ["user_id"], name: "index_study_materials_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -123,8 +167,12 @@ ActiveRecord::Schema.define(version: 2018_05_08_031958) do
   add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
+  add_foreign_key "professor_subject_users", "professor_subjects"
+  add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
   add_foreign_key "schedules", "users"
+  add_foreign_key "study_materials", "subjects"
+  add_foreign_key "study_materials", "users"
   add_foreign_key "users", "courses"
 end

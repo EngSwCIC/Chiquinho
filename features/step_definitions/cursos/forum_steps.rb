@@ -1,5 +1,6 @@
 Dado("que eu esteja na página do curso {string}") do |page|
-    visit page
+  pending
+  #visit page
 end
   
   
