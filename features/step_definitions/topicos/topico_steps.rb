@@ -1,4 +1,6 @@
 Dado("que eu esteja no fórum do curso de {string}") do |course|
+    pending
+    
     course = Course.find_by(name: course)
     visit courses_path(course)
 end
