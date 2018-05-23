@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  before_save :create_forum
+  before_create :create_forum
   enum classification: [ :exatas, :humanas ]
   has_many :users
   has_and_belongs_to_many :subjects
