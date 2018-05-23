@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag "courses" %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-white">
+      <div class="panel-heading clearfix">
+        <h2 class="panel-title">Matérias</h2>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover display">
+            <thead>
+              <tr>
+                <th>Área</th>
+                <th>Código</th>
+                <th>Créditos</th>
+                <th>Nome</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @subjects.each do |subject| %>
+                <tr>
+                  <td><%= subject.area %></td>
+                  <td><%= subject.code %></td>
+                  <td><%= subject.credits %></td>
+                  <td><%= subject.name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <th>Área</th>
+                <th>Código</th>
+                <th>Créditos</th>
+                <th>Nome</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
