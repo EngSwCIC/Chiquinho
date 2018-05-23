@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   post '/update_user_schedule',to: "main#update_user_schedule",as: "update_user_schedule"
   post '/update_user_professor_subject_rating',to: "professor_subjects#update_user_professor_subject_rating",as: "update_user_professor_subject_rating"
   get '/clean_user_schedule',to: "main#clean_user_schedule",as: "clean_user_schedule"
-  get '/grade',to: "main#schedule",as: "user_schedule"
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/grade', to: "main#schedule", as: "user_schedule"
+  get '/search_subject', to: 'main#search_subject', as: :search_subject
 end
