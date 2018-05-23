@@ -73,6 +73,8 @@
                   <canvas id="barChart<%= professor.name %>"></canvas>
                 </div>
                 <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe, subject_professor_path(@subject.id, professor.id),class: "btn btn-primary btn-sm"%>
+                <% professor_subject_id =  ProfessorSubject.where(subject_id: @subject.id).find_by(professor_id: professor).id %>
+                <p style="margin-top: 0.5em;"><strong><%=number_with_delimiter(( ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).count), :delimiter => '.')%></strong> avaliações totais</p>
               </div>
             <% end %>
           </div>
@@ -198,6 +200,7 @@
     });
     //professors charts
     <% @subject.professors.each do |professor| %>
+      <% professor_subject_id =  ProfessorSubject.where(subject_id: @subject.id).find_by(professor_id: professor).id %>
       var ctx1 = document.getElementById("barChart"+'<%= professor.name %>').getContext('2d');
       var barChart = new Chart(ctx1, {
           type: 'bar',
@@ -205,7 +208,11 @@
               labels: ["Trabalhos","Provas","Tarefas"],
               datasets: [{
                   label: '',
-                  data: [5.5,8,7.5],
+                  data: [
+                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:trabalhos).to_f.round(2) %>,
+                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:provas).to_f.round(2) %>,
+                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:tarefas).to_f.round(2) %>
+                  ],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',

@@ -8,7 +8,7 @@ Funcionalidade: Avaliar uma matéria de um professor por trabalhos,provas e tare
 
   Cenário: Avaliar com sucesso uma matéria com um professor
     Dado que eu tenha me cadastrado e me autenticado
-    E que exita uma matéria criada com um professor
+    E que exista uma matéria criada com um professor
     Quando eu clicar no link para detalhes daquela matéria com aquele professor
     E clicar na estrela de avalição para 5 estrelas
     Então eu devo ver uma mensagem dizendo "Avaliação feita"
