@@ -151,10 +151,17 @@
       </li>
       <li class="float-left" style="margin-top: 0.6rem;">
         <!-- Search form -->
-        <form class="form-inline md-form form-sm">
-          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Procurar Matéria" aria-label="Search" style="border-radius: 20px !important; width: 20rem !important; padding-left: 20px;" id="search-bar">
-          <i class="fa fa-search" aria-hidden="true" style="color: white !important;" id="search-bar"></i>
-        </form>
+        <%= form_tag search_subject_path, class: 'form-inline md-form form-sm', method: :get do %>
+          <%= text_field_tag :name, nil, id: 'search-bar',
+                                         class: 'form-control form-control-sm mr-3 w-75',
+                                         placeholder: 'Procurar Matéria',
+                                         aria: { label: 'Search' },
+                                         style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px;'
+          %>
+
+          <%= submit_tag 'Pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-outline-light' %>
+
+        <% end %>
       </li>
     </ul>
 
