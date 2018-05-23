@@ -9,7 +9,6 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão do curso
 
   Cenário: Usuário abre um tópico de discussão no fórum do curso
     Dado que eu esteja no fórum do curso de "CIÊNCIA DA COMPUTAÇÃO"
-    E que exista um botão para adicionar um novo tópico de discussão
     Quando eu clicar no link "Criar novo tópico"
     E preencher o fórmulário com:
     |title|ES|
