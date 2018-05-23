@@ -12,5 +12,4 @@ class Course < ApplicationRecord
   def create_forum
     self.forum = Forum.new
   end
->>>>>>> 016_topico_forum
 end

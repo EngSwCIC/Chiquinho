@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
         forum = Forum.find_by(course_id: params[:course_id])
         @topic.forum_id = forum.id
         if @topic.save
-            redirect_to root_path
+            redirect_to course_forums_path(params[:course_id])
         else
             render :new
         end
