@@ -15,7 +15,7 @@ Funcionalidade: Pesquisar matéria por nome
     |name   |ORGANIZAÇÃO DE ARQUIVOS|
   Quando eu preencher o form com:
     |search-bar|Org|
-  E clicar no link "<i class=\"fa fa-search\" aria-hidden=\"true\" style=\"color: white !important;\" id=\"search-bar\"></i>"
+  E clicar no link "Pesquisar"
   Entao eu devo ver os dados da matéria:
     |area   |AC|
     |code   |116327|
