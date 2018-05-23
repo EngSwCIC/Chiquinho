@@ -108,6 +108,16 @@ ActiveRecord::Schema.define(version: 2018_05_23_220719) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "subject_id"
+    t.integer "trabalhos"
+    t.integer "provas"
+    t.integer "tarefas"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_ratings_on_subject_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.string "time_8", default: [], array: true
     t.string "time_10", default: [], array: true
@@ -188,6 +198,7 @@ ActiveRecord::Schema.define(version: 2018_05_23_220719) do
   add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
+  add_foreign_key "ratings", "subjects"
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"

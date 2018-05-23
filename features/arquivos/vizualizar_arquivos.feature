@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
 
-#Funcionalidade: vizualizar_arquivos
+Funcionalidade: vizualizar_arquivos
  # Como usuario autenticado
   #Para que eu possa ter acesso a materiais de estudo de uma materia com um professor
   #Eu quero poder acesso ao arqivos compartilhados por outros usuarios do sistema

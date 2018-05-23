@@ -46,7 +46,15 @@
                 Ranking de Dificuldade
               </th>
               <td>
-                #16
+                #<%= @subject.id %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Dificuldade Geral
+              </th>
+              <td>
+                <%= @subject.dificuldade_geral %>
               </td>
             </tr>
           </table>
@@ -118,7 +126,7 @@
           <div class="row">
             <div class="col-md-3"></div>
               <div class="col-md-4 m-4">
-                <%= link_to 'Compartilhar material de estudo', new_subject_study_material_path(subject_id: @subject.id), class: 'btn btn-md btn-primary' %>
+                <%= link_to "<i class='fa fa-share-alt'></i> Compartilhar material de estudo".html_safe, new_subject_study_material_path(subject_id: @subject.id), class: 'btn btn-md btn-primary' %>
               </div>
           </div>
         </div>
@@ -170,7 +178,11 @@
             labels: ["Trabalhos","Provas","Tarefas"],
             datasets: [{
                 label: '',
-                data: [5,8,6],
+                data: [
+                    <%= @averages[:trabalhos]%>,
+                    <%= @averages[:provas]%>,
+                    <%= @averages[:tarefas]%>
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -209,9 +221,9 @@
               datasets: [{
                   label: '',
                   data: [
-                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:trabalhos).to_f.round(2) %>,
-                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:provas).to_f.round(2) %>,
-                      <%= ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).average(:tarefas).to_f.round(2) %>
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:trabalhos) %>,
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:provas) %>,
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:tarefas) %>
                   ],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
