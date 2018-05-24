@@ -231,7 +231,11 @@
             labels: ["Trabalhos","Provas","Tarefas"],
             datasets: [{
                 label: '',
-                data: [5,8,6],
+                data: [
+                    <%= ProfessorSubjectUser.where(professor_subject_id: @professor_subject.id).average(:trabalhos).to_f.round(2) %>,
+                    <%= ProfessorSubjectUser.where(professor_subject_id: @professor_subject.id).average(:provas).to_f.round(2) %>,
+                    <%= ProfessorSubjectUser.where(professor_subject_id: @professor_subject.id).average(:tarefas).to_f.round(2) %>
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

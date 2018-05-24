@@ -46,7 +46,15 @@
                 Ranking de Dificuldade
               </th>
               <td>
-                #16
+                #<%= @subject.id %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Dificuldade Geral
+              </th>
+              <td>
+                <%= @subject.dificuldade_geral %>
               </td>
             </tr>
           </table>
@@ -73,6 +81,8 @@
                   <canvas id="barChart<%= professor.name %>"></canvas>
                 </div>
                 <%= link_to "<i class='fa fa-star'></i> Avaliar".html_safe, subject_professor_path(@subject.id, professor.id),class: "btn btn-primary btn-sm"%>
+                <% professor_subject_id =  ProfessorSubject.where(subject_id: @subject.id).find_by(professor_id: professor).id %>
+                <p style="margin-top: 0.5em;"><strong><%=number_with_delimiter(( ProfessorSubjectUser.where(professor_subject_id: professor_subject_id).count), :delimiter => '.')%></strong> avaliações totais</p>
               </div>
             <% end %>
           </div>
@@ -108,7 +118,7 @@
                 <tr>
                   <td><%= studyMaterial.name%></td>
                   <td><%= studyMaterial.description %></td>
-                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe, url_for(studyMaterial.file) ,class: "btn btn-success btn-sm btn-rounded" %></td>
+                  <td><%= link_to "<i class='fa fa-download'></i> Baixar".html_safe, url_for(studyMaterial.file) ,class: "btn btn-success btn-sm btn-rounded", target: :_blank %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -116,7 +126,7 @@
           <div class="row">
             <div class="col-md-3"></div>
               <div class="col-md-4 m-4">
-                <%= link_to 'Compartilhar material de estudo', new_subject_study_material_path(subject_id: @subject.id), class: 'btn btn-md btn-primary' %>
+                <%= link_to "<i class='fa fa-share-alt'></i> Compartilhar material de estudo".html_safe, new_subject_study_material_path(subject_id: @subject.id), class: 'btn btn-md btn-primary' %>
               </div>
           </div>
         </div>
@@ -168,7 +178,11 @@
             labels: ["Trabalhos","Provas","Tarefas"],
             datasets: [{
                 label: '',
-                data: [5,8,6],
+                data: [
+                    <%= @averages[:trabalhos]%>,
+                    <%= @averages[:provas]%>,
+                    <%= @averages[:tarefas]%>
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -198,6 +212,7 @@
     });
     //professors charts
     <% @subject.professors.each do |professor| %>
+      <% professor_subject_id =  ProfessorSubject.where(subject_id: @subject.id).find_by(professor_id: professor).id %>
       var ctx1 = document.getElementById("barChart"+'<%= professor.name %>').getContext('2d');
       var barChart = new Chart(ctx1, {
           type: 'bar',
@@ -205,7 +220,11 @@
               labels: ["Trabalhos","Provas","Tarefas"],
               datasets: [{
                   label: '',
-                  data: [5.5,8,7.5],
+                  data: [
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:trabalhos) %>,
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:provas) %>,
+                      <%= ProfessorSubjectUser.get_avg(professor_subject_id,:tarefas) %>
+                  ],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
