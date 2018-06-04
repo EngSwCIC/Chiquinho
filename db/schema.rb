@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_23_220719) do
+ActiveRecord::Schema.define(version: 2018_06_01_014412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2018_05_23_220719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "opcode"
+    t.bigint "professors_id"
+    t.index ["professors_id"], name: "index_courses_on_professors_id"
   end
 
   create_table "courses_subjects", id: false, force: :cascade do |t|
@@ -106,6 +108,8 @@ ActiveRecord::Schema.define(version: 2018_05_23_220719) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "courses_id"
+    t.index ["courses_id"], name: "index_professors_on_courses_id"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -193,11 +197,13 @@ ActiveRecord::Schema.define(version: 2018_05_23_220719) do
   add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
+  add_foreign_key "courses", "professors", column: "professors_id"
   add_foreign_key "forums", "courses"
   add_foreign_key "professor_subject_users", "professor_subjects"
   add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
+  add_foreign_key "professors", "courses", column: "courses_id"
   add_foreign_key "ratings", "subjects"
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"

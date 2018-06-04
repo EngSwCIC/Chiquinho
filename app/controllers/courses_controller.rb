@@ -20,6 +20,9 @@ class CoursesController < ApplicationController
         @optativas << subject
       end
     end
+    if @course.professors_id != nil
+      @coordinator = Professor.find_by(id: @course.professors_id)
+    end
 
   end
 

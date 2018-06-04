@@ -9,7 +9,7 @@ Funcionalidade: vizualizar_arquivos
   #Delineação do Cenário: Cenario: ver lista de arquivos
    #Dado que eu tenha uma matéria criada com os atributos:
     #  |code   |116327                 |
-     # |name   |ORGANIZAÇÃO DE ARQUIVOS|
+     # |name   |ORGANIZAÇÃO DE ARQUIVOS|ra
       #|credits|002 002 000 004        |
       #|area   |AC                     |
     #E que ela é ministrada por um professor criado com os atributos:
