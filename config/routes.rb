@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resource :topics
     end
   end
+  resources :department, only: [:index, :show]
   resources :professors
   resources :courses
   resources :subjects do
