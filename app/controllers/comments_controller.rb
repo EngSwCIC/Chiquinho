@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = current_user.comments.new(comments_params)
+    @comment[:subject_id] = params[:comment][:subject_id]
     if @comment.save
       respond_to do |format|
         format.html {redirect_to request.referrer}
