@@ -6,7 +6,7 @@ Dado("que eu esteja na pagina de grade horária") do
 end
 
 Quando("eu clicar na coluna para adicionar um matéria") do
-  find('#00').click
+  pending find('#00').click
 end
 
 Então("eu devo ver a nova matéria adicionada a grade {string}") do |materia_name|
@@ -20,6 +20,7 @@ end
 
 ##Ver Gráficos
 Dado("que eu tenha adicionado uma matéria a minha grade") do
+  pending
   steps %Q{
     Dado que eu tenha me cadastrado e me autenticado
     E que eu tenha uma matéria criada com os atributos:
