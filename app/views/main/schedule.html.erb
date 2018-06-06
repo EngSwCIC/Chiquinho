@@ -15,6 +15,31 @@
   .th-gray {
     background-color: #d1d2d3;
   }
+
+  .tooltip2 {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Tooltip text */
+  .tooltip2 .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip2:hover .tooltiptext {
+    visibility: visible;
+  }
 </style>
 
 <div class="margin-all" style="margin: 30px;">
@@ -137,11 +162,13 @@
           Opinião do Chiquinho:
         </h5>
         <div class="card-body">
-          <div data-toggle="tooltip" data-placement="right" title="<%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas]) %>">
-            <div class="img-lateral">
-              <%= image_tag "chiquinho_guru_alt.png",id: "chiquinho_alt" %>
-            </div>
+          <div class="img-lateral">
+            <%= image_tag "chiquinho_guru_alt.png",id: "chiquinho_alt" %>
           </div>
+          <br>
+          <h4 align="center">
+            <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas]) %>
+          </h4>
         </div>
       </div>
     </div>

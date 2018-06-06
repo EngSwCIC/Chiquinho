@@ -153,7 +153,9 @@ img {
 
 .img-lateral img{
   max-height: 450px;
-  float: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 80%;
 }
 
