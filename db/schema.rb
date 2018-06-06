@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_014412) do
+ActiveRecord::Schema.define(version: 2018_06_05_115501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 2018_06_01_014412) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "professor_subject_id"
+    t.bigint "subject_id"
     t.index ["professor_subject_id"], name: "index_comments_on_professor_subject_id"
+    t.index ["subject_id"], name: "index_comments_on_subject_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -194,6 +196,7 @@ ActiveRecord::Schema.define(version: 2018_06_01_014412) do
   end
 
   add_foreign_key "comments", "professor_subjects"
+  add_foreign_key "comments", "subjects"
   add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"

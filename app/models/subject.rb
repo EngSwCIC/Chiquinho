@@ -6,7 +6,7 @@ class Subject < ApplicationRecord
   has_many :professor_subjects
   has_many :study_materials
   has_many :professors, through: :professor_subjects
-
+  has_many :comments
   def get_avg
     trabalhos = 0
     provas = 0
