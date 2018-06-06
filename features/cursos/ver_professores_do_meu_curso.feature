@@ -19,6 +19,8 @@ Funcionalidade: ver_professores_do_meu_curso
       |classification|exatas               |
     E que eu exista um professor daquele departamento com os campos:
       |name|joao|
+    E que exista um coordenador do curso com os campos:
+      |name|jose|
     E que eu esteja na pagina de vizualização desse curso
     Quando eu clicar no link "Ver Professores do Curso"
     Então devo uma lista com os professores desse curso

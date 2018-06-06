@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :department, only: [:index, :show]
   resources :professors
   resources :courses
+  get 'course/:id/professors', to: "courses#course_professors", as: "course_professors"
   resources :subjects do
     resources :study_materials, only: [:create, :new]
   end
