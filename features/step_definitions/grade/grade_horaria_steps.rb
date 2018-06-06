@@ -7,6 +7,7 @@ end
 
 Quando("eu clicar na coluna para adicionar um matéria") do
   find('#00').click
+  #expect(page).to have_content "Adicione uma Matéria"
 end
 
 Então("eu devo ver a nova matéria adicionada a grade {string}") do |materia_name|
