@@ -21,6 +21,7 @@ Dado("que exista um professor que seja o orientador desse curso com os campos:")
 end
 
 Dado("que eu esteja na pagina de vizualização desse curso") do
+  @course.save
   visit course_path(@course)
 end
 

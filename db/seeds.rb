@@ -190,3 +190,7 @@ while (line = file.gets)
   end
 end
 puts "Professores populados"
+
+puts "Populando Departamentos"
+Department.create(name: 'DEPARTAMENTO DE CIENCIA DA COMPUTAÇAO', code: '116', initial: 'CIC')
+puts "Departamentos populados"
