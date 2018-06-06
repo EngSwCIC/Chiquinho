@@ -10,7 +10,9 @@ class MainController < ApplicationController
     @subjects = Subject.all
   end
 
-  def schedule; end
+  def schedule
+    @grade = current_user.schedule
+  end
   def clean_user_schedule
     current_user.schedule.delete
     current_user.schedule = Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
