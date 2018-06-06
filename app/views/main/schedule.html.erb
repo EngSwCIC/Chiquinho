@@ -168,7 +168,9 @@
           <br>
           <h4 align="center">
             <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas]) %>
+            <% media =  (@grade.get_avg[:trabalhos] + @grade.get_avg[:provas] + @grade.get_avg[:tarefas])/3.0 %>
           </h4>
+          <p align="center">Sua média: <%= media %></p>
         </div>
       </div>
     </div>
