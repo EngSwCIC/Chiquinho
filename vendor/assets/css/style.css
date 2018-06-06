@@ -151,6 +151,12 @@ img {
   margin-top: 25px;
 }
 
+.img-lateral img{
+  max-height: 450px;
+  float: left;
+  width: 80%;
+}
+
 .img-side-menu {
   display: none;
 }
