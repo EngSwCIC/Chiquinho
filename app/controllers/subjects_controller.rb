@@ -15,7 +15,7 @@ class SubjectsController < ApplicationController
   # GET /subjects/1.json
   def show
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = Comment.where(subject_id: set_subject.id)
     #@professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
     @studyMaterials = StudyMaterial.where(subject_id: @subject.id)
     @averages = @subject.get_avg
