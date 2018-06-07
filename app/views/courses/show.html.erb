@@ -59,6 +59,19 @@
       </div>
     </div>
   </div>
+  <% if @coordinator != nil %>
+    <div class="col-md-7">
+      <div class="card">
+        <h5 class="card-header">
+          Coordenador
+        </h5>
+        <div class="card-body">
+          <h6><%= link_to @coordinator.name, professor_path(@coordinator) %></h6>
+          <%= link_to 'Ver Professores do Curso', course_professors_path(@course), class: "btn btn-md btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <div class="col-md-12">
     <div class="panel panel-white">
       <div class="panel-heading clearfix">

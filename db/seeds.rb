@@ -104,11 +104,85 @@ courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"
            {:kind=>"Distância", :code=>"299", :name=>"TEATRO", :turn=>"Diurno"},
            {:kind=>"Distância", :code=>"1171", :name=>"TEATRO", :turn=>"Diurno"}]
 
+departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLVIMENTO TECNOLÓGICO"},
+               {code: "383", initial: "CDS", name: "CENTRO DE DESENVOLVIMENTO SUSTENTÁVEL"},
+               {code: "025", initial: "CEAM", name: "CENTRO DE ESTUDOS AVANÇADOS E MULTIDISCIPLINARES"},
+               {code: "039", initial: "CET", name: "CENTRO DE EXCELÊNCIA EM TURISMO"},
+               {code: "135", initial: "DAN", name: "DEPARTAMENTO DE ANTROPOLOGIA"},
+               {code: "422", initial: "CEN", name: "DEPARTAMENTO DE ARTES CÊNICAS"},
+               {code: "421", initial: "VIS", name: "DEPARTAMENTO DE ARTES VISUAIS"},
+               {code: "121", initial: "CEL", name: "DEPARTAMENTO DE BIOLOGIA CELULAR"},
+               {code: "129", initial: "BOT", name: "DEPARTAMENTO DE BOTÂNICA"},
+               {code: "116", initial: "CIC", name: "DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO"},
+               {code: "424", initial: "DIN", name: "DEPARTAMENTO DE DESENHO INDUSTRIAL"},
+               {code: "127", initial: "ECL", name: "DEPARTAMENTO DE ECOLOGIA"},
+               {code: "405", initial: "ECO", name: "DEPARTAMENTO DE ECONOMIA"},
+               {code: "177", initial: "ENF", name: "DEPARTAMENTO DE ENFERMAGEM"},
+               {code: "162", initial: "ENC", name: "DEPARTAMENTO DE ENGENHARIA CIVIL E AMBIENTAL"},
+               {code: "163", initial: "ENE", name: "DEPARTAMENTO DE ENGENHARIA ELÉTRICA"},
+               {code: "165", initial: "EFL", name: "DEPARTAMENTO DE ENGENHARIA FLORESTAL"},
+               {code: "164", initial: "ENM", name: "DEPARTAMENTO DE ENGENHARIA MECÂNICA"},
+               {code: "115", initial: "EST", name: "DEPARTAMENTO DE ESTATÍSTICA"},
+               {code: "352", initial: "ELA", name: "DEPARTAMENTO DE ESTUDOS LATINO-AMERICANOS"},
+               {code: "137", initial: "FIL", name: "DEPARTAMENTO DE FILOSOFIA"},
+               {code: "128", initial: "FIT", name: "DEPARTAMENTO DE FITOPATOLOGIA"},
+               {code: "126", initial: "GEM", name: "DEPARTAMENTO DE GENÉTICA E MORFOLOGIA"},
+               {code: "138", initial: "GEA", name: "DEPARTAMENTO DE GEOGRAFIA"},
+               {code: "139", initial: "HIS", name: "DEPARTAMENTO DE HISTÓRIA"},
+               {code: "149", initial: "LET", name: "DEPARTAMENTO DE LÍNGUAS ESTRANGEIRAS E TRADUÇÃO"},
+               {code: "147", initial: "LIP", name: "DEPARTAMENTO DE LINGUÍSTICA, PORTUGUÊS, LÍNG CLÁS"},
+               {code: "113", initial: "MAT", name: "DEPARTAMENTO DE MATEMÁTICA"},
+               {code: "423", initial: "MUS", name: "DEPARTAMENTO DE MÚSICA"},
+               {code: "411", initial: "PPB", name: "DEPARTAMENTO DE PROCESSOS PSICOLOGICOS BÁSICOS"},
+               {code: "157", initial: "PRO", name: "DEPARTAMENTO DE PROJETOS EXPRESSÃO E REPRESENTAÇÃO"},
+               {code: "412", initial: "PED", name: "DEPARTAMENTO DE PSIC.ESCOLAR E DO DESENVOLVIMENTO"},
+               {code: "413", initial: "PCL", name: "DEPARTAMENTO DE PSICOLOGIA CLÍNICA"},
+               {code: "414", initial: "PST", name: "DEPARTAMENTO DE PSICOLOGIA SOCIAL E DO TRABALHO"},
+               {code: "179", initial: "DSC",	 name: "DEPARTAMENTO DE SAÚDE COLETIVA"},
+               {code: "136", initial: "SER",	 name: "DEPARTAMENTO DE SERVIÇO SOCIAL"},
+               {code: "134", initial: "SOL",	 name: "DEPARTAMENTO DE SOCIOLOGIA"},
+               {code: "158", initial: "TEC",	 name: "DEPARTAMENTO DE TECNOLOGIA EM ARQUIT. E URBANISMO"},
+               {code: "148", initial: "TEL",	 name: "DEPARTAMENTO DE TEORIA LITERÁRIA E LITERATURA"},
+               {code: "382", initial: "ZOO",	 name: "DEPARTAMENTO DE ZOOLOGIA"},
+               {code: "404", initial: "CCA",	 name: "DEPTO DE CIÊNCIAS CONTÁBEIS E ATUARIAIS"},
+               {code: "159", initial: "HAU",	 name: "DEPTO.DE TEORIA E HIST.EM ARQUITETURA E URBANISMO"},
+               {code: "120", initial: "IBD",	 name: "DIREÇÃO DO INSTITUTO CIÊNCIAS BIOLÓGICAS"},
+               {code: "40",  initial: "FACE", name: "FACULD. DE ECONOMIA, ADMINISTRAÇÃO E CONTABILIDADE"},
+               {code: "540", initial: "FAV",	 name: "FACULDADE DE AGRONOMIA E MEDICINA VETERINÁRIA"},
+               {code: "700", initial: "FCI",	 name: "FACULDADE DE CIÊNCIA DA INFORMAÇÃO"},
+               {code: "17",  initial: "FS",	 name: "FACULDADE DE CIÊNCIAS DA SAÚDE"},
+               {code: "430", initial: "FAC",	 name: "FACULDADE DE COMUNICAÇÃO"},
+               {code: "500", initial: "FDD",	 name: "FACULDADE DE DIREITO"},
+               {code: "19",  initial: "FE",	 name: "FACULDADE DE EDUCAÇÃO"},
+               {code: "530", initial: "FEF",	 name: "FACULDADE DE EDUCAÇÃO FÍSICA"},
+               {code: "570", initial: "FMD",	 name: "FACULDADE DE MEDICINA"},
+               {code: "16",  initial: "FT",	 name: "FACULDADE DE TECNOLOGIA"},
+               {code: "377", initial: "HUB",	 name: "HOSPITAL UNIVERSITÁRIO DE BRASÍLIA"},
+               {code: "588", initial: "POL",	 name: "INSTITUTO DE CIÊNCIA POLÍTICA"},
+               {code: "12",  initial: "IB",	 name: "INSTITUTO DE CIÊNCIAS BIOLÓGICAS"},
+               {code: "13",  initial: "IH",	 name: "INSTITUTO DE CIÊNCIAS HUMANAS"},
+               {code: "550", initial: "IFD",	 name: "INSTITUTO DE FÍSICA"},
+               {code: "440", initial: "IGD",	 name: "INSTITUTO DE GEOCIÊNCIAS"},
+               {code: "560", initial: "IQD",	 name: "INSTITUTO DE QUÍMICA"},
+               {code: "589", initial: "REL",	 name: "INSTITUTO DE RELAÇÕES INTERNACIONAIS"},
+               {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
+
 ProfessorSubject.delete_all
 CourseSubject.delete_all
 Professor.delete_all
 Course.delete_all
 Subject.delete_all
+Department.delete_all
+
+puts "Populando Departamentos"
+departments.each do |department|
+  @department = Department.new
+  department.each do |key,value|
+    @department[key] = value
+  end
+  @department.save
+end
+puts "Departamentos populados"
 
 puts "Populando Cursos..."
 courses.each do |course|
