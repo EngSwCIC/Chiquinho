@@ -59,6 +59,7 @@
         </h5>
         <div class="card-body">
           <h6><%= link_to @coordinator.name, professor_path(@coordinator) %></h6>
+          <%= link_to 'Ver Professores do Curso', course_professors_path(@course), class: "btn btn-md btn-primary" %>
         </div>
       </div>
     </div>
