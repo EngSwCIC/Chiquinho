@@ -1,7 +1,9 @@
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :professor_subject
+  has_one :professor_subject
+  has_one :subject
   def subject_id=(data)
 
   end
+  validates_presence_of :content
 end

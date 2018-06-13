@@ -3,13 +3,14 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = current_user.comments.new(comments_params)
-    professor_subject = ProfessorSubject.find(@comment.professor_subject_id)
+    @comment[:subject_id] = params[:comment][:subject_id]
     if @comment.save
       respond_to do |format|
         format.html {redirect_to request.referrer}
         format.json
       end
     else
+      flash[:error] = 'Não foi possível salvar seu comentário'
       redirect_to request.referrer
     end
   end
@@ -17,6 +18,6 @@ class CommentsController < ApplicationController
   private
 
   def comments_params
-    params.require(:comment).permit(:content, :professor_subject_id)
+    params.require(:comment).permit(:content, :professor_subject_id, :subject_id)
   end
 end

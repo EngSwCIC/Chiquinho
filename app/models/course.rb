@@ -6,6 +6,9 @@ class Course < ApplicationRecord
   has_many :subjects,through: :course_subjects
   has_one :forum
   has_one :professor
+  belongs_to :department, required: false
+
+
 
   private
 

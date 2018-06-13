@@ -9,7 +9,7 @@ Funcionalidade: Listar matérias do curso na página de curso
   Cenário: Ver todas as matérias ao acessar curso desejado
     Dado tenha um curso criado:
       |kind        |code|name           |turn     |classification|
-      |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|exatas   |
+      |"Presencial"|701 |"ADMINISTRAÇÃO"|"Noturno"|exatas        |
     E que eu esteja na página de cursos
     E com as matérias dele:
     |code|name  |credits          |area|
