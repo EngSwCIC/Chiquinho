@@ -20,6 +20,9 @@ class CoursesController < ApplicationController
         @optativas << subject
       end
     end
+    if @course.professors_id != nil
+      @coordinator = Professor.find_by(id: @course.professors_id)
+    end
 
   end
 
@@ -70,6 +73,11 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def course_professors
+    @course = Course.find(params[:id])
+    @professors = Professor.where(departments_id: @course.departments_id)
   end
 
   private

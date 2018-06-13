@@ -14,6 +14,7 @@
                 <th>Código</th>
                 <th>Créditos</th>
                 <th>Nome</th>
+                <th>Detalhes</th>
               </tr>
             </thead>
 
@@ -24,6 +25,7 @@
                   <td><%= subject.code %></td>
                   <td><%= subject.credits %></td>
                   <td><%= subject.name %></td>
+                  <td><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, subject,class: "label label-info" %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -34,6 +36,7 @@
                 <th>Código</th>
                 <th>Créditos</th>
                 <th>Nome</th>
+                <th>Detalhes</th>
               </tr>
             </tfoot>
           </table>
