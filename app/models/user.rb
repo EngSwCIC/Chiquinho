@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :professor_subjects, through: :professor_subject_users
 
   validates :matricula, presence: true
+  validates :first_name,presence: true
+  validates :last_name,presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
