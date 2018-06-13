@@ -8,6 +8,11 @@ RSpec.describe Comment, type: :model do
     it 'comment valid' do
       expect(comment).to be_valid
     end
+
+    it 'comments exists in database' do
+      comment.save
+      expect(Comment.find_by(content: comment.content, user: user)).to be_truthy
+    end
   end
 
   context 'when params are invalid' do
