@@ -4,16 +4,14 @@ RSpec.describe Comment, type: :model do
   let(:user) { FactoryBot.create(:user)}
   let(:comment) { Comment.new(content: 'teste', user: user)}
 
+  it { expect(comment).to belong_to(:user) }
+
   context 'when params are valid' do
     it 'comment valid' do
       expect(comment).to be_valid
     end
-
-    it 'comments exists in database' do
-      comment.save
-      expect(Comment.find_by(content: comment.content, user: user)).to be_truthy
-    end
   end
+
 
   context 'when params are invalid' do
     let(:comment) { Comment.new(content: '', user: user)}
