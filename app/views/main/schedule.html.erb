@@ -167,10 +167,11 @@
           </div>
           <br>
           <h4 align="center">
-            <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas]) %>
+            <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas],total_credits*0.00) %>
             <% media =  (@grade.get_avg[:trabalhos] + @grade.get_avg[:provas] + @grade.get_avg[:tarefas])/3.0 %>
           </h4>
-          <p align="center">Sua média: <%= media %></p>
+          <p align="center">Sua média: <%= media + (total_credits*0.00) %>
+          </p>
         </div>
       </div>
     </div>

@@ -139,6 +139,11 @@
     </h5>
     <div class="card-body">
       <div class="comments">
+        <% if flash[:error] %>
+          <div id='error_explanation'>
+            <%= flash[:error] %>
+          </div>
+        <% end %>
         <% @comments.each do |comment| %>
           <div class="comentario-header">
             <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>

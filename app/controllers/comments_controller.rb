@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
         format.json
       end
     else
+      flash[:error] = 'Não foi possível salvar seu comentário'
       redirect_to request.referrer
     end
   end
