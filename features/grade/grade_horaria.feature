@@ -15,7 +15,7 @@ Funcionalidade: Configurar grade horária do aluno
       |area   |AC                     |
     E que eu esteja na pagina de grade horária
     Quando eu clicar na coluna para adicionar um matéria
-    E preencher o formulário de pesquisa com:
+    E preencher o formulário com:
       |materia-search|ORGANIZAÇÃO DE ARQUIVOS|
     E clicar no botão "Adicionar"
     Então eu devo ver a nova matéria adicionada a grade "ORGANIZAÇÃO DE ARQUIVOS"
@@ -30,7 +30,7 @@ Funcionalidade: Configurar grade horária do aluno
     Dado que eu tenha me cadastrado e me autenticado
     E que eu esteja na pagina de grade horária
     Quando eu clicar na coluna para adicionar um matéria
-    E preencher o formulário de pesquisa com:
+    E preencher o formulário com:
       |materia-search|Matéria que não existe|
     E clicar no botão "Adicionar"
     Então devo ver uma mensagem de erro "Matéria não encontrada."
