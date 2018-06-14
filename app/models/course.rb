@@ -8,8 +8,11 @@ class Course < ApplicationRecord
   has_one :professor
   belongs_to :department, required: false
 
-
-
+  validates :name, presence: true, allow_blank: false
+  validates_format_of :code, with: /^\d{4}$/, :multiline => true
+  validates_format_of :opcode, with: /^\d{4}$/, :multiline => true
+  validates_format_of :turn, with: /\A(Diurno|Noturno)\Z/
+  validates_format_of :kind, with: /\A(Presencial|Distância)\Z/
   private
 
   def create_forum

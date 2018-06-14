@@ -3,4 +3,6 @@ class Professor < ApplicationRecord
   has_many :professor_subjects
   has_many :subjects, through: :professor_subjects
   belongs_to :department, required: false
+
+  validates :name, presence: true, allow_blank: false
 end

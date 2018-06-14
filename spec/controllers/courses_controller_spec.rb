@@ -55,6 +55,17 @@ RSpec.describe CoursesController, type: :controller do
       get :show, params: {id: course.to_param}, session: valid_session
       expect(response).to be_success
     end
+
+    it "have a coordinator" do
+      course =  Course.create! valid_attributes
+      coordinator = Professor.create! valid_attributes
+      course.professors_id = coordinator.id
+      coordinator.courses_id = course.id
+      course.save
+      coordinator.save
+      get :show, params: {id: course.id}, session: valid_session
+      expect(page).to have_content(coordinator.name)
+    end
   end
 
   describe "GET #new" do
