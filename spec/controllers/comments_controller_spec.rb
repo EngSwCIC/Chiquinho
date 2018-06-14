@@ -16,7 +16,7 @@ RSpec.describe CommentsController, type: :controller do
                     {content: 'testando controller', user_id: user.id, subject_id: subject.id}
                 end
                 
-                it 'returns http status 302 adn redirect to subject page' do
+                it 'returns http status 302 and redirect to subject page' do
                     expect(response).to have_http_status(302)
                     expect(response).to redirect_to(subject_path(subject))
                 end
@@ -29,6 +29,8 @@ RSpec.describe CommentsController, type: :controller do
             
             context 'when params are invalid' do
                 before do
+                    sign_in user
+                    request.env['HTTP_REFERER'] = subject_path(subject)
                     post :create, params: {comment: comment_params}
                 end
                 
@@ -36,8 +38,13 @@ RSpec.describe CommentsController, type: :controller do
                     { comment:{content: '', user: user} }
                 end
                 
-                it 'return http status 302' do
+                it 'return http status 302 and redirect to subject page' do
                     expect(response).to have_http_status(302)
+                    expect(response).to redirect_to(subject_path(subject))
+                end
+
+                it 'error message' do
+                    expect(request.flash[:error]).not_to be_nil
                 end
                 
             end
