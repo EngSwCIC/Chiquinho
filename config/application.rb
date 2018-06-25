@@ -22,7 +22,7 @@ module Chiquinho
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-    # config.i18n.default_locale = :'pt-BR'
+    config.i18n.default_locale = :'pt-BR'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
