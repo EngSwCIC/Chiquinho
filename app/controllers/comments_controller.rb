@@ -15,6 +15,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def like_comment
+    @like_comment = UserLikeComment.find_or_create_by(user_id: params[:user_id], comment_id: params[:comment_id])
+    if @like_comment.like == nil || @like_comment.like == false
+      @like_comment.like = true
+    else
+      @like_comment.like = false
+    end
+    @like_comment.save
+    redirect_to request.referrer
+  end
+
   private
 
   def comments_params

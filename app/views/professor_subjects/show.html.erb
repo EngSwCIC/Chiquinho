@@ -119,7 +119,14 @@
           <% @comments.each do |comment| %>
             <div class="comentario-header">
               <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
-              <a href="#" style="float: right;">16 <i class="fa fa-thumbs-up"></i></a>
+              <%= link_to like_path(user_id: current_user.id, comment_id: comment.id), method: "post", style: "float: right;" do %>
+                  <%=comment.likes%>
+                  <% if comment.user_liked? %>
+                    <i class="fa fa-thumbs-up" style="color: #6D92D0;"></i>
+                  <% else %>
+                    <i class="fa fa-thumbs-up"></i>
+                  <% end %>
+              <% end %>
             </div>
             <div class="comentario-body">
               <p><%= comment.content %></p>
