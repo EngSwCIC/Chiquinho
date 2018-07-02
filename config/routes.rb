@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get '/clean_user_schedule',to: "main#clean_user_schedule",as: "clean_user_schedule"
   get '/grade', to: "main#schedule", as: "user_schedule"
   get '/search_subject', to: 'main#search_subject', as: :search_subject
+  post '/likes/:user_id', to: 'comments#like_comment', as: :like
 end
