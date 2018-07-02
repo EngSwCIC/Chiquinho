@@ -2,7 +2,9 @@ class User < ApplicationRecord
   before_create :create_user_schedule
   belongs_to :course
   has_one :schedule
+  has_many :user_like_comments
   has_many :comments
+  has_many :liked_comments, through: :user_like_comments, class_name: 'Comment'
   has_many :study_materials
   has_many :professor_subjects, through: :comments
   has_many :professor_subject_users

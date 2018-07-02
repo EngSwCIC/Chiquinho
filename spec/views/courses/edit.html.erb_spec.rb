@@ -7,7 +7,7 @@ RSpec.describe "courses/edit", type: :view do
       :code => 1,
       :name => "MyString",
       :turn => "MyString",
-      :type => 1
+      :classification => 1
     ))
   end
 
