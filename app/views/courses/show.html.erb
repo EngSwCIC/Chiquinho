@@ -47,6 +47,14 @@
               <%= @course.classification.capitalize %>
             </td>
           </tr>
+          <tr>
+            <th>
+              Fóruns
+            </th>
+            <td>
+              <%= link_to 'Forum', course_forums_path(@course),class: "btn btn-primary" %>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
@@ -83,10 +91,10 @@
             </thead>
             <tfoot>
             <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Credits</th>
-              <th>Area</th>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>Créditos</th>
+              <th>Área</th>
               <th>Detalhes</th>
             </tr>
             </tfoot>
@@ -188,12 +196,4 @@
     });
 </script>
 
-<p>
-  <strong>Type:</strong>
-  <%= @course.classification %>
-</p>
-
 <%= link_to 'Voltar', courses_path,class: "btn btn-primary" %>
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Forum', course_forums_path(@course) %> |
-<%= link_to 'Back', courses_path %>

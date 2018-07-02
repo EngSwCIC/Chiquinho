@@ -9,7 +9,6 @@ class Course < ApplicationRecord
   belongs_to :department, required: false
 
 
-
   private
 
   def create_forum
