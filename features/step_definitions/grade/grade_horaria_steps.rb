@@ -6,7 +6,8 @@ Dado("que eu esteja na pagina de grade horária") do
 end
 
 Quando("eu clicar na coluna para adicionar um matéria") do
-  find('#00').click
+  pending
+  # find('#00').click
   # expect(page).to have_content "Adicione uma Matéria"
 end
 
