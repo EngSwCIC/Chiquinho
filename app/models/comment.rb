@@ -5,4 +5,5 @@ class Comment < ApplicationRecord
   def subject_id=(data)
 
   end
+  validates_presence_of :content
 end

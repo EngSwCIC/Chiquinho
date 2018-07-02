@@ -1,12 +1,13 @@
 # This is the steps file referred to grade_horaria feature
 # Place your code relative to that feature here
-#
+
 Dado("que eu esteja na pagina de grade horária") do
   visit user_schedule_path
 end
 
 Quando("eu clicar na coluna para adicionar um matéria") do
-  pending find('#00').click
+  find('#00').click
+  # expect(page).to have_content "Adicione uma Matéria"
 end
 
 Então("eu devo ver a nova matéria adicionada a grade {string}") do |materia_name|
@@ -20,7 +21,7 @@ end
 
 ##Ver Gráficos
 Dado("que eu tenha adicionado uma matéria a minha grade") do
-  pending
+  # pending
   steps %Q{
     Dado que eu tenha me cadastrado e me autenticado
     E que eu tenha uma matéria criada com os atributos:
