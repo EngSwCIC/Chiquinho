@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   # before_action :after_update_path_for, if: :devise_controller?
   #protect_from_forgery
   include ApplicationHelper
+  before_action :set_current_user
+
+  def set_current_user
+    Comment.current_user = current_user
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name,:matricula,:course_id])

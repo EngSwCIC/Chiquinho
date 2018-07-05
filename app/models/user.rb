@@ -2,11 +2,17 @@ class User < ApplicationRecord
   before_create :create_user_schedule
   belongs_to :course
   has_one :schedule
+  has_many :user_like_comments
   has_many :comments
+  has_many :liked_comments, through: :user_like_comments, class_name: 'Comment'
   has_many :study_materials
   has_many :professor_subjects, through: :comments
   has_many :professor_subject_users
   has_many :professor_subjects, through: :professor_subject_users
+
+  validates :matricula, presence: true
+  validates :first_name,presence: true
+  validates :last_name,presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
