@@ -43,3 +43,16 @@ Então("eu devo ver a página de matéria com {string},{string}, {string} e os d
   end
 end
 
+Dado("que essa matéria tenha a turma {string}") do |string|
+  @turma = SubjectClass.new(:turma => string, :materia => @subject.id)
+end
+
+Dado("que essa turma tenha os horários:") do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Então("eu devo ver os horários para a turma {string}:") do |string, table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  pending # Write code here that turns the phrase above into concrete actions
+end

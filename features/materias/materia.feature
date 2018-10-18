@@ -25,6 +25,11 @@ Funcionalidade: Sistema de Matérias
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |
       |area   |AC                     |
+    E que essa matéria tenha a turma "A"
+    E que essa turma tenha os horários:
+      |dia    |horario                |
+      |Terça  |8h                     |
+      |Quinta |8h                     |
     E que eu esteja na página de matérias
     Quando eu clicar no link para detalhes daquela matéria
     Então eu devo ver a página de matéria com "Ranking de Dificuldade","Conteúdos", "Professores que Ministram" e os dados dela:
@@ -32,4 +37,7 @@ Funcionalidade: Sistema de Matérias
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |
       |area   |AC                     |
-
+    E eu devo ver os horários para a turma "A":
+      |dia    |horario                |
+      |Terça  |8h                     |
+      |Quinta |8h                     |
