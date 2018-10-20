@@ -5,10 +5,6 @@ Dado("que eu estou na página da matéria {string}") do |nome_materia|
   pending
 end
 
-Quando("clicar no botão {string}") do |btn_ementa|
-  pending
-end
-
 Então("eu devo ser redirecionado para a página da ementa") do
   pending
 end
