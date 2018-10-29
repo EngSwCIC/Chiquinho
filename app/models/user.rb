@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   before_create :create_user_schedule
   belongs_to :course
+  belongs_to :professor_user_favorites
+  has_many :professor, through: :professor_user_favorites
   has_one :schedule
   has_many :user_like_comments
   has_many :comments

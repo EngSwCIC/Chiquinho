@@ -16,6 +16,11 @@ class ProfessorsController < ApplicationController
       end
     end
 
+    def favorite
+      ProfessorUserFavorite.create({:professor_id => params[:id],  :user_id => current_user.id})
+      # Assuming that we've a logged in user
+    end
+
     def show
       @professor = Professor.find(params[:id])
     end
