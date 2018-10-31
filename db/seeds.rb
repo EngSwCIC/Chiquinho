@@ -227,6 +227,13 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
         subject.name = arr[2].strip
         subject.credits = arr[3]
         subject.area = arr[4]
+        subject.ementa = %{
+        	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at leo non diam faucibus blandit quis non tellus. Mauris ullamcorper magna vel libero tincidunt semper. Nunc efficitur consectetur nisi ornare efficitur. Aliquam porta rutrum elit non posuere. Aliquam placerat, enim vitae sagittis blandit, ex magna accumsan ligula, a maximus ligula ligula a nulla. Nam sagittis sit amet sem a condimentum. Curabitur condimentum vestibulum mauris, vitae maximus ligula convallis vel. Etiam id pulvinar justo. Phasellus luctus neque justo, ac bibendum turpis lobortis quis. Aenean nec tincidunt ipsum.
+        	
+					Donec vel lacus ut nulla dignissim eleifend. Aliquam tristique elementum feugiat. Phasellus vulputate molestie viverra. Quisque mollis condimentum dolor, eu sollicitudin turpis fringilla sed. Phasellus felis leo, tristique egestas massa at, rutrum vestibulum justo. Aliquam nulla augue, cursus quis dui sit amet, accumsan ultricies felis. Duis purus urna, molestie dapibus ullamcorper in, pretium at orci. Curabitur venenatis lacus id lacinia tristique. Proin ornare scelerisque laoreet. Fusce et augue pharetra, consectetur mauris ac, cursus lectus. Sed diam arcu, pellentesque pulvinar facilisis convallis, facilisis eget arcu. Fusce porttitor diam congue est aliquet, rhoncus eleifend sapien hendrerit.
+					
+					Etiam in nunc id dolor aliquam efficitur. Etiam at tempor lectus. Morbi varius velit sit amet lectus maximus rutrum. Proin tincidunt lectus vitae dolor tempus, at commodo ipsum condimentum. Fusce nec nisl vitae ipsum varius convallis. Sed eros tortor, pharetra eget finibus sed, malesuada vel odio. Vivamus pretium porta tellus. Pellentesque laoreet velit enim, nec commodo urna finibus eu. Mauris risus turpis, condimentum egestas leo ac, auctor rutrum est.
+        }
       end
       @course = Course.find_by(opcode: codigo_curso)
       if @course

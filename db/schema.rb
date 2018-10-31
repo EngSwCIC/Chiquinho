@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
     t.string "name"
     t.string "credits"
     t.string "area"
+    t.string "ementa"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
