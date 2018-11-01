@@ -57,14 +57,6 @@
                 <%= @subject.dificuldade_geral %>
               </td>
             </tr>
-            <tr>
-              <th>
-                Ementa
-              </th>
-              <td>
-                <%= link_to "Ver ementa".html_safe, "https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{@subject.code}", class: "btn btn-primary btn-sm", target: "_blank" %>
-              </td>
-            </tr>
           </table>
         </div>
         <div class="card-body-graph">
@@ -72,6 +64,19 @@
         </div>
       </div>
     </div>
+    <div class="col-md-5">
+      <div class="card">
+        <h5 class="card-header">
+          Ementa
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+        	<%= @ementa.html_safe %>
+        </div>
+      </div>
+    </div>
+  	</div>
+  </div>
+  <div class="row">
     <div class="col-md-7">
       <div class="card">
         <h5 class="card-header">

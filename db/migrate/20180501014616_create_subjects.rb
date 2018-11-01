@@ -5,6 +5,7 @@ class CreateSubjects < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :credits
       t.string :area
+      t.string :ementa
 
       t.timestamps
     end
