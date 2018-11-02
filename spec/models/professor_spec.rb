@@ -8,7 +8,7 @@ RSpec.describe Professor, type: :model do
       @professor = Professor.new(name: 'Raimundo Nonato', office: 'BT-58/11')
     }
 
-    it 'sets office space' do
+    it 'set office space' do
       expect(@professor.office).to eq('BT-58/11')
     end
 
