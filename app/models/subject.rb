@@ -39,7 +39,7 @@ class Subject < ApplicationRecord
   	begin
 	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{self.code}")).css("table#datatable").css("tr")[6].css("td")[0].text
 	  rescue
-	  	"Não encontrado no MW"
+	  	"Não encontrada no MW"
 	  end
   end
   
