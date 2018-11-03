@@ -20,7 +20,7 @@ class SubjectsController < ApplicationController
     @studyMaterials = StudyMaterial.where(subject_id: @subject.id)
     @averages = @subject.get_avg
     # Tries to get ementa from our DB, if not found, tries MW
-    @ementa = @subject.ementa.nil? ? @subject.ementaMW : @subject.ementa
+    @ementa = @subject.ementa.nil? ? Subject.ementaMW(@subject.code) : @subject.ementa
   end
 
   # GET /subjects/new
