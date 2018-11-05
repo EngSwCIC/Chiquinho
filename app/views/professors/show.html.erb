@@ -4,15 +4,23 @@
       <div class="col-md-4 offset-4">
         <div class="col-md-4 offset-2">
           <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
-          <% if !current_user %>
-            <div style="background: orange; width: 30px; height: 30px; border-radius: 20px; padding: 5px 8px">
-              <% if true #favoritado? %>
-                <a href="fav" style="color: yellow"><i class="fa fa-star"></i></a>
-              <% else %>
-                <a href="desfav" style="color: white"><i class="fa fa-star-o"></i></a>
+          <!-- Favorite professor -->
+          <% if current_user %>
+            <% if is_favorite? @professor.id, current_user.id %>
+              <%= link_to unfavorite_professor_path(@professor), title:'Remover dos Favoritos', style: 'color: white' do %>
+                <div class="isprofessor-favorite">
+                  <i class="fa fa-star"></i>
+                </div>
               <% end %>
-            </div>
+            <% else %>
+              <%= link_to favorite_professor_path(@professor), title:'Adicionar aos Favoritos', style: 'color: white' do %>
+                <div class="isnprofessor-favorite">
+                  <i class="fa fa-star"></i>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
+          <!-- ./Favorite professor -->
         </div>
       </div>
     </div>

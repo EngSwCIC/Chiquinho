@@ -1,6 +1,9 @@
 class ProfessorsController < ApplicationController
+  include ProfessorsHelper
+
     def index
-      @professors = Professor.all
+      @favorite_professors = current_user ? current_user.favorite_professors : []
+      @professors = Professor.all - @favorite_professors
     end
 
     def create
