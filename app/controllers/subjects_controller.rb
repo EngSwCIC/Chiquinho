@@ -19,6 +19,10 @@ class SubjectsController < ApplicationController
     #@professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
     @studyMaterials = StudyMaterial.where(subject_id: @subject.id)
     @averages = @subject.get_avg
+
+    all_favorite_professors_id = current_user ? current_user.favorite_professors.map{|x| x.id} : []
+    @favorite_professors_subject = @subject.professors.where('professor_id in (?)', all_favorite_professors_id).uniq
+    @professors = @favorite_professors_subject + (@subject.professors - @favorite_professors_subject)
   end
 
   # GET /subjects/new
