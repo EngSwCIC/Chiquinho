@@ -1,4 +1,4 @@
 class ProfessorUserFavorite < ApplicationRecord
-  has_many :users
-  has_many :professors
+  belongs_to :user
+  belongs_to :professor
 end
