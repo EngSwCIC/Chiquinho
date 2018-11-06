@@ -29,11 +29,15 @@ RSpec.describe SubjectsController, type: :controller do
   # Subject. As you add validations to Subject, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {id: 1, code: 116327, name: "ORGANIZAÇÃO DE ARQUIVOS", credits: "002 002 000 004", area: "AC", ementa: nil}
   }
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
+  }
+
+  let(:valid_attributes_ementa) {
+    {id: 1, code: 116327, name: "ORGANIZAÇÃO DE ARQUIVOS", credits: "002 002 000 004", area: "AC", ementa: "EMENTA..."}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -54,6 +58,19 @@ RSpec.describe SubjectsController, type: :controller do
       subject = Subject.create! valid_attributes
       get :show, params: {id: subject.to_param}, session: valid_session
       expect(response).to be_success
+    end
+  end
+  
+  describe "searching ementa on MW" do
+    it "calls model method ementaMW if ementa is nil in our DB" do
+      subject = Subject.create! valid_attributes
+      expect(Subject).to receive(:ementaMW)
+      get :show, params: {id: subject.to_param}, session: valid_session
+    end
+    it "doesn't call model method ementaMW if ementa is not nil in our DB" do      
+      subject = Subject.create! valid_attributes_ementa
+      expect(Subject).not_to receive(:ementaMW)
+      get :show, params: {id: subject.to_param}, session: valid_session
     end
   end
 
