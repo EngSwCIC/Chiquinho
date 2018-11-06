@@ -167,12 +167,23 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "589", initial: "REL",	 name: "INSTITUTO DE RELAÇÕES INTERNACIONAIS"},
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
+# Clean up the database.
+
+UserLikeComment.delete_all
+Comment.delete_all
+ProfessorSubjectUser.delete_all
 ProfessorSubject.delete_all
 CourseSubject.delete_all
 Professor.delete_all
+Topic.delete_all
+Forum.delete_all
+Schedule.delete_all
+User.delete_all
 Course.delete_all
 Subject.delete_all
 Department.delete_all
+
+# Populate the database.
 
 puts "Populando Departamentos"
 departments.each do |department|
@@ -263,4 +274,14 @@ while (line = file.gets)
     puts "não encontrada materia"
   end
 end
+
+# Código placeholder para popular salas dos professores.
+# TODO Substituir esse código por um arquivo obtido de um web crawler.
+
+Professor.find_each do |professor|
+  professor.office = "Placeholder A1-55/11"
+  puts "Professor #{professor.name} atualizado com sala #{professor.office}"
+  professor.save
+end
+
 puts "Professores populados"
