@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         <tr>
-            <% @forum.topics.each do |topic| %>
+            <% @topics.each do |topic| %>
                 <tr>
                     <td><%= topic.title %></td>
                     <td><%= topic.description %></td>
@@ -16,4 +16,4 @@
         </tr>
     </tbody>
 </table>
-<%= link_to 'Criar novo tópico',new_course_forums_topics_path %>
+<%= link_to 'Criar novo tópico',new_topic_path %>

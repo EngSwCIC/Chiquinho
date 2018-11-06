@@ -2,14 +2,21 @@ Rails.application.routes.draw do
   resources :subjects do
     resources :professors, :controller => :professor_subjects
   end
-  resources :subjects
-  
+
+  resources :topics
   resources :courses do
-    resource :forums, only: [:show] do
-      resource :topics
-    end
+    resources :topics
   end
+  resources :subjects do
+    resources :topics
+  end
+  resources :professors do
+    resources :topics
+  end  
+
   resources :department, only: [:index, :show]
+
+  resources :subjects
   resources :professors
   resources :courses
   get 'course/:id/professors', to: "courses#course_professors", as: "course_professors"
