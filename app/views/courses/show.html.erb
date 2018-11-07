@@ -52,7 +52,7 @@
               Fóruns
             </th>
             <td>
-              <%= link_to 'Forum', course_topics_path(@course),class: "btn btn-primary" %>
+              <%= link_to 'Forum', topics_path( { :course_id => @course.id } ),class: "btn btn-primary" %>
             </td>
           </tr>
         </table>

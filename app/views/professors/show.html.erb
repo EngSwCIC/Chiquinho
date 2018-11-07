@@ -32,6 +32,14 @@
                   <th>créditos</th>
                   <td><%= subject.credits%></td>
                 </tr>
+                <tr>
+                  <th>
+                    fórum
+                  </th>
+                  <td>
+                    <%= link_to 'Forum', topics_path( { :professor_id => @professor.id, :subject_id => subject } ),class: "btn btn-primary" %>
+                  </td>
+                </tr>
               </table>
               <%= link_to 'Explorar', subject_path(subject), class: "btn btn-md btn-primary" %>
             </div>
