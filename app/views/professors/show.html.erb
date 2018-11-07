@@ -10,6 +10,7 @@
   </div>
   <hr style="width: 50%;">
   <h2 style="text-align: center;"><%= @professor.name %></h2>
+  <h3 style="text-align: center;"><%= link_to 'Forum do professor', topics_path( { :professor_id => @professor.id} ),class: "btn btn-primary" %> </h3>
   <div class="professor-subjects" style="margin-top: 5%;">
     <h4>Matérias Ministradas</h4>
     <hr>
@@ -32,15 +33,8 @@
                   <th>créditos</th>
                   <td><%= subject.credits%></td>
                 </tr>
-                <tr>
-                  <th>
-                    fórum
-                  </th>
-                  <td>
-                    <%= link_to 'Forum', topics_path( { :professor_id => @professor.id, :subject_id => subject } ),class: "btn btn-primary" %>
-                  </td>
-                </tr>
               </table>
+              <%= link_to 'Forum', topics_path( { :professor_id => @professor.id, :subject_id => subject } ),class: "btn btn-primary" %>
               <%= link_to 'Explorar', subject_path(subject), class: "btn btn-md btn-primary" %>
             </div>
           </div>

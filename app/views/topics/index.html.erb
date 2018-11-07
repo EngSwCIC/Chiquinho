@@ -1,19 +1,67 @@
-<table>
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <% @topics.each do |topic| %>
+<%= stylesheet_link_tag "topics" %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-white">
+      <div class="panel-heading clearfix">
+        <h2 class="panel-title">Forum</h2>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="example1" class="table table-bordered table-hover display">
+            <thead>
+              <tr>
+                <th>Titulo</th>
+                <th>Criado</th>
+                <th>Modificado</th>
+              </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <th>Titulo</th>
+              <th>Criado</th>
+              <th>Modificado</th>
+            </tr>
+            </tfoot>
+            <tbody>
+              <% @topics.each do |topic| %>
                 <tr>
-                    <td><%= topic.title %></td>
-                    <td><%= topic.description %></td>
+                  <td><%= topic.title %></td>
+                  <td>Há <%= time_ago_in_words(topic.created_at) %></td>
+                  <td>Há <%= time_ago_in_words(topic.updated_at) %></td>
                 </tr>
-            <% end %>
-        </tr>
-    </tbody>
-</table>
-<%= link_to 'Criar novo tópico',new_topic_path %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%#= link_to 'New Course', new_course_path %>
+
+<!-- BEGIN Java Script for this page -->
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#example1').dataTable({
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ topicos por página",
+                "sZeroRecords": "Nenhum registro encontrado - sorry",
+                "sInfo": "Mostrando página _PAGE_ de _PAGES_",
+                "sInfoEmpty": "Nenhum campo encontrado",
+                "sInfoFiltered": "(filtrando de _MAX_ total de campos)",
+                "sSearch": "Procurar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
+    });
+</script>
+

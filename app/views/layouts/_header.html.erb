@@ -208,6 +208,10 @@
           <a href="<%= department_index_path %>"><i class="fa fa-fw fa-building"></i><span> Departamentos </span> </a>
         </li>
 
+        <li class="submenu">
+          <a href="<%= topics_path %>"><i class="fa fa-fw fa-commenting"></i><span> Forum </span> </a>
+        </li>
+
         <% if user_signed_in? %>
           <li class="submenu">
             <a href="<%= edit_user_registration_path %>"><i class="fa fa-fw fa-user"></i> <span> Perfil </span></a>
