@@ -19,15 +19,18 @@ class TopicsController < ApplicationController
         end
 
         if @topic.save
-            redirect_to topics_path#( { :course_id => params[:course_id], 
-                #:professor_id => params[:professor_id], 
-                #:subject_id => params[:subject_id] } )
+            redirect_to topics_path( { :course_id => session[:filter_course_id], 
+                :professor_id => session[:filter_professor_id], 
+                :subject_id => session[:filter_subject_id] } )
         else
             render :new
         end
     end
 
     def index
+        session.delete(:filter_course_id)
+        session.delete(:filter_professor_id)
+        session.delete(:filter_subject_id)
         if params.has_key?(:course_id) || params.has_key?(:professor_id) || params.has_key?(:subject_id)
             if params.has_key?(:course_id) 
                 session[:filter_course_id] = params[:course_id]

@@ -57,6 +57,14 @@
                 <%= @subject.dificuldade_geral %>
               </td>
             </tr>
+            <tr>
+              <th>
+                Fóruns
+              </th>
+              <td>
+                <%= link_to 'Forum', subject_topics_path(@subject),class: "btn btn-primary" %>
+              </td>
+            </tr>
           </table>
         </div>
         <div class="card-body-graph">
