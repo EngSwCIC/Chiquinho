@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_02_121248) do
+ActiveRecord::Schema.define(version: 2018_11_01_061620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,10 +179,14 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.bigint "forum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["forum_id"], name: "index_topics_on_forum_id"
+    t.bigint "course_id"
+    t.bigint "professor_id"
+    t.bigint "subject_id"
+    t.index ["course_id"], name: "index_topics_on_course_id"
+    t.index ["professor_id"], name: "index_topics_on_professor_id"
+    t.index ["subject_id"], name: "index_topics_on_subject_id"
   end
 
   create_table "user_like_comments", force: :cascade do |t|
@@ -235,7 +239,9 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"
-  add_foreign_key "topics", "forums"
+  add_foreign_key "topics", "courses"
+  add_foreign_key "topics", "professors"
+  add_foreign_key "topics", "subjects"
   add_foreign_key "user_like_comments", "comments"
   add_foreign_key "user_like_comments", "users"
   add_foreign_key "users", "courses"
