@@ -72,6 +72,77 @@
       </div>
     </div>
   <% end %>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-white">
+      <!--<a data-toggle="collapse" href="#fluxo-collapse">-->
+        <div id="fluxo-header" class="panel-heading clearfix">
+          <h2 class="panel-title">
+            Fluxo
+          </h2>
+        </div>
+      <!--</a>-->
+      <!--<div id="fluxo-collapse" class="panel-collapse collapse show">-->
+        <div class="panel-body" id="flow">
+          <nav aria-label="Seletor de Semestre">
+            <ul class="pagination justify-content-center">
+              <% @flow.each_with_index do |semester, index| %>
+                <li class="page-item">
+                  <a title='<%= index+1 %> Semestre' class="page-link flow-paginator" href="#semester-<%= index+1 %>" data-toggle="collapse">
+                    <%= index+1 %> Semestre
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
+          <!-- Flow table -->
+          <% @flow.each_with_index do |semester, index| %>
+            <div class="table-responsive collapse" data-parent="#flow" id="semester-<%= index+1 %>">
+              <table class="table table-bordered table-hover display">
+                <thead>
+                  <tr>
+                    <th class="code-column-width">Código</th>
+                    <th class="code-name-width">Nome</th>
+                    <th class="code-credits-width">Créditos</th>
+                    <th class="code-area-width">Área</th>
+                    <th class="code-details-width">Detalhes</th>
+                  </tr>
+                </thead>
+                <% if semester.length >= 8 %>
+                  <tfoot>
+                    <tr>
+                      <th class="code-column-width">Código</th>
+                      <th class="code-name-width">Nome</th>
+                      <th class="code-credits-width">Créditos</th>
+                      <th class="code-area-width">Área</th>
+                      <th class="code-details-width">Detalhes</th>
+                    </tr>
+                  </tfoot>
+                <% end %>
+                <tbody>
+                <% semester.each do |subject| %>
+                  <tr>
+                    <td class="code-column-width"><%= subject.code %></td>
+                    <td class="code-name-width"><%= subject.name %></td>
+                    <td class="code-credits-width"><%= subject.credits %></td>
+                    <td class="code-area-width"><%= subject.area %></td>
+                    <td class="code-details-width"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, subject, class:"label label-info" %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-12">
     <div class="panel panel-white">
       <div class="panel-heading clearfix">
@@ -192,6 +263,13 @@
                     "sPrevious": "Anterior"
                 }
             }
+        });
+        $('.flow-paginator').click(function() {
+          let was_active = $(this).hasClass('flow-paginator-active');
+          $('.flow-paginator').removeClass('flow-paginator-active');
+          if(!was_active){
+            $(this).addClass('flow-paginator-active');
+          }
         });
     });
 </script>

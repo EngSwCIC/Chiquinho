@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_123447) do
+ActiveRecord::Schema.define(version: 2018_11_07_125414) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -85,6 +86,16 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.string "initial"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "flows", force: :cascade do |t|
+    t.bigint "subject_id"
+    t.bigint "course_id"
+    t.integer "semester"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_flows_on_course_id"
+    t.index ["subject_id"], name: "index_flows_on_subject_id"
   end
 
   create_table "forums", force: :cascade do |t|
@@ -174,6 +185,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.string "area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ementa"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -224,6 +236,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "departments", column: "departments_id"
   add_foreign_key "courses", "professors", column: "professors_id"
+  add_foreign_key "flows", "courses"
+  add_foreign_key "flows", "subjects"
   add_foreign_key "forums", "courses"
   add_foreign_key "professor_subject_users", "professor_subjects"
   add_foreign_key "professor_subject_users", "users"
