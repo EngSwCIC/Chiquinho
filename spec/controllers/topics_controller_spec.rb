@@ -2,6 +2,80 @@ require 'rails_helper'
 
 
 RSpec.describe TopicsController, type: :controller do
+    describe 'POST create' do
+        let(:topic) { FactoryBot.create(:topic)}
+        let(:course) { FactoryBot.create(:course)}
+        let(:subject) { FactoryBot.create(:subject)}
+        let(:professor) { FactoryBot.create(:professor)}
+        let(:user) { FactoryBot.create(:user)}
+        context 'valid params course' do
+            before do
+                sign_in user
+                request.env['HTTP_REFERER'] = course_path(course)
+                post :create, params: {topic: topic_params}
+            end
+
+            let(:topic_params) do
+                {title: 'título teste', description: 'descrição teste'}
+            end
+            
+            it 'returns http status 302 and redirect to subject page' do
+                expect(response).to have_http_status(302)
+                expect(response).to redirect_to(topics_path)
+            end
+            
+            it 'comment exists in database' do
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(@topic).not_to be_nil
+            end
+        end
+
+        context 'valid params subject' do
+            before do
+                sign_in user
+                request.env['HTTP_REFERER'] = subject_path(subject)
+                post :create, params: {topic: topic_params}
+            end
+
+            let(:topic_params) do
+                {title: 'título teste', description: 'descrição teste'}
+            end
+            
+            it 'returns http status 302 and redirect to subject page' do
+                expect(response).to have_http_status(302)
+                expect(response).to redirect_to(topics_path)
+            end
+            
+            it 'comment exists in database' do
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(@topic).not_to be_nil
+            end
+        end
+
+        context 'valid params professor' do
+            before do
+                sign_in user
+                request.env['HTTP_REFERER'] = professor_path(professor)
+                post :create, params: {topic: topic_params}
+            end
+
+            let(:topic_params) do
+                {title: 'título teste', description: 'descrição teste'}
+            end
+            
+            it 'returns http status 302 and redirect to subject page' do
+                expect(response).to have_http_status(302)
+                expect(response).to redirect_to(topics_path)
+            end
+            
+            it 'comment exists in database' do
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(@topic).not_to be_nil
+            end
+        end
+    end
+
+
     describe 'GET #index' do
         let(:topic) { FactoryBot.create(:topic)}
         context 'view all posts' do
