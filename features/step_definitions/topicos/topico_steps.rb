@@ -11,6 +11,13 @@ Dado("que eu esteja na página matéria {string}") do |subject_name|
     subject = Subject.find_by(name: subject_name)
     visit subject_path(subject)
 end
+
+Dado("que eu esteja na página do professor {string}") do |professor_name|
+    professor_params = {name: "GENAINA NUNES RODRIGUES"}
+    Professor.create(professor_params)
+    professor = Professor.find_by(name: professor_name)
+    visit professor_path(professor)
+end
   
 Quando("preencher o fórmulário com:") do |table|
     table.rows_hash.each do |field,value|

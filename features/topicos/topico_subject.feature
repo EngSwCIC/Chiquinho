@@ -18,5 +18,3 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão da matéria
     Então eu devo ser redirecionado para a página de tópicos
     E ver os dados:
     |title|ES|
-    |description|Muito interessante a matéria abordado no assunto|
-

@@ -12,6 +12,13 @@ Quando("eu clicar no link de detalhes do professor {string}") do |name|
   find(link).click
 end
 
+Quando("eu clicar no link de {string}") do |name|
+  #@professor = Professor.find_by(name: name)
+  path = professor_topics_path(professor.id)
+  link = "a[href=\'#{path}\']"
+  find(link).click
+end
+
 Então("devo ir pra uma pagina com detalhes sobre o professor {string}") do |name|
   expect(page).to have_content(name)
 end

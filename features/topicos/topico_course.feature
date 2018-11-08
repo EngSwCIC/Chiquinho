@@ -18,5 +18,4 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão do curso
     Então eu devo ser redirecionado para a página de tópicos
     E ver os dados:
     |title|ES|
-    |description|Muito interessante o assunto abordado na matéria|
 

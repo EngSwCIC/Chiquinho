@@ -58,5 +58,4 @@ RSpec.describe TopicsController, type: :controller do
             end
         end
     end
-
 end
