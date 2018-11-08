@@ -12,7 +12,7 @@ RSpec.describe TopicsController, type: :controller do
             before do
                 sign_in user
                 request.env['HTTP_REFERER'] = course_path(course)
-                post :create, params: {topic: topic_params}
+                post :create, params: {topic: topic_params}, session: {:filter_course_id => topic.course_id}
             end
 
             let(:topic_params) do
@@ -21,7 +21,7 @@ RSpec.describe TopicsController, type: :controller do
             
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path)
+                expect(response).to redirect_to(topics_path({:course_id => topic.course_id}))
             end
             
             it 'comment exists in database' do
@@ -32,9 +32,9 @@ RSpec.describe TopicsController, type: :controller do
 
         context 'valid params subject' do
             before do
-                sign_in user
-                request.env['HTTP_REFERER'] = subject_path(subject)
-                post :create, params: {topic: topic_params}
+               sign_in user
+               request.env['HTTP_REFERER'] = subject_path(subject)
+                post :create, params: {topic: topic_params}, session: {:filter_subject_id => topic.subject_id}
             end
 
             let(:topic_params) do
@@ -43,7 +43,7 @@ RSpec.describe TopicsController, type: :controller do
             
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path)
+                expect(response).to redirect_to(topics_path({:subject_id => topic.subject_id}))
             end
             
             it 'comment exists in database' do
@@ -56,7 +56,7 @@ RSpec.describe TopicsController, type: :controller do
             before do
                 sign_in user
                 request.env['HTTP_REFERER'] = professor_path(professor)
-                post :create, params: {topic: topic_params}
+                post :create, params: {topic: topic_params}, session: {:filter_professor_id => topic.professor_id}
             end
 
             let(:topic_params) do
@@ -65,7 +65,7 @@ RSpec.describe TopicsController, type: :controller do
             
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path)
+                expect(response).to redirect_to(topics_path({:professor_id => topic.professor_id}))
             end
             
             it 'comment exists in database' do
@@ -80,14 +80,14 @@ RSpec.describe TopicsController, type: :controller do
         let(:topic) { FactoryBot.create(:topic)}
         context 'view all posts' do
             context 'get has no params' do
-            	before do
+                before do
                     get :index, params: {}
                 end
                 it 'returns http status 200' do
                     expect(response).to have_http_status(200)
                 end
                 it 'topics exist' do
-                	#@comment = Comment.find_by(content: comment_params[:content],user_id: user.id, subject_id: subject.id)
+                    #@comment = Comment.find_by(content: comment_params[:content],user_id: user.id, subject_id: subject.id)
                     @topics = Topic.all
                     expect(@topics).not_to be_nil
                 end
@@ -102,7 +102,7 @@ RSpec.describe TopicsController, type: :controller do
                     expect(response).to have_http_status(200)
                 end
                 it 'topics exist' do
-                	@topics = Topic.find_by(course_id: topic.course_id)
+                    @topics = Topic.find_by(course_id: topic.course_id)
                     expect(@topics).not_to be_nil
                 end
             end
@@ -114,7 +114,7 @@ RSpec.describe TopicsController, type: :controller do
                     expect(response).to have_http_status(200)
                 end
                 it 'topics exist' do
-                	@topics = Topic.find_by(subject_id: topic.subject_id)
+                    @topics = Topic.find_by(subject_id: topic.subject_id)
                     expect(@topics).not_to be_nil
                 end
             end
@@ -126,10 +126,26 @@ RSpec.describe TopicsController, type: :controller do
                     expect(response).to have_http_status(200)
                 end
                 it 'topics exist' do
-                	@topics = Topic.find_by(professor_id: topic.professor_id)
+                    @topics = Topic.find_by(professor_id: topic.professor_id)
                     expect(@topics).not_to be_nil
                 end
             end
         end
     end
+
+    describe 'GET #new' do
+        let(:topic) { FactoryBot.create(:topic)}
+        context 'new post' do
+            context 'get has no params' do
+                before do
+                    get :index, params: {}
+                    get :new, params: {}
+                end
+                it 'returns http status 200' do
+                    expect(response).to have_http_status(200)
+                end
+            end
+        end
+    end
+
 end
