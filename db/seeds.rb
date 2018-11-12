@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+fast_mode = 2
+
 courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"701", :name=>"ADMINISTRAÇÃO", :turn=>"Noturno"},
            {:kind=>"Presencial", :code=>"86", :name=>"AGRONOMIA", :turn=>"Diurno"},
@@ -169,6 +171,8 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
 
 # Clean up the database.
 
+Flow.delete_all
+
 UserLikeComment.delete_all
 Comment.delete_all
 ProfessorSubjectUser.delete_all
@@ -182,6 +186,7 @@ User.delete_all
 Course.delete_all
 Subject.delete_all
 Department.delete_all
+
 
 # Populate the database.
 
@@ -210,19 +215,19 @@ while (line = file.gets)
   codigo = JSON.parse(line)
   @curso = Course.find_by(code: codigo[0])
   if @curso
-    puts @curso
+    puts @curso unless fast_mode >= 1
     @curso.opcode = JSON.parse(codigo[1])
     @curso.save
-    puts "#{@curso.name} att"
+    puts "#{@curso.name} att" unless fast_mode >= 1
   else
-    puts "não encontrado"
+    puts "não encontrado" unless fast_mode >= 2
   end
 end
 
 puts "Populando Matérias..."
 
 Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
-  puts filename
+  puts filename unless fast_mode >= 1
   file = File.new(filename, "r")
   contador = 1
   tipo = 0
@@ -230,7 +235,7 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
     if contador == 1
       line.slice!("Curso")
       codigo_curso = JSON.parse(line)[1]
-      puts "codigo_curso: #{codigo_curso}"
+      puts "codigo_curso: #{codigo_curso}" unless fast_mode >= 1
     end
     if contador > 11 && line[1] == '"'
       arr = JSON.parse(line)
@@ -242,14 +247,14 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
       @course = Course.find_by(opcode: codigo_curso)
       if @course
         CourseSubject.create(subject_id: @subject.id, course_id: @course.id,kind: tipo)
-        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}"
+        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}" unless fast_mode >= 1
       else
-        puts "curso nao encontrado..."
+        puts "curso nao encontrado..." unless fast_mode >= 2
         break
       end
     else
       if line[2] == 't'
-        p "optativas:"
+        p "optativas:" unless fast_mode >= 1
         tipo = 1
       end
     end
@@ -260,6 +265,25 @@ end
 
 puts "Matérias Populadas"
 
+
+puts "Populando fluxos..."
+
+file = File.new("db/fluxos.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line.gsub("\n",""))
+  @materia = Subject.find_by(code: codigo[0])
+  @curso   = Course.find_by(code: codigo[1])
+  semestre = codigo[2]
+  unless @materia.nil? || @curso.nil?
+    Flow.create!(subject: @materia, course: @curso, semester: semestre)
+    puts "Matéria #{@materia.name} adicionada ao fluxo de #{@curso.name} no #{semestre}º semestre" unless fast_mode >= 2
+  else
+    puts "Matéria #{codigo[0]} ou curso #{codigo[1]} não encontrados" unless fast_mode >= 2
+  end
+end
+
+puts "Fluxos Populados"
+
 puts "Populando professores..."
 
 file = File.new("db/professores_materias.rb", "r")
@@ -269,9 +293,9 @@ while (line = file.gets)
   @professor = Professor.find_or_create_by(name: codigo[0])
   if @materia
     ProfessorSubject.create(professor_id: @professor.id,subject_id: @materia.id)
-    puts "Professor #{@professor.name} criado para matéria #{@materia.name}"
+    puts "Professor #{@professor.name} criado para matéria #{@materia.name}" unless fast_mode >= 1
   else
-    puts "não encontrada materia"
+    puts "não encontrada materia" unless fast_mode >= 2
   end
 end
 
@@ -280,7 +304,7 @@ end
 
 Professor.find_each do |professor|
   professor.office = "Placeholder A1-55/11"
-  puts "Professor #{professor.name} atualizado com sala #{professor.office}"
+  puts "Professor #{professor.name} atualizado com sala #{professor.office}" unless fast_mode >= 1
   professor.save
 end
 
