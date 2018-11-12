@@ -55,3 +55,15 @@
 .comentario-body {
 
 }
+
+.favorite-professor-subject{
+  border: 3px dashed yellow;
+}
+
+.favorite-professor-subject > i{
+  display: block !important;
+  float: right;
+  color: yellow;
+  margin: 5px -5px 0 0;
+}
+

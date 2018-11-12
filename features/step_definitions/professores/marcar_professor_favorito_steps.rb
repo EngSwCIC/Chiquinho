@@ -1,24 +1,24 @@
 Dado("que exista o professor de nome {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  @professor = Professor.create(name: string)
 end
 
 Dado("que eu esteja em sua página de perfil") do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit(professor_path(@professor))
 end
 
-Quando("eu clicar no botão de favoritar") do
-  pending # Write code here that turns the phrase above into concrete actions
+Quando("eu clicar no botão de adicionar aos favoritos") do
+  find('a[title="Adicionar aos Favoritos"]').click
 end
 
-Então("devo ver em sua página que eu marquei como favorito") do
-  pending # Write code here that turns the phrase above into concrete actions
+Quando("eu clicar no botão remover dos favoritos") do
+  find('a[title="Remover dos Favoritos"]').click
+end
+
+Então("devo ver em sua página a messagem {string}") do |messagem|
+  expect(page).to have_content messagem
 end
 
 Dado("que ele já esteja marcado como favorito") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Então("devo ver em sua página que eu desmarquei como favorito") do
-  pending # Write code here that turns the phrase above into concrete actions
+  ProfessorUserFavorite.create(professor_id: @professor.id, user_id: @user.id)
 end
 

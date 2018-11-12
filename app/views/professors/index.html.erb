@@ -21,6 +21,12 @@
             </tr>
             </tfoot>
             <tbody>
+            <% @favorite_professors.each do |fav_professor| %>
+              <tr>
+                <td><i style="color:yellow;" class="fa fa-star"> </i>&emsp;<%= fav_professor.name %></td>
+                <td align="center"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, professor_path(fav_professor),class: "label label-info" %></td>
+              </tr>
+            <% end %>
             <% @professors.each do |professor| %>
               <tr>
                 <td><%= professor.name %></td>
