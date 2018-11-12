@@ -1,6 +1,9 @@
 class ProfessorsController < ApplicationController
+  include ProfessorsHelper
+
     def index
-      @professors = Professor.all
+      @favorite_professors = current_user ? current_user.favorite_professors : []
+      @professors = Professor.all - @favorite_professors
     end
 
     def create
@@ -14,6 +17,27 @@ class ProfessorsController < ApplicationController
           format.json {render json: @professor.erros, status: :unprocessable_entity}
         end
       end
+    end
+
+    def favorite
+      # Assuming that we've a logged in user
+
+      unless is_favorite?(params[:id], current_user.id)
+      ProfessorUserFavorite.create(:professor_id => params[:id],  :user_id => current_user.id)
+      end
+
+      flash['notice'] = 'Professor adicionado aos favoritos com sucesso!'
+      redirect_to professor_path(params[:id])
+    end
+
+    def unfavorite
+      # Assuming that we've a logged in user
+
+      favorite = ProfessorUserFavorite.where('professor_id = ? and  user_id = ?', params[:id],  current_user.id)
+      favorite.delete_all unless favorite.empty?
+
+      flash['notice'] = 'Professor removido dos favoritos com sucesso!'
+      redirect_to professor_path(params[:id])
     end
 
     def show

@@ -84,8 +84,9 @@
         </h5>
         <div class="card-body" style="padding: 15px;">
           <div class="row">
-            <% @subject.professors.uniq.each do |professor|%>
-              <div class="col-md-6">
+            <% @professors.each do |professor|%>
+              <div class="col-md-6 <%= 'favorite-professor-subject' if  @favorite_professors_subject.include? professor%>">
+                <i class="fa fa-star" style="display: none"></i>
                 <div class="teacher-header">
                   <img src="https://www.shape.com/sites/shape.com/files/styles/channel_masonry/public/emma-watson-video-feature.jpg?itok=6AqfgFae" alt="<%= professor.name %>" class="image-thumbnail"/>
                   <p><%= professor.name%></p>

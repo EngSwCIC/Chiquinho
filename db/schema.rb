@@ -126,6 +126,13 @@ ActiveRecord::Schema.define(version: 2018_11_07_125414) do
     t.index ["subject_id"], name: "index_professor_subjects_on_subject_id"
   end
 
+  create_table "professor_user_favorites", force: :cascade do |t|
+    t.integer "professor_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "professors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

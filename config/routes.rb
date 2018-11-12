@@ -9,13 +9,20 @@ Rails.application.routes.draw do
       resource :topics
     end
   end
+
   resources :department, only: [:index, :show]
+
   resources :professors
+  get '/professors/:id/favorite', to: 'professors#favorite', as: :favorite_professor
+  get '/professors/:id/unfavorite', to: 'professors#unfavorite', as: :unfavorite_professor
+
+
   resources :courses
   get 'course/:id/professors', to: "courses#course_professors", as: "course_professors"
   resources :subjects do
     resources :study_materials, only: [:create, :new]
   end
+
   resources :comments, only: [:create]
   devise_for :users, :controllers => { registrations: 'registrations/registrations' }
   root to: 'main#index'
