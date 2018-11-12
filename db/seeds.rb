@@ -172,7 +172,7 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
 # Clean up the database.
 
 Flow.delete_all
-=begin
+
 UserLikeComment.delete_all
 Comment.delete_all
 ProfessorSubjectUser.delete_all
@@ -264,7 +264,7 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
 end
 
 puts "Matérias Populadas"
-=end
+
 
 puts "Populando fluxos..."
 
@@ -276,7 +276,7 @@ while (line = file.gets)
   semestre = codigo[2]
   unless @materia.nil? || @curso.nil?
     Flow.create!(subject: @materia, course: @curso, semester: semestre)
-    puts "Matéria #{@materia.name} adicionada ao fluxo de #{@curso.name} no #{semestre}º semestre" unless fast_mode >= 3
+    puts "Matéria #{@materia.name} adicionada ao fluxo de #{@curso.name} no #{semestre}º semestre" unless fast_mode >= 2
   else
     puts "Matéria #{codigo[0]} ou curso #{codigo[1]} não encontrados" unless fast_mode >= 2
   end
@@ -284,7 +284,6 @@ end
 
 puts "Fluxos Populados"
 
-=begin
 puts "Populando professores..."
 
 file = File.new("db/professores_materias.rb", "r")
@@ -310,4 +309,3 @@ Professor.find_each do |professor|
 end
 
 puts "Professores populados"
-=end

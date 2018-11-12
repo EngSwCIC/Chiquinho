@@ -15,7 +15,6 @@ RSpec.describe Flow, type: :model do
     end
 
     it 'gets all semesters correctly' do
-
       expect(Flow).to receive(:get_semesters).with(course).and_return([nil,nil,nil,nil,nil,[subject, subject2]])
       Flow.get_semesters(course)
     end
