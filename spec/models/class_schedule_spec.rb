@@ -7,7 +7,6 @@ RSpec.describe ClassSchedule, type: :model do
       let(:subject_class) { FactoryBot.create(:subject_class)}
 
       before do
-        # TODO create a professor factory
         week_day = WeekDay.create(day: "Segunda")
         class_hour = ClassHour.create(hour: "10:00")
 
