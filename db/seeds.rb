@@ -169,6 +169,29 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "589", initial: "REL",	 name: "INSTITUTO DE RELAÇÕES INTERNACIONAIS"},
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
+
+week_days = [{day: "segunda"},
+             {day: "terça"},
+             {day: "quarta"},
+             {day: "quinta"},
+             {day: "sexta"},
+             {day: "sábado"},
+             {day: "domingo"}]
+
+class_hours = [{hour: "06:00"},
+               {hour: "08:00"},
+               {hour: "10:00"},
+               {hour: "12:00"},
+               {hour: "14:00"},
+               {hour: "16:00"},
+               {hour: "18:00"},
+               {hour: "20:00"},
+               {hour: "22:00"},
+               {hour: "24:00"},
+               {hour: "19:00"},
+               {hour: "20:50"},
+               {hour: "22:30"},]
+
 # Clean up the database.
 
 Flow.delete_all
@@ -186,6 +209,9 @@ User.delete_all
 Course.delete_all
 Subject.delete_all
 Department.delete_all
+WeekDay.delete_all
+ClassHour.delete_all
+
 
 
 # Populate the database.
@@ -309,3 +335,15 @@ Professor.find_each do |professor|
 end
 
 puts "Professores populados"
+
+puts "Populando dias da semana..."
+week_days.each do |week_day|
+  WeekDay.create(week_day)
+end
+puts "Dias da semana populados"
+
+puts "Populando horários de aula..."
+class_hours.each do |class_hour|
+  ClassHour.create(class_hour)
+end
+puts "Horários de aula populados"
