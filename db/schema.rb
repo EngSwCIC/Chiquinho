@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_125414) do
+ActiveRecord::Schema.define(version: 2018_11_19_092610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,27 @@ ActiveRecord::Schema.define(version: 2018_11_07_125414) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "class_hours", force: :cascade do |t|
+    t.time "hour"
+  end
+
+  create_table "class_schedules", force: :cascade do |t|
+    t.bigint "class_id"
+    t.bigint "week_day_id"
+    t.bigint "class_hour_id"
+    t.index ["class_hour_id"], name: "index_class_schedules_on_class_hour_id"
+    t.index ["class_id"], name: "index_class_schedules_on_class_id"
+    t.index ["week_day_id"], name: "index_class_schedules_on_week_day_id"
+  end
+
+  create_table "classes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "subject_id"
+    t.bigint "professor_id"
+    t.index ["professor_id"], name: "index_classes_on_professor_id"
+    t.index ["subject_id"], name: "index_classes_on_subject_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -236,6 +257,15 @@ ActiveRecord::Schema.define(version: 2018_11_07_125414) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_days", force: :cascade do |t|
+    t.string "day"
+  end
+
+  add_foreign_key "class_schedules", "class_hours"
+  add_foreign_key "class_schedules", "classes"
+  add_foreign_key "class_schedules", "week_days"
+  add_foreign_key "classes", "professors"
+  add_foreign_key "classes", "subjects"
   add_foreign_key "comments", "professor_subjects"
   add_foreign_key "comments", "subjects"
   add_foreign_key "comments", "users"
