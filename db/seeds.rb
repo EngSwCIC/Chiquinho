@@ -170,27 +170,27 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
 
-week_days = [{day: "segunda"},
-             {day: "terça"},
-             {day: "quarta"},
-             {day: "quinta"},
-             {day: "sexta"},
-             {day: "sábado"},
-             {day: "domingo"}]
+week_days = [{id: 0, day: "segunda"},
+             {id: 1, day: "terça"},
+             {id: 2, day: "quarta"},
+             {id: 3, day: "quinta"},
+             {id: 4, day: "sexta"},
+             {id: 5, day: "sábado"},
+             {id: 6, day: "domingo"}]
 
-class_hours = [{hour: "06:00"},
-               {hour: "08:00"},
-               {hour: "10:00"},
-               {hour: "12:00"},
-               {hour: "14:00"},
-               {hour: "16:00"},
-               {hour: "18:00"},
-               {hour: "20:00"},
-               {hour: "22:00"},
-               {hour: "24:00"},
-               {hour: "19:00"},
-               {hour: "20:50"},
-               {hour: "22:30"},]
+class_hours = [{id: 0, hour: "06:00"},
+               {id: 1, hour: "08:00"},
+               {id: 2, hour: "10:00"},
+               {id: 3, hour: "12:00"},
+               {id: 4, hour: "14:00"},
+               {id: 5, hour: "16:00"},
+               {id: 6, hour: "18:00"},
+               {id: 7, hour: "20:00"},
+               {id: 8, hour: "22:00"},
+               {id: 9, hour: "24:00"},
+               {id: 10, hour: "19:00"},
+               {id: 11, hour: "20:50"},
+               {id: 12, hour: "22:30"},]
 
 
 # Clean up the database.
