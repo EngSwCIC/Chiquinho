@@ -192,26 +192,28 @@ class_hours = [{hour: "06:00"},
                {hour: "20:50"},
                {hour: "22:30"},]
 
+
 # Clean up the database.
 
-Flow.delete_all
+Flow.destroy_all
 
-UserLikeComment.delete_all
-Comment.delete_all
-ProfessorSubjectUser.delete_all
-ProfessorSubject.delete_all
-CourseSubject.delete_all
-Professor.delete_all
-Topic.delete_all
-Forum.delete_all
-Schedule.delete_all
-User.delete_all
-Course.delete_all
-Subject.delete_all
-Department.delete_all
-WeekDay.delete_all
-ClassHour.delete_all
-
+UserLikeComment.destroy_all
+Comment.destroy_all
+ProfessorSubjectUser.destroy_all
+ProfessorSubject.destroy_all
+CourseSubject.destroy_all
+Professor.destroy_all
+Topic.destroy_all
+Forum.destroy_all
+Schedule.destroy_all
+User.destroy_all
+Course.destroy_all
+Subject.destroy_all
+Department.destroy_all
+SubjectClass.destroy_all
+ClassSchedule.destroy_all
+WeekDay.destroy_all
+ClassHour.destroy_all
 
 
 # Populate the database.
@@ -347,3 +349,22 @@ class_hours.each do |class_hour|
   ClassHour.create(class_hour)
 end
 puts "Horários de aula populados"
+
+# Código placeholder para popular turmas as matérias e seus horários.
+# TODO Substituir esse código por um arquivo obtido de um web crawler.
+puts "Populando turmas e horários"
+Subject.all.each do |subject|
+  class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: Professor.first.id)
+  class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: Professor.first.id)
+  class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: Professor.first.id)
+
+  3.times do |index|
+    day = rand(0..6)
+    hour = rand(0..12)
+    ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
+    ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
+    ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+  end
+
+end
+puts "Turmas e horários populados"
