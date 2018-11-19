@@ -356,16 +356,19 @@ puts "Horários de aula populados"
 # TODO Substituir esse código por um arquivo obtido de um web crawler.
 puts "Populando turmas e horários"
 Subject.all.each do |subject|
-  class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: subject.professors.first.id)
-  class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
-  class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
 
-  3.times do |index|
-    day = rand(0..6)
-    hour = rand(0..12)
-    ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
-    ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
-    ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+  unless subject.professors.empty?
+    class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
+
+    3.times do |index|
+      day = rand(0..6)
+      hour = rand(0..12)
+      ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+    end
   end
 
 end
