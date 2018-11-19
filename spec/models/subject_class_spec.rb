@@ -5,10 +5,9 @@ RSpec.describe SubjectClass, type: :model do
 
     context "with valid params" do
       let(:subject) { FactoryBot.create(:subject)}
+      let(:professor){ FactoryBot.create(:professor)}
 
       before do
-        # TODO create a professor factory
-        professor = Professor.create(name: "Professor")
         @params = {name: "A",
                   subject_id: subject.id,
                   professor_id: professor.id}
