@@ -1,6 +1,6 @@
-class CreateClasses < ActiveRecord::Migration[5.2]
+class CreateSubjectClasses < ActiveRecord::Migration[5.2]
   def change
-    create_table :classes do |t|
+    create_table :subject_classes do |t|
       t.string :name
       t.references :subject, foreign_key: true
       t.references :professor, foreign_key: true
