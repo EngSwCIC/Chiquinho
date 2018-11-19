@@ -195,25 +195,27 @@ class_hours = [{id: 0, hour: "06:00"},
 
 # Clean up the database.
 
-Flow.destroy_all
+Flow.delete_all
 
-UserLikeComment.destroy_all
-Comment.destroy_all
-ProfessorSubjectUser.destroy_all
-ProfessorSubject.destroy_all
-CourseSubject.destroy_all
-Professor.destroy_all
-Topic.destroy_all
-Forum.destroy_all
-Schedule.destroy_all
-User.destroy_all
-Course.destroy_all
-Subject.destroy_all
-Department.destroy_all
-SubjectClass.destroy_all
-ClassSchedule.destroy_all
-WeekDay.destroy_all
-ClassHour.destroy_all
+ClassSchedule.delete_all
+WeekDay.delete_all
+ClassHour.delete_all
+SubjectClass.delete_all
+
+UserLikeComment.delete_all
+Comment.delete_all
+ProfessorSubjectUser.delete_all
+ProfessorSubject.delete_all
+CourseSubject.delete_all
+Professor.delete_all
+Topic.delete_all
+Forum.delete_all
+Schedule.delete_all
+User.delete_all
+Course.delete_all
+Subject.delete_all
+Department.delete_all
+
 
 
 # Populate the database.
