@@ -354,9 +354,9 @@ puts "Horários de aula populados"
 # TODO Substituir esse código por um arquivo obtido de um web crawler.
 puts "Populando turmas e horários"
 Subject.all.each do |subject|
-  class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: Professor.first.id)
-  class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: Professor.first.id)
-  class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: Professor.first.id)
+  class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: subject.professors.first.id)
+  class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
+  class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
 
   3.times do |index|
     day = rand(0..6)
