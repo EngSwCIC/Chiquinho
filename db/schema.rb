@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_061620) do
+ActiveRecord::Schema.define(version: 2018_11_20_144520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,9 +184,14 @@ ActiveRecord::Schema.define(version: 2018_11_01_061620) do
     t.bigint "course_id"
     t.bigint "professor_id"
     t.bigint "subject_id"
+    t.bigint "user_id"
+    t.bigint "topic_id"
+    t.boolean "deleted", default: false
     t.index ["course_id"], name: "index_topics_on_course_id"
     t.index ["professor_id"], name: "index_topics_on_professor_id"
     t.index ["subject_id"], name: "index_topics_on_subject_id"
+    t.index ["topic_id"], name: "index_topics_on_topic_id"
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "user_like_comments", force: :cascade do |t|
@@ -242,6 +247,8 @@ ActiveRecord::Schema.define(version: 2018_11_01_061620) do
   add_foreign_key "topics", "courses"
   add_foreign_key "topics", "professors"
   add_foreign_key "topics", "subjects"
+  add_foreign_key "topics", "topics"
+  add_foreign_key "topics", "users"
   add_foreign_key "user_like_comments", "comments"
   add_foreign_key "user_like_comments", "users"
   add_foreign_key "users", "courses"

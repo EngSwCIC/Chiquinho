@@ -1,10 +1,16 @@
 class TopicsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!, only: [:new, :create]
     def new
         @topic = Topic.new
     end
 
     def create
         @topic = Topic.new(topic_params)
+        
+        user = User.find_by(id: session["warden.user.user.key"][0][0]) 
+        @topic.user_id = user.id
+        
         if session.has_key?(:filter_course_id)
             course = Course.find_by(id: session[:filter_course_id]) 
             @topic.course_id = course.id
@@ -23,6 +29,7 @@ class TopicsController < ApplicationController
                 :professor_id => session[:filter_professor_id], 
                 :subject_id => session[:filter_subject_id] } )
         else
+            flash[:error] = 'Não foi possível salvar seu tópico'
             render :new
         end
     end
