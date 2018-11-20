@@ -190,7 +190,7 @@ class_hours = [{hour: "06:00"},
                {hour: "24:00"},
                {hour: "19:00"},
                {hour: "20:50"},
-               {hour: "22:30"},]
+               {hour: "22:30"}]
 
 
 # Clean up the database.

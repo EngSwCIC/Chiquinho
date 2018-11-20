@@ -15,7 +15,7 @@ Dado("que existam as turmas {string}, {string}, {string} para essa matéria") do
     |schedule|
     week_day, class_hour = schedule.split(" - ")
     @week = WeekDay.find_or_create_by(day: week_day)
-    @hour = ClassHour.find_or_create_by(hour: Time.parse(class_hour))
+    @hour = ClassHour.find_or_create_by(hour: class_hour)
     ClassSchedule.create(subject_class_id: @class.id, week_day_id: @week.id,
                          class_hour_id: @hour.id)
   }
