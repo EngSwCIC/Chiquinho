@@ -170,50 +170,52 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
 
-week_days = [{day: "segunda"},
-             {day: "terça"},
-             {day: "quarta"},
-             {day: "quinta"},
-             {day: "sexta"},
-             {day: "sábado"},
-             {day: "domingo"}]
+week_days = [{id: 0, day: "segunda"},
+             {id: 1, day: "terça"},
+             {id: 2, day: "quarta"},
+             {id: 3, day: "quinta"},
+             {id: 4, day: "sexta"},
+             {id: 5, day: "sábado"},
+             {id: 6, day: "domingo"}]
 
-class_hours = [{hour: "06:00"},
-               {hour: "08:00"},
-               {hour: "10:00"},
-               {hour: "12:00"},
-               {hour: "14:00"},
-               {hour: "16:00"},
-               {hour: "18:00"},
-               {hour: "20:00"},
-               {hour: "22:00"},
-               {hour: "24:00"},
-               {hour: "19:00"},
-               {hour: "20:50"},
-               {hour: "22:30"}]
+class_hours = [{id: 0, hour: "06:00"},
+               {id: 1, hour: "08:00"},
+               {id: 2, hour: "10:00"},
+               {id: 3, hour: "12:00"},
+               {id: 4, hour: "14:00"},
+               {id: 5, hour: "16:00"},
+               {id: 6, hour: "18:00"},
+               {id: 7, hour: "20:00"},
+               {id: 8, hour: "22:00"},
+               {id: 9, hour: "24:00"},
+               {id: 10, hour: "19:00"},
+               {id: 11, hour: "20:50"},
+               {id: 12, hour: "22:30"}]
 
 
 # Clean up the database.
 
-Flow.destroy_all
+Flow.delete_all
 
-UserLikeComment.destroy_all
-Comment.destroy_all
-ProfessorSubjectUser.destroy_all
-ProfessorSubject.destroy_all
-CourseSubject.destroy_all
-Professor.destroy_all
-Topic.destroy_all
-Forum.destroy_all
-Schedule.destroy_all
-User.destroy_all
-Course.destroy_all
-Subject.destroy_all
-Department.destroy_all
-SubjectClass.destroy_all
-ClassSchedule.destroy_all
-WeekDay.destroy_all
-ClassHour.destroy_all
+ClassSchedule.delete_all
+WeekDay.delete_all
+ClassHour.delete_all
+SubjectClass.delete_all
+
+UserLikeComment.delete_all
+Comment.delete_all
+ProfessorSubjectUser.delete_all
+ProfessorSubject.delete_all
+CourseSubject.delete_all
+Professor.delete_all
+Topic.delete_all
+Forum.delete_all
+Schedule.delete_all
+User.delete_all
+Course.delete_all
+Subject.delete_all
+Department.delete_all
+
 
 
 # Populate the database.
@@ -354,16 +356,19 @@ puts "Horários de aula populados"
 # TODO Substituir esse código por um arquivo obtido de um web crawler.
 puts "Populando turmas e horários"
 Subject.all.each do |subject|
-  class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: Professor.first.id)
-  class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: Professor.first.id)
-  class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: Professor.first.id)
 
-  3.times do |index|
-    day = rand(0..6)
-    hour = rand(0..12)
-    ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
-    ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
-    ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+  unless subject.professors.empty?
+    class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
+
+    3.times do |index|
+      day = rand(0..6)
+      hour = rand(0..12)
+      ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+    end
   end
 
 end

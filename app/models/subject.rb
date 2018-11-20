@@ -8,7 +8,7 @@ class Subject < ApplicationRecord
   has_many :courses,through: :course_subjects
   has_many :professor_subjects
   has_many :study_materials
-  has_many :subject_classes, dependent: :destroy
+  has_many :subject_classes
   has_many :professors, through: :professor_subjects
   has_many :comments
   has_many :flows
