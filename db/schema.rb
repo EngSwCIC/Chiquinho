@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_125414) do
+ActiveRecord::Schema.define(version: 2018_11_14_101923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_125414) do
     t.integer "tarefas"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "professor_id"
     t.index ["professor_subject_id"], name: "index_professor_subject_users_on_professor_subject_id"
     t.index ["user_id"], name: "index_professor_subject_users_on_user_id"
   end
@@ -247,6 +248,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_125414) do
   add_foreign_key "flows", "subjects"
   add_foreign_key "forums", "courses"
   add_foreign_key "professor_subject_users", "professor_subjects"
+  add_foreign_key "professor_subject_users", "professors"
   add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"

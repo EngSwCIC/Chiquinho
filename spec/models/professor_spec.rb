@@ -18,5 +18,37 @@ RSpec.describe Professor, type: :model do
     end
 
   end
+  
+  describe "professor score" do
+    before(:each){
+      @user = User.create
+      @subject = Subject.create
+      @professorsubject = ProfessorSubject.create(subject: @subject)
+      @tests = [
+        {name: "Maria", scores: [{trabalhos: 10, provas: 10, tarefas: 10}]},
+        {name: "João", scores: [{trabalhos: 9, provas: 8, tarefas: 7}]}
+      ]
+      @tests.each do |t|
+        @professor = Professor.create(name: t[:name])
+        t[:scores].each do |s|
+          ProfessorSubjectUser.create!(
+            user: @user,
+            professor_subject: @professorsubject,
+            professor_id: @professor.id, 
+            trabalhos: s[:trabalhos], 
+            provas: s[:provas], 
+            tarefas: s[:tarefas])
+        end
+      end
+    }
+    
+    it "returns 8 for João" do
+      expect(Professor.find_by(name: "João").score).to eq(8)
+    end
+    
+    it "returns 10 for Maria" do
+      expect(Professor.find_by(name: "Maria").score).to eq(10)
+    end
+  end
 
 end

@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "courses" %>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-8">
     <div class="card" style="margin-bottom: 15px;">
       <h5 class="card-header">
         Dados do Curso
@@ -47,6 +47,16 @@
               <%= @course.classification.capitalize %>
             </td>
           </tr>
+          <% if @coordinator != nil %>
+          <tr>
+            <th>
+              Coordenador
+            </th>
+            <td>
+              <h6><%= link_to @coordinator.name, professor_path(@coordinator) %></h6>
+            </td>
+          </tr>
+          <% end %>
           <tr>
             <th>
               Fóruns
@@ -55,23 +65,20 @@
               <%= link_to 'Forum', course_forums_path(@course),class: "btn btn-primary" %>
             </td>
           </tr>
+          <tr>
+            <th>
+              Professores do departamento deste curso
+            </th>
+            <td>
+              <%= link_to 'Ver Professores do Curso', course_professors_path(@course), class: "btn btn-md btn-primary" %>
+            </td>
+          </tr>
+          
         </table>
       </div>
     </div>
   </div>
-  <% if @coordinator != nil %>
-    <div class="col-md-7">
-      <div class="card">
-        <h5 class="card-header">
-          Coordenador
-        </h5>
-        <div class="card-body">
-          <h6><%= link_to @coordinator.name, professor_path(@coordinator) %></h6>
-          <%= link_to 'Ver Professores do Curso', course_professors_path(@course), class: "btn btn-md btn-primary" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+
 
 </div>
 
