@@ -19,6 +19,7 @@ Funcionalidade: Link na página da disciplina para adicioná-la à grade horári
       |name      |A                      |
       |course    |ORGANIZAÇÃO DE ARQUIVOS|
       |professor |PEDRO DE AZEVEDO BERGER|
-      |schedule  |Ter, Qui - 14h         |
+      |schedule  |Terça - 14h            |
+      |schedule  |Quinta - 14h           |
     Quando eu clicar no link para detalhes dessa turma
     Então eu devo ver um botão que me permita adicionar a turma a grade horária
