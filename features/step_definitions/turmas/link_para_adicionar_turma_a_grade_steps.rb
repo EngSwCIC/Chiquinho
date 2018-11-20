@@ -30,7 +30,7 @@ Quando("eu clicar no link para detalhes dessa turma") do
 end
 
 Então("eu devo ver um botão que me permita adicionar a turma a grade horária") do
-  path = add_class_schedule(@subject_class.id)
+  path = add_class_schedule_path(@subject_class.id)
   link = "a[href='#{path}']"
   expect(page).to have_selector(link)
 end
