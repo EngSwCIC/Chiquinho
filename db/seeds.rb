@@ -170,13 +170,13 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
 
-week_days = [{id: 0, day: "segunda"},
-             {id: 1, day: "terça"},
-             {id: 2, day: "quarta"},
-             {id: 3, day: "quinta"},
-             {id: 4, day: "sexta"},
-             {id: 5, day: "sábado"},
-             {id: 6, day: "domingo"}]
+week_days = [{id: 0, day: "domingo"},
+             {id: 1, day: "segunda"},
+             {id: 2, day: "terça"},
+             {id: 3, day: "quarta"},
+             {id: 4, day: "quinta"},
+             {id: 5, day: "sexta"},
+             {id: 6, day: "sábado"}]
 
 class_hours = [{id: 0, hour: "06:00"},
                {id: 1, hour: "08:00"},
@@ -362,6 +362,8 @@ Subject.all.each do |subject|
     class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
     class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
 
+    puts "Matéria #{subject.name} atualizada com 3 turmas." unless fast_mode >= 1
+
     3.times do |index|
       day = rand(0..6)
       hour = rand(0..12)
@@ -369,6 +371,9 @@ Subject.all.each do |subject|
       ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
       ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
     end
+
+    puts "Turmas de #{subject.name} atualizadas com 3 horários." unless fast_mode >= 1
+
   end
 
 end
