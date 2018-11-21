@@ -13,8 +13,8 @@ Funcionalidade: Listar turmas da materia
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |
       |area   |AC                     |
-    E que eu esteja na página dessa matéria
     E que existam as turmas "<name>", "<schedule>", "<professor>" para essa matéria
+    E que eu esteja na página dessa matéria
     Entao devo ver uma lista contendo as turmas "<name>", "<schedule>", "<professor>"
 
     Exemplos:

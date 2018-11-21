@@ -8,6 +8,15 @@
   margin-bottom: 10px;
 }
 
+.subject_class-professor_star {
+  color: yellow;
+  display: inline;
+}
+
+.subject_class-schedule {
+  display: block;
+}
+
 .teacher-header {
   padding: 10px;
 }
@@ -16,11 +25,13 @@
   font-size: 1.3em;
   display: inline;
 }
+
 .teacher-header img{
   max-height: 3em;
   border-radius: 50px;
   margin-right: 0.5em;
 }
+
 .comentario-header{
   font-size: 1.5em;
   font-weight: 400px;
@@ -66,4 +77,3 @@
   color: yellow;
   margin: 5px -5px 0 0;
 }
-

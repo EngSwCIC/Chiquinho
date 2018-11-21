@@ -75,33 +75,65 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="row" style="margin: 30px">
-  <div class="card col-md-10" style="padding: 0;">
-    <h5 class="card-header">
-      Turmas
-    </h5>
-    <div class="card-body">
-      <table class="table">
-        <% @subject.subject_classes.each do |subject_class| %>
-          <tr>
-            <th>
-              <%= "Turma #{subject_class.name}" %>
-            </th>
-            <td>
-              <%= link_to subject_class.professor.name ,professor_path(subject_class.professor) %>
-            </td>
-            <td>
-              <%= link_to "Ver Turma #{subject_class.name}", subject_path(@subject), class: 'btn btn-primary', style: 'margin-bottom: 5px' %>
-            </td>
-          </tr>
+<br>
+<div class="row">
+  <div class="col-md-10">
+    <div class="card">
+      <h5 class="card-header">
+        Turmas
+      </h5>
+      <div class="card-body">
+        <% @subject.subject_classes.order('name').each do |subject_class| %>
+          <div class="col-md-11" style="margin: 20px;">
+            <div class="card">
+              <div class="subject_class">
+                <h6 class="card-header">
+                  <%= "Turma #{subject_class.name}" %>
+                </h6>
+              <div class="card-body">
+                <table class="table">
+                  <tr>
+                    <th>
+                      Professor
+                    </th>
+                    <td>
+                      <%= subject_class.professor.name %>
+                      <% if current_user %>
+                        <% if is_favorite? subject_class.professor.id, current_user.id %>
+                          <div class="subject_class-professor_star">
+                            <i class="fa fa-star"></i>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td align="center"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, professor_path(subject_class.professor), class: "label label-info" %></td>
+                  </tr>
+                  <tr>
+                    <th>
+                      Horários
+                    </th>
+                    <td>
+                      <% subject_class.class_schedules.order('week_day_id').each do |schedule| %>
+                        <div class="subject_class-schedule">
+                          <%= "#{schedule.week_day.day.capitalize}" %>
+                          <%= "#{schedule.class_hour.hour.strftime("%H:%M")} - " %>
+                          <%= "#{(schedule.class_hour.hour + 110.minutes).strftime("%H:%M")}" %>
+                        </div>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+                <%= link_to "Ver Turma #{subject_class.name}", subject_path(@subject), class: 'btn btn-primary', style: 'margin: 10px 0; float: right' %>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </table>
+      </div>
     </div>
   </div>
 </div>
-
+<br>
 <div class="row">
   <div class="col-md-7">
     <div class="card">
@@ -204,6 +236,7 @@
       </div>
     <% end %>
   </div>
+</div>
 </div>
 </div>
 

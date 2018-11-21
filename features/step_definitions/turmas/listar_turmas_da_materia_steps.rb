@@ -23,8 +23,13 @@ Dado("que existam as turmas {string}, {string}, {string} para essa matéria") do
 end
 
 Então("devo ver uma lista contendo as turmas {string}, {string}, {string}") do
-  |name, schedule, professor|
+  |name, schedules, professor|
   expect(page).to have_content("Turma " + name)
-  expect(page).to have_content(schedule)
+  schedules.split(", ").each {
+    |schedule|
+    week_day, class_hour = schedule.split(" - ")
+    class_end_hour = (Time.parse(class_hour) + 110.minutes).strftime("%H:%M")
+    expect(page).to have_content(week_day.capitalize + " " + class_hour + " - " + class_end_hour)
+  }
   expect(page).to have_content(professor)
 end
