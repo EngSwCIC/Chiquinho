@@ -18,4 +18,8 @@ class Professor < ApplicationRecord
     end
     @score == 0 ? 0 : @score/3.0/@count;
   end
+  
+  def count_favorite
+    ProfessorUserFavorite.where(professor_id: self.id).count
+  end
 end

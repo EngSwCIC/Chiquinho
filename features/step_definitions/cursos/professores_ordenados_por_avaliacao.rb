@@ -50,3 +50,15 @@ Então("devo ver {string} na frente da {string}") do |string, string2|
   expect(page.body.index(string) >= page.body.index(string2)).to eq(false)
 end
 
+Dado("que os professores recebam os seguintes favoritos:") do |table|
+  table.hashes.each do |row|
+    row[:nfavoritos].to_i.times {
+      ProfessorUserFavorite.create!(professor_id: Professor.find_by(name: row[:nome]).id, user: User.new)
+    }
+  end
+end
+
+Então("devo ver {string} com {string} de score") do |professor, score|
+  expect(page).to have_content("#{professor} #{score}")
+end
+

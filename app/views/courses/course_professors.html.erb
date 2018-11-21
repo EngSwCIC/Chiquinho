@@ -12,6 +12,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Score</th>
+                            <th>Favoritos</th>
                             <th>Detalhes</th>
                         </tr>
                         </thead>
@@ -19,14 +20,16 @@
                         <tr>
                             <th>Nome</th>
                             <th>Score</th>
+                            <th>Favoritos</th>
                             <th>Detalhes</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <% @professors.sort_by{ |x| -x.score}.each do |professor| %>
+                        <% @professors.sort_by{ |x| -x.count_favorite}.each do |professor| %>
                         <tr>
                             <td><%= professor.name %></td>
-                            <td><%= professor.score %></td>
+                            <td><%= professor.score.round(3) %></td>
+                            <td><%= professor.count_favorite %></td>
                             <td align="center"><%= link_to "Detalhes <i class='fa fa-external-link'></i>".html_safe, professor_path(professor),class: "label label-info" %></td>
                         </tr>
                         <% end %>
@@ -61,6 +64,6 @@
                 }
             }
         });
-        table.fnSort( [[1,'desc']] );
+        table.fnSort( [[2,'desc']] );
     });
 </script>

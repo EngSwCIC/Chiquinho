@@ -24,4 +24,20 @@ Funcionalidade: Ver professores do curso ordenados por avaliação
   Quando clicar para ver professores do curso
   Então devo ver os professores do "CIC"
   E não devo ver os professores do "MAT"
+  E devo ver "Maria" com "10.0" de score
+  E devo ver "João" com "8.167" de score
+  
+  Cenário:
+  Dado que exista o departamento "CIC" com professores:
+  | nome  |
+  | João  | 
+  | Maria |
+  E que os professores recebam os seguintes favoritos:
+  | nome  | nfavoritos |
+  | João  | 3          |
+  | Maria | 10         | 
+  E dado que exista o curso "Engenharia de Computação" do "CIC"
+  E que eu esteja na página do curso
+  Quando clicar para ver professores do curso
+  Então devo ver os professores do "CIC"
   E devo ver "Maria" na frente da "João"
