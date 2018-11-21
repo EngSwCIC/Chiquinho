@@ -33,6 +33,16 @@ class TopicsController < ApplicationController
             render :new
         end
     end
+    def show
+        @user = User.find(session["warden.user.user.key"][0][0]) 
+        @topic = Topic.find(params[:id])
+        @responses = Topic.where(topic_id: @topic.id).order(:created_at)
+        #@comment = Comment.new
+        #@comments = Comment.where(subject_id: set_subject.id)
+        #@professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
+        #@studyMaterials = StudyMaterial.where(subject_id: @subject.id)
+        #@averages = @subject.get_avg
+    end
 
     def index
         session.delete(:filter_course_id)
@@ -67,6 +77,9 @@ class TopicsController < ApplicationController
     end
 
     private
+    #def set_topic
+    #  @topic = Topic.find(params[:id])
+    #end
 
     def topic_params
         params.require(:topic).permit(:title, :description)

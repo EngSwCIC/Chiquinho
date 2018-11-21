@@ -1,0 +1,78 @@
+<%= stylesheet_link_tag "topics" %>
+
+        <div class="row" style="margin-top: 20px;color:#1c1c1c;">
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">           
+              <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="container col-md-12">
+                            <div class="invoice-title text-left mb-3">
+                              <h2><%= @topic.title %></h2>
+                              <p style="color:#777"> Escrito por <strong><u><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
+                            </div>
+                            <hr>
+                            <div class="row" style="padding-left: 10px;">
+                              <div class="col-md-12">                                
+                                <%= @topic.description %>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row" >
+                              <div class="col-md-9">                                
+                                <p style="color:#777"> Última edição há <%= time_ago_in_words(@topic.updated_at) %></p>
+                              </div>
+                              <div class="col-md-3 float-right text-right">
+                                <div class="btn-group" role="group" style="color:#fff; font-style: strong;">
+                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-plus'></i> Responder</a>
+                                  <!-- if is same user -->
+                                  <% if @user.id == @topic.user_id then %>
+                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
+                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-times'></i> Remover</a>
+                                  <% end %>
+                                </div>
+                              </div>
+                            </div>
+                      </div>
+
+                    </div><!-- end card body -->                              
+                    
+                  </div><!-- end card-->
+
+                  
+
+            <!-- ################# FOREACH BEGIN -->
+              <% @responses.each do |response| %>
+              <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="container col-md-12">
+
+                            <div class="row"">
+                              <div class="col-md-10"> 
+                                <p style="color:#777;font-size: 0.8rem; margin-bottom:0.2rem;"> <strong><u><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></u></strong> &nbsp;·&nbsp; <%= time_ago_in_words(response.created_at) %> atrás</p>
+                                <p style="padding-left:5px;"><%= response.description %></p>
+                              </div>
+                              <div class="col-md-2 float-right text-right" style="padding-top:10px;">
+                                <div class="btn-group" role="group" style="color:#fff;">
+                                  <!-- if is same user -->
+                                  <% if @user.id == response.user_id then %>
+                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
+                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-times'></i> Remover</a>
+                                  <% end %>
+                                </div>
+                              </div>
+                            </div>
+
+                      </div>
+
+                    </div><!-- end card body -->                              
+                    
+                  </div><!-- end card-->
+              <% end %>
+                  <!-- ################# FOREACH END -->
+                  
+                </div><!-- end col-->     
+
+          </div><!-- end row-->
+
+
+
+            
