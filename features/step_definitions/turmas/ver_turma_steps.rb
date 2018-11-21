@@ -1,20 +1,22 @@
 # This is the steps file referred to ver_turma feature
 # Place your code relative to that feature here
 
+
+Dado("que eu esteja na página da matéria") do
+  visit subject_path(Subject.first)
+end
+
 Dado("que existam turmas para essa matéria com o nome {string}") do |name|
-  pending
-  # @class = Class.create(name: name)
-  # @subject.classes << @class
+  professor = Professor.create(name: "professor")
+  @subject_class = SubjectClass.create(name: name, subject_id: Subject.first.id, professor_id: professor.id)
 end
 
 Quando("eu clicar no link de detalhes da turma {string}") do |name|
-  pending
-  # path = class_path(@class)
-  # link = "a[href=\'#{path}\']"
-  # find(link).click
+  path = subject_class_path(SubjectClass.find_by_name(name))
+  link = "a[href=\"#{path}\"]"
+  find(link).click
 end
 
 Então("devo ir pra uma pagina com detalhes sobre a turma {string}") do |name|
-  pending
-  # expect(page).to have_content(name)
+  expect(page).to have_content(name)
 end
