@@ -53,9 +53,21 @@ RSpec.describe Professor, type: :model do
   
   describe "professor count_favorites" do
     before(:each){
-      [{nome: "João", count: 12}, {nome: "Maria", count: 200}].
-      ProfessorUserFavorite.create!(professor_id: Professor.find_by(name: row[:nome]).id, user: User.new)
+      [{nome: "João", count: 12}, {nome: "Maria", count: 200}].each do |professor|
+        @professor = Professor.create!(name: professor[:nome])
+        professor[:count].times{
+          ProfessorUserFavorite.create!(professor_id: @professor.id, user: User.new)
+        }
+      end
     }
+    
+    it "returns 12 for João" do
+      expect(Professor.find_by(name: "João").count_favorite).to eq(12)
+    end
+    
+    it "returns 200 for Maria" do
+      expect(Professor.find_by(name: "Maria").count_favorite).to eq(200)
+    end
   end
 
 end
