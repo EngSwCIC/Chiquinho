@@ -170,13 +170,13 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
 
-week_days = [{id: 0, day: "domingo"},
-             {id: 1, day: "segunda"},
-             {id: 2, day: "terça"},
-             {id: 3, day: "quarta"},
-             {id: 4, day: "quinta"},
-             {id: 5, day: "sexta"},
-             {id: 6, day: "sábado"}]
+week_days = [{id: 0, day: "segunda"},
+             {id: 1, day: "terça"},
+             {id: 2, day: "quarta"},
+             {id: 3, day: "quinta"},
+             {id: 4, day: "sexta"},
+             {id: 5, day: "sábado"},
+             {id: 6, day: "domingo"}]
 
 class_hours = [{id: 0, hour: "06:00"},
                {id: 1, hour: "08:00"},
