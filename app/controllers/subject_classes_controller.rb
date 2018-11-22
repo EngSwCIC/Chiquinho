@@ -21,7 +21,7 @@ class SubjectClassesController < ApplicationController
         time = 8
       elsif time > 16 && time < 20
         time = 19
-      elsif time > 20
+      elsif time >= 20
         time = 21
       end
 
