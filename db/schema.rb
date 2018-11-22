@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_092610) do
     t.integer "tarefas"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "professor_id"
     t.index ["professor_subject_id"], name: "index_professor_subject_users_on_professor_subject_id"
     t.index ["user_id"], name: "index_professor_subject_users_on_user_id"
   end
@@ -275,6 +276,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_092610) do
   add_foreign_key "flows", "subjects"
   add_foreign_key "forums", "courses"
   add_foreign_key "professor_subject_users", "professor_subjects"
+  add_foreign_key "professor_subject_users", "professors"
   add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
