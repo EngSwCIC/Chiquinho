@@ -13,7 +13,7 @@
         <div class="teacher-header professor-profile-image" align="center">
           <img src="http://www.cic.unb.br/wp-content/uploads/2015/11/Genaina-150x150.jpg" alt="Genaína" class="image-thumbnail"/>
           <hr>
-          <h5><%= @professor.name%></h5>
+          <h5><%= link_to @professor.name, professor_path(@professor)%></h5>
         </div>
       </div>
     </div>
@@ -193,6 +193,7 @@
           data: {
               trabalhos: trabalhos,
               professor_subject_id: professor_subject_id,
+              professor_id: <%= @professor.id %>
           }
       });
   });
@@ -210,6 +211,7 @@
           data: {
               provas: provas,
               professor_subject_id: professor_subject_id,
+              professor_id: <%= @professor.id %>
           }
       });
   });
@@ -227,6 +229,7 @@
           data: {
               tarefas: tarefas,
               professor_subject_id: professor_subject_id,
+              professor_id: <%= @professor.id %>
           }
       });
   });
