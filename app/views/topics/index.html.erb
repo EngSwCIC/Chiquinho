@@ -11,15 +11,15 @@
           <h6 class="group-title">Filtros</h6>
             <div class="form-row">
               <%=form_tag topics_path, :method => :get  do %>
-              <div class="form-group col-md-7">
+              <div class="form-group col-md-4">
                 <%= label_tag(:course_id, "Curso:") %>
                 <%= select_tag :course_id,options_for_select(Course.all.map{|p| [p.name, p.id]}), class: "form-control select2" %>
               </div>
-              <div class="form-group col-md-7">
+              <div class="form-group col-md-4">
                 <%= label_tag(:subject_id, "Matéria:") %>
                 <%= select_tag :subject_id,options_for_select(Subject.all.map{|p| [p.name, p.id]}), class: "form-control select2"   %>
               </div>
-              <div class="form-group col-md-7">
+              <div class="form-group col-md-4">
                 <%= label_tag(:professor_id, "Professor:") %>
                 <%= select_tag :professor_id,options_for_select(Professor.all.map{|p| [p.name, p.id]}), class: "form-control select2" %>
               </div>
@@ -54,7 +54,7 @@
                     <% if topic.deleted %>
                       Tópico removido pelo usuário
                     <% else %>
-                      <%= topic.title %>
+                      <%= link_to topic.title, topic_path(topic.id) %>
                       <% if topic.user_id == current_user.id %>
                         <a role="button" href="#" class="btn btn-danger" data-toggle="modal" style="float: right;" data-target="<%=".remove-topic-modal-sm-#{topic.id}" %>">
                           <i class='fa fa-times'></i>

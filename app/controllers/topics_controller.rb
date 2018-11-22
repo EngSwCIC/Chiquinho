@@ -122,7 +122,7 @@ class TopicsController < ApplicationController
 
         @query = @query.join(' and ')
         @query << ((@query.length > 0) ? (' and ') : (''))
-        @query << 'topic_id is null'
+        @query << 'topic_id is null and deleted = false'
 
         @topics = Topic.where( @query )
 
