@@ -1,9 +1,50 @@
-<%= form_for @topic, url: topics_path do |f| %>
-    <%= f.label :title %><br />
-    <%= f.text_field :title, id: :title %><br />
+<% if @is_response %>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
+		<div class="card mb-3">
+			<div class="card-header">
+				<h3><i class="fa fa-check-square-o"></i> Responder ao tópico </h3>
+				<%= @filtersmsg.html_safe %>
+			</div>
+			<div class="card-body">
+				<%= form_for @topic, url: topics_path do |f| %>
+				  <div class="form-group">
+					<label for="topic_description">Resposta</label>
+	                <div>
+	                    <textarea id="description" name="topic[description]" required="true" class="form-control"></textarea>
+	                </div>
+	              </div>
+				  <div class="form-group">
+					<label for="topic_title">Legenda</label>
+					<input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Insira uma legenda ou deixe em branco" name="topic[title]">
+				  </div>
+				  <button type="submit" name="commit" data-disable-with="Enviar" class="btn btn-primary">Enviar</button>
+				<% end %>						
+			</div>														
+		</div><!-- end card-->					
+</div>
 
-    <%= f.label :description %><br />
-    <%= f.text_area :description, id: :description %>
-
-    <%= f.submit 'Enviar' %>
+<% else %>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
+		<div class="card mb-3">
+			<div class="card-header">
+				<h3><i class="fa fa-check-square-o"></i> Criar novo tópico </h3>
+				<%= @filtersmsg.html_safe %>
+			</div>
+			<div class="card-body">
+				<%= form_for @topic, url: topics_path do |f| %>
+				  <div class="form-group">
+					<label for="topic_title">Título</label>
+					<input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Insira um título" required="true" name="topic[title]">
+				  </div>
+				  <div class="form-group">
+	                <label for="topic_description">Descrição</label>
+	                <div>
+	                    <textarea id="description" name="topic[description]" required="true" class="form-control"></textarea>
+	                </div>
+	              </div>
+				  <button type="submit" name="commit" data-disable-with="Enviar" class="btn btn-primary">Enviar</button>
+				<% end %>						
+			</div>
+		</div><!-- end card-->
+	</div>
 <% end %>
