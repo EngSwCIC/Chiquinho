@@ -7,7 +7,7 @@
                       <div class="container col-md-12">
                             <div class="invoice-title text-left mb-3">
                               <h2><%= @topic.title %></h2>
-                              <p style="color:#777"> Escrito por <strong><u><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
+                              <p style="color:#777"> Escrito por <strong><u><%= @usernames[@user.id] %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
                             </div>
                             <hr>
                             <div class="row" style="padding-left: 10px;">
@@ -22,19 +22,37 @@
                               </div>
                               <div class="col-md-3 float-right text-right">
                                 <div class="btn-group" role="group" style="color:#fff; font-style: strong;">
-                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-plus'></i> Responder</a>
+                                  <%= link_to "<i class='fa fa-plus'></i>Responder".html_safe, new_topic_path, :class => "btn btn-secondary btn-danger btn-sm"%>
                                   <!-- if is same user -->
                                   <% if @user.id == @topic.user_id then %>
                                   <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
-                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-times'></i> Remover</a>
+                                  <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target=".modal-confirma-remover-topico"><i class='fa fa-times'></i> Remover</a>
+                                  <div class="modal fade modal-confirma-remover-topico" tabindex="-1" role="dialog" style="display: none; color: #111;" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                      <h5 class="modal-title">Você tem certeza?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                      </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        Você tem certeza que deseja remover este tópico?
+                                      </div>
+                                      <div class="modal-footer">
+                                      <%= button_to 'Remover', topic_path(@topic.id), :method => :delete, :class => "btn btn-primary"%>
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+
                                   <% end %>
                                 </div>
                               </div>
                             </div>
                       </div>
-
-                    </div><!-- end card body -->                              
-                    
+                    </div><!-- end card body -->
                   </div><!-- end card-->
 
                   
@@ -47,15 +65,34 @@
 
                             <div class="row"">
                               <div class="col-md-10"> 
-                                <p style="color:#777;font-size: 0.8rem; margin-bottom:0.2rem;"> <strong><u><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></u></strong> &nbsp;·&nbsp; <%= time_ago_in_words(response.created_at) %> atrás</p>
+                                <p style="color:#777;font-size: 0.8rem; margin-bottom:0.2rem;"> <strong><u><%= @usernames[response.user_id] %></u></strong> &nbsp;·&nbsp; <%= time_ago_in_words(response.created_at) %> atrás</p>
                                 <p style="padding-left:5px;"><%= response.description %></p>
                               </div>
                               <div class="col-md-2 float-right text-right" style="padding-top:10px;">
                                 <div class="btn-group" role="group" style="color:#fff;">
                                   <!-- if is same user -->
                                   <% if @user.id == response.user_id then %>
-                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
-                                  <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-times'></i> Remover</a>
+                                  <a role="button" class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
+                                  <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target="<%=".modal-confirma-remover-#{response.id}"%>"><i class='fa fa-times'></i> Remover</a>
+                                  <div class="modal fade <%="modal-confirma-remover-#{response.id}"%>" tabindex="-1" role="dialog" style="display: none; color: #111;" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                      <h5 class="modal-title">Você tem certeza?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                      </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        Você tem certeza que deseja remover este comentário? (<%= "#{response.description}" %>)
+                                      </div>
+                                      <div class="modal-footer">
+                                      <%= button_to 'Remover', topic_path(response.id), :method => :delete, :class => "btn btn-primary"%>
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
                                   <% end %>
                                 </div>
                               </div>
@@ -67,12 +104,10 @@
                     
                   </div><!-- end card-->
               <% end %>
-                  <!-- ################# FOREACH END -->
+              <!-- ################# FOREACH END -->
                   
                 </div><!-- end col-->     
 
           </div><!-- end row-->
 
-
-
-            
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/esm/popper.js"></script>
