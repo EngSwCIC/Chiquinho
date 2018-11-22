@@ -1,0 +1,110 @@
+<div class="margin-all" style="margin: 30px;">
+  <h2><%= @subject_class.subject.name %></h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card" style="">
+        <h5 class="card-header">
+          Dados da Matéria
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table">
+            <tr>
+              <th>
+                Código
+              </th>
+              <td>
+                <%= @subject_class.subject.code %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Nome
+              </th>
+              <td>
+                <%= @subject_class.subject.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Créditos
+              </th>
+              <td>
+                <%= @subject_class.subject.credits %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Área
+              </th>
+              <td>
+                <%= @subject_class.subject.area %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Dificuldade Geral
+              </th>
+              <td>
+                <%= @subject_class.subject.dificuldade_geral %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <%= link_to 'Voltar para matéria', subject_path(@subject_class.subject), class: 'btn btn-primary' %>
+              </th>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card" style="">
+        <h5 class="card-header">
+          Dados da Turma
+        </h5>
+        <div class="card-body" style="padding: 15px;">
+          <table class="table">
+            <tr>
+              <th>
+                Nome
+              </th>
+              <td>
+                <%= @subject_class.name %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Professor
+              </th>
+              <td>
+                <%= link_to @subject_class.professor.name, professor_path(@subject_class.professor), target: '_blank' %>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Horários
+              </th>
+              <td>
+                <table class="table">
+                  <% @class_schedules.each do |schedule| %>
+                    <tr>
+                      <th>
+                        <%= schedule.week_day.day %>
+                      </th>
+                      <td>
+                        <%=  schedule.class_hour.hour.strftime("%H:%M") %> -
+                        <%= (schedule.class_hour.hour + 1.hour + 50.minutes).strftime("%H:%M") %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
