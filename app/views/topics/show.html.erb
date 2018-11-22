@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "topics" %>
 
         <div class="row" style="margin-top: 20px;color:#1c1c1c;">
-          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
               <div class="card mb-3">
                     <div class="card-body">
                       <div class="container col-md-12">
@@ -11,7 +11,7 @@
                               <% else  %>
                                 <h2><%= @topic.title %></h2>
                               <% end %>
-                              <p style="color:#777"> Escrito por <strong><u><%= @usernames[@user.id] %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
+                              <p style="color:#777"> Escrito por <strong><u><%= @usernames[@author.id] %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
                             </div>
                             <hr>
                             <div class="row" style="padding-left: 10px;">
@@ -31,7 +31,7 @@
                                   <% if !@topic.deleted %>
                                     <%= link_to "<i class='fa fa-plus'></i>Responder".html_safe, new_topic_path, :class => "btn btn-secondary btn-danger btn-sm"%>
                                     <!-- if is same user -->
-                                    <% if @user.id == @topic.user_id then %>
+                                    <% if !@user.nil? && @user.id == @author.id then %>
                                       <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
                                       <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target=".modal-confirma-remover-topico"><i class='fa fa-times'></i> Remover</a>
                                       <div class="modal fade modal-confirma-remover-topico" tabindex="-1" role="dialog" style="display: none; color: #111;" aria-hidden="true">
@@ -78,7 +78,7 @@
                               <div class="col-md-2 float-right text-right" style="padding-top:10px;">
                                 <div class="btn-group" role="group" style="color:#fff;">
                                   <!-- if is same user -->
-                                  <% if @user.id == response.user_id then %>
+                                  <% if !@user.nil? && @user.id == response.user_id then %>
                                   <% if !@topic.deleted %>
                                     <a role="button" class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
                                   <% end %>

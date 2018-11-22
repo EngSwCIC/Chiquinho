@@ -75,11 +75,16 @@ class TopicsController < ApplicationController
         session.delete(:last_topic_id)
         session[:last_topic_id] = params[:id]
 
-        @user = User.find(session["warden.user.user.key"][0][0])
+        if session.has_key?("warden.user.user.key")
+            @user = User.find(session["warden.user.user.key"][0][0])
+        else
+            @user = nil
+        end
         @topic = Topic.find(params[:id])
+        @author = User.find(@topic.user_id)
         @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)
         @usernames = Hash.new
-        @usernames.store(@user.id, (@user.first_name.capitalize + " " + @user.last_name.capitalize))
+        @usernames.store(@author.id, (@author.first_name.capitalize + " " + @author.last_name.capitalize))
         if @responses.count > 0
             @responses.each do |response|
                 responseuser = User.find(response.user_id)
@@ -97,13 +102,13 @@ class TopicsController < ApplicationController
         session.delete(:filter_professor_id)
         session.delete(:filter_subject_id)
         if params.has_key?(:course_id) || params.has_key?(:professor_id) || params.has_key?(:subject_id)
-            if params.has_key?(:course_id)
+            if params.has_key?(:course_id) && params[:course_id] != ""
                 session[:filter_course_id] = params[:course_id]
             end
-            if params.has_key?(:professor_id)
+            if params.has_key?(:professor_id) && params[:professor_id] != ""
                 session[:filter_professor_id] = params[:professor_id]
             end
-            if params.has_key?(:subject_id)
+            if params.has_key?(:subject_id) && params[:subject_id] != ""
                 session[:filter_subject_id] = params[:subject_id]
             end
         end
