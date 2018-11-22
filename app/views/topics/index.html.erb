@@ -55,7 +55,7 @@
                       Tópico removido pelo usuário
                     <% else %>
                       <%= link_to topic.title, topic_path(topic.id) %>
-                      <% if topic.user_id == current_user.id %>
+                      <% if !current_user.nil? && topic.user_id == current_user.id %>
                         <a role="button" href="#" class="btn btn-danger" data-toggle="modal" style="float: right;" data-target="<%=".remove-topic-modal-sm-#{topic.id}" %>">
                           <i class='fa fa-times'></i>
                           Remover
