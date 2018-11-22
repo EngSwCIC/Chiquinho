@@ -13,11 +13,11 @@ Funcionalidade: Listar turmas da materia
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |
       |area   |AC                     |
-    E que eu esteja na página de matérias
-    E que existam turmas para essa matéria com o nome "<name>"
+    E que existam as turmas "<name>", "<schedule>", "<professor>" para essa matéria
+    E que eu esteja na página dessa matéria
     Entao devo ver uma lista contendo as turmas "<name>", "<schedule>", "<professor>"
 
     Exemplos:
-    |name |schedule       |professor               |
-    |A    |Ter, Qui - 14h |PEDRO DE AZEVEDO BERGER |
-    |C    |Seg, Qua - 14h |CAMILO CHANG DOREA      |
+    |name |schedule                        |professor               |
+    |A    |terça - 14:00, quinta - 14:00   |PEDRO DE AZEVEDO BERGER |
+    |C    |segunda - 14:00, quarta - 14:00 |CAMILO CHANG DOREA      |
