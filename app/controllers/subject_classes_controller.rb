@@ -3,7 +3,8 @@ class SubjectClassesController < ApplicationController
   before_action :require_current_user,only: [:add_class_schedule]
 
   def show
-
+    @subject_class = SubjectClass.find(params[:id])
+    @class_schedules = ClassSchedule.where(subject_class_id: params[:id])
   end
 
   def add_class_schedule
@@ -61,6 +62,7 @@ class SubjectClassesController < ApplicationController
     end
 
   end
+
 
   def require_current_user
     if current_user.nil?

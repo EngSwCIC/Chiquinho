@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe SubjectClassesController, type: :controller do
 
   describe "GET #show" do
+    let(:subject_class){ FactoryBot.create(:subject_class)}
+
     it "returns http success" do
-      get :show
+      get :show, params: { id: subject_class.id}
       expect(response).to have_http_status(:success)
     end
   end
@@ -20,8 +22,8 @@ RSpec.describe SubjectClassesController, type: :controller do
       class_hour = ClassHour.create(hour: "10:00")
 
       params = {subject_class_id: subject_class.id,
-                 week_day_id: week_day.id,
-                 class_hour_id: class_hour.id}
+                week_day_id: week_day.id,
+                class_hour_id: class_hour.id}
 
       ClassSchedule.create(params)
     end
@@ -33,6 +35,6 @@ RSpec.describe SubjectClassesController, type: :controller do
 
       expect(response).to redirect_to(user_schedule_path)
     end
-  end
 
+  end
 end
