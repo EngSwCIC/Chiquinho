@@ -77,7 +77,7 @@ class TopicsController < ApplicationController
 
         @user = User.find(session["warden.user.user.key"][0][0])
         @topic = Topic.find(params[:id])
-        @responses = Topic.where(topic_id: @topic.id).order(:created_at)
+        @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)
         @usernames = Hash.new
         @usernames.store(@user.id, (@user.first_name.capitalize + " " + @user.last_name.capitalize))
         if @responses.count > 0
