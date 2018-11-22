@@ -39,7 +39,6 @@ class Subject < ApplicationRecord
   def self.ementaMW(code)
   	begin
 	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{code}")).css("table#datatable").css("tr")[6].css("td")[0].text
-	  	"Não encontrada no MW"
 	  rescue
 	  	"Não encontrada no MW"
 	  end
