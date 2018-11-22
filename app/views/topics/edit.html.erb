@@ -1,0 +1,48 @@
+<% if @topic[:topic_id] %>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
+		<div class="card mb-3">
+			<div class="card-header">
+				<h3><i class="fa fa-check-square-o"></i> Editar resposta </h3>
+			</div>
+			<div class="card-body">
+				<%= form_for @topic, url: topic_path do |f| %>
+				  <div class="form-group">
+					<label for="topic_description">Resposta</label>
+	                <div>
+	                    <textarea id="description" name="topic[description]" required="true" class="form-control" placeholder="<%=@topic.description%>"></textarea>
+	                </div>
+	              </div>
+				  <div class="form-group">
+					<label for="topic_title">Legenda</label>
+					<input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="topic[title]" value="<%=@topic.title%>">
+				  </div>
+				  <button type="submit" name="commit" data-disable-with="Enviar" class="btn btn-primary">Enviar</button>
+				<% end %>						
+			</div>
+		</div><!-- end card-->					
+</div>
+
+<% else %>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
+		<div class="card mb-3">
+			<div class="card-header">
+				<h3><i class="fa fa-check-square-o"></i> Editar tópico </h3>
+			</div>
+			<div class="card-body">
+				<%= form_for @topic, url: topic_path do |f| %>
+				  <div class="form-group">
+					<label for="topic_title">Título</label>
+					<input type="text" class="form-control" id="title" aria-describedby="titleHelp" required="true" name="topic[title]" value="<%=@topic.title%>">
+				  </div>
+				  <div class="form-group">
+	                <label for="topic_description">Descrição</label>
+	                <div>
+	                    <textarea id="description" name="topic[description]" required="true" class="form-control" placeholder="<%=@topic.description%>"></textarea>
+	                </div>
+	              </div>
+				  <button type="submit" name="commit" data-disable-with="Enviar" class="btn btn-primary">Enviar</button>
+				<% end %>
+			</div>
+		</div><!-- end card-->
+	</div>
+<% end %>

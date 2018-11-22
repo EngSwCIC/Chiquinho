@@ -71,6 +71,26 @@ class TopicsController < ApplicationController
         end
     end
 
+    def edit
+        @topic = Topic.find(params[:id])
+    end
+
+    def update
+        @topic = Topic.find(params[:id])
+        @topic.title = params[:topic][:title]
+        @topic.description = params[:topic][:description]
+        if @topic.save
+            if @topic[:topic_id]
+                redirect_to topic_path(@topic.topic_id)
+            else
+                redirect_to topic_path(@topic.id)
+            end
+        else
+            flash[:error] = 'Não foi possível salvar seu tópico'
+            render :new
+        end
+    end
+
     def show
         session.delete(:last_topic_id)
         session[:last_topic_id] = params[:id]
