@@ -9,27 +9,27 @@
       <div class="panel-body">
         <div class="form-group">
           <h6 class="group-title">Filtros</h6>
-            <div class="form-row">
-              <%=form_tag topics_path, :method => :get  do %>
+            <%=form_tag topics_path, :method => :get  do %>
+              <div class="form-row">
               <div class="form-group col-md-4">
                 <%= label_tag(:course_id, "Curso:") %>
-                <%= select_tag :course_id,options_for_select(Course.all.map{|p| [p.name, p.id]}), class: "form-control select2" %>
+                <%= select_tag :course_id,options_for_select(Course.all.map{|p| [p.name, p.id]}), include_blank: "", class: "form-control select2" %>
               </div>
               <div class="form-group col-md-4">
                 <%= label_tag(:subject_id, "Matéria:") %>
-                <%= select_tag :subject_id,options_for_select(Subject.all.map{|p| [p.name, p.id]}), class: "form-control select2"   %>
+                <%= select_tag :subject_id,options_for_select(Subject.all.map{|p| [p.name, p.id]}), include_blank: "", class: "form-control select2"   %>
               </div>
               <div class="form-group col-md-4">
                 <%= label_tag(:professor_id, "Professor:") %>
-                <%= select_tag :professor_id,options_for_select(Professor.all.map{|p| [p.name, p.id]}), class: "form-control select2" %>
+                <%= select_tag :professor_id,options_for_select(Professor.all.map{|p| [p.name, p.id]}),include_blank: "", class: "form-control select2" %>
               </div>
 
 
                 <div class="actions">
                 <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+                </div>
               </div>
-              <% end %>
-            </div>
+            <% end %>
             </div>
         <div class="table-responsive">
           <table id="example1" class="table table-bordered table-hover display">
