@@ -7,7 +7,7 @@ class Course < ApplicationRecord
   has_one :forum
   has_one :professor
   belongs_to :department, required: false
-
+  has_many :flows
 
   private
 

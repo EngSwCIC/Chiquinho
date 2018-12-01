@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :study_materials, only: [:create, :new]
   end
 
+  get 'subject_classes/:id', to: "subject_classes#show", as: "subject_class"
+  get 'subject_classes/:id/add_class_schedule', to: "subject_classes#add_class_schedule", as: "add_class_schedule"
+
   resources :comments, only: [:create]
   devise_for :users, :controllers => { registrations: 'registrations/registrations' }
   root to: 'main#index'

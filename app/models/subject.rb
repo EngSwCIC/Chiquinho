@@ -1,15 +1,17 @@
 class Subject < ApplicationRecord
   require 'nokogiri'
   require 'open-uri'
-  
+
   has_one :rating
   has_and_belongs_to_many :schedules
   has_many :course_subjects
   has_many :courses,through: :course_subjects
   has_many :professor_subjects
   has_many :study_materials
+  has_many :subject_classes
   has_many :professors, through: :professor_subjects
-  has_many :comments  
+  has_many :comments
+  has_many :flows
   def get_avg
     trabalhos = 0
     provas = 0
@@ -34,7 +36,7 @@ class Subject < ApplicationRecord
     averages = self.get_avg
     (averages[:trabalhos] + averages[:provas] + averages[:tarefas])/3.0
   end
-  
+
   def self.ementaMW(code)
   	begin
 	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{code}")).css("table#datatable").css("tr")[6].css("td")[0].text
@@ -42,5 +44,5 @@ class Subject < ApplicationRecord
 	  	"Não encontrada no MW"
 	  end
   end
-  
+
 end

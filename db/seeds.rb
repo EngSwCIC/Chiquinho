@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+fast_mode = 2
+
 courses = [{:kind=>"Presencial", :code=>"19", :name=>"ADMINISTRAÇÃO", :turn=>"Diurno"},
            {:kind=>"Presencial", :code=>"701", :name=>"ADMINISTRAÇÃO", :turn=>"Noturno"},
            {:kind=>"Presencial", :code=>"86", :name=>"AGRONOMIA", :turn=>"Diurno"},
@@ -167,7 +169,38 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "589", initial: "REL",	 name: "INSTITUTO DE RELAÇÕES INTERNACIONAIS"},
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
 
+
+week_days = [{id: 0, day: "segunda"},
+             {id: 1, day: "terça"},
+             {id: 2, day: "quarta"},
+             {id: 3, day: "quinta"},
+             {id: 4, day: "sexta"},
+             {id: 5, day: "sábado"},
+             {id: 6, day: "domingo"}]
+
+class_hours = [{id: 0, hour: "06:00"},
+               {id: 1, hour: "08:00"},
+               {id: 2, hour: "10:00"},
+               {id: 3, hour: "12:00"},
+               {id: 4, hour: "14:00"},
+               {id: 5, hour: "16:00"},
+               {id: 6, hour: "18:00"},
+               {id: 7, hour: "20:00"},
+               {id: 8, hour: "22:00"},
+               {id: 9, hour: "24:00"},
+               {id: 10, hour: "19:00"},
+               {id: 11, hour: "20:50"},
+               {id: 12, hour: "22:30"}]
+
+
 # Clean up the database.
+
+Flow.delete_all
+
+ClassSchedule.delete_all
+WeekDay.delete_all
+ClassHour.delete_all
+SubjectClass.delete_all
 
 UserLikeComment.delete_all
 Comment.delete_all
@@ -182,6 +215,8 @@ User.delete_all
 Course.delete_all
 Subject.delete_all
 Department.delete_all
+
+
 
 # Populate the database.
 
@@ -210,19 +245,19 @@ while (line = file.gets)
   codigo = JSON.parse(line)
   @curso = Course.find_by(code: codigo[0])
   if @curso
-    puts @curso
+    puts @curso unless fast_mode >= 1
     @curso.opcode = JSON.parse(codigo[1])
     @curso.save
-    puts "#{@curso.name} att"
+    puts "#{@curso.name} att" unless fast_mode >= 1
   else
-    puts "não encontrado"
+    puts "não encontrado" unless fast_mode >= 2
   end
 end
 
 puts "Populando Matérias..."
 
 Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
-  puts filename
+  puts filename unless fast_mode >= 1
   file = File.new(filename, "r")
   contador = 1
   tipo = 0
@@ -230,7 +265,7 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
     if contador == 1
       line.slice!("Curso")
       codigo_curso = JSON.parse(line)[1]
-      puts "codigo_curso: #{codigo_curso}"
+      puts "codigo_curso: #{codigo_curso}" unless fast_mode >= 1
     end
     if contador > 11 && line[1] == '"'
       arr = JSON.parse(line)
@@ -242,14 +277,14 @@ Dir[Rails.root.join('db', 'materias_txts', '*.txt')].each do |filename|
       @course = Course.find_by(opcode: codigo_curso)
       if @course
         CourseSubject.create(subject_id: @subject.id, course_id: @course.id,kind: tipo)
-        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}"
+        p "#{Subject.last.name} criada com relacionamento para #{@course.name} do tipo #{tipo}" unless fast_mode >= 1
       else
-        puts "curso nao encontrado..."
+        puts "curso nao encontrado..." unless fast_mode >= 2
         break
       end
     else
       if line[2] == 't'
-        p "optativas:"
+        p "optativas:" unless fast_mode >= 1
         tipo = 1
       end
     end
@@ -260,6 +295,25 @@ end
 
 puts "Matérias Populadas"
 
+
+puts "Populando fluxos..."
+
+file = File.new("db/fluxos.rb", "r")
+while (line = file.gets)
+  codigo = JSON.parse(line.gsub("\n",""))
+  @materia = Subject.find_by(code: codigo[0])
+  @curso   = Course.find_by(code: codigo[1])
+  semestre = codigo[2]
+  unless @materia.nil? || @curso.nil?
+    Flow.create!(subject: @materia, course: @curso, semester: semestre)
+    puts "Matéria #{@materia.name} adicionada ao fluxo de #{@curso.name} no #{semestre}º semestre" unless fast_mode >= 2
+  else
+    puts "Matéria #{codigo[0]} ou curso #{codigo[1]} não encontrados" unless fast_mode >= 2
+  end
+end
+
+puts "Fluxos Populados"
+
 puts "Populando professores..."
 
 file = File.new("db/professores_materias.rb", "r")
@@ -269,9 +323,9 @@ while (line = file.gets)
   @professor = Professor.find_or_create_by(name: codigo[0])
   if @materia
     ProfessorSubject.create(professor_id: @professor.id,subject_id: @materia.id)
-    puts "Professor #{@professor.name} criado para matéria #{@materia.name}"
+    puts "Professor #{@professor.name} criado para matéria #{@materia.name}" unless fast_mode >= 1
   else
-    puts "não encontrada materia"
+    puts "não encontrada materia" unless fast_mode >= 2
   end
 end
 
@@ -280,8 +334,47 @@ end
 
 Professor.find_each do |professor|
   professor.office = "Placeholder A1-55/11"
-  puts "Professor #{professor.name} atualizado com sala #{professor.office}"
+  puts "Professor #{professor.name} atualizado com sala #{professor.office}" unless fast_mode >= 1
   professor.save
 end
 
 puts "Professores populados"
+
+puts "Populando dias da semana..."
+week_days.each do |week_day|
+  WeekDay.create(week_day)
+end
+puts "Dias da semana populados"
+
+puts "Populando horários de aula..."
+class_hours.each do |class_hour|
+  ClassHour.create(class_hour)
+end
+puts "Horários de aula populados"
+
+# Código placeholder para popular turmas as matérias e seus horários.
+# TODO Substituir esse código por um arquivo obtido de um web crawler.
+puts "Populando turmas e horários"
+Subject.all.each do |subject|
+
+  unless subject.professors.empty?
+    class_a = SubjectClass.create(name: "A", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_b = SubjectClass.create(name: "B", subject_id: subject.id, professor_id: subject.professors.first.id)
+    class_c = SubjectClass.create(name: "C", subject_id: subject.id, professor_id: subject.professors.first.id)
+
+    puts "Matéria #{subject.name} atualizada com 3 turmas." unless fast_mode >= 1
+
+    3.times do |index|
+      day = rand(0..6)
+      hour = rand(0..12)
+      ClassSchedule.create(subject_class_id: class_a.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_b.id, week_day_id: day, class_hour_id: hour)
+      ClassSchedule.create(subject_class_id: class_c.id, week_day_id: day, class_hour_id: hour)
+    end
+
+    puts "Turmas de #{subject.name} atualizadas com 3 horários." unless fast_mode >= 1
+
+  end
+
+end
+puts "Turmas e horários populados"

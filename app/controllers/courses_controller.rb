@@ -24,6 +24,8 @@ class CoursesController < ApplicationController
       @coordinator = Professor.find_by(id: @course.professors_id)
     end
 
+    @flow = Flow.get_semesters(@course)
+
   end
 
   # GET /courses/new

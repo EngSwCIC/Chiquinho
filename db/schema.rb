@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_123447) do
+ActiveRecord::Schema.define(version: 2018_11_19_092610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,19 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "class_hours", force: :cascade do |t|
+    t.time "hour"
+  end
+
+  create_table "class_schedules", force: :cascade do |t|
+    t.bigint "subject_class_id"
+    t.bigint "week_day_id"
+    t.bigint "class_hour_id"
+    t.index ["class_hour_id"], name: "index_class_schedules_on_class_hour_id"
+    t.index ["subject_class_id"], name: "index_class_schedules_on_subject_class_id"
+    t.index ["week_day_id"], name: "index_class_schedules_on_week_day_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -88,6 +101,16 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "flows", force: :cascade do |t|
+    t.bigint "subject_id"
+    t.bigint "course_id"
+    t.integer "semester"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_flows_on_course_id"
+    t.index ["subject_id"], name: "index_flows_on_subject_id"
+  end
+
   create_table "forums", force: :cascade do |t|
     t.bigint "course_id"
     t.datetime "created_at", null: false
@@ -103,6 +126,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.integer "tarefas"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "professor_id"
     t.index ["professor_subject_id"], name: "index_professor_subject_users_on_professor_subject_id"
     t.index ["user_id"], name: "index_professor_subject_users_on_user_id"
   end
@@ -175,6 +199,14 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.index ["user_id"], name: "index_study_materials_on_user_id"
   end
 
+  create_table "subject_classes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "subject_id"
+    t.bigint "professor_id"
+    t.index ["professor_id"], name: "index_subject_classes_on_professor_id"
+    t.index ["subject_id"], name: "index_subject_classes_on_subject_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.integer "code"
     t.string "name"
@@ -182,6 +214,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.string "area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ementa"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -225,6 +258,13 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_days", force: :cascade do |t|
+    t.string "day"
+  end
+
+  add_foreign_key "class_schedules", "class_hours"
+  add_foreign_key "class_schedules", "subject_classes"
+  add_foreign_key "class_schedules", "week_days"
   add_foreign_key "comments", "professor_subjects"
   add_foreign_key "comments", "subjects"
   add_foreign_key "comments", "users"
@@ -232,8 +272,11 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
   add_foreign_key "course_subjects", "subjects"
   add_foreign_key "courses", "departments", column: "departments_id"
   add_foreign_key "courses", "professors", column: "professors_id"
+  add_foreign_key "flows", "courses"
+  add_foreign_key "flows", "subjects"
   add_foreign_key "forums", "courses"
   add_foreign_key "professor_subject_users", "professor_subjects"
+  add_foreign_key "professor_subject_users", "professors"
   add_foreign_key "professor_subject_users", "users"
   add_foreign_key "professor_subjects", "professors"
   add_foreign_key "professor_subjects", "subjects"
@@ -243,6 +286,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_123447) do
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"
+  add_foreign_key "subject_classes", "professors"
+  add_foreign_key "subject_classes", "subjects"
   add_foreign_key "topics", "forums"
   add_foreign_key "user_like_comments", "comments"
   add_foreign_key "user_like_comments", "users"

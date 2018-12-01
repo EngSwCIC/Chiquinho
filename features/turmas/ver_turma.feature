@@ -13,8 +13,8 @@ Funcionalidade: Ver turma
       |name   |ORGANIZAÇÃO DE ARQUIVOS|
       |credits|002 002 000 004        |
       |area   |AC                     |
-    E que eu esteja na página de matérias
     E que existam turmas para essa matéria com o nome "<name>"
+    E que eu esteja na página da matéria
     Quando eu clicar no link de detalhes da turma "<name>"
     Então devo ir pra uma pagina com detalhes sobre a turma "<name>"
 
