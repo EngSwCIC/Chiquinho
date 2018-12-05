@@ -27,48 +27,51 @@ class TopicsController < ApplicationController
             @filtersmsg = "Em resposta à: "
             @filtersmsg << rtopic.title
         end
-
-
-
     end
 
     def create
         @topic = Topic.new(topic_params)
+        #user = find_session_user()
+        @topic.user_id = find_session_user().id
 
-        user = User.find(session["warden.user.user.key"][0][0])
-        @topic.user_id = user.id
+        filters = ['course', 'professor', 'subject']
 
         if session.has_key?(:last_topic_id)
-            rtopic = Topic.find(session[:last_topic_id])
-            @topic.topic_id = rtopic.id
-            if @topic.save
-                redirect_to topic_path( rtopic.id )
-            else
-                flash[:error] = 'Não foi possível salvar sua resposta.'
-                render :new
-            end
+            #rtopic = Topic.find(session[:last_topic_id])
+            @topic.topic_id = Topic.find(session[:last_topic_id]).id
+#            if @topic.save
+#                redirect_to topic_path( @topic.topic_id )
+#            else
+#                flash[:error] = 'Não foi possível salvar sua resposta.'
+#                render :new
+#            end
         else
-            if session.has_key?(:filter_course_id)
-                course = Course.find_by(id: session[:filter_course_id])
-                @topic.course_id = course.id
-            end
-            if session.has_key?(:filter_professor_id)
-                professor = Professor.find_by(id: session[:filter_professor_id])
-                @topic.professor_id = professor.id
-            end
-            if session.has_key?(:filter_subject_id)
-                subject = Subject.find_by(id: session[:filter_subject_id])
-                @topic.subject_id = subject.id
-            end
+            assign_topic_categories_from_session(filters)
+            #filters.each do |filter|
+            #    filter_sym = "filter_#{filter}_id".to_sym
+            #    if session.has_key?(filter_sym)
+            #        @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)
+            #    end
+            #end
+
+#            if @topic.save
+#                redirect_to topics_path( build_redirect_hash(filters) )
+#            else
+#                flash[:error] = 'Não foi possível salvar seu tópico'
+#                render :new
+#            end
+        end
             if @topic.save
-                redirect_to topics_path( { :course_id => session[:filter_course_id],
-                    :professor_id => session[:filter_professor_id],
-                    :subject_id => session[:filter_subject_id] } )
+                if @topic.topic_id != nil
+                    redirect_to topic_path( @topic.topic_id )
+                else
+                    redirect_to topics_path( build_redirect_hash(filters) )
+                end
+            #if @topic.save
             else
-                flash[:error] = 'Não foi possível salvar seu tópico'
+                flash[:error] = 'Não foi possível salvar seu tópico ou resposta.'
                 render :new
             end
-        end
     end
 
     def edit
@@ -92,63 +95,29 @@ class TopicsController < ApplicationController
     end
 
     def show
-        session.delete(:last_topic_id)
-        session[:last_topic_id] = params[:id]
+        reassign_last_topic()
 
-        if session.has_key?("warden.user.user.key")
-            @user = User.find(session["warden.user.user.key"][0][0])
-        else
-            @user = nil
-        end
+        @user = find_session_user()
+
         @topic = Topic.find(params[:id])
+
         @author = User.find(@topic.user_id)
+
         @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)
-        @usernames = Hash.new
-        @usernames.store(@author.id, (@author.first_name.capitalize + " " + @author.last_name.capitalize))
-        if @responses.count > 0
-            @responses.each do |response|
-                responseuser = User.find(response.user_id)
-                if !(@usernames.has_key? responseuser.id) then
-                    responsename = (responseuser.first_name.capitalize + " " + responseuser.last_name.capitalize)
-                    @usernames.store(responseuser.id, responsename)
-                end
-            end
-        end
+
+        @usernames = {@author.id => "#{@author.first_name.capitalize} #{@author.last_name.capitalize}"}.merge(get_topics_usernames(@responses))
+        #@usernames = Hash.new
+        #@usernames.store(@author.id, "#{@author.first_name.capitalize} #{@author.last_name.capitalize}")
+        #@usernames = @usernames.merge(get_topics_usernames(@responses))
     end
 
     def index
-        session.delete(:last_topic_id)
-        session.delete(:filter_course_id)
-        session.delete(:filter_professor_id)
-        session.delete(:filter_subject_id)
-        if params.has_key?(:course_id) || params.has_key?(:professor_id) || params.has_key?(:subject_id)
-            if params.has_key?(:course_id) && params[:course_id] != ""
-                session[:filter_course_id] = params[:course_id]
-            end
-            if params.has_key?(:professor_id) && params[:professor_id] != ""
-                session[:filter_professor_id] = params[:professor_id]
-            end
-            if params.has_key?(:subject_id) && params[:subject_id] != ""
-                session[:filter_subject_id] = params[:subject_id]
-            end
-        end
+        clear_session_filters()
 
+        filters = ["course", "professor", "subject"]
+        store_filters_in_session_from_params(filters)
 
-        @query = []
-        if session.has_key?(:filter_course_id)
-            @query << ('course_id = ' + session[:filter_course_id])
-        end
-        if session.has_key?(:filter_professor_id)
-            @query << ('professor_id = ' + session[:filter_professor_id])
-        end
-        if session.has_key?(:filter_subject_id)
-            @query << ('subject_id = ' + session[:filter_subject_id])
-        end
-
-        @query = @query.join(' and ')
-        @query << ((@query.length > 0) ? (' and ') : (''))
-        @query << 'topic_id is null and deleted = false'
-
+        @query = build_filters_query(filters)
         @topics = Topic.where( @query )
 
     end
@@ -159,12 +128,90 @@ class TopicsController < ApplicationController
       redirect_back fallback_location: topics_url
     end
 
+
+    ############### PRIVATE CLASS METHODS #################
     private
-    #def set_topic
-    #  @topic = Topic.find(params[:id])
-    #end
+
+    def find_session_user
+        user = nil
+        if session.has_key?("warden.user.user.key")
+            user = User.find(session["warden.user.user.key"][0][0])
+        end
+        return user
+    end
+
+    def clear_session_filters
+        session.delete(:last_topic_id)
+        session.delete(:filter_course_id)
+        session.delete(:filter_professor_id)
+        session.delete(:filter_subject_id)
+    end
+
+    def store_filters_in_session_from_params(filters)
+        filters.each do |filter|
+            tag_sym = "#{filter}_id".to_sym
+            filter_sym = "filter_#{filter}_id".to_sym
+            if params.has_key?(tag_sym) && params[tag_sym] != ""
+                session[filter_sym] = params[tag_sym]
+            end
+        end
+    end
+
+    def reassign_last_topic
+        session.delete(:last_topic_id)
+        session[:last_topic_id] = params[:id]
+    end
+
+    def build_filters_query(filters)
+        query = []
+        filters.each do |filter|
+            tag_sym = filter.to_sym
+            filter_sym = "filter_#{filter}_id".to_sym
+            if session.has_key?(filter_sym)
+                query << "#{filter}_id = #{session[filter_sym]}"
+            end
+        end
+        query = query.join(' and ')
+        query << ((query.length > 0) ? (' and ') : (''))
+        query << 'topic_id is null and deleted = false'
+
+        return query
+    end
+
+    def get_topics_usernames(topics)
+        usernames = Hash.new
+        topics.each do |topic|
+            topic_user = User.find(topic.user_id)
+            if (!usernames.has_key?(topic_user.id))
+                topic_name = "#{topic_user.first_name.capitalize} #{topic_user.last_name.capitalize}"
+                usernames.store(topic_user.id, topic_name)
+            end
+        end
+        return usernames
+    end
 
     def topic_params
         params.require(:topic).permit(:title, :description)
+    end
+
+    def build_redirect_hash(filters)
+        redirect_hash = Hash.new
+        filters.each do |filter|
+            tag_sym = "#{filter}_id".to_sym
+            filter_sym = "filter_#{filter}_id".to_sym
+            if (session.has_key?(filter_sym))
+                redirect_hash.store(tag_sym, session[filter_sym])
+            end
+        end
+        return redirect_hash
+    end
+
+    def assign_topic_categories_from_session(filters)
+        filters.each do |filter|
+            filter_sym = "filter_#{filter}_id".to_sym
+            if session.has_key?(filter_sym)
+                @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)
+            end
+        end
     end
 end

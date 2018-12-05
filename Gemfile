@@ -64,6 +64,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'metric_fu', git: 'https://github.com/bergholdt/metric_fu.git'
   gem 'simplecov', require: false
 end
 
