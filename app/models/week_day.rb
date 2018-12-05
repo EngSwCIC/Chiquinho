@@ -1,4 +1,7 @@
 # Model class to represent the days
+#  == Attributes
+#  * +day+ - string to describe the day of the week
+#
 
 class WeekDay < ApplicationRecord
   has_many :class_schedules
