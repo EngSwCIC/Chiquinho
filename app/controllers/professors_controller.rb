@@ -21,6 +21,7 @@ class ProfessorsController < ApplicationController
       end
     end
 
+    # Insert a professor into user favorite list (ProfessorUserFavorite)
     def favorite
       # Assuming that we've a logged in user
 
@@ -32,6 +33,7 @@ class ProfessorsController < ApplicationController
       redirect_to professor_path(params[:id])
     end
 
+    # Remove a professor into user favorite list (ProfessorUserFavorite)
     def unfavorite
       # Assuming that we've a logged in user
 

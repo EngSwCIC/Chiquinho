@@ -2,11 +2,13 @@ class SubjectClassesController < ApplicationController
 
   before_action :require_current_user,only: [:add_class_schedule]
 
+  # Controller show action
   def show
     @subject_class = SubjectClass.find(params[:id])
     @class_schedules = ClassSchedule.where(subject_class_id: params[:id])
   end
 
+  # Adds a class to user schedule, converting it into subject
   def add_class_schedule
     subject_class = SubjectClass.find(params[:id])
 
@@ -21,6 +23,7 @@ class SubjectClassesController < ApplicationController
 
   private
 
+  # Convert the class into a subject
   def add_subject_class_schedules(subject_class)
     class_schedules = ClassSchedule.where(subject_class_id: params[:id])
 
@@ -40,6 +43,7 @@ class SubjectClassesController < ApplicationController
     true
   end
 
+  # Adds a subject to user and user schedule
   def update_schedule(name, day, time)
     times = %w"time_8 time_10 time_12 time_14 time_16 time_19 time_21"
     current_user.schedule ||= Schedule.new(hash[times.map{|x| [x, Array.new(6)]}])
@@ -51,12 +55,14 @@ class SubjectClassesController < ApplicationController
     add_subject_user(subject)
   end
 
+  # Adds a subject to a user
   def add_subject_user(subject)
     unless current_user.schedule.subjects.include? subject
       current_user.schedule.subjects << subject
     end
   end
 
+  # Checks if there's a user logged in
   def require_current_user
     if current_user.nil?
       flash[:danger] = "Apenas próprio usuário tem acesso à isso."

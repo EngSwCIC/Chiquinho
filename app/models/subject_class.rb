@@ -1,3 +1,5 @@
+# Model class to represent the classes of a subject
+
 class SubjectClass < ApplicationRecord
   belongs_to :subject
   belongs_to :professor
