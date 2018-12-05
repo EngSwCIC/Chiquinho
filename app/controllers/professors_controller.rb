@@ -1,3 +1,5 @@
+# Controller for the Professor model class.
+
 class ProfessorsController < ApplicationController
   include ProfessorsHelper
 
