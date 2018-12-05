@@ -37,6 +37,9 @@ class Subject < ApplicationRecord
     (averages[:trabalhos] + averages[:provas] + averages[:tarefas])/3.0
   end
 
+  ##
+  # Crawler to get ementa information from matriculaweb
+  
   def self.ementaMW(code)
   	begin
 	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{code}")).css("table#datatable").css("tr")[6].css("td")[0].text

@@ -7,19 +7,16 @@ class Professor < ApplicationRecord
   has_many :subject_classes
   belongs_to :department, required: false
   
+  ##
+  # Computes the professor's score based on all avaliations
   def score
-    @score = 0
-    @count = 0
-    ProfessorSubjectUser.where(professor_id: self.id).each do |avaliation|
-      @score += 
-        (avaliation.trabalhos || 0) + 
-        (avaliation.provas || 0) + 
-        (avaliation.tarefas || 0)
-      @count = @count + 1
-    end
-    @score == 0 ? 0 : @score/3.0/@count;
+    @avaliations = ProfessorSubjectUser.where(professor_id: self.id)
+    @score = @avaliations.map{|x| x.sumscore}.sum
+    @score == 0 ? 0 : @score/@avaliations.count;
   end
   
+  ##
+  # Computes the number of likes professor got
   def count_favorite
     ProfessorUserFavorite.where(professor_id: self.id).count
   end
