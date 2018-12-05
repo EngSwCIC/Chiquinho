@@ -312,6 +312,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    rdoc (6.0.4)
     redcard (1.1.0)
     reek (2.2.1)
       parser (~> 2.2)
@@ -440,6 +441,7 @@ DEPENDENCIES
   rails (~> 5.2.0)
   rails-controller-testing
   rails-erd
+  rdoc
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1)

@@ -1,0 +1,555 @@
+[1mdiff --git a/Gemfile b/Gemfile[m
+[1mindex fdaae31..abbc9f1 100644[m
+[1m--- a/Gemfile[m
+[1m+++ b/Gemfile[m
+[36m@@ -64,6 +64,7 @@[m [mgroup :test do[m
+   gem 'cucumber-rails', :require => false[m
+   # database_cleaner is not required, but highly recommended[m
+   gem 'database_cleaner'[m
+[32m+[m[32m  gem 'metric_fu', git: 'https://github.com/bergholdt/metric_fu.git'[m
+   gem 'simplecov', require: false[m
+ end[m
+ [m
+[1mdiff --git a/Gemfile.lock b/Gemfile.lock[m
+[1mindex bc1b014..0523c4b 100644[m
+[1m--- a/Gemfile.lock[m
+[1m+++ b/Gemfile.lock[m
+[36m@@ -1,3 +1,22 @@[m
+[32m+[m[32mGIT[m
+[32m+[m[32m  remote: https://github.com/bergholdt/metric_fu.git[m
+[32m+[m[32m  revision: 6ec57f23838b1aef47e7bc4aaca1e7668f191b30[m
+[32m+[m[32m  specs:[m
+[32m+[m[32m    metric_fu (4.12.0)[m
+[32m+[m[32m      cane (~> 2.5, >= 2.5.2)[m
+[32m+[m[32m      churn (~> 0.0.35)[m
+[32m+[m[32m      code_metrics (~> 0.1)[m
+[32m+[m[32m      coderay[m
+[32m+[m[32m      flay (~> 2.1, >= 2.0.1)[m
+[32m+[m[32m      flog (~> 4.1, >= 4.1.1)[m
+[32m+[m[32m      launchy (~> 2.0)[m
+[32m+[m[32m      metric_fu-Saikuro (~> 1.1, >= 1.1.3)[m
+[32m+[m[32m      multi_json[m
+[32m+[m[32m      rails_best_practices (~> 1.14, >= 1.14.3)[m
+[32m+[m[32m      redcard[m
+[32m+[m[32m      reek (>= 1.3.4, < 3.0)[m
+[32m+[m[32m      roodi (~> 5.0.0)[m
+[32m+[m
+ GIT[m
+   remote: https://github.com/stympy/faker.git[m
+   revision: a7c03e67c18356b32a487795332c01c3d8d9add7[m
+[36m@@ -9,6 +28,7 @@[m [mGIT[m
+ GEM[m
+   remote: https://rubygems.org/[m
+   specs:[m
+[32m+[m[32m    abstract_type (0.0.7)[m
+     actioncable (5.2.0)[m
+       actionpack (= 5.2.0)[m
+       nio4r (~> 2.0)[m
+[36m@@ -50,9 +70,14 @@[m [mGEM[m
+       i18n (>= 0.7, < 2)[m
+       minitest (~> 5.1)[m
+       tzinfo (~> 1.1)[m
+[32m+[m[32m    adamantium (0.2.0)[m
+[32m+[m[32m      ice_nine (~> 0.11.0)[m
+[32m+[m[32m      memoizable (~> 0.4.0)[m
+     addressable (2.5.2)[m
+       public_suffix (>= 2.0.2, < 4.0)[m
+     arel (9.0.0)[m
+[32m+[m[32m    arrayfields (4.9.2)[m
+[32m+[m[32m    ast (2.4.0)[m
+     autoprefixer-rails (8.2.0)[m
+       execjs[m
+     aws-eventstream (1.0.0)[m
+[36m@@ -81,6 +106,8 @@[m [mGEM[m
+       sass (>= 3.5.2)[m
+     builder (3.2.3)[m
+     byebug (10.0.2)[m
+[32m+[m[32m    cane (2.6.2)[m
+[32m+[m[32m      parallel[m
+     capybara (2.18.0)[m
+       addressable[m
+       mini_mime (>= 0.1.3)[m
+[36m@@ -89,6 +116,19 @@[m [mGEM[m
+       rack-test (>= 0.5.4)[m
+       xpath (>= 2.0, < 4.0)[m
+     choice (0.2.0)[m
+[32m+[m[32m    chronic (0.10.2)[m
+[32m+[m[32m    churn (0.0.35)[m
+[32m+[m[32m      chronic (>= 0.2.3)[m
+[32m+[m[32m      hirb[m
+[32m+[m[32m      json_pure[m
+[32m+[m[32m      main[m
+[32m+[m[32m      rest-client (>= 1.6.0)[m
+[32m+[m[32m      ruby_parser (~> 3.0)[m
+[32m+[m[32m      sexp_processor (~> 4.1)[m
+[32m+[m[32m    code_analyzer (0.4.8)[m
+[32m+[m[32m      sexp_processor[m
+[32m+[m[32m    code_metrics (0.1.3)[m
+[32m+[m[32m    coderay (1.1.2)[m
+     coffee-rails (4.2.2)[m
+       coffee-script (>= 2.2.0)[m
+       railties (>= 4.0.0)[m
+[36m@@ -96,6 +136,9 @@[m [mGEM[m
+       coffee-script-source[m
+       execjs[m
+     coffee-script-source (1.12.2)[m
+[32m+[m[32m    concord (0.1.5)[m
+[32m+[m[32m      adamantium (~> 0.2.0)[m
+[32m+[m[32m      equalizer (~> 0.0.9)[m
+     concurrent-ruby (1.0.5)[m
+     crass (1.0.4)[m
+     cucumber (3.1.0)[m
+[36m@@ -128,22 +171,40 @@[m [mGEM[m
+       warden (~> 1.2.3)[m
+     diff-lcs (1.3)[m
+     docile (1.3.1)[m
+[32m+[m[32m    domain_name (0.5.20180417)[m
+[32m+[m[32m      unf (>= 0.0.5, < 1.0.0)[m
+[32m+[m[32m    equalizer (0.0.11)[m
+     erubi (1.7.1)[m
+[32m+[m[32m    erubis (2.7.0)[m
+     execjs (2.7.0)[m
+     factory_bot (4.10.0)[m
+       activesupport (>= 3.0.0)[m
+     factory_bot_rails (4.10.0)[m
+       factory_bot (~> 4.10.0)[m
+       railties (>= 3.0.0)[m
+[32m+[m[32m    fattr (2.4.0)[m
+     ffi (1.9.23)[m
+[32m+[m[32m    flay (2.12.0)[m
+[32m+[m[32m      erubis (~> 2.7.0)[m
+[32m+[m[32m      path_expander (~> 1.0)[m
+[32m+[m[32m      ruby_parser (~> 3.0)[m
+[32m+[m[32m      sexp_processor (~> 4.0)[m
+[32m+[m[32m    flog (4.6.2)[m
+[32m+[m[32m      path_expander (~> 1.0)[m
+[32m+[m[32m      ruby_parser (~> 3.1, > 3.1.0)[m
+[32m+[m[32m      sexp_processor (~> 4.8)[m
+     font-awesome-rails (4.7.0.4)[m
+       railties (>= 3.2, < 6.0)[m
+     gemaina (1.0)[m
+     gherkin (5.0.0)[m
+     globalid (0.4.1)[m
+       activesupport (>= 4.2.0)[m
+[32m+[m[32m    hirb (0.7.3)[m
+[32m+[m[32m    http-cookie (1.0.3)[m
+[32m+[m[32m      domain_name (~> 0.5)[m
+     i18n (1.0.0)[m
+       concurrent-ruby (~> 1.0)[m
+[32m+[m[32m    ice_nine (0.11.2)[m
+     jbuilder (2.7.0)[m
+       activesupport (>= 4.2.0)[m
+       multi_json (>= 1.2)[m
+[36m@@ -153,6 +214,9 @@[m [mGEM[m
+       railties (>= 4.2.0)[m
+       thor (>= 0.14, < 2.0)[m
+     json (2.1.0)[m
+[32m+[m[32m    json_pure (2.1.0)[m
+[32m+[m[32m    launchy (2.4.3)[m
+[32m+[m[32m      addressable (~> 2.3)[m
+     listen (3.1.5)[m
+       rb-fsevent (~> 0.9, >= 0.9.4)[m
+       rb-inotify (~> 0.9, >= 0.9.7)[m
+[36m@@ -162,9 +226,21 @@[m [mGEM[m
+       nokogiri (>= 1.5.9)[m
+     mail (2.7.0)[m
+       mini_mime (>= 0.1.1)[m
+[32m+[m[32m    main (6.2.2)[m
+[32m+[m[32m      arrayfields (~> 4.7, >= 4.7.4)[m
+[32m+[m[32m      chronic (~> 0.6, >= 0.6.2)[m
+[32m+[m[32m      fattr (~> 2.2, >= 2.2.0)[m
+[32m+[m[32m      map (~> 6.1, >= 6.1.0)[m
+[32m+[m[32m    map (6.6.0)[m
+     marcel (0.3.2)[m
+       mimemagic (~> 0.3.2)[m
+[32m+[m[32m    memoizable (0.4.2)[m
+[32m+[m[32m      thread_safe (~> 0.3, >= 0.3.1)[m
+     method_source (0.9.0)[m
+[32m+[m[32m    metric_fu-Saikuro (1.1.3)[m
+[32m+[m[32m    mime-types (3.2.2)[m
+[32m+[m[32m      mime-types-data (~> 3.2015)[m
+[32m+[m[32m    mime-types-data (3.2018.0812)[m
+     mimemagic (0.3.2)[m
+     mini_mime (1.0.0)[m
+     mini_portile2 (2.3.0)[m
+[36m@@ -172,12 +248,18 @@[m [mGEM[m
+     msgpack (1.2.4)[m
+     multi_json (1.13.1)[m
+     multi_test (0.1.2)[m
+[32m+[m[32m    netrc (0.11.0)[m
+     nio4r (2.3.0)[m
+     nokogiri (1.8.2)[m
+       mini_portile2 (~> 2.3.0)[m
+     orm_adapter (0.5.0)[m
+[32m+[m[32m    parallel (1.12.1)[m
+[32m+[m[32m    parser (2.5.3.0)[m
+[32m+[m[32m      ast (~> 2.4.0)[m
+[32m+[m[32m    path_expander (1.0.3)[m
+     pg (1.0.0)[m
+     popper_js (1.12.9)[m
+[32m+[m[32m    procto (0.0.3)[m
+     public_suffix (3.0.2)[m
+     puma (3.11.4)[m
+     rack (2.0.4)[m
+[36m@@ -210,19 +292,41 @@[m [mGEM[m
+       ruby-graphviz (~> 1.2)[m
+     rails-html-sanitizer (1.0.4)[m
+       loofah (~> 2.2, >= 2.2.2)[m
+[32m+[m[32m    rails_best_practices (1.19.4)[m
+[32m+[m[32m      activesupport[m
+[32m+[m[32m      code_analyzer (>= 0.4.8)[m
+[32m+[m[32m      erubis[m
+[32m+[m[32m      i18n[m
+[32m+[m[32m      json[m
+[32m+[m[32m      require_all (~> 2.0)[m
+[32m+[m[32m      ruby-progressbar[m
+     railties (5.2.0)[m
+       actionpack (= 5.2.0)[m
+       activesupport (= 5.2.0)[m
+       method_source[m
+       rake (>= 0.8.7)[m
+       thor (>= 0.18.1, < 2.0)[m
+[32m+[m[32m    rainbow (2.2.2)[m
+[32m+[m[32m      rake[m
+     rake (12.3.1)[m
+     rb-fsevent (0.10.3)[m
+     rb-inotify (0.9.10)[m
+       ffi (>= 0.5.0, < 2)[m
+[32m+[m[32m    redcard (1.1.0)[m
+[32m+[m[32m    reek (2.2.1)[m
+[32m+[m[32m      parser (~> 2.2)[m
+[32m+[m[32m      rainbow (~> 2.0)[m
+[32m+[m[32m      unparser (~> 0.2.2)[m
+[32m+[m[32m    require_all (2.0.0)[m
+     responders (2.4.0)[m
+       actionpack (>= 4.2.0, < 5.3)[m
+       railties (>= 4.2.0, < 5.3)[m
+[32m+[m[32m    rest-client (2.0.2)[m
+[32m+[m[32m      http-cookie (>= 1.0.2, < 2.0)[m
+[32m+[m[32m      mime-types (>= 1.16, < 4.0)[m
+[32m+[m[32m      netrc (~> 0.8)[m
+[32m+[m[32m    roodi (5.0.0)[m
+[32m+[m[32m      ruby_parser (~> 3.2, >= 3.2.2)[m
+     rspec-core (3.7.1)[m
+       rspec-support (~> 3.7.0)[m
+     rspec-expectations (3.7.0)[m
+[36m@@ -241,7 +345,10 @@[m [mGEM[m
+       rspec-support (~> 3.7.0)[m
+     rspec-support (3.7.1)[m
+     ruby-graphviz (1.2.3)[m
+[32m+[m[32m    ruby-progressbar (1.10.0)[m
+     ruby_dep (1.5.0)[m
+[32m+[m[32m    ruby_parser (3.12.0)[m
+[32m+[m[32m      sexp_processor (~> 4.9)[m
+     sass (3.5.6)[m
+       sass-listen (~> 4.0.0)[m
+     sass-listen (4.0.0)[m
+[36m@@ -253,6 +360,7 @@[m [mGEM[m
+       sprockets (>= 2.8, < 4.0)[m
+       sprockets-rails (>= 2.0, < 4.0)[m
+       tilt (>= 1.1, < 3)[m
+[32m+[m[32m    sexp_processor (4.11.0)[m
+     shoulda-matchers (3.1.2)[m
+       activesupport (>= 4.0.0)[m
+     simplecov (0.16.1)[m
+[36m@@ -282,6 +390,17 @@[m [mGEM[m
+       thread_safe (~> 0.1)[m
+     uglifier (4.1.9)[m
+       execjs (>= 0.3.0, < 3)[m
+[32m+[m[32m    unf (0.1.4)[m
+[32m+[m[32m      unf_ext[m
+[32m+[m[32m    unf_ext (0.0.7.5)[m
+[32m+[m[32m    unparser (0.2.8)[m
+[32m+[m[32m      abstract_type (~> 0.0.7)[m
+[32m+[m[32m      adamantium (~> 0.2.0)[m
+[32m+[m[32m      concord (~> 0.1.5)[m
+[32m+[m[32m      diff-lcs (~> 1.3)[m
+[32m+[m[32m      equalizer (~> 0.0.9)[m
+[32m+[m[32m      parser (>= 2.3.1.2, < 2.6)[m
+[32m+[m[32m      procto (~> 0.0.2)[m
+     warden (1.2.7)[m
+       rack (>= 1.0)[m
+     web-console (3.6.0)[m
+[36m@@ -315,6 +434,7 @@[m [mDEPENDENCIES[m
+   jbuilder (~> 2.5)[m
+   jquery-rails[m
+   listen (>= 3.0.5, < 3.2)[m
+[32m+[m[32m  metric_fu![m
+   pg (>= 0.18, < 2.0)[m
+   puma (~> 3.11)[m
+   rails (~> 5.2.0)[m
+[36m@@ -335,4 +455,4 @@[m [mRUBY VERSION[m
+    ruby 2.4.3p205[m
+ [m
+ BUNDLED WITH[m
+[31m-   1.16.1[m
+[32m+[m[32m   1.17.1[m
+[1mdiff --git a/Rakefile b/Rakefile[m
+[1mindex e85f913..fa6c9bb 100644[m
+[1m--- a/Rakefile[m
+[1m+++ b/Rakefile[m
+[36m@@ -2,5 +2,6 @@[m
+ # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.[m
+ [m
+ require_relative 'config/application'[m
+[32m+[m[32mrequire 'metric_fu'[m
+ [m
+ Rails.application.load_tasks[m
+[1mdiff --git a/app/controllers/topics_controller.rb b/app/controllers/topics_controller.rb[m
+[1mindex ee8df9f..ac43b48 100644[m
+[1m--- a/app/controllers/topics_controller.rb[m
+[1m+++ b/app/controllers/topics_controller.rb[m
+[36m@@ -27,48 +27,51 @@[m [mclass TopicsController < ApplicationController[m
+             @filtersmsg = "Em resposta à: "[m
+             @filtersmsg << rtopic.title[m
+         end[m
+[31m-[m
+[31m-[m
+[31m-[m
+     end[m
+ [m
+     def create[m
+         @topic = Topic.new(topic_params)[m
+[32m+[m[32m        #user = find_session_user()[m
+[32m+[m[32m        @topic.user_id = find_session_user().id[m
+ [m
+[31m-        user = User.find(session["warden.user.user.key"][0][0])[m
+[31m-        @topic.user_id = user.id[m
+[32m+[m[32m        filters = ['course', 'professor', 'subject'][m
+ [m
+         if session.has_key?(:last_topic_id)[m
+[31m-            rtopic = Topic.find(session[:last_topic_id])[m
+[31m-            @topic.topic_id = rtopic.id[m
+[31m-            if @topic.save[m
+[31m-                redirect_to topic_path( rtopic.id )[m
+[31m-            else[m
+[31m-                flash[:error] = 'Não foi possível salvar sua resposta.'[m
+[31m-                render :new[m
+[31m-            end[m
+[32m+[m[32m            #rtopic = Topic.find(session[:last_topic_id])[m
+[32m+[m[32m            @topic.topic_id = Topic.find(session[:last_topic_id]).id[m
+[32m+[m[32m#            if @topic.save[m
+[32m+[m[32m#                redirect_to topic_path( @topic.topic_id )[m
+[32m+[m[32m#            else[m
+[32m+[m[32m#                flash[:error] = 'Não foi possível salvar sua resposta.'[m
+[32m+[m[32m#                render :new[m
+[32m+[m[32m#            end[m
+         else[m
+[31m-            if session.has_key?(:filter_course_id)[m
+[31m-                course = Course.find_by(id: session[:filter_course_id])[m
+[31m-                @topic.course_id = course.id[m
+[31m-            end[m
+[31m-            if session.has_key?(:filter_professor_id)[m
+[31m-                professor = Professor.find_by(id: session[:filter_professor_id])[m
+[31m-                @topic.professor_id = professor.id[m
+[31m-            end[m
+[31m-            if session.has_key?(:filter_subject_id)[m
+[31m-                subject = Subject.find_by(id: session[:filter_subject_id])[m
+[31m-                @topic.subject_id = subject.id[m
+[31m-            end[m
+[32m+[m[32m            assign_topic_categories_from_session(filters)[m
+[32m+[m[32m            #filters.each do |filter|[m
+[32m+[m[32m            #    filter_sym = "filter_#{filter}_id".to_sym[m
+[32m+[m[32m            #    if session.has_key?(filter_sym)[m
+[32m+[m[32m            #        @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)[m
+[32m+[m[32m            #    end[m
+[32m+[m[32m            #end[m
+[32m+[m
+[32m+[m[32m#            if @topic.save[m
+[32m+[m[32m#                redirect_to topics_path( build_redirect_hash(filters) )[m
+[32m+[m[32m#            else[m
+[32m+[m[32m#                flash[:error] = 'Não foi possível salvar seu tópico'[m
+[32m+[m[32m#                render :new[m
+[32m+[m[32m#            end[m
+[32m+[m[32m        end[m
+             if @topic.save[m
+[31m-                redirect_to topics_path( { :course_id => session[:filter_course_id],[m
+[31m-                    :professor_id => session[:filter_professor_id],[m
+[31m-                    :subject_id => session[:filter_subject_id] } )[m
+[32m+[m[32m                if @topic.topic_id != nil[m
+[32m+[m[32m                    redirect_to topic_path( @topic.topic_id )[m
+[32m+[m[32m                else[m
+[32m+[m[32m                    redirect_to topics_path( build_redirect_hash(filters) )[m
+[32m+[m[32m                end[m
+[32m+[m[32m            #if @topic.save[m
+             else[m
+[31m-                flash[:error] = 'Não foi possível salvar seu tópico'[m
+[32m+[m[32m                flash[:error] = 'Não foi possível salvar seu tópico ou resposta.'[m
+                 render :new[m
+             end[m
+[31m-        end[m
+     end[m
+ [m
+     def edit[m
+[36m@@ -92,63 +95,29 @@[m [mclass TopicsController < ApplicationController[m
+     end[m
+ [m
+     def show[m
+[31m-        session.delete(:last_topic_id)[m
+[31m-        session[:last_topic_id] = params[:id][m
+[32m+[m[32m        reassign_last_topic()[m
+[32m+[m
+[32m+[m[32m        @user = find_session_user()[m
+ [m
+[31m-        if session.has_key?("warden.user.user.key")[m
+[31m-            @user = User.find(session["warden.user.user.key"][0][0])[m
+[31m-        else[m
+[31m-            @user = nil[m
+[31m-        end[m
+         @topic = Topic.find(params[:id])[m
+[32m+[m
+         @author = User.find(@topic.user_id)[m
+[32m+[m
+         @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)[m
+[31m-        @usernames = Hash.new[m
+[31m-        @usernames.store(@author.id, (@author.first_name.capitalize + " " + @author.last_name.capitalize))[m
+[31m-        if @responses.count > 0[m
+[31m-            @responses.each do |response|[m
+[31m-                responseuser = User.find(response.user_id)[m
+[31m-                if !(@usernames.has_key? responseuser.id) then[m
+[31m-                    responsename = (responseuser.first_name.capitalize + " " + responseuser.last_name.capitalize)[m
+[31m-                    @usernames.store(responseuser.id, responsename)[m
+[31m-                end[m
+[31m-            end[m
+[31m-        end[m
+[32m+[m
+[32m+[m[32m        @usernames = {@author.id => "#{@author.first_name.capitalize} #{@author.last_name.capitalize}"}.merge(get_topics_usernames(@responses))[m
+[32m+[m[32m        #@usernames = Hash.new[m
+[32m+[m[32m        #@usernames.store(@author.id, "#{@author.first_name.capitalize} #{@author.last_name.capitalize}")[m
+[32m+[m[32m        #@usernames = @usernames.merge(get_topics_usernames(@responses))[m
+     end[m
+ [m
+     def index[m
+[31m-        session.delete(:last_topic_id)[m
+[31m-        session.delete(:filter_course_id)[m
+[31m-        session.delete(:filter_professor_id)[m
+[31m-        session.delete(:filter_subject_id)[m
+[31m-        if params.has_key?(:course_id) || params.has_key?(:professor_id) || params.has_key?(:subject_id)[m
+[31m-            if params.has_key?(:course_id) && params[:course_id] != ""[m
+[31m-                session[:filter_course_id] = params[:course_id][m
+[31m-            end[m
+[31m-            if params.has_key?(:professor_id) && params[:professor_id] != ""[m
+[31m-                session[:filter_professor_id] = params[:professor_id][m
+[31m-            end[m
+[31m-            if params.has_key?(:subject_id) && params[:subject_id] != ""[m
+[31m-                session[:filter_subject_id] = params[:subject_id][m
+[31m-            end[m
+[31m-        end[m
+[32m+[m[32m        clear_session_filters()[m
+ [m
+[32m+[m[32m        filters = ["course", "professor", "subject"][m
+[32m+[m[32m        store_filters_in_session_from_params(filters)[m
+ [m
+[31m-        @query = [][m
+[31m-        if session.has_key?(:filter_course_id)[m
+[31m-            @query << ('course_id = ' + session[:filter_course_id])[m
+[31m-        end[m
+[31m-        if session.has_key?(:filter_professor_id)[m
+[31m-            @query << ('professor_id = ' + session[:filter_professor_id])[m
+[31m-        end[m
+[31m-        if session.has_key?(:filter_subject_id)[m
+[31m-            @query << ('subject_id = ' + session[:filter_subject_id])[m
+[31m-        end[m
+[31m-[m
+[31m-        @query = @query.join(' and ')[m
+[31m-        @query << ((@query.length > 0) ? (' and ') : (''))[m
+[31m-        @query << 'topic_id is null and deleted = false'[m
+[31m-[m
+[32m+[m[32m        @query = build_filters_query(filters)[m
+         @topics = Topic.where( @query )[m
+ [m
+     end[m
+[36m@@ -159,12 +128,90 @@[m [mclass TopicsController < ApplicationController[m
+       redirect_back fallback_location: topics_url[m
+     end[m
+ [m
+[32m+[m
+[32m+[m[32m    ############### PRIVATE CLASS METHODS #################[m
+     private[m
+[31m-    #def set_topic[m
+[31m-    #  @topic = Topic.find(params[:id])[m
+[31m-    #end[m
+[32m+[m
+[32m+[m[32m    def find_session_user[m
+[32m+[m[32m        user = nil[m
+[32m+[m[32m        if session.has_key?("warden.user.user.key")[m
+[32m+[m[32m            user = User.find(session["warden.user.user.key"][0][0])[m
+[32m+[m[32m        end[m
+[32m+[m[32m        return user[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def clear_session_filters[m
+[32m+[m[32m        session.delete(:last_topic_id)[m
+[32m+[m[32m        session.delete(:filter_course_id)[m
+[32m+[m[32m        session.delete(:filter_professor_id)[m
+[32m+[m[32m        session.delete(:filter_subject_id)[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def store_filters_in_session_from_params(filters)[m
+[32m+[m[32m        filters.each do |filter|[m
+[32m+[m[32m            tag_sym = "#{filter}_id".to_sym[m
+[32m+[m[32m            filter_sym = "filter_#{filter}_id".to_sym[m
+[32m+[m[32m            if params.has_key?(tag_sym) && params[tag_sym] != ""[m
+[32m+[m[32m                session[filter_sym] = params[tag_sym][m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def reassign_last_topic[m
+[32m+[m[32m        session.delete(:last_topic_id)[m
+[32m+[m[32m        session[:last_topic_id] = params[:id][m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def build_filters_query(filters)[m
+[32m+[m[32m        query = [][m
+[32m+[m[32m        filters.each do |filter|[m
+[32m+[m[32m            tag_sym = filter.to_sym[m
+[32m+[m[32m            filter_sym = "filter_#{filter}_id".to_sym[m
+[32m+[m[32m            if session.has_key?(filter_sym)[m
+[32m+[m[32m                query << "#{filter}_id = #{session[filter_sym]}"[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m        query = query.join(' and ')[m
+[32m+[m[32m        query << ((query.length > 0) ? (' and ') : (''))[m
+[32m+[m[32m        query << 'topic_id is null and deleted = false'[m
+[32m+[m
+[32m+[m[32m        return query[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def get_topics_usernames(topics)[m
+[32m+[m[32m        usernames = Hash.new[m
+[32m+[m[32m        topics.each do |topic|[m
+[32m+[m[32m            topic_user = User.find(topic.user_id)[m
+[32m+[m[32m            if (!usernames.has_key?(topic_user.id))[m
+[32m+[m[32m                topic_name = "#{topic_user.first_name.capitalize} #{topic_user.last_name.capitalize}"[m
+[32m+[m[32m                usernames.store(topic_user.id, topic_name)[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m        return usernames[m
+[32m+[m[32m    end[m
+ [m
+     def topic_params[m
+         params.require(:topic).permit(:title, :description)[m
+     end[m
+[32m+[m
+[32m+[m[32m    def build_redirect_hash(filters)[m
+[32m+[m[32m        redirect_hash = Hash.new[m
+[32m+[m[32m        filters.each do |filter|[m
+[32m+[m[32m            tag_sym = "#{filter}_id".to_sym[m
+[32m+[m[32m            filter_sym = "filter_#{filter}_id".to_sym[m
+[32m+[m[32m            if (session.has_key?(filter_sym))[m
+[32m+[m[32m                redirect_hash.store(tag_sym, session[filter_sym])[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m        return redirect_hash[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    def assign_topic_categories_from_session(filters)[m
+[32m+[m[32m        filters.each do |filter|[m
+[32m+[m[32m            filter_sym = "filter_#{filter}_id".to_sym[m
+[32m+[m[32m            if session.has_key?(filter_sym)[m
+[32m+[m[32m                @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)[m
+[32m+[m[32m            end[m
+[32m+[m[32m        end[m
+[32m+[m[32m    end[m
+ end[m
