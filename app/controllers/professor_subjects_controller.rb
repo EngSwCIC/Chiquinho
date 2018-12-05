@@ -4,10 +4,10 @@ class ProfessorSubjectsController < ApplicationController
   def show
     @professor = Professor.find(params[:id])
     @subject = Subject.find(params[:subject_id])
-    @professor_subject = ProfessorSubject.where(professor_id: @professor.id).find_by(subject_id: @subject.id)
+    @professor_subject = ProfessorSubject.find_by(professor_id: @professor.id, subject_id: @subject.id)
     @comments = @professor_subject.comments
     if user_signed_in?
-      @rating = ProfessorSubjectUser.where(user_id: current_user.id).find_by(professor_subject_id: @professor_subject.id)
+      @rating = ProfessorSubjectUser.find_by(user_id: current_user.id, professor_subject_id: @professor_subject.id)
     else
       @rating = false
     end
