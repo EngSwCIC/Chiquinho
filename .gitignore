@@ -31,4 +31,6 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+# Ignore code metrics.
 coverage
+saikuro
