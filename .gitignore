@@ -4,8 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+# Ignore local environment.
 /.bundle
+vendor/bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -13,7 +14,6 @@
 !/log/.keep
 !/tmp/.keep
 
-.idea/
 # Ignore uploaded files in development
 /storage/*
 .idea/
@@ -34,3 +34,6 @@
 # Ignore code metrics.
 coverage
 saikuro
+
+# Ignore project documentation.
+doc
