@@ -1,3 +1,5 @@
+# Main controller for general propose
+
 class MainController < ApplicationController
   before_action :require_current_user,only: [:update_user_schedule,:clean_user_schedule]
   # skip_before_action :verify_authenticity_token, only: [:update_user_schedule]
