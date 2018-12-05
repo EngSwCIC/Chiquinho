@@ -2,16 +2,18 @@ class Flow < ApplicationRecord
   belongs_to :subject
   belongs_to :course
 
-  def self.get_semesters(course)
+  def Flow.get_semesters(course)
+    if !course.is_a?(Course)
+      return nil
+    end
     flows = course.flows
     semesters = []
     flows.each do |flow|
-      if semesters[flow.semester-1].nil?
-        semesters[flow.semester-1] = [flow.subject]
-      else
-        semesters[flow.semester-1] << flow.subject
-      end
+      semester = semesters[flow.semester-1]
+      semester = [] if semester.nil?
+      semester << flow.subject
+      semesters[flow.semester-1] = semester
     end
-    semesters
+    return semesters
   end
 end
