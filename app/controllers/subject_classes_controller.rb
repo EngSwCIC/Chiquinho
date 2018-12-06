@@ -1,3 +1,5 @@
+# Controller to classes of a subject
+
 class SubjectClassesController < ApplicationController
 
   before_action :require_current_user,only: [:add_class_schedule]

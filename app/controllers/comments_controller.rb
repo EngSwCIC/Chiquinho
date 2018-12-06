@@ -1,6 +1,10 @@
+# Controller class to subject page comments and likes of those comments
+
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
+  
+  # Creates a comment about a subject
   def create
     @comment = current_user.comments.new(comments_params)
     @comment[:subject_id] = params[:comment][:subject_id]
@@ -15,6 +19,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Add a like to a comment if user hasn't liked yet
   def like_comment
     @like_comment = UserLikeComment.find_or_create_by(user_id: params[:user_id], comment_id: params[:comment_id])
     if @like_comment.like == nil || @like_comment.like == false
