@@ -1,3 +1,5 @@
+# Model to the users of the system
+
 class User < ApplicationRecord
   before_create :create_user_schedule
   belongs_to :course
@@ -21,10 +23,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Returns user full name
   def full_name
     "#{first_name} #{last_name}"
   end
 
+  # Creates a schedule of 6 days to a user for each time slot
   def create_user_schedule
     self.schedule = Schedule.new
     self.schedule.time_8 = Array.new(6)

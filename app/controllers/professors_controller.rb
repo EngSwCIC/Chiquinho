@@ -3,11 +3,13 @@
 class ProfessorsController < ApplicationController
   include ProfessorsHelper
 
+    # Show professors
     def index
       @favorite_professors = current_user ? current_user.favorite_professors : []
       @professors = Professor.all - @favorite_professors
     end
 
+    # Create a professor
     def create
       @professor = Professor.new(professor_params)
       respond_to do |format|
@@ -44,19 +46,24 @@ class ProfessorsController < ApplicationController
       redirect_to professor_path(params[:id])
     end
 
+    # Show info about a professor
     def show
       @professor = Professor.find(params[:id])
     end
-
+    
+    # CRUD professor new page
     def new
     end
-
+    
+    # CRUD professor edit page
     def edit
     end
 
+    # Update professor POST method
     def update
     end
 
+    # Destroy professor method
     def destroy
     end
 
