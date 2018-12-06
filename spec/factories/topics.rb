@@ -6,6 +6,5 @@ FactoryBot.define do
         association :professor, factory: :professor
         association :subject, factory: :subject
         association :user, factory: :user
-        #association :topic
     end
 end

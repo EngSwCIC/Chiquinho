@@ -5,7 +5,16 @@ require 'rails_helper'
 
 RSpec.describe TopicsController, type: :controller do
     describe 'POST create' do
+<<<<<<< HEAD
         let(:topic) { FactoryBot.create(:topic)}
+        
+=======
+        let(:course) { FactoryBot.create(:course)}
+        let(:subject) { FactoryBot.create(:subject)}
+        let(:professor) { FactoryBot.create(:professor)}
+        let(:user) { FactoryBot.create(:user)}
+        let(:topic) { FactoryBot.create(:topic)}
+>>>>>>> 55e2a6ba95ce31ce27a6e7d0ccb51e889edade2e
         context 'valid params course' do
             before do
                 sign_in User.find(topic.user_id)

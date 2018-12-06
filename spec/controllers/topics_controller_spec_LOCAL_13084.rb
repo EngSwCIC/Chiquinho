@@ -1,11 +1,10 @@
-#language: pt
-#encoding: utf-8
-
 require 'rails_helper'
+
 
 RSpec.describe TopicsController, type: :controller do
     describe 'POST create' do
         let(:topic) { FactoryBot.create(:topic)}
+        
         context 'valid params course' do
             before do
                 sign_in User.find(topic.user_id)

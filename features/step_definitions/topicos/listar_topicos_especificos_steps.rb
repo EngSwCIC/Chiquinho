@@ -56,17 +56,17 @@ Dado("que eu esteja na pagina desse curso") do
 end
 
 Entao("eu devo ver o topico desse professor:") do |table|
-  table.rows_hash.each do |field,value|
+  table.rows.each do |value|
     expect(page).to have_content(value)
   end
 end
 Entao("eu devo ver o topico dessa materia:") do |table|
-  table.rows_hash.each do |field,value|
+  table.rows.each do |value|
     expect(page).to have_content(value)
   end
 end
 Entao("eu devo ver o topico desse curso:") do |table|
-  table.rows_hash.each do |field,value|
+  table.rows.each do |value|
     expect(page).to have_content(value)
   end
 end
