@@ -17,7 +17,7 @@ class SubjectClassesController < ApplicationController
     if add_subject_class_schedules(subject_class) and current_user.schedule.save
       flash['notice'] = "Grade Atualizada."
     else
-      flash['danger'] = "Erro ao Atualizar."
+      flash['danger'] = "Erro ao Atualizar! Talvez os horários da turma não existam nesta grade!"
     end
 
     redirect_to user_schedule_path
