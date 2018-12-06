@@ -22,3 +22,15 @@ Dado("que ele já esteja marcado como favorito") do
   ProfessorUserFavorite.create(professor_id: @professor.id, user_id: @user.id)
 end
 
+Então("eu não devo ver um botão de adicionar aos favoritos") do
+  link_favorite = "a[href~=\"favorite\"]"
+  link_unfavorite = "a[href~=\"unfavorite\"]"
+
+  expect(page).not_to have_selector(link_favorite)
+  expect(page).not_to have_selector(link_unfavorite)
+
+end
+
+Então("devo ver {string} antes de {string}") do |nome1, nome2|
+  expect(page.body.index(nome1) >= page.body.index(nome2)).to eq(false)
+end
