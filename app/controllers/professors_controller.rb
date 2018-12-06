@@ -27,23 +27,29 @@ class ProfessorsController < ApplicationController
     def favorite
       # Assuming that we've a logged in user
 
-      unless is_favorite?(params[:id], current_user.id)
-      ProfessorUserFavorite.create(:professor_id => params[:id],  :user_id => current_user.id)
+      professor_id = params[:id]
+      user_id = current_user.id
+
+      unless is_favorite?(professor_id, user_id)
+      ProfessorUserFavorite.create(:professor_id => professor_id,  :user_id => user_id)
       end
 
       flash['notice'] = 'Professor adicionado aos favoritos com sucesso!'
-      redirect_to professor_path(params[:id])
+      redirect_to professor_path(professor_id)
     end
 
     # Remove a professor into user favorite list (ProfessorUserFavorite)
     def unfavorite
       # Assuming that we've a logged in user
 
-      favorite = ProfessorUserFavorite.where('professor_id = ? and  user_id = ?', params[:id],  current_user.id)
+      professor_id = params[:id]
+      user_id = current_user.id
+
+      favorite = ProfessorUserFavorite.where('professor_id = ? and  user_id = ?', professor_id,  user_id)
       favorite.delete_all unless favorite.empty?
 
       flash['notice'] = 'Professor removido dos favoritos com sucesso!'
-      redirect_to professor_path(params[:id])
+      redirect_to professor_path(professor_id)
     end
 
     # Show info about a professor

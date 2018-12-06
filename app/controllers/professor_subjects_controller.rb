@@ -19,17 +19,17 @@ class ProfessorSubjectsController < ApplicationController
 
   # Update professor rating based on new user trabalhos/tarefas/provas avaliation
   def update_user_professor_subject_rating
+    trabalhos = params[:trabalhos]
+    provas = params[:provas]
+    tarefas = params[:tarefas]
+
     @rating = ProfessorSubjectUser.where(user_id: current_user.id).find_or_create_by(professor_subject_id: params[:professor_subject_id])
     @rating.professor_id = params[:professor_id]
-    if params[:trabalhos]
-      @rating.trabalhos = params[:trabalhos]
-    end
-    if params[:provas]
-      @rating.provas = params[:provas]
-    end
-    if params[:tarefas]
-      @rating.tarefas = params[:tarefas]
-    end
+
+    @rating.trabalhos = trabalhos if trabalhos
+    @rating.provas = provas if provas
+    @rating.tarefas = tarefas if tarefas
+
     respond_to do |format|
       if @rating.save
         format.js
