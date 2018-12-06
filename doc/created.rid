@@ -1,17 +1,17 @@
-Thu, 06 Dec 2018 00:29:45 -0200
-app/controllers/study_materials_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/application_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/sessions_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/omniauth_callbacks_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/passwords_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/unlocks_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/confirmations_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/registrations/registrations_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/courses_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/comments_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/topics_controller.rb	Thu, 06 Dec 2018 00:29:32 -0200
-app/controllers/department_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/main_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/professors_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/professor_subjects_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/subjects_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
+Thu, 06 Dec 2018 07:30:38 -0200
+app/controllers/department_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/comments_controller.rb	Tue, 20 Nov 2018 12:52:20 -0200
+app/controllers/courses_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/topics_controller.rb	Thu, 06 Dec 2018 04:33:24 -0200
+app/controllers/subjects_controller.rb	Wed, 07 Nov 2018 01:08:27 -0200
+app/controllers/main_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/application_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/study_materials_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/professor_subjects_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/professors_controller.rb	Thu, 08 Nov 2018 04:10:55 -0200
+app/controllers/registrations/passwords_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/registrations/confirmations_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/registrations/omniauth_callbacks_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/registrations/sessions_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/registrations/unlocks_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300
+app/controllers/registrations/registrations_controller.rb	Tue, 30 Oct 2018 08:33:36 -0300

@@ -57,8 +57,7 @@
                       <%= link_to topic.title, topic_path(topic.id) %>
                       <% if !current_user.nil? && topic.user_id == current_user.id %>
                         <a role="button" href="#" class="btn btn-danger" data-toggle="modal" style="float: right;" data-target="<%=".remove-topic-modal-sm-#{topic.id}" %>">
-                          <i class='fa fa-times'></i>
-                          Remover
+                          <i class='fa fa-times'></i><!--Remover-->
                         </a>
                         <div class="<%= "remove-topic-modal-sm-#{topic.id}" %> modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
                           <div class="modal-dialog modal-sm">

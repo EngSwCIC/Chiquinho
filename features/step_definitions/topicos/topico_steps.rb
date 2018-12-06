@@ -28,6 +28,10 @@ end
 Então("eu devo ser redirecionado para a página de tópicos") do
     expect(current_path).to eq(topics_path())
 end
+
+Então("eu devo ser redirecionado para a página de cadastro") do
+    expect(current_path).to eq('/users/sign_in')
+end
   
 Então("ver os dados:") do |table|
     table.rows_hash.each do |field, value|

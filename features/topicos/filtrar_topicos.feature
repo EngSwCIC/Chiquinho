@@ -1,9 +1,10 @@
 #language: pt
-#encoding: utf-8
+#encoding: utf-
+  #Caio Albuquerque
 
 Funcionalidade: Filtrar a página de tópico por campo
   Como usuário do sistema Chiquinho
-  Para que eu possa melhor visualizar os tópicos discutidos por assuno
+  Para que eu possa melhor visualizar os tópicos discutidos por assunto
   Eu quero poder filrar os tópicos de discussão por campo
   Para que eu e outros usuários possamos acessar mais facilmente os tópicos
   Cenário de Fundo:

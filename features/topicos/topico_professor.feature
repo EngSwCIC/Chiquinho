@@ -1,5 +1,6 @@
 #language: pt
 #encoding: utf-8
+  #Caio Albuquerque
 
 Funcionalidade: Criar um tópico dentro do fórum de discussão do professor
   Como estudante da UnB
@@ -19,3 +20,9 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão do professor
     Então eu devo ser redirecionado para a página de tópicos
     E ver os dados:
     |title|GENA|
+
+  Cenário: Usuário abre um tópico de discussão vazio no fórum do curso
+    Dado que eu esteja na página do professor "GENAINA NUNES RODRIGUES"
+    Quando eu clicar no link "Forum do professor"
+    E eu clicar no link 'Criar novo tópico'
+    Então eu devo ser redirecionado para a página de cadastro
