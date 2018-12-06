@@ -28,6 +28,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  # Creates a schedule of 6 days to a user for each time slot
   def create_user_schedule
     self.schedule = Schedule.new
     self.schedule.time_8 = Array.new(6)

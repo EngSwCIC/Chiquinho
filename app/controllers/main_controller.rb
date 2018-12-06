@@ -4,7 +4,8 @@ class MainController < ApplicationController
   before_action :require_current_user,only: [:update_user_schedule,:clean_user_schedule]
   # skip_before_action :verify_authenticity_token, only: [:update_user_schedule]
   require 'i18n'
-
+  
+  # Chiquinho's initial page
   def index
     @users = User.all
     @courses = Course.all
@@ -12,9 +13,12 @@ class MainController < ApplicationController
     @subjects = Subject.all
   end
 
+  # gets schedule of a user
   def schedule
     @grade = current_user.schedule
   end
+  
+  # Cleans schedule of a user
   def clean_user_schedule
     current_user.schedule.delete
     current_user.schedule = Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
@@ -23,6 +27,7 @@ class MainController < ApplicationController
     redirect_to user_schedule_path
   end
 
+  # Updates user schedule
   def update_user_schedule
     current_user.schedule ||= Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
 
@@ -59,12 +64,14 @@ class MainController < ApplicationController
     end
   end
 
+  # Method that searches for a subject based on name
   def search_subject
     @subjects = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:name].downcase)}%")
   end
 
   private
 
+  # Avoids user to change things that doesn't belong to him
   def require_current_user
     if current_user.nil?
       flash[:danger] = "Apenas próprio usuário tem acesso à isso."
