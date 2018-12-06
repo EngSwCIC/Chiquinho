@@ -1,3 +1,5 @@
+# Controller to the subjects on system
+
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
 

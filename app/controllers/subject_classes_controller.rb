@@ -1,14 +1,32 @@
+# Controller to classes of a subject
+
 class SubjectClassesController < ApplicationController
 
   before_action :require_current_user,only: [:add_class_schedule]
 
+  # Controller show action
   def show
     @subject_class = SubjectClass.find(params[:id])
     @class_schedules = ClassSchedule.where(subject_class_id: params[:id])
   end
 
+  # Adds a class to user schedule, converting it into subject
   def add_class_schedule
     subject_class = SubjectClass.find(params[:id])
+
+    if add_subject_class_schedules(subject_class) and current_user.schedule.save
+      flash['notice'] = "Grade Atualizada."
+    else
+      flash['danger'] = "Erro ao Atualizar."
+    end
+
+    redirect_to user_schedule_path
+  end
+
+  private
+
+  # Convert the class into a subject
+  def add_subject_class_schedules(subject_class)
     class_schedules = ClassSchedule.where(subject_class_id: params[:id])
 
     name = subject_class.subject.name
@@ -17,53 +35,36 @@ class SubjectClassesController < ApplicationController
       day = schedule.week_day.id
       time = schedule.class_hour.hour.hour
 
-      if time < 8
-        time = 8
-      elsif time > 16 && time < 20
-        time = 19
-      elsif time >= 20
-        time = 21
-      end
-
-      if day == 6
-        day = 5
-      end
-
-      update_schedule(name, day, time)
-    end
-
-
-    respond_to do |format|
-      if current_user.schedule.save
-        format.html { redirect_to user_schedule_path, notice: "Grade Atualizada."}
-        format.js { @subject = "ola" }
-        format.json
-      else
-        format.html { redirect_to user_schedule_path, danger: "Erro ao Atualizar."}
-        format.js { @subject = "ola" }
-        format.json
+      begin
+        update_schedule(name, day, time)
+      rescue
+        return false
       end
     end
+
+    true
   end
 
-  private
-
+  # Adds a subject to user and user schedule
   def update_schedule(name, day, time)
-    current_user.schedule ||= Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
+    times = %w"time_8 time_10 time_12 time_14 time_16 time_19 time_21"
+    current_user.schedule ||= Schedule.new(hash[times.map{|x| [x, Array.new(6)]}])
 
-    mater = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(name.downcase)}%")
-    mater.each do |mat|
-      puts mat.name
-    end
+    subject = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(name.downcase)}%").first
 
-    current_user.schedule["time_#{time}"][day.to_i] = mater.first.name
-    unless current_user.schedule.subjects.any? {|m| m.name == mater.first.name}
-      current_user.schedule.subjects << mater.first
-    end
+    current_user.schedule["time_#{time}"][day] = subject.name
 
+    add_subject_user(subject)
   end
 
+  # Adds a subject to a user
+  def add_subject_user(subject)
+    unless current_user.schedule.subjects.include? subject
+      current_user.schedule.subjects << subject
+    end
+  end
 
+  # Checks if there's a user logged in
   def require_current_user
     if current_user.nil?
       flash[:danger] = "Apenas próprio usuário tem acesso à isso."

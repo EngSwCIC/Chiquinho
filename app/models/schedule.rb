@@ -1,7 +1,10 @@
+# Model that represent the schedule of an user
+
 class Schedule < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :subjects
 
+  # Get difficulty of a schedule based on avaliations for each column (trabalhos/provas/tarefas)
   def get_avg
     @trabalhos = 0
     @provas = 0
