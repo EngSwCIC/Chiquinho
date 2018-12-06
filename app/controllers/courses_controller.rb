@@ -76,7 +76,9 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  ##
+  # Controller to page that list professors of a course
   def course_professors
     @course = Course.find(params[:id])
     @professors = Professor.where(departments_id: @course.departments_id)
