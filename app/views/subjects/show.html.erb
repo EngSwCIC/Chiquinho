@@ -123,6 +123,7 @@
                     </td>
                   </tr>
                 </table>
+                <%= link_to 'Adicionar a grade', add_class_schedule_path(subject_class), class: 'btn btn-primary' %>
                 <%= link_to "Ver Turma #{subject_class.name}", subject_class_path(subject_class), class: 'btn btn-primary', style: 'margin: 10px 0; float: right' %>
                 </div>
               </div>
