@@ -32,7 +32,8 @@
                                     <%= link_to "<i class='fa fa-plus'></i>Responder".html_safe, new_topic_path, :class => "btn btn-secondary btn-danger btn-sm"%>
                                     <!-- if is same user -->
                                     <% if !@user.nil? && @user.id == @author.id then %>
-                                      <a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
+                                      <%= link_to "<i class='fa fa-pencil'></i> Editar".html_safe, edit_topic_path(@topic.id), :class => "btn btn-secondary btn-danger btn-sm"%>
+                                      <!--<a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>-->
                                       <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target=".modal-confirma-remover-topico"><i class='fa fa-times'></i> Remover</a>
                                       <div class="modal fade modal-confirma-remover-topico" tabindex="-1" role="dialog" style="display: none; color: #111;" aria-hidden="true">
                                         <div class="modal-dialog modal-sm">
@@ -80,7 +81,8 @@
                                   <!-- if is same user -->
                                   <% if !@user.nil? && @user.id == response.user_id then %>
                                   <% if !@topic.deleted %>
-                                    <a role="button" class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>
+                                    <%= link_to "<i class='fa fa-pencil'></i> Editar".html_safe, edit_topic_path(response.id), :class => "btn btn-secondary btn-danger btn-sm"%>
+                                    <!--<a role="button" class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>-->
                                   <% end %>
                                   <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target="<%=".modal-confirma-remover-#{response.id}"%>"><i class='fa fa-times'></i> Remover</a>
                                   <div class="modal fade <%="modal-confirma-remover-#{response.id}"%>" tabindex="-1" role="dialog" style="display: none; color: #111;" aria-hidden="true">
