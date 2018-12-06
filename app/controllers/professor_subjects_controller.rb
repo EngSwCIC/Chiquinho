@@ -17,7 +17,7 @@ class ProfessorSubjectsController < ApplicationController
     #@comment = Comment.new(professor_subject_id: @professor_subject.id)
   end
 
-  # Update professor rating based on new user trabalhos/tarefas/provas avaliation
+  # Update professor rating based on new user trabalhos/tarefas/provas review
   def update_user_professor_subject_rating
     @rating = ProfessorSubjectUser.where(user_id: current_user.id).find_or_create_by(professor_subject_id: params[:professor_subject_id])
     @rating.professor_id = params[:professor_id]

@@ -4,7 +4,7 @@
 Funcionalidade: Ver professores do curso ordenados por avaliação
   Como usuário não autenticado
   
-  Cenário:
+  Cenário: Mostrar pontuação por avaliação
   Dado que exista o departamento "CIC" com professores:
   | nome  |
   | João  | 
@@ -27,7 +27,20 @@ Funcionalidade: Ver professores do curso ordenados por avaliação
   E devo ver "Maria" com "10.0" de score
   E devo ver "João" com "8.167" de score
   
-  Cenário:
+  
+  Cenário: Mostrar pontuação por avaliação quando não há avaliações
+  Dado que exista o departamento "CIC" com professores:
+  | nome  |
+  | João  | 
+  | Maria |
+  E dado que exista o curso "Engenharia de Computação" do "CIC"
+  E que eu esteja na página do curso
+  Quando clicar para ver professores do curso
+  Então devo ver os professores do "CIC"
+  E devo ver "Maria" com "0" de score
+  E devo ver "João" com "0" de score
+  
+  Cenário: Ordenar por número de favoritos
   Dado que exista o departamento "CIC" com professores:
   | nome  |
   | João  | 
@@ -41,3 +54,10 @@ Funcionalidade: Ver professores do curso ordenados por avaliação
   Quando clicar para ver professores do curso
   Então devo ver os professores do "CIC"
   E devo ver "Maria" na frente da "João"
+  
+  Cenário: Departamento sem professores
+  Dado que exista o departamento "CIC" sem professores
+  E dado que exista o curso "Engenharia de Computação" do "CIC"
+  E que eu esteja na página do curso
+  Quando clicar para ver professores do curso
+  Então não devo ver professores

@@ -14,11 +14,16 @@ class Professor < ApplicationRecord
   has_many :subject_classes
   belongs_to :department, required: false
 
-  # Computes the professor's score based on all avaliations
+  # Computes the professor's score based on all reviews
+  #
+  # ==== Returns
+  #
+  # Returns an average of all reviews (trabalhos/tarefas/provas) of a professor
+  #
   def score
-    @avaliations = ProfessorSubjectUser.where(professor_id: self.id)
-    @score = @avaliations.map{|x| x.sumscore}.sum
-    @score == 0 ? 0 : @score/@avaliations.count;
+    @reviews = ProfessorSubjectUser.where(professor_id: self.id)
+    @score = @reviews.map{|x| x.sumscore}.sum
+    @score == 0 ? 0 : @score/@reviews.count;
   end
 
   # Computes the number of likes professor got
