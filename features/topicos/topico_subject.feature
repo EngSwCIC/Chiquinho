@@ -6,7 +6,8 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão da matéria
   Para que eu possa comentar sobre assuntos de uma matéria
   Eu quero poder abrir um tópico de discussão na matéria
   Para que eu e outros alunos possamos comentar sobre a matéria
-
+  Cenário de Fundo:
+    Dado que eu tenha me cadastrado e me autenticado
   Cenário: Usuário abre um tópico de discussão na matéria
     Dado que eu esteja na página matéria "ENGENHARIA DE SOFTWARE"
     Quando eu clicar no link "Forum"

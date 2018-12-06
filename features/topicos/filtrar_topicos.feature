@@ -14,7 +14,7 @@ Funcionalidade: Filtrar a página de tópico por campo
     E eu selecionar o curso 'ADMINISTRAÇÃO'
     E eu selecionar a matéria 'ENGENHARIA DE SOFTWARE'
     E eu clicar no botão 'Filtrar'
-    E eu clicar no link 'Criar novo tópico'
+    E eu clicar em 'Criar novo tópico'
     E preencher o fórmulário com:
     |title|ES|
     |description|Muito interessante a matéria abordado no assunto|
@@ -34,12 +34,11 @@ Funcionalidade: Filtrar a página de tópico por campo
     E eu selecionar o curso 'COMPUTAÇÃO'
     E eu selecionar a matéria 'ENGENHARIA DE SOFTWARE'
     E eu clicar no botão 'Filtrar'
-    E eu clicar no link 'Criar novo tópico'
+    E eu clicar em 'Criar novo tópico'
     E preencher o fórmulário com:
       |title|void|
       |description|void description|
     E clicar no botão 'Enviar'
-    E que eu esteja na página de Fóruns
     E eu selecionar o professor 'GENAINA NUNES RODRIGUES'
     E eu selecionar o curso 'ADMINISTRAÇÃO'
     E eu selecionar a matéria 'ENGENHARIA DE SOFTWARE'

@@ -5,5 +5,6 @@ FactoryBot.define do
         association :course, factory: :course
         association :professor, factory: :professor
         association :subject, factory: :subject
+        association :user, factory: :user
     end
 end

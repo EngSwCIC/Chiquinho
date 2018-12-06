@@ -30,7 +30,28 @@ Então("eu devo ser redirecionado para a página de tópicos") do
 end
   
 Então("ver os dados:") do |table|
-    table.rows_hash.each do |field,value|
+    table.rows_hash.each do |field, value|
         expect(page).to have_content(value)
     end
+end
+
+Dado ("que eu entre no site") do
+  visit root_path
+end
+
+Dado("que eu esteja logado") do
+    steps %Q{
+    Dado que eu entre no site
+      Quando eu clicar no link "Entrar"
+      E eu clicar no link "Novo usuário? Cadastre-se"
+      E preencher o formulário com:
+      |user_email|nicknish@hotmail.com     |
+      |user_matricula |150019343           |
+      |user_first_name      |Nicholas      |
+      |user_last_name       |Marques       |
+      |user_password  |123456              |
+      |user_password_confirmation|123456   |
+      E selecionar o meu curso ""
+      E clicar no botão "Cadastrar-se"
+  }
 end

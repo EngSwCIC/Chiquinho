@@ -1,13 +1,15 @@
-require 'rails_helper'
+#language: pt
+#encoding: utf-8
 
+require 'rails_helper'
 
 RSpec.describe TopicsController, type: :controller do
     describe 'POST create' do
-        let(:topic) { FactoryBot.create(:topic)}
         let(:course) { FactoryBot.create(:course)}
         let(:subject) { FactoryBot.create(:subject)}
         let(:professor) { FactoryBot.create(:professor)}
         let(:user) { FactoryBot.create(:user)}
+        let(:topic) { FactoryBot.create(:topic)}
         context 'valid params course' do
             before do
                 sign_in user
