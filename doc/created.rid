@@ -1,4 +1,4 @@
-Wed, 05 Dec 2018 13:45:09 -0200
+Thu, 06 Dec 2018 00:29:45 -0200
 app/controllers/study_materials_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/application_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/registrations/sessions_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
@@ -9,7 +9,7 @@ app/controllers/registrations/confirmations_controller.rb	Sat, 03 Nov 2018 19:08
 app/controllers/registrations/registrations_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/courses_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/comments_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
-app/controllers/topics_controller.rb	Wed, 05 Dec 2018 11:05:30 -0200
+app/controllers/topics_controller.rb	Thu, 06 Dec 2018 00:29:32 -0200
 app/controllers/department_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/main_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
 app/controllers/professors_controller.rb	Sat, 03 Nov 2018 19:08:16 -0300
