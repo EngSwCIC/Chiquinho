@@ -1,10 +1,8 @@
 # Model class to represent the classes of a subject
 # == Attributes
-# *+name+ - string to name
-# *+subject_id+ - Foreign key to subject
-# *+professor_id+ - Foreign key to professor
-#
-
+# * +name+ - string to name
+# * +subject_id+ - Foreign key to subject
+# * +professor_id+ - Foreign key to professor
 class SubjectClass < ApplicationRecord
   belongs_to :subject
   belongs_to :professor
