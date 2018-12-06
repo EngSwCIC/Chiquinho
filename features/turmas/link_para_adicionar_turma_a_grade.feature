@@ -24,6 +24,7 @@ Funcionalidade: Link na página da disciplina para adicioná-la à grade horári
     Quando eu clicar no link para detalhes dessa turma
     Então eu devo ver um botão que me permita adicionar a turma a grade horária
 
+
   Cenário: Adicionar Turma a grade a partir da página da diciplina
     Dado que eu tenha me cadastrado e me autenticado
     Dado  que eu tenha uma matéria criada com os atributos:
@@ -40,3 +41,17 @@ Funcionalidade: Link na página da disciplina para adicioná-la à grade horári
     E que eu esteja na página de matérias
     Quando eu clicar no link para detalhes daquela matéria
     Então eu devo ver um botão que me permita adicionar a turma a grade horária
+
+
+  Cenário: Adicionar Turma não existente a grade a partir da página da diciplina
+    Dado que eu tenha me cadastrado e me autenticado
+    Dado  que eu tenha uma matéria criada com os atributos:
+      |code   |116327                 |
+      |name   |ORGANIZAÇÃO DE ARQUIVOS|
+      |credits|002 002 000 004        |
+      |area   |AC                     |
+    E que eu esteja na página de matérias
+    Quando eu clicar no link para detalhes daquela matéria
+    Então eu não devo ver um botão que me permita adicionar a turma a grade horária
+    E eu não devo ver um botão para clicar no link para detalhes dessa turma
+

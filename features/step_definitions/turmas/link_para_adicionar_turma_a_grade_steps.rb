@@ -34,3 +34,8 @@ Então("eu devo ver um botão que me permita adicionar a turma a grade horária"
   link = "a[href=\"#{path}\"]"
   expect(page).to have_selector(link)
 end
+
+Então("eu não devo ver um botão que me permita adicionar a turma a grade horária") do
+  link = "a[href~=\"schedule\"]"
+  expect(page).not_to have_selector(link)
+end

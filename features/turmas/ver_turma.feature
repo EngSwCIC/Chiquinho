@@ -23,3 +23,13 @@ Funcionalidade: Ver turma
       |A   |
       |B   |
       |C   |
+
+  Cenário: Acessar a página de uma turma não existente
+    Dado que eu tenha me cadastrado e me autenticado
+    E que eu tenha uma matéria criada com os atributos:
+      |code   |116327                 |
+      |name   |ORGANIZAÇÃO DE ARQUIVOS|
+      |credits|002 002 000 004        |
+      |area   |AC                     |
+    E que eu esteja na página da matéria
+    Então eu não devo ver um botão para clicar no link para detalhes dessa turma
