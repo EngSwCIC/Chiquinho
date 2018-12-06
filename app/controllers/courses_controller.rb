@@ -1,14 +1,20 @@
+# Controller class to help manage CRUD of the Course model
+# and coordinate with which views to respond to http requests.
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
-  # GET /courses
-  # GET /courses.json
+  # Method to exibit all courses
+  # ==== Returns
+  # * html containing all courses for GET /courses
+  # * json containing all courses for GET /courses.json
   def index
     @courses = Course.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
+  # Method to exibit a specific course
+  # ==== Returns
+  # * html with info for a specific course for GET /courses/:id
+  # * json with info for a specific course for GET /courses/:id.json
   def show
     @subjects = @course.subjects
     @obrigatorias = []
@@ -28,17 +34,23 @@ class CoursesController < ApplicationController
 
   end
 
-  # GET /courses/new
+  # Method to instantiate a new course being created
+  # ==== Returns
+  # * html with a form for a new course for GET /courses/new
   def new
     @course = Course.new
   end
 
-  # GET /courses/1/edit
+  # Method to help edit a course
+  # ==== Returns
+  # * html for a editing form for GET /courses/:id/edit
   def edit
   end
 
-  # POST /courses
-  # POST /courses.json
+  # Method to create a new course on the database from a form over POST
+  # ==== Returns
+  # * html with a success message or the new page with errors for POST /courses
+  # * json with a success message or with errors for POST /courses.json
   def create
     @course = Course.new(course_params)
 
@@ -53,8 +65,10 @@ class CoursesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /courses/1
-  # PATCH/PUT /courses/1.json
+  # Method to create a new course on the database from a form over POST
+  # ==== Returns
+  # * html with a success message or the edit page with errors for PUT/PATCH /courses/:id
+  # * json with a success message or with errors for PUT/PATCH /courses/:id.json
   def update
     respond_to do |format|
       if @course.update(course_params)
@@ -67,8 +81,10 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
+  # Method to remove a course from the database
+  # ==== Returns
+  # * html with a success message for DELETE /courses/:id
+  # * json with nothing for DELETE /courses/1.json
   def destroy
     @course.destroy
     respond_to do |format|
@@ -76,9 +92,11 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  ##
-  # Controller to page that list professors of a course
+
+  # Method to instantiate a course and its professors
+  # ==== Alters
+  # * +@course+ - Specific course
+  # * +@professors+ - Professors of +@course+
   def course_professors
     @course = Course.find(params[:id])
     @professors = Professor.where(departments_id: @course.departments_id)
