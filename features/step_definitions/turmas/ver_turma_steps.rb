@@ -20,3 +20,8 @@ end
 Então("devo ir pra uma pagina com detalhes sobre a turma {string}") do |name|
   expect(page).to have_content(name)
 end
+
+Então("eu não devo ver um botão para clicar no link para detalhes dessa turma") do
+  link = "a[href~=\"class\"]"
+  expect(page).not_to have_selector(link)
+end

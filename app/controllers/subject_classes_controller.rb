@@ -10,7 +10,13 @@ class SubjectClassesController < ApplicationController
     @class_schedules = ClassSchedule.where(subject_class_id: params[:id])
   end
 
-  # Adds a class to user schedule, converting it into subject
+  # Adds a class to user schedule, converting it into subject.
+  #
+  # Because the actual architecture is add subject into schedule, so this function must convert the class
+  # to his subject, keeping the subject's hours and week days.
+  #
+  # For better understanding please compare Schedule and ClassSchedule.
+  #
   def add_class_schedule
     subject_class = SubjectClass.find(params[:id])
 
@@ -45,7 +51,10 @@ class SubjectClassesController < ApplicationController
     true
   end
 
-  # Adds a subject to user and user schedule
+  # Adds a subject to user and user schedule.
+  #
+  # This function is an adaptation of MainController#update_user_schedule
+  #
   def update_schedule(name, day, time)
     times = %w"time_8 time_10 time_12 time_14 time_16 time_19 time_21"
     current_user.schedule ||= Schedule.new(hash[times.map{|x| [x, Array.new(6)]}])
