@@ -9,7 +9,7 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão do curso
   Para que eu e outros alunos possamos comentar sobre o curso
   Cenário: Usuário abre um tópico de discussão no fórum do curso
     Dado que eu tenha me cadastrado e me autenticado
-    Dado que eu esteja no fórum do curso de "CIÊNCIA DA COMPUTAÇÃO"
+    E que eu esteja no fórum do curso de "CIÊNCIA DA COMPUTAÇÃO"
     Quando eu clicar no link "Forum"
     E eu clicar no link 'Criar novo tópico'
     E preencher o fórmulário com:

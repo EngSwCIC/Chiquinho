@@ -13,7 +13,7 @@ Dado("que eu esteja na página matéria {string}") do |subject_name|
 end
 
 Dado("que eu esteja na página do professor {string}") do |professor_name|
-    professor_params = {name: "GENAINA NUNES RODRIGUES"}
+    professor_params = {name: professor_name}
     Professor.create(professor_params)
     professor = Professor.find_by(name: professor_name)
     visit professor_path(professor)
