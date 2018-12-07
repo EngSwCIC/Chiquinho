@@ -63,7 +63,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">TopicsHelper</span>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -71,11 +82,13 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-assign_topic_categories_from_session">#assign_topic_categories_from_session</a>
+    <li ><a href="#method-i-assign_topic_course">#assign_topic_course</a>
     
-    <li ><a href="#method-i-build_filters_query">#build_filters_query</a>
+    <li ><a href="#method-i-assign_topic_professor">#assign_topic_professor</a>
     
-    <li ><a href="#method-i-build_redirect_hash">#build_redirect_hash</a>
+    <li ><a href="#method-i-assign_topic_subject">#assign_topic_subject</a>
+    
+    <li ><a href="#method-i-assign_topic_tags_or_parent">#assign_topic_tags_or_parent</a>
     
     <li ><a href="#method-i-clear_session_filters">#clear_session_filters</a>
     
@@ -85,21 +98,23 @@
     
     <li ><a href="#method-i-edit">#edit</a>
     
-    <li ><a href="#method-i-find_session_user">#find_session_user</a>
-    
-    <li ><a href="#method-i-get_filters_string">#get_filters_string</a>
-    
-    <li ><a href="#method-i-get_topics_usernames">#get_topics_usernames</a>
-    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
     
+    <li ><a href="#method-i-params_filters_to_session">#params_filters_to_session</a>
+    
     <li ><a href="#method-i-reassign_last_topic">#reassign_last_topic</a>
+    
+    <li ><a href="#method-i-redirect_topic">#redirect_topic</a>
+    
+    <li ><a href="#method-i-require_topic_owner">#require_topic_owner</a>
+    
+    <li ><a href="#method-i-set_topic">#set_topic</a>
     
     <li ><a href="#method-i-show">#show</a>
     
-    <li ><a href="#method-i-store_filters_in_session_from_params">#store_filters_in_session_from_params</a>
+    <li ><a href="#method-i-store_filter_in_session_from_params">#store_filter_in_session_from_params</a>
     
     <li ><a href="#method-i-topic_params">#topic_params</a>
     
@@ -160,27 +175,19 @@ para a página geral do fórum se for um novo tópico.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
     <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">topic_params</span>)
-    <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">find_session_user</span>().<span class="ruby-identifier">id</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:last_topic_id</span>)
-        <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:last_topic_id</span>]).<span class="ruby-identifier">id</span>
-    <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">assign_topic_categories_from_session</span>()
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">assign_topic_tags_or_parent</span>
 
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">save</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-            <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topic_path</span>( <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span> )
-        <span class="ruby-keyword">else</span>
-            <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topics_path</span>( <span class="ruby-identifier">build_redirect_hash</span>() )
-        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">redirect_topic</span>
     <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&#39;Não foi possível salvar seu tópico ou resposta.&#39;</span>
         <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
     <span class="ruby-keyword">end</span>
+
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -213,11 +220,14 @@ recuperados eventualmente.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
-  <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">update</span>(<span class="ruby-value">deleted:</span><span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">redirect_back</span> <span class="ruby-value">fallback_location:</span> <span class="ruby-identifier">topics_url</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">update</span>(<span class="ruby-value">deleted:</span> <span class="ruby-keyword">true</span>)
+        <span class="ruby-identifier">redirect_back</span> <span class="ruby-value">fallback_location:</span> <span class="ruby-identifier">topics_url</span>
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&#39;Não foi possível remover seu tópico ou resposta.&#39;</span>
+        <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
+    <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -249,9 +259,8 @@ editado.</p>
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
-    <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -284,15 +293,13 @@ propagação segura em GET (CRUD).</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 89</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
     <span class="ruby-identifier">clear_session_filters</span>()
 
-    <span class="ruby-identifier">filters</span> = [<span class="ruby-string">&quot;course&quot;</span>, <span class="ruby-string">&quot;professor&quot;</span>, <span class="ruby-string">&quot;subject&quot;</span>]
-    <span class="ruby-identifier">store_filters_in_session_from_params</span>()
+    <span class="ruby-identifier">params_filters_to_session</span>()
 
-    <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">build_filters_query</span>()
-    <span class="ruby-ivar">@topics</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">where</span>( <span class="ruby-ivar">@query</span> )
+    <span class="ruby-ivar">@topics</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">where</span>( <span class="ruby-identifier">build_query_from_filters</span> )
 
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -319,23 +326,21 @@ propagação segura em GET (CRUD).</p>
         <div class="method-description">
           
           <p>Método para a recuperação de dados para a página de criação de novo post ou
-resposta. Determina os filtros (professor, curso e/ou matéria) e se o
-tópico é um post ou uma resposta.</p>
+resposta. Determina se o tópico é um post ou uma resposta.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>
     <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">new</span>
 
-    <span class="ruby-ivar">@is_response</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:last_topic_id</span>)
-        <span class="ruby-ivar">@filtersmsg</span> = <span class="ruby-identifier">get_filters_string</span>
-    <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@is_response</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-ivar">@filtersmsg</span> = <span class="ruby-string">&quot;Em resposta à: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:last_topic_id</span>]).<span class="ruby-identifier">title</span>
+    <span class="ruby-identifier">assign_topic_tags_or_parent</span>
+
+    <span class="ruby-ivar">@parent</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:last_topic_id</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@parent</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@parent</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@parent</span>)
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -361,24 +366,20 @@ tópico é um post ou uma resposta.</p>
 
         <div class="method-description">
           
-          <p>Método para exibição de um post específico. Procura na database o post,
-suas respostas e os nomes dos autores dos mesmos para exibição.</p>
+          <p>Método para exibição de um post específico. Procura na database o post E
+suas respostas para exibição.</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
     <span class="ruby-comment"># Redefine último post visualizado na sessão como sendo o post atual (para utilização do id no CRUD)</span>
     <span class="ruby-identifier">reassign_last_topic</span>()
 
-    <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">find_session_user</span>()
-    <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-    <span class="ruby-ivar">@author</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">user_id</span>)
+    <span class="ruby-comment">#@topic = Topic.find(params[:id])</span>
     <span class="ruby-ivar">@responses</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">topic_id:</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">deleted:</span> <span class="ruby-keyword">false</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:created_at</span>)
-    <span class="ruby-ivar">@usernames</span> = {<span class="ruby-ivar">@author</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{@author.first_name.capitalize} #{@author.last_name.capitalize}&quot;</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">get_topics_usernames</span>(<span class="ruby-ivar">@responses</span>))
-
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -410,19 +411,12 @@ de sucesso na edição</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
-    <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-    <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">title</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:topic</span>][<span class="ruby-value">:title</span>]
-    <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:topic</span>][<span class="ruby-value">:description</span>]
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">save</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>[<span class="ruby-value">:topic_id</span>]
-            <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topic_path</span>(<span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span>)
-        <span class="ruby-keyword">else</span>
-            <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topic_path</span>(<span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">id</span>)
-        <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">topic_params</span>)
+        <span class="ruby-identifier">redirect_topic</span>
     <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&#39;Não foi possível salvar seu tópico ou resposta.&#39;</span>
+        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&#39;Não foi possível modificar seu tópico ou resposta.&#39;</span>
         <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -444,10 +438,10 @@ de sucesso na edição</p>
        </header>
 
     
-      <div id="method-i-assign_topic_categories_from_session" class="method-detail ">
+      <div id="method-i-assign_topic_course" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">assign_topic_categories_from_session</span><span
+          <span class="method-name">assign_topic_course</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -457,21 +451,17 @@ de sucesso na edição</p>
 
         <div class="method-description">
           
-          <p>Atribui os filtros existentes em session ao objeto Topic atual Busca antes
-na database os objetos de cada filtro (professor, materia e/ou curso) para
-checar se o mesmo existe</p>
+          
           
           
 
           
-          <div class="method-source-code" id="assign_topic_categories_from_session-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_topic_categories_from_session</span>
-    [<span class="ruby-string">&#39;course&#39;</span>, <span class="ruby-string">&#39;professor&#39;</span>, <span class="ruby-string">&#39;subject&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">filter_sym</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">filter_sym</span>)
-            <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{filter}_id=&quot;</span>, <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">filter</span>.<span class="ruby-identifier">capitalize</span>).<span class="ruby-identifier">find_by</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">session</span>[<span class="ruby-identifier">filter_sym</span>]).<span class="ruby-identifier">id</span>)
-        <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="assign_topic_course-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_topic_course</span>
+    <span class="ruby-identifier">filter</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:filter_course_id</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">course_id</span> = <span class="ruby-constant">Course</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">filter</span>).<span class="ruby-identifier">id</span>
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -484,10 +474,10 @@ checar se o mesmo existe</p>
       </div>
 
     
-      <div id="method-i-build_filters_query" class="method-detail ">
+      <div id="method-i-assign_topic_professor" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">build_filters_query</span><span
+          <span class="method-name">assign_topic_professor</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -497,28 +487,18 @@ checar se o mesmo existe</p>
 
         <div class="method-description">
           
-          <p>Constrói a query SQL para busca de posts na database com os filtros
-existentes na sessão</p>
+          
           
           
 
           
-          <div class="method-source-code" id="build_filters_query-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_filters_query</span>
-    <span class="ruby-identifier">query</span> = []
-    [<span class="ruby-string">&#39;course&#39;</span>, <span class="ruby-string">&#39;professor&#39;</span>, <span class="ruby-string">&#39;subject&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">tag_sym</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-identifier">filter_sym</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">filter_sym</span>)
-            <span class="ruby-identifier">query</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{filter}_id = #{session[filter_sym]}&quot;</span>
-        <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="assign_topic_professor-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_topic_professor</span>
+    <span class="ruby-identifier">filter</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:filter_professor_id</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">professor_id</span> = <span class="ruby-constant">Professor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">filter</span>).<span class="ruby-identifier">id</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">query</span> = <span class="ruby-identifier">query</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-    <span class="ruby-identifier">query</span> <span class="ruby-operator">&lt;&lt;</span> ((<span class="ruby-identifier">query</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>) <span class="ruby-operator">?</span> (<span class="ruby-string">&#39; and &#39;</span>) <span class="ruby-operator">:</span> (<span class="ruby-string">&#39;&#39;</span>))
-    <span class="ruby-identifier">query</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;topic_id is null and deleted = false&#39;</span>
-
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -530,10 +510,10 @@ existentes na sessão</p>
       </div>
 
     
-      <div id="method-i-build_redirect_hash" class="method-detail ">
+      <div id="method-i-assign_topic_subject" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">build_redirect_hash</span><span
+          <span class="method-name">assign_topic_subject</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -543,24 +523,61 @@ existentes na sessão</p>
 
         <div class="method-description">
           
-          <p>Constrói uma hash com os filtros da sessão (professor, matéria e curso)
-para ser utilizada no redirecionamento</p>
+          
           
           
 
           
-          <div class="method-source-code" id="build_redirect_hash-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_redirect_hash</span>
-    <span class="ruby-identifier">redirect_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    [<span class="ruby-string">&#39;course&#39;</span>, <span class="ruby-string">&#39;professor&#39;</span>, <span class="ruby-string">&#39;subject&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">tag_sym</span> = <span class="ruby-node">&quot;#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-identifier">filter_sym</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">filter_sym</span>))
-            <span class="ruby-identifier">redirect_hash</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">tag_sym</span>, <span class="ruby-identifier">session</span>[<span class="ruby-identifier">filter_sym</span>])
-        <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="assign_topic_subject-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_topic_subject</span>
+    <span class="ruby-identifier">filter</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:filter_subject_id</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">subject_id</span> = <span class="ruby-constant">Subject</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">filter</span>).<span class="ruby-identifier">id</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-assign_topic_tags_or_parent" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">assign_topic_tags_or_parent</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Atribui os filtros existentes em session ao objeto Topic atual Se for uma
+resposta atribui apenas o id do topico pai Busca antes na database os
+objetos de cada filtro (professor, materia e/ou curso) para checar se o
+mesmo existe</p>
+          
+          
+
+          
+          <div class="method-source-code" id="assign_topic_tags_or_parent-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_topic_tags_or_parent</span>
+    <span class="ruby-identifier">parent_id</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:last_topic_id</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">parent_id</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span> = <span class="ruby-identifier">parent_id</span>
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">assign_topic_course</span>
+        <span class="ruby-identifier">assign_topic_subject</span>
+        <span class="ruby-identifier">assign_topic_professor</span>
+    <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -591,7 +608,7 @@ para ser utilizada no redirecionamento</p>
 
           
           <div class="method-source-code" id="clear_session_filters-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 124</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_session_filters</span>
     <span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:last_topic_id</span>)
     <span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:filter_course_id</span>)
@@ -608,10 +625,10 @@ para ser utilizada no redirecionamento</p>
       </div>
 
     
-      <div id="method-i-find_session_user" class="method-detail ">
+      <div id="method-i-params_filters_to_session" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">find_session_user</span><span
+          <span class="method-name">params_filters_to_session</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -621,102 +638,19 @@ para ser utilizada no redirecionamento</p>
 
         <div class="method-description">
           
-          <p>Retorna o usuário logado</p>
+          <p>Armazena na sessão o(s) filtro(s) obtido(s) de params (professor, curso ou
+matéria) <a href=":filter_professor_id">session</a> = <a
+href=":professor_id">params</a></p>
           
           
 
           
-          <div class="method-source-code" id="find_session_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_session_user</span>
-    <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;warden.user.user.key&quot;</span>)
-        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-string">&quot;warden.user.user.key&quot;</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>])
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">user</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-get_filters_string" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">get_filters_string</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Função auxiliar que procura na database o nome dos objetos filtrados
-(professor, curso, matéria) e os concatena em uma string</p>
-          
-          
-
-          
-          <div class="method-source-code" id="get_filters_string-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_filters_string</span>
-    <span class="ruby-identifier">str</span> = []
-    [<span class="ruby-string">&#39;course&#39;</span>, <span class="ruby-string">&#39;professor&#39;</span>, <span class="ruby-string">&#39;subject&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">filter_sym</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">filter_sym</span>)
-            <span class="ruby-identifier">str</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">filter</span>.<span class="ruby-identifier">capitalize</span>).<span class="ruby-identifier">find_by</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">session</span>[<span class="ruby-identifier">filter_sym</span>]).<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">capitalize</span>
-        <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; · &quot;</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-get_topics_usernames" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">get_topics_usernames</span><span
-            class="method-args">(topics)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>A partir de uma lista de tópicos recupera da database o nome dos autores
-destes tópicos e retorna uma hash.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="get_topics_usernames-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 170</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_topics_usernames</span>(<span class="ruby-identifier">topics</span>)
-    <span class="ruby-identifier">usernames</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">topics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">topic_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">topic</span>.<span class="ruby-identifier">user_id</span>)
-        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">usernames</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">topic_user</span>.<span class="ruby-identifier">id</span>))
-            <span class="ruby-identifier">topic_name</span> = <span class="ruby-node">&quot;#{topic_user.first_name.capitalize} #{topic_user.last_name.capitalize}&quot;</span>
-            <span class="ruby-identifier">usernames</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">topic_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">topic_name</span>)
-        <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">usernames</span>
+          <div class="method-source-code" id="params_filters_to_session-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">params_filters_to_session</span>
+    <span class="ruby-identifier">store_filter_in_session_from_params</span>(<span class="ruby-string">&#39;course&#39;</span>)
+    <span class="ruby-identifier">store_filter_in_session_from_params</span>(<span class="ruby-string">&#39;subject&#39;</span>)
+    <span class="ruby-identifier">store_filter_in_session_from_params</span>(<span class="ruby-string">&#39;professor&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -747,7 +681,7 @@ destes tópicos e retorna uma hash.</p>
 
           
           <div class="method-source-code" id="reassign_last_topic-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 145</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reassign_last_topic</span>
     <span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:last_topic_id</span>)
     <span class="ruby-identifier">session</span>[<span class="ruby-value">:last_topic_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
@@ -762,10 +696,10 @@ destes tópicos e retorna uma hash.</p>
       </div>
 
     
-      <div id="method-i-store_filters_in_session_from_params" class="method-detail ">
+      <div id="method-i-redirect_topic" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">store_filters_in_session_from_params</span><span
+          <span class="method-name">redirect_topic</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -775,21 +709,126 @@ destes tópicos e retorna uma hash.</p>
 
         <div class="method-description">
           
-          <p>Armazena na sessão os filtros obtidos de params (professor, curso ou
-matéria)</p>
+          <p>Redireciona para o tópico pai ou para si mesmo se não for resposta</p>
           
           
 
           
-          <div class="method-source-code" id="store_filters_in_session_from_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store_filters_in_session_from_params</span>
-    [<span class="ruby-string">&#39;course&#39;</span>, <span class="ruby-string">&#39;professor&#39;</span>, <span class="ruby-string">&#39;subject&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">tag_sym</span> = <span class="ruby-node">&quot;#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-identifier">filter_sym</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">tag_sym</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">tag_sym</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span>
-            <span class="ruby-identifier">session</span>[<span class="ruby-identifier">filter_sym</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">tag_sym</span>]
-        <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="redirect_topic-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirect_topic</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span>
+        <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topic_path</span>( <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">topic_id</span> )
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topic_path</span>( <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">id</span> )<span class="ruby-comment">#build_redirect_hash_from_session()</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-require_topic_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">require_topic_owner</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checa se o usuário realizando a ação sobre um tópico/resposta é o mesmo
+usuário que o criou</p>
+          
+          
+
+          
+          <div class="method-source-code" id="require_topic_owner-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_topic_owner</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@topic</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:danger</span>] = <span class="ruby-string">&quot;Ação permitida apenas ao criador do tópico ou resposta.&quot;</span>
+        <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">topics_path</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_topic" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_topic</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_topic-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_topic</span>
+    <span class="ruby-ivar">@topic</span> = <span class="ruby-constant">Topic</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-store_filter_in_session_from_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">store_filter_in_session_from_params</span><span
+            class="method-args">(filter)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="store_filter_in_session_from_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store_filter_in_session_from_params</span>(<span class="ruby-identifier">filter</span>)
+    <span class="ruby-identifier">params_filter</span> = <span class="ruby-node">&quot;#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
+    <span class="ruby-identifier">session_filter</span> = <span class="ruby-node">&quot;filter_#{filter}_id&quot;</span>.<span class="ruby-identifier">to_sym</span>
+    <span class="ruby-identifier">parameter</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">params_filter</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">parameter</span>.<span class="ruby-identifier">blank?</span>
+        <span class="ruby-identifier">session</span>[<span class="ruby-identifier">session_filter</span>] = <span class="ruby-identifier">parameter</span>
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -815,15 +854,16 @@ matéria)</p>
 
         <div class="method-description">
           
-          <p>Recebe os parâmetros do formulário de criação de tópico</p>
+          <p>Recebe os parâmetros do formulário de criação e edição de tópico</p>
           
           
 
           
           <div class="method-source-code" id="topic_params-source">
-            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 223</span>
+            <pre><span class="ruby-comment"># File app/controllers/topics_controller.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topic_params</span>
-    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:topic</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:description</span>)
+    <span class="ruby-identifier">params</span>[<span class="ruby-value">:topic</span>][<span class="ruby-value">:user_id</span>] = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:topic</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:user_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

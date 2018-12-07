@@ -37,9 +37,6 @@ class TopicsController < ApplicationController
 
     end
 
-    ##
-    # Método para a página de edição do post.
-    # Busca na database o post a ser editado.
     def edit
     end
 
@@ -49,7 +46,7 @@ class TopicsController < ApplicationController
         if @topic.update(topic_params)
             redirect_topic
         else
-            flash[:error] = 'Não foi possível remover seu tópico ou resposta.'
+            flash[:error] = 'Não foi possível modificar seu tópico ou resposta.'
             render :new
         end
     end

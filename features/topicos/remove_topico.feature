@@ -1,6 +1,5 @@
 #language: pt
 #encoding: utf-8
-  #Douglas Shiro
 
 Funcionalidade: Remover logicamente um tópico dentro do fórum do sistema
   Como usuário logado no sistema
@@ -15,3 +14,4 @@ Funcionalidade: Remover logicamente um tópico dentro do fórum do sistema
     E que eu entre na página deste tópico
     E eu clicar no botão "Remover"
     E eu clicar no botão "Remover"
+    Então eu devo ser redirecionado para a página do tópico
