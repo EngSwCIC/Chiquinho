@@ -25,15 +25,12 @@ class TopicsController < ApplicationController
         @topic = Topic.new(topic_params)
         @topic.user_id = find_session_user().id
 
-        if session.has_key?(:last_topic_id)
-            @topic.topic_id = Topic.find(session[:last_topic_id]).id
-        else
-            assign_topic_categories_from_session()
-        end
+        @topic.topic_id = get_topic_id
+        var = @topic.topic_id
 
         if @topic.save
-            if @topic.topic_id != nil
-                redirect_to topic_path( @topic.topic_id )
+            if var
+                redirect_to topic_path( var )
             else
                 redirect_to topics_path( build_redirect_hash() )
             end
@@ -53,11 +50,11 @@ class TopicsController < ApplicationController
     ##
     # Método para tratamento dos dados editados do post e redicionamento em caso de sucesso na edição
     def update
-        @topic = Topic.find(params[:id])
-        @topic.title = params[:topic][:title]
-        @topic.description = params[:topic][:description]
+        @topic = Topic.find(get_params_1(:id))
+        @topic.title = get_params_2(:topic, :title)
+        @topic.description = get_params_2(:topic, :description)
         if @topic.save
-            if @topic[:topic_id]
+            if @topic.topic_id
                 redirect_to topic_path(@topic.topic_id)
             else
                 redirect_to topic_path(@topic.id)
@@ -68,6 +65,14 @@ class TopicsController < ApplicationController
         end
     end
 
+    def get_params_1(s)
+        return params[s]
+    end
+
+    def get_params_2(s1, s2)
+        return params[s1][s2]
+    end
+
     ##
     # Método para exibição de um post específico.
     # Procura na database o post, suas respostas e os nomes dos autores dos mesmos para exibição.
@@ -76,7 +81,7 @@ class TopicsController < ApplicationController
         reassign_last_topic()
 
         @user = find_session_user()
-        @topic = Topic.find(params[:id])
+        @topic = Topic.find(get_params_1(:id))
         @author = User.find(@topic.user_id)
         @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)
         @usernames = {@author.id => "#{@author.first_name.capitalize} #{@author.last_name.capitalize}"}.merge(get_topics_usernames(@responses))
@@ -199,8 +204,9 @@ class TopicsController < ApplicationController
     def assign_topic_categories_from_session
         ['course', 'professor', 'subject'].each do |filter|
             filter_sym = "filter_#{filter}_id".to_sym
+            filter_capitalize = filter.capitalize
             if session.has_key?(filter_sym)
-                @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)
+                @topic.send("#{filter}_id=", Kernel.const_get(filter_capitalize).find_by(id: session[filter_sym]).id)
             end
         end
     end
@@ -210,14 +216,29 @@ class TopicsController < ApplicationController
     def get_filters_string
         str = []
         ['course', 'professor', 'subject'].each do |filter|
+            filter_capitalize = filter.capitalize
             filter_sym = "filter_#{filter}_id".to_sym
             if session.has_key?(filter_sym)
-                str.push Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).name.downcase.capitalize
+                s = Kernel.const_get(filter_capitalize).find_by(id: session[filter_sym]).name
+                capitalize_name(s)
+                str.push s
             end
         end
         return str.join(" · ")
     end
 
+    def capitalize_name(s)
+        s.downcase.capitalize
+    end
+
+    def get_topic_id
+        if session.has_key?(:last_topic_id)
+             return Topic.find(session[:last_topic_id]).id
+        else
+            assign_topic_categories_from_session()
+            return nil
+        end
+    end
     ##
     # Recebe os parâmetros do formulário de criação de tópico
     def topic_params
