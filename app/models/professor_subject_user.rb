@@ -1,4 +1,4 @@
-# Model that keep the avaliations of a professor in a subject
+# Model that keep the reviews of a professor in a subject
 
 class ProfessorSubjectUser < ApplicationRecord
   belongs_to :user
@@ -10,7 +10,7 @@ class ProfessorSubjectUser < ApplicationRecord
   end
   
   ##
-  # For a given avaliation, compute the average based on works, tests and tasks scores
+  # For a given review, compute the average based on works, tests and tasks scores
   
   def sumscore
     ((self.trabalhos || 0) + 

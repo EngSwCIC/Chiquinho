@@ -97,6 +97,7 @@ class CoursesController < ApplicationController
   # ==== Alters
   # * +@course+ - Specific course
   # * +@professors+ - Professors of +@course+
+
   def course_professors
     @course = Course.find(params[:id])
     @professors = Professor.where(departments_id: @course.departments_id)

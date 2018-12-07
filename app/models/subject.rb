@@ -15,7 +15,7 @@ class Subject < ApplicationRecord
   has_many :comments
   has_many :flows
   
-  # Get a trabalhos/tarefas/provas avaliations average for each one of them of a subject
+  # Get a trabalhos/tarefas/provas reviews average for each one of them of a subject
   def get_avg
     trabalhos = 0
     provas = 0
@@ -36,7 +36,7 @@ class Subject < ApplicationRecord
     {trabalhos: trabalhos.round(2), provas: provas.round(2), tarefas: tarefas.round(2)}
   end
 
-  # Computes difficulty of a subject based on the three avaliations
+  # Computes difficulty of a subject based on the three reviews
   def dificuldade_geral
     averages = self.get_avg
     (averages[:trabalhos] + averages[:provas] + averages[:tarefas])/3.0
@@ -44,10 +44,15 @@ class Subject < ApplicationRecord
 
   ##
   # Crawler to get ementa information from matriculaweb
+  #
+  # ==== Parameters
+  #
+  # [+subject_code+] Subject code on matriculaweb
+  #
   
-  def self.ementaMW(code)
+  def self.ementaMW(subject_code)
   	begin
-	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{code}")).css("table#datatable").css("tr")[6].css("td")[0].text
+	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{subject_code}")).css("table#datatable").css("tr")[6].css("td")[0].text
 	  rescue
 	  	"Não encontrada no MW"
 	  end
