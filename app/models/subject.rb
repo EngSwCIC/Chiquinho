@@ -47,12 +47,12 @@ class Subject < ApplicationRecord
   #
   # ==== Parameters
   #
-  # [+code+] Subject code on matriculaweb
+  # [+subject_code+] Subject code on matriculaweb
   #
   
-  def self.ementaMW(code)
+  def self.ementaMW(subject_code)
   	begin
-	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{code}")).css("table#datatable").css("tr")[6].css("td")[0].text
+	    Nokogiri::HTML(open("https://matriculaweb.unb.br/graduacao/disciplina.aspx?cod=#{subject_code}")).css("table#datatable").css("tr")[6].css("td")[0].text
 	  rescue
 	  	"Não encontrada no MW"
 	  end
