@@ -73,7 +73,7 @@
               <%= link_to 'Ver Professores do Curso', course_professors_path(@course), class: "btn btn-md btn-primary" %>
             </td>
           </tr>
-          
+
         </table>
       </div>
     </div>
@@ -103,6 +103,7 @@
             </ul>
           </nav>
           <!-- Flow table -->
+          <% unless @flow.empty? %>
           <% @flow.each_with_index do |semester, index| %>
               <div class="table-responsive collapse" data-parent="#flow" id="semester-<%= index+1 %>">
                 <% if semester.nil? %>
@@ -145,6 +146,9 @@
                   </table>
                 <% end %>
               </div>
+          <% end %>
+          <% else %>
+            <p>Infelizmente não há informações sobre esse fluxo</p>
           <% end %>
         </div>
     </div>

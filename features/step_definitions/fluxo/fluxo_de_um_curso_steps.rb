@@ -27,15 +27,27 @@ end
 
 Dado("que eu estou na página do curso {string}") do |nome_curso|
   course = Course.find_by(name: nome_curso)
-  expect(course).to eq(@course)
+  visit course_path(course)
+end
+
+Quando("eu acessar a página do curso {string}") do |nome_curso|
+  course = Course.find_by(name: nome_curso)
   visit course_path(course)
 end
 
 Então("eu devo ver as seguintes matérias:") do |table|
-  expect(page.find("div[id='flow']")).not_to eq("")
+  expect(page.find("div[id='flow']").text).not_to eq("")
   table.rows.each do |td|
     td.each do |content|
       expect(page).to have_content(content)
     end
   end
+end
+
+Então("o fluxo deve estar vazio") do
+  expect(page.find("div[id='flow']").text).to eq("")
+end
+
+Então("eu devo ver {string}") do |conteudo|
+  expect(page).to have_content(conteudo)
 end
