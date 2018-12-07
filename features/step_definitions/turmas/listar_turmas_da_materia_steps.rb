@@ -22,7 +22,7 @@ Dado("que existam as turmas {string}, {string}, {string} para essa matéria") do
 
 end
 
-Então("devo ver uma lista contendo as turmas {string}, {string}, {string}") do
+Então("eu devo ver uma lista contendo as turmas {string}, {string}, {string}") do
   |name, schedules, professor|
   expect(page).to have_content("Turma " + name)
   schedules.split(", ").each {
@@ -32,4 +32,9 @@ Então("devo ver uma lista contendo as turmas {string}, {string}, {string}") do
     expect(page).to have_content(week_day.capitalize + " " + class_hour + " - " + class_end_hour)
   }
   expect(page).to have_content(professor)
+end
+
+Então("eu devo ver uma lista vazia de turmas") do
+  expect(page).to have_content("Turmas")
+  expect(page).to have_content("Não há turmas para essa disciplina!")
 end
