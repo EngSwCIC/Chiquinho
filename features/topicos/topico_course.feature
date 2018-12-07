@@ -16,8 +16,8 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão do curso
     |title|ES|
     |description|Muito interessante o assunto abordado na matéria|
     E clicar no botão "Enviar"
-    Então eu devo ser redirecionado para a página de tópicos
-    E ver os dados:
+    Dado que eu esteja na página de Fóruns
+    Então eu devo ver os dados:
     |title|ES|
 
   Cenário: Usuário abre um tópico de discussão vazio no fórum do curso

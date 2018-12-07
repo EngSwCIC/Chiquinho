@@ -1,19 +1,21 @@
 class TopicsController < ApplicationController
+    include TopicsHelper
     skip_before_action :verify_authenticity_token
-    before_action :authenticate_user!, only: [:new, :create]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+    before_action :set_topic, only: [:show, :edit, :update, :destroy]
+    before_action :require_topic_owner, only: [:edit, :update, :destroy]
 
     ##
     # Método para a recuperação de dados para a página de criação de novo post ou resposta.
-    # Determina os filtros (professor, curso e/ou matéria) e se o tópico é um post ou uma resposta.
+    # Determina se o tópico é um post ou uma resposta.
     def new
         @topic = Topic.new
 
-        @is_response = false
-        if !session.has_key?(:last_topic_id)
-            @filtersmsg = get_filters_string
-        else
-            @is_response = true
-            @filtersmsg = "Em resposta à: " + Topic.find(session[:last_topic_id]).title
+        assign_topic_tags_or_parent
+
+        @parent = session[:last_topic_id]
+        if !@parent.blank?
+            @parent = Topic.find(@parent)
         end
     end
 
@@ -23,64 +25,44 @@ class TopicsController < ApplicationController
     # Redireciona para a página do tópico principal se é uma resposta ou para a página geral do fórum se for um novo tópico.
     def create
         @topic = Topic.new(topic_params)
-        @topic.user_id = find_session_user().id
 
-        if session.has_key?(:last_topic_id)
-            @topic.topic_id = Topic.find(session[:last_topic_id]).id
-        else
-            assign_topic_categories_from_session()
-        end
+        assign_topic_tags_or_parent
 
         if @topic.save
-            if @topic.topic_id != nil
-                redirect_to topic_path( @topic.topic_id )
-            else
-                redirect_to topics_path( build_redirect_hash() )
-            end
+            redirect_topic
         else
             flash[:error] = 'Não foi possível salvar seu tópico ou resposta.'
             render :new
         end
+
     end
 
     ##
     # Método para a página de edição do post.
     # Busca na database o post a ser editado.
     def edit
-        @topic = Topic.find(params[:id])
     end
 
     ##
     # Método para tratamento dos dados editados do post e redicionamento em caso de sucesso na edição
     def update
-        @topic = Topic.find(params[:id])
-        @topic.title = params[:topic][:title]
-        @topic.description = params[:topic][:description]
-        if @topic.save
-            if @topic[:topic_id]
-                redirect_to topic_path(@topic.topic_id)
-            else
-                redirect_to topic_path(@topic.id)
-            end
+        if @topic.update(topic_params)
+            redirect_topic
         else
-            flash[:error] = 'Não foi possível salvar seu tópico ou resposta.'
+            flash[:error] = 'Não foi possível remover seu tópico ou resposta.'
             render :new
         end
     end
 
     ##
     # Método para exibição de um post específico.
-    # Procura na database o post, suas respostas e os nomes dos autores dos mesmos para exibição.
+    # Procura na database o post E suas respostas para exibição.
     def show
         # Redefine último post visualizado na sessão como sendo o post atual (para utilização do id no CRUD)
         reassign_last_topic()
 
-        @user = find_session_user()
-        @topic = Topic.find(params[:id])
-        @author = User.find(@topic.user_id)
+        #@topic = Topic.find(params[:id])
         @responses = Topic.where(topic_id: @topic.id, deleted: false).order(:created_at)
-        @usernames = {@author.id => "#{@author.first_name.capitalize} #{@author.last_name.capitalize}"}.merge(get_topics_usernames(@responses))
-
     end
 
     ##
@@ -89,11 +71,9 @@ class TopicsController < ApplicationController
     def index
         clear_session_filters()
 
-        filters = ["course", "professor", "subject"]
-        store_filters_in_session_from_params()
+        params_filters_to_session()
 
-        @query = build_filters_query()
-        @topics = Topic.where( @query )
+        @topics = Topic.where( build_query_from_filters )
 
     end
 
@@ -101,23 +81,16 @@ class TopicsController < ApplicationController
     # Método para remoção de post ou resposta
     # Ao invés de remover o registro da database, altera o campo deleted para true, dessa forma posts podem ser recuperados eventualmente.
     def destroy
-      @topic = Topic.find(params[:id])
-      @topic.update(deleted:true)
-      redirect_back fallback_location: topics_url
+        if @topic.update(deleted: true)
+            redirect_back fallback_location: topics_url
+        else
+            flash[:error] = 'Não foi possível remover seu tópico ou resposta.'
+            render :new
+        end
     end
 
 
     private
-
-    ##
-    # Retorna o usuário logado
-    def find_session_user
-        user = nil
-        if session.has_key?("warden.user.user.key")
-            user = User.find(session["warden.user.user.key"][0][0])
-        end
-        return user
-    end
 
     ##
     # Limpa os filtros da sessão
@@ -129,14 +102,19 @@ class TopicsController < ApplicationController
     end
 
     ##
-    # Armazena na sessão os filtros obtidos de params (professor, curso ou matéria)
-    def store_filters_in_session_from_params
-        ['course', 'professor', 'subject'].each do |filter|
-            tag_sym = "#{filter}_id".to_sym
-            filter_sym = "filter_#{filter}_id".to_sym
-            if params.has_key?(tag_sym) && params[tag_sym] != ""
-                session[filter_sym] = params[tag_sym]
-            end
+    # Armazena na sessão o(s) filtro(s) obtido(s) de params (professor, curso ou matéria)
+    # session[:filter_professor_id] = params[:professor_id]
+    def params_filters_to_session
+        store_filter_in_session_from_params('course')
+        store_filter_in_session_from_params('subject')
+        store_filter_in_session_from_params('professor')
+    end
+    def store_filter_in_session_from_params(filter)
+        params_filter = "#{filter}_id".to_sym
+        session_filter = "filter_#{filter}_id".to_sym
+        parameter = params[params_filter]
+        if !parameter.blank?
+            session[session_filter] = parameter
         end
     end
 
@@ -148,79 +126,67 @@ class TopicsController < ApplicationController
     end
 
     ##
-    # Constrói a query SQL para busca de posts na database com os filtros existentes na sessão
-    def build_filters_query
-        query = []
-        ['course', 'professor', 'subject'].each do |filter|
-            tag_sym = filter.to_sym
-            filter_sym = "filter_#{filter}_id".to_sym
-            if session.has_key?(filter_sym)
-                query << "#{filter}_id = #{session[filter_sym]}"
-            end
-        end
-        query = query.join(' and ')
-        query << ((query.length > 0) ? (' and ') : (''))
-        query << 'topic_id is null and deleted = false'
-
-        return query
-    end
-
-    ##
-    # A partir de uma lista de tópicos recupera da database o nome dos autores destes tópicos e retorna uma hash.
-    def get_topics_usernames(topics)
-        usernames = Hash.new
-        topics.each do |topic|
-            topic_user = User.find(topic.user_id)
-            if (!usernames.has_key?(topic_user.id))
-                topic_name = "#{topic_user.first_name.capitalize} #{topic_user.last_name.capitalize}"
-                usernames.store(topic_user.id, topic_name)
-            end
-        end
-        return usernames
-    end
-
-    ##
-    # Constrói uma hash com os filtros da sessão (professor, matéria e curso) para ser utilizada no redirecionamento
-    def build_redirect_hash
-        redirect_hash = Hash.new
-        ['course', 'professor', 'subject'].each do |filter|
-            tag_sym = "#{filter}_id".to_sym
-            filter_sym = "filter_#{filter}_id".to_sym
-            if (session.has_key?(filter_sym))
-                redirect_hash.store(tag_sym, session[filter_sym])
-            end
-        end
-        return redirect_hash
-    end
-
-    ##
     # Atribui os filtros existentes em session ao objeto Topic atual
+    # Se for uma resposta atribui apenas o id do topico pai
     # Busca antes na database os objetos de cada filtro (professor, materia e/ou curso) para checar se o mesmo existe
-    def assign_topic_categories_from_session
-        ['course', 'professor', 'subject'].each do |filter|
-            filter_sym = "filter_#{filter}_id".to_sym
-            if session.has_key?(filter_sym)
-                @topic.send("#{filter}_id=", Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).id)
-            end
+    def assign_topic_tags_or_parent
+        parent_id = session[:last_topic_id]
+        if !parent_id.blank?
+            @topic.topic_id = parent_id
+        else
+            assign_topic_course
+            assign_topic_subject
+            assign_topic_professor
+        end
+    end
+    def assign_topic_course
+        filter = session[:filter_course_id]
+        if !filter.blank?
+            @topic.course_id = Course.find(filter).id
+        end
+    end
+    def assign_topic_subject
+        filter = session[:filter_subject_id]
+        if !filter.blank?
+            @topic.subject_id = Subject.find(filter).id
+        end
+    end
+    def assign_topic_professor
+        filter = session[:filter_professor_id]
+        if !filter.blank?
+            @topic.professor_id = Professor.find(filter).id
         end
     end
 
-    ##
-    # Função auxiliar que procura na database o nome dos objetos filtrados (professor, curso, matéria) e os concatena em uma string
-    def get_filters_string
-        str = []
-        ['course', 'professor', 'subject'].each do |filter|
-            filter_sym = "filter_#{filter}_id".to_sym
-            if session.has_key?(filter_sym)
-                str.push Kernel.const_get(filter.capitalize).find_by(id: session[filter_sym]).name.downcase.capitalize
-            end
-        end
-        return str.join(" · ")
-    end
 
     ##
-    # Recebe os parâmetros do formulário de criação de tópico
+    # Recebe os parâmetros do formulário de criação e edição de tópico
     def topic_params
-        params.require(:topic).permit(:title, :description)
+        params[:topic][:user_id] = current_user.id
+        params.require(:topic).permit(:title, :description, :user_id)
     end
+
+    def set_topic
+        @topic = Topic.find(params[:id])
+    end
+
+    ##
+    # Redireciona para o tópico pai ou para si mesmo se não for resposta
+    def redirect_topic
+        if @topic.topic_id
+            redirect_to topic_path( @topic.topic_id )
+        else
+            redirect_to topic_path( @topic.id )#build_redirect_hash_from_session()
+        end
+    end
+
+    ##
+    # Checa se o usuário realizando a ação sobre um tópico/resposta é o mesmo usuário que o criou
+    def require_topic_owner
+        if current_user.id != @topic.user.id
+            flash[:danger] = "Ação permitida apenas ao criador do tópico ou resposta."
+            redirect_to topics_path
+        end
+    end
+
 end

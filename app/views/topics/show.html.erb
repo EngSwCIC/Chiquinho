@@ -6,12 +6,14 @@
                     <div class="card-body">
                       <div class="container col-md-12">
                             <div class="invoice-title text-left mb-3">
-                              <% if @topic.deleted %>
-                                <h2>Tópico removido pelo usuário</h2>
-                              <% else  %>
-                                <h2><%= @topic.title %></h2>
-                              <% end %>
-                              <p style="color:#777"> Escrito por <strong><u><%= @usernames[@author.id] %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
+                              <h2>
+                                <% if @topic.deleted %>
+                                  Tópico removido pelo usuário.
+                                <% else  %>
+                                  <%= @topic.title %>
+                                <% end %>
+                              </h2>
+                              <p style="color:#777"> Escrito por <strong><u><%= "#{@topic.user.first_name.capitalize} #{@topic.user.last_name.capitalize}" %></u></strong> há <%= time_ago_in_words(@topic.created_at) %></p>
                             </div>
                             <hr>
                             <div class="row" style="padding-left: 10px;">
@@ -31,7 +33,7 @@
                                   <% if !@topic.deleted %>
                                     <%= link_to "<i class='fa fa-plus'></i>Responder".html_safe, new_topic_path, :class => "btn btn-secondary btn-danger btn-sm"%>
                                     <!-- if is same user -->
-                                    <% if !@user.nil? && @user.id == @author.id then %>
+                                    <% if !current_user.nil? && current_user.id == @topic.user.id then %>
                                       <%= link_to "<i class='fa fa-pencil'></i> Editar".html_safe, edit_topic_path(@topic.id), :class => "btn btn-secondary btn-danger btn-sm"%>
                                       <!--<a class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>-->
                                       <a role="button" href="#" class="btn btn-secondary btn-danger btn-sm" data-toggle="modal" data-target=".modal-confirma-remover-topico"><i class='fa fa-times'></i> Remover</a>
@@ -67,19 +69,20 @@
 
             <!-- ################# FOREACH BEGIN -->
               <% @responses.each do |response| %>
+              <% if !response.deleted %>
               <div class="card mb-3">
                     <div class="card-body">
                       <div class="container col-md-12">
 
                             <div class="row"">
                               <div class="col-md-10">
-                                <p style="color:#777;font-size: 0.8rem; margin-bottom:0.2rem;"> <strong><u><%= @usernames[response.user_id] %></u></strong> &nbsp;·&nbsp; <%= time_ago_in_words(response.created_at) %> atrás</p>
+                                <p style="color:#777;font-size: 0.8rem; margin-bottom:0.2rem;"> <strong><u><%= "#{response.user.first_name.capitalize} #{response.user.last_name.capitalize}" %></u></strong> &nbsp;·&nbsp; <%= time_ago_in_words(response.created_at) %> atrás</p>
                                 <p style="padding-left:5px;"><%= response.description %></p>
                               </div>
                               <div class="col-md-2 float-right text-right" style="padding-top:10px;">
                                 <div class="btn-group" role="group" style="color:#fff;">
                                   <!-- if is same user -->
-                                  <% if !@user.nil? && @user.id == response.user_id then %>
+                                  <% if !current_user.nil? && current_user.id == response.user_id then %>
                                   <% if !@topic.deleted %>
                                     <%= link_to "<i class='fa fa-pencil'></i> Editar".html_safe, edit_topic_path(response.id), :class => "btn btn-secondary btn-danger btn-sm"%>
                                     <!--<a role="button" class="btn btn-secondary btn-danger btn-sm"><i class='fa fa-pencil'></i> Editar</a>-->
@@ -114,6 +117,7 @@
                     </div><!-- end card body -->
 
                   </div><!-- end card-->
+              <% end %>
               <% end %>
               <!-- ################# FOREACH END -->
 

@@ -20,7 +20,7 @@ Funcionalidade: Filtrar a página de tópico por campo
     |title|ES|
     |description|Muito interessante a matéria abordado no assunto|
     E clicar no botão 'Enviar'
-    E que eu esteja na página de Fóruns
+    Dado que eu esteja na página de Fóruns
     E eu selecionar o professor 'GENAINA NUNES RODRIGUES'
     E eu selecionar o curso 'ADMINISTRAÇÃO'
     E eu selecionar a matéria 'ENGENHARIA DE SOFTWARE'
@@ -40,6 +40,7 @@ Funcionalidade: Filtrar a página de tópico por campo
       |title|void|
       |description|void description|
     E clicar no botão 'Enviar'
+    Dado que eu esteja na página de Fóruns
     E eu selecionar o professor 'GENAINA NUNES RODRIGUES'
     E eu selecionar o curso 'ADMINISTRAÇÃO'
     E eu selecionar a matéria 'ENGENHARIA DE SOFTWARE'

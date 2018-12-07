@@ -17,7 +17,8 @@ RSpec.describe TopicsController, type: :controller do
 
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path({:course_id => topic.course_id}))
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(response).to redirect_to(topic_path(@topic.id))
             end
             
             it 'comment exists in database' do
@@ -37,7 +38,8 @@ RSpec.describe TopicsController, type: :controller do
             
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path({:subject_id => topic.subject_id}))
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(response).to redirect_to(topic_path(@topic.id))
             end
             
             it 'comment exists in database' do
@@ -58,7 +60,8 @@ RSpec.describe TopicsController, type: :controller do
             
             it 'returns http status 302 and redirect to subject page' do
                 expect(response).to have_http_status(302)
-                expect(response).to redirect_to(topics_path({:professor_id => topic.professor_id}))
+                @topic = Topic.find_by(title: 'título teste', description: 'descrição teste')
+                expect(response).to redirect_to(topic_path(@topic.id))
             end
             
             it 'comment exists in database' do

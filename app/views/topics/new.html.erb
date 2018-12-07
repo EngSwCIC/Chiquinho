@@ -1,9 +1,9 @@
-<% if @is_response %>
+<% if !@parent.blank? %>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
 		<div class="card mb-3">
 			<div class="card-header">
 				<h3><i class="fa fa-check-square-o"></i> Responder ao tópico </h3>
-				<%= @filtersmsg.html_safe %>
+				Em resposta à: <%= @parent.title.html_safe %>
 			</div>
 			<div class="card-body">
 				<%= form_for @topic, url: topics_path do |f| %>
@@ -28,7 +28,7 @@
 		<div class="card mb-3">
 			<div class="card-header">
 				<h3><i class="fa fa-check-square-o"></i> Criar novo tópico </h3>
-				<%= @filtersmsg.html_safe %>
+				<%= get_filters_string.html_safe %>
 			</div>
 			<div class="card-body">
 				<%= form_for @topic, url: topics_path do |f| %>

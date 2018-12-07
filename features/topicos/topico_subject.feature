@@ -17,8 +17,8 @@ Funcionalidade: Criar um tópico dentro do fórum de discussão da matéria
     |title|ES|
     |description|Muito interessante a matéria abordado no assunto|
     E clicar no botão "Enviar"
-    Então eu devo ser redirecionado para a página de tópicos
-    E ver os dados:
+    Dado que eu esteja na página de Fóruns
+    Então eu devo ver os dados:
     |title|ES|
 
   Cenário: Usuário abre um tópico de discussão no fórum da matéria sem estar autenticado
