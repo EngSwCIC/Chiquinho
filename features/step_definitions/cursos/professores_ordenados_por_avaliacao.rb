@@ -62,3 +62,12 @@ Então("devo ver {string} com {string} de score") do |professor, score|
   expect(page).to have_content("#{professor} #{score}")
 end
 
+Dado("que exista o departamento {string} sem professores") do |depto|
+  @department = Department.create(name: depto)
+end
+
+Então("não devo ver professores") do
+  expect(page.all("table#example1 tbody tr").count).to eq(0)
+end
+
+

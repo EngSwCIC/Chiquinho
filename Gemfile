@@ -76,7 +76,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd'
-  gem 'metric_fu'
+  gem 'metric_fu', git: 'https://github.com/metricfu/metric_fu.git'
 end
 
 

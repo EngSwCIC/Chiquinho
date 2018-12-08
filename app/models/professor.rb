@@ -1,3 +1,10 @@
+# Class to model a university professor.
+#
+# == Attributes
+# * +Name+ - The full name of the professor.
+# * +Office+ - The location of the professor's office in the university.
+#
+
 class Professor < ApplicationRecord
   has_one :course
   has_many :professor_subjects
@@ -6,20 +13,20 @@ class Professor < ApplicationRecord
   has_many :users, through: :professor_user_favorites
   has_many :subject_classes
   belongs_to :department, required: false
-  
+
+  # Computes the professor's score based on all reviews
+  #
+  # ==== Returns
+  #
+  # Returns an average of all reviews (trabalhos/tarefas/provas) of a professor
+  #
   def score
-    @score = 0
-    @count = 0
-    ProfessorSubjectUser.where(professor_id: self.id).each do |avaliation|
-      @score += 
-        (avaliation.trabalhos || 0) + 
-        (avaliation.provas || 0) + 
-        (avaliation.tarefas || 0)
-      @count = @count + 1
-    end
-    @score == 0 ? 0 : @score/3.0/@count;
+    @reviews = ProfessorSubjectUser.where(professor_id: self.id)
+    @score = @reviews.map{|x| x.sumscore}.sum
+    @score == 0 ? 0 : @score/@reviews.count;
   end
-  
+
+  # Computes the number of likes professor got
   def count_favorite
     ProfessorUserFavorite.where(professor_id: self.id).count
   end

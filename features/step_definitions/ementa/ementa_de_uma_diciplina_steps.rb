@@ -13,6 +13,10 @@ Então("devo ver a ementa da matéria") do
   expect(page).to have_content @ementa
 end
 
+Então("não devo ver a ementa da matéria") do
+  expect(page).to have_content "Ementa Não encontrada no MW"
+end
+
 Dado("que tenha ementa: {string}") do |string|
   @subject.update({"ementa": string})
   @ementa = string

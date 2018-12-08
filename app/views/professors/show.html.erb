@@ -27,7 +27,11 @@
   </div>
   <hr style="width: 50%;">
   <h2 style="text-align: center;"><%= @professor.name %></h2>
-  <h5 style="text-align: center;">Sala: <%= @professor.office %></h5>
+  <% unless @professor.office.nil? %>
+    <h5 style="text-align: center;"> Sala: <%= @professor.office %> </h5>
+  <% else %>
+    <h5 style="text-align: center;"> Sala: Não disponível </h5>
+  <% end %>
   <div class="professor-subjects" style="margin-top: 5%;">
     <h4>Matérias Ministradas</h4>
     <hr>

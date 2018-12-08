@@ -11,7 +11,7 @@ RSpec.describe SubjectClassesController, type: :controller do
     end
   end
 
-  describe "GET #add_class_schedule" do
+  describe "GET #add_class_schedule - happy case" do
     let(:subject_class){ FactoryBot.create(:subject_class)}
     let(:user) { FactoryBot.create(:user)}
 
@@ -35,6 +35,37 @@ RSpec.describe SubjectClassesController, type: :controller do
 
       expect(response).to redirect_to(user_schedule_path)
     end
+  end
 
+  describe "GET #add_class_schedule - sad case" do
+    let(:subject_class){ FactoryBot.create(:subject_class)}
+    let(:user) { FactoryBot.create(:user)}
+
+    it "try save a new schedule and redirect to schedule path" do
+      sign_in user
+
+      week_day = WeekDay.create(day: "Domingo")
+      class_hour = ClassHour.create(hour: "11:00")
+
+      params = {subject_class_id: subject_class.id,
+                week_day_id: week_day.id,
+                class_hour_id: class_hour.id}
+
+      ClassSchedule.create(params)
+
+      expect{
+        get :add_class_schedule, params: {id: subject_class.id}
+      }.to change(user.schedule.subjects, :count).by(0)
+
+      expect(response).to redirect_to(user_schedule_path)
+    end
+
+    it "try save a new schedule without signed user" do
+      expect{
+        get :add_class_schedule, params: {id: subject_class.id}
+      }.to change(user.schedule.subjects, :count).by(0)
+
+      expect(response).to redirect_to(root_path)
+    end
   end
 end
