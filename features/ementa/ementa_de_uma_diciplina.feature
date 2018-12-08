@@ -15,3 +15,12 @@ Funcionalidade: ementa_de_uma_diciplina
     E que tenha ementa: "Ementa da matéria..."
     E que eu estou na página dessa matéria
     Então devo ver a ementa da matéria
+
+  Cenário: Visualizar a ementa de uma matéria
+    Dado que eu tenha uma matéria criada com os atributos:
+      |code   |123                        |
+      |name   |MATERIA QUE NAO TEM EMENTA |
+      |credits|002 002 000 004            |
+      |area   |AC                         |
+    E que eu estou na página dessa matéria
+    Então não devo ver a ementa da matéria

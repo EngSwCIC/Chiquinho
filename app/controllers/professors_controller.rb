@@ -3,7 +3,7 @@
 class ProfessorsController < ApplicationController
   include ProfessorsHelper
 
-    # Show professors
+    # Show all professors
     def index
       @favorite_professors = current_user ? current_user.favorite_professors : []
       @professors = Professor.all - @favorite_professors
