@@ -6,7 +6,7 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :turn
       t.integer :classification,default: 0
-
+      
       t.timestamps
     end
   end
