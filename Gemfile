@@ -7,6 +7,7 @@ ruby '2.4.3'
 gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'awesome_print'
 
 gem 'aws-sdk-s3', require: false
 
