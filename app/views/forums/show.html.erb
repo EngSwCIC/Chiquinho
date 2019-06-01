@@ -3,25 +3,21 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>#</th>
-          <th>#forum</th>
-          <th>#curso</th>
-          <th>Título</th>
-          <th>Descrição</th>
+          <th> Título </th>
+          <th> Descrição </th>
+          <th> Usuário </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <% @forum.topics.each do |topic| %>
             <tr>
-              <td><%= topic.id %></td>
-              <td><%= topic.forum_id %></td>
-              <td><%= topic.forum.course_id %></td>
-
               <td><%= topic.title %></td>
               <td><%= topic.description %></td>
+              <td><%= topic.user.email %></td>
               <% if user_signed_in? %>
                 <% if topic.user_id == current_user.id %>
+                  <td><%= link_to 'Editar', edit_course_forum_topic_path(@forum.course_id,@forum.id,topic.id) %>
                   <td><%= link_to 'Deletar', course_forum_topic_path(@forum.course_id,@forum.id,topic.id), method: :delete, data: {confirm: "Tem certeza?"}%>
                 <% end %>
               <% end %>
