@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :subjects
   
   resources :courses do
-    resource :forums, only: [:show] do
-      resource :topics
+    resources :forums, only: [:show] do
+      resources :topics
     end
   end
 

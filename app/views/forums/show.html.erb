@@ -17,8 +17,14 @@
               <td><%= topic.id %></td>
               <td><%= topic.forum_id %></td>
               <td><%= topic.forum.course_id %></td>
+
               <td><%= topic.title %></td>
               <td><%= topic.description %></td>
+              <% if user_signed_in? %>
+                <% if topic.user_id == current_user.id %>
+                  <td><%= link_to 'Deletar', course_forum_topic_path(@forum.course_id,@forum.id,topic.id), method: :delete, data: {confirm: "Tem certeza?"}%>
+                <% end %>
+              <% end %>
             </tr>
           <% end %>
         </tr>
@@ -26,4 +32,4 @@
     </table>
   </div>
 </div>
-<%= link_to 'Criar novo tópico',new_course_forums_topics_path%>
+<%= link_to 'Criar novo tópico',new_course_forum_topic_path(@forum, @forum.id) %>
