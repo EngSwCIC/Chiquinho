@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :forums, only: [:index]
+
   resources :department, only: [:index, :show]
   resources :professors
   resources :courses
