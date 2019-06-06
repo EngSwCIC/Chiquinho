@@ -1,0 +1,24 @@
+<div class="panel-body">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th> Título </th>
+          <th> Curso </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @courses.each do |course| %>
+            <% course.forum.topics.each do |topic| %>
+              <tr>
+                <td><%= topic.title %></td>
+                <td><%= course.name %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
