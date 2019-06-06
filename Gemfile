@@ -59,6 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', :require => false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
