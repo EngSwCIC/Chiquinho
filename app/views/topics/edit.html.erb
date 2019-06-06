@@ -1,3 +1,26 @@
-<h1>Edit topic</h1>
-
-<%= render 'form', topic: @topic %>
+<div id="page-wrapper" style="min-height: 539px;">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Editar Tópico</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <%= form_for @topic, url: course_forum_topic_path(@forum,@forum,@topic) do |f| %>
+                <%= f.label :title %><br />
+                <%= f.text_field :title, id: :title, class: "form-control" %><br />
+                <%= f.label :description %><br />
+                <%= f.text_area :description, id: :description, class: "form-control" %>
+                <%= f.submit 'Enviar' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
