@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
     @topic.forum_id = @forum.id
     @topic.user_id = current_user.id
     if @topic.save
-      redirect_to course_forum_path(params[:course_id], params[:forum_id])
+      redirect_to course_forum_topics_path
     else
       render :new
     end
