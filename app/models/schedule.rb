@@ -1,6 +1,20 @@
 class Schedule < ApplicationRecord
   belongs_to :user
-  has_and_belongs_to_many :subjects
+  has_many :schedule_subjects
+  has_many :subjects, through: :schedule_subjects
+
+  SCHEDULES = %i[time_8 time_10 time_12 time_14 time_16 time_19 time_21].freeze
+
+  def find_and_remove_subject(subject)
+    SCHEDULES.each do |schedule|
+      send(schedule).each_with_index do |_day, i|
+        self.send(schedule)[i] = nil if self.send(schedule)[i] == subject
+      end
+    end
+    save
+    subject_id = subjects.find_by(name: subject).id
+    schedule_subjects.find_by(subject_id: subject_id).destroy
+  end
 
   def get_avg
     @trabalhos = 0
