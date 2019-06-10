@@ -163,11 +163,82 @@
 
         <% end %>
       </li>
+      <li class="float-left">
+        <button type="button" class="button-menu-mobile"  data-toggle="modal" data-target="#myModal">
+          <i class="fa fa-fw fa-filter"></i>
+        </button>
+      </li>
     </ul>
 
   </nav>
 
 </div>
+ 
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Filtro</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+        <%= form_tag search_subject_path, class: 'form-inline md-form form-sm', method: :get do %>
+          <%= text_field_tag :name, nil, id: 'search-bar',
+                                         class: 'form-control form-control-sm mr-3 w-75',
+                                         placeholder: 'Nome da matéria',
+                                         aria: { label: 'Search' },
+                                         style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
+          %>
+          <%= text_field_tag :professors, nil, id: 'search-bar',
+                                         class: 'form-control form-control-sm mr-3 w-75',
+                                         placeholder: 'Nome do professor',
+                                         aria: { label: 'Search' },
+                                         style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
+          %>
+          <!--
+          <%= text_field_tag :code, nil, id: 'search-bar',
+                                         class: 'form-control form-control-sm mr-3 w-75',
+                                         placeholder: 'Código',
+                                         aria: { label: 'Search' },
+                                         style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
+          %>
+          <%= text_field_tag :area, nil, id: 'search-bar',
+                                         class: 'form-control form-control-sm mr-3 w-75',
+                                         placeholder: 'Área',
+                                         aria: { label: 'Search' },
+                                         style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
+          %>-->
+          
+          <div class="text-center">
+            <%= submit_tag 'Pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-light' %>
+          </div>
+
+        <% end %>
+
+        </div>
+      <!-- 
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Pesquisar</button>
+        </div>
+      -->
+        
+        <!-- Modal footer
+        <div class="modal-footer">
+          <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div> -->
+        
+      </div>
+    </div>
+  </div>
+
 <div class="left main-sidebar">
 
   <div class="sidebar-inner leftscroll">
