@@ -173,22 +173,22 @@
   </nav>
 
 </div>
- 
+
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Filtro</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
-          
-        <%= form_tag search_subject_filter_path, class: 'form-inline md-form form-sm', method: :get do %>
+
+        <%= form_tag search_subject_path, class: 'form-inline md-form form-sm', method: :get do %>
           <%= text_field_tag :name, nil, id: 'search-bar',
                                          class: 'form-control form-control-sm mr-3 w-75',
                                          placeholder: 'Nome da matéria',
@@ -214,7 +214,7 @@
                                          aria: { label: 'Search' },
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
           %>-->
-          
+
           <div class="text-center">
             <%= submit_tag 'Pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-light' %>
           </div>
@@ -222,19 +222,19 @@
         <% end %>
 
         </div>
-      <!-- 
+      <!--
         <div class="text-center">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Pesquisar</button>
         </div>
       -->
-        
+
         <!-- Modal footer
         <div class="modal-footer">
           <div class="text-center">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div> -->
-        
+
       </div>
     </div>
   </div>
