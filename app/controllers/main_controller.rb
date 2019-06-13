@@ -58,13 +58,15 @@ class MainController < ApplicationController
   end
 
   def search_subject
-    #puts("SEARCH SUBJECT PROFESSORS")
-    #puts(params[:professors])
-    #prof = Professor.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:professors].downcase)}%")
-    #puts prof
-
     @subjects = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:name].downcase)}%")
   end
+
+  def search_subject_filter
+    @subjects = Subject.joins(:professors).where("professors.name LIKE '%" + params[:professor].upcase + "%'")
+    
+    #@subjects = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:name].downcase)}%")
+  end
+  
 
   private
 

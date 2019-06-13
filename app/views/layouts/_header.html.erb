@@ -188,14 +188,14 @@
         <!-- Modal body -->
         <div class="modal-body">
           
-        <%= form_tag search_subject_path, class: 'form-inline md-form form-sm', method: :get do %>
+        <%= form_tag search_subject_filter_path, class: 'form-inline md-form form-sm', method: :get do %>
           <%= text_field_tag :name, nil, id: 'search-bar',
                                          class: 'form-control form-control-sm mr-3 w-75',
                                          placeholder: 'Nome da matéria',
                                          aria: { label: 'Search' },
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
           %>
-          <%= text_field_tag :professors, nil, id: 'search-bar',
+          <%= text_field_tag :professor, nil, id: 'search-bar',
                                          class: 'form-control form-control-sm mr-3 w-75',
                                          placeholder: 'Nome do professor',
                                          aria: { label: 'Search' },
