@@ -1,19 +1,39 @@
-<table>
-    <thead>
+<div class="panel-body">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
         <tr>
-            <th>Título</th>
-            <th>Descrição</th>
+          <th> Título </th>
+          <th> Descrição </th>
+          <th> Usuário </th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr>
-            <% @forum.topics.each do |topic| %>
-                <tr>
-                    <td><%= topic.title %></td>
-                    <td><%= topic.description %></td>
-                </tr>
-            <% end %>
+          <% @forum.topics.each do |topic| %>
+            <tr>
+              <td><%= topic.title %></td>
+              <td><%= topic.description %></td>
+              <td><%= topic.user.email %></td>
+              <% if user_signed_in? %>
+                <% if topic.user_id == current_user.id %>
+                  <td>
+                    <%=link_to edit_course_forum_topic_path(@forum.course_id,@forum.id,topic.id),class:'btn btn-success btn-circle' do %> 
+                      <i class="fa fa-edit"></i>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%=link_to course_forum_topic_path(@forum.course_id,@forum.id,topic.id),method: :delete,class:'btn btn-danger btn-circle', data: {confirm: "Tem certeza?"} do %> 
+                      <i class="fa fa-minus"></i>
+                    <% end %>
+                  </td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
         </tr>
-    </tbody>
-</table>
-<%= link_to 'Criar novo tópico',new_course_forums_topics_path %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%= link_to 'Criar novo tópico',new_course_forum_topic_path(@forum, @forum.id), class:'btn btn-primary'%>

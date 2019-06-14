@@ -1,6 +1,10 @@
 class ForumsController < ApplicationController
-
-    def show
-        @forum = Forum.find_by(course_id: params[:course_id])
-    end
+  
+  def index
+    @courses = Course.all
+  end
+  
+  def show
+    @forum = Forum.find(params[:id])
+  end
 end

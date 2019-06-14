@@ -8,6 +8,10 @@ gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 
+gem 'awesome_print'
+#gem 'kaminari'
+#gem 'pagy'
+
 gem 'aws-sdk-s3', require: false
 
 # Use Puma as the app server
@@ -55,6 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', :require => false
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
