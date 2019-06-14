@@ -2,6 +2,7 @@ Dado("que estou na página do curso de {string}") do |string|
   course_params = {kind: "Presencial", code: 370, name: "CIÊNCIA DA COMPUTAÇÃO", turn: "Diurno", classification: "exatas", opcode: nil}
     Course.create(course_params)
     @course = Course.find_by(name: string)
+    #puts @course.id
     visit course_path(@course)
 end
 
@@ -31,7 +32,13 @@ Então("devo ir para a página de tópicos") do
   expect(current_path).to eq(course_forum_path(@course, @course)) 
 end
 
+Então("enxergar o meu tópico criado com os dados:") do |table|
+  table.rows_hash do |chave,valor|
+    expect(page).to eq(valor) 
+  end
+end
 
+=begin
 Então("enxergar o meu tópico criado com os dados:") do |table|
   data = table.hashes
   Ttopics = []
@@ -43,3 +50,4 @@ Então("enxergar o meu tópico criado com os dados:") do |table|
     end
   end
 end
+=end
