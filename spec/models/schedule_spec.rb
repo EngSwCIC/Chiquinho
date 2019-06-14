@@ -24,6 +24,15 @@ RSpec.describe Schedule, type: :model do
     let(:subject){ FactoryBot.create(:subject) }
 
     before do
+      schedule = Schedule.new(
+        time_8: Array.new(6),
+        time_10: Array.new(6),
+        time_12: Array.new(6),
+        time_14: Array.new(6),
+        time_16: Array.new(6),
+        time_19: Array.new(6),
+        time_21: Array.new(6)
+      )
       schedule.user = user
       schedule.time_8 << subject.name
       ScheduleSubject.create(subject: subject, schedule: schedule)
@@ -31,7 +40,8 @@ RSpec.describe Schedule, type: :model do
     end
     it "should be deleted" do
       user.schedule.find_and_remove_subject(subject.name)
-      expect(schedule.time_8).to eq([nil])
+      byebug
+      expect(user.schedule.time_8).to eq([nil, nil, nil, nil, nil, nil, nil])
     end
   end
 end
