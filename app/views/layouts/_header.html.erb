@@ -159,13 +159,14 @@
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px;'
           %>
 
-          <%= submit_tag 'Pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-outline-light' %>
+          <%= submit_tag 'pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-outline-light' %>
 
         <% end %>
       </li>
       <li class="float-left">
-        <button type="button" class="button-menu-mobile"  data-toggle="modal" data-target="#myModal">
-          <i class="fa fa-fw fa-filter"></i>
+        <button type="button" class="button-menu-mobile" name="filter"  id="filter" data-toggle="modal" data-target="#myModal">
+          filter
+          <!--<i class="fa fa-fw fa-filter"></i> -->
         </button>
       </li>
     </ul>
