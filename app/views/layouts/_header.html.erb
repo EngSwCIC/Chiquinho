@@ -202,13 +202,12 @@
                                          aria: { label: 'Search' },
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
           %>
-          <!--
           <%= text_field_tag :codigo, nil, id: 'search-bar',
                                          class: 'form-control form-control-sm mr-3 w-75',
                                          placeholder: 'Código',
                                          aria: { label: 'Search' },
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
-          %> -->
+          %> 
           <%= text_field_tag :area, nil, id: 'search-bar',
                                          class: 'form-control form-control-sm mr-3 w-75',
                                          placeholder: 'Área',
@@ -216,7 +215,7 @@
                                          style: 'border-radius: 20px !important; width: 20rem !important; padding-left: 20px; margin: 5px 20px'
           %>
 
-          <div class="text-center">
+          <div class="text-center" style="margin:auto;">
             <%= submit_tag 'Pesquisar', id: 'search-subject-button', class: 'btn btn-sm btn-light' %>
           </div>
 

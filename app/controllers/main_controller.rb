@@ -59,7 +59,7 @@ class MainController < ApplicationController
 
   def search_subject
     @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%' ")
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
   end
 
   private
