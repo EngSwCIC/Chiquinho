@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   has_many :users_that_liked, through: :user_like_comments, class_name: 'User'
   has_one :professor_subject
   has_one :subject
+  has_one :topic
 
 
   cattr_accessor :current_user

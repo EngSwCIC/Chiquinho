@@ -6,6 +6,7 @@
           <th> Título </th>
           <th> Descrição </th>
           <th> Usuário </th>
+          <th> Link </th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +16,7 @@
               <td><%= topic.title %></td>
               <td><%= topic.description %></td>
               <td><%= topic.user.email %></td>
+              <td><%= link_to "detalhes", course_forum_topic_path(topic.forum, topic.forum, topic) %> </td>
               <% if user_signed_in? %>
                 <% if topic.user_id == current_user.id %>
                   <td>
