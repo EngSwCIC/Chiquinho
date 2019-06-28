@@ -10,12 +10,15 @@ Rails.application.routes.draw do
   
   resources :courses do
     resources :forums, only: [:show] do
-      resources :topics
+      resources :topics do
+        resources :comments
+      end
     end
   end
 
   resources :forums, only: [:index]
 
+  
   resources :department, only: [:index, :show]
   resources :professors
   resources :courses

@@ -1,7 +1,10 @@
 class TopicsController < ApplicationController
   
   before_action :authenticate_user!, only: [:new, :create, :destroy]
-  before_action :set_topic, only: [:edit, :update, :destroy]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
+
+  def show
+  end
 
   def new
     @topic = Topic.new
@@ -62,7 +65,7 @@ class TopicsController < ApplicationController
   end
 
   def set_topic
-    @topic = Topic.find(params[:id])  
+    @topic = Topic.find(params[:id])
   end
 
 end
