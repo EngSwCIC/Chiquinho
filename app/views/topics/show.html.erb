@@ -12,11 +12,15 @@
         <% @topic.comments.each do |comment| %> 
           <div class="comentario-header">
             <i class="fa fa-user-circle"></i> <%= comment.user.full_name %>
-            <%=link_to course_forum_topic_comment_path(@topic.forum, @topic.forum, @topic, comment), method: :delete,class:'btn btn-danger btn-circle btn-sm', style:'float: right' do %> 
-              <i class="fa fa-minus"></i>
-            <% end %>
-            <%=link_to "#", class:'btn btn-success btn-circle btn-sm', style:'float: right' do %> 
-              <i class="fa fa-edit"></i>
+            <% if user_signed_in? %>
+              <% if comment.user_id == current_user.id %>
+                <%=link_to course_forum_topic_comment_path(@topic.forum, @topic.forum, @topic, comment), method: :delete,class:'btn btn-danger btn-circle btn-sm', style:'float: right' do %> 
+                  <i class="fa fa-minus"></i>
+                <% end %>
+                <%=link_to edit_course_forum_topic_comment_path(@topic.forum, @topic.forum, @topic, comment), class:'btn btn-success btn-circle btn-sm', style:'float: right' do %> 
+                  <i class="fa fa-edit"></i>
+                <% end %>
+              <% end %> 
             <% end %>
           </div>
           <div class="comentario-body">
