@@ -4,9 +4,7 @@ RSpec.describe CommentsController, type: :controller do
     let(:valid_attributes) {
         skip("Add a hash of attributes valid for your model")
     }
-    
     let(:valid_session) { {} }
-    
     describe 'POST create' do
         let(:user) { FactoryBot.create(:user)}
         context 'criar comentário no topico' do
@@ -32,7 +30,6 @@ RSpec.describe CommentsController, type: :controller do
                     expect(response).to redirect_to(course_forum_topic_path(@course.id, @forum.id, @topic.id))
                 end
             end
-            
             context 'usuário não ta logado' do
                 before do
                     request.env['HTTP_REFERER'] = course_forum_topic_path(@course.id, @forum.id, @topic.id)
@@ -46,10 +43,25 @@ RSpec.describe CommentsController, type: :controller do
                     expect(response).to redirect_to(new_user_session_path)
                 end
             end
+
+            context 'parametros invalidos' do
+                before do
+                    sign_in user
+                    request.env['HTTP_REFERER'] = course_forum_topic_path(@course.id, @forum.id, @topic.id)
+                    post :create, params: {comment: comment_params}
+                end
+                let(:comment_params) do
+                    {content: '', user_id: user.id, topic_id: @topic.id}
+                end
+
+                it 'return http status 302 and redirect to subject page' do
+                    expect(response).to have_http_status(302)
+                    expect(response).to redirect_to(course_forum_topic_path(@course.id, @forum.id, @topic.id))
+                    expect(request.flash[:error]).not_to be_nil
+                end
+            end
         end
     end
-
-
 
     describe 'DELETE destroy' do 
         let(:user){FactoryBot.create(:user)}
@@ -166,6 +178,7 @@ RSpec.describe CommentsController, type: :controller do
                 it 'error message' do
                     expect(request.flash[:error]).not_to be_nil
                 end
+
             end
         end
     end
