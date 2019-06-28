@@ -1,3 +1,17 @@
+  <div class="card" style="margin-top: 10px">
+    <h5 class="card-header">
+      <%= @topic.title %>
+      <i class="fa fa-user-circle" style="float: right"></i>
+      <div style="padding-left:1px; clear:both;">  
+      <div style="float: right"><%= @topic.user.full_name%></div>
+    </h5>
+    <div class="card-body">
+      <div class="comments">
+        <h5> <%= @topic.description %> </h5>
+      </div>
+    </div>
+  </div>
+  
   <div class="card" style="margin-top: 10px;">
     <h5 class="card-header">
       Comentários
