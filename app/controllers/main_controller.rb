@@ -59,8 +59,8 @@ class MainController < ApplicationController
 
   def search_subject
     puts "CODIGO"
-    puts params[:code]
-    @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%' AND subjects.code = " + params[:code])
+    puts params[:codigo]
+    @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%' AND subjects.credits LIKE '00"+ params[:creditos] +"%' AND subjects.code = " + params[:codigo])
                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   end
 
