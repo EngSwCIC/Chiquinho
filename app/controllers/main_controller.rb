@@ -58,10 +58,21 @@ class MainController < ApplicationController
   end
 
   def search_subject
-    puts "CODIGO"
-    puts params[:codigo]
-    @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%' AND subjects.credits LIKE '00"+ params[:creditos] +"%' AND subjects.code = " + params[:codigo])
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    if params[:professor] == nil
+      @subjects = Subject.where("subjects.name LIKE '%" + params[:name].upcase + "%'")
+    elsif params[:name] != "" || params[:professor] != "" || params[:area] != "" || params[:creditos] != "" ||  params[:codigo] != "" 
+      pesquisa = ""
+      if(params[:creditos] != "")
+        pesquisa = pesquisa + " AND subjects.credits LIKE '00"+ params[:creditos] + "%' "
+      end
+      if(params[:codigo] != "")
+        pesquisa = pesquisa + " AND subjects.code = " + params[:codigo]
+      end
+      @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%'")
+    else 
+      flash[:danger] = "Nenhum filtro aplicado"
+      redirect_to root_path  
+    end                                                                                                                                                                                                                                                                                                                                                                                                                                       
   end
 
   private
