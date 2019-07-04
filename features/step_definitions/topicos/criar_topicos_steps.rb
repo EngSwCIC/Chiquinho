@@ -6,10 +6,6 @@ Dado("que estou na página do curso de {string}") do |string|
     visit course_path(@course)
 end
 
-Quando("eu clicar no botão Forum") do
-  find("a", text: /\AForum\z/).click
-end
-
 Quando("eu pressionar o botão Criar novo tópico") do
   find("a", text: /\ACriar novo tópico\z/).click
 end
@@ -29,7 +25,7 @@ Quando("eu pressionar o botão enviar") do
 end
 
 Então("devo ir para a página de tópicos") do
-  expect(current_path).to eq(course_forum_path(@course, @course)) 
+  expect(current_path).to eq(course_forum_path(@course, @course.forum)) 
 end
 
 Então("enxergar o meu tópico criado com os dados:") do |table|
@@ -38,16 +34,3 @@ Então("enxergar o meu tópico criado com os dados:") do |table|
   end
 end
 
-=begin
-Então("enxergar o meu tópico criado com os dados:") do |table|
-  data = table.hashes
-  Ttopics = []
-  data.each do |row|
-    row.each do |key, value|
-      if key == 'CiC é um curso com muita evasão'
-        Ttopics << value
-      end
-    end
-  end
-end
-=end

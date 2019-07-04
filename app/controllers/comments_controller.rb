@@ -42,10 +42,7 @@ class CommentsController < ApplicationController
         if @comment.update(comments_params)
           format.html { redirect_to course_forum_topic_path(params[:course_id], params[:forum_id], params[:topic_id]), notice: 'comment was successfully updated.' }
           format.json { render :show, status: :ok, location: @comment }
-        else
-          format.html { render :edit }
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-        end 
+        end
       end
     end
   end

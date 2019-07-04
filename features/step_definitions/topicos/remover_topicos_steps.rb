@@ -11,7 +11,8 @@ Dado("que eu tenha criado o tópico {string}") do |string|
 end
 
 Quando("eu clicar no botão de Forum") do
-  find("a", text: /\AForum\z/).click
+  #find("a", text: /\AForum\z/).click
+  visit course_forum_path(@course, @course.forum)
 end
 
 Quando("eu clicar no botão de remover em um tópico criado por mim") do
@@ -25,5 +26,5 @@ Então("o tópico deverá ser removido") do
 end
 
 Então("eu serei redirecionado para a página do fórum do curso") do
-  expect(current_path).to eq(course_forum_path(@course, @course)) 
+  expect(current_path).to eq(course_forum_path(@course, @course.forum)) 
 end

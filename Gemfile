@@ -48,6 +48,8 @@ gem 'font-awesome-rails'
 #autenticação
 gem 'devise'
 
+gem "metric_fu"
+
 gem 'gemaina', '~> 1.0'
 
 # Reduces boot times through caching; required in config/boot.rb
