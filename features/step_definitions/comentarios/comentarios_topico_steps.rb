@@ -8,15 +8,16 @@ Dado("que estou na página do fórum do curso de {string}") do |string|
   @topic = Topic.new(topic_params)
   @topic.user = @user
   @topic.forum = @course.forum
-  @topic.save
+  @topic.save!
   visit course_forum_path(@course.id, @course.forum)
-  #expect(page).to have_content("Título")
+  expect(page).to have_content("Título")
 end
 
 Quando("eu clicar no botão Comentários") do
-  path = course_forum_topic_path(@course.id, @course.forum, @topic.id)
+  path = course_forum_topic_path(@course.id, @course.forum.id, @topic.id)
   link = "a[href=\'#{path}\']"
   find(link,match: :first).click
+  expect(current_path).to eq(course_forum_topic_path(@course.id, @course.forum, @topic.id))
 end
 
 Quando("eu digitar o comentário:") do |table|
@@ -29,14 +30,37 @@ Quando("eu digitar o comentário:") do |table|
 end
 
 Quando("eu pressionar o botão enviar comentário") do
-  find("#comment_topic_id").click
+  click_button("Enviar Comentario")
 end
 
 Então("devo ir para a página do tópico") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(current_path).to eq(course_forum_topic_path(@course.id, @course.forum, @topic.id))
 end
 
 Então("enxergar o meu comentário com os dados:") do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+  table.rows_hash do |chave,valor|
+    expect(page).to eq(valor)
+  end
+end
+
+# SAD PATH: USUÁRIO NÃO ESTÁ LOGADO
+Dado("que estou na página do fórum do curso {string}") do |string|
+  course_params = {kind: "Presencial", code: 370, name: "CIÊNCIA DA COMPUTAÇÃO", turn: "Diurno", classification: "exatas", opcode: nil}
+  Course.create(course_params)
+  @course = Course.find_by(name: string)
+  user_params = {email: "admin@admin.com", password:"123456", first_name:"admin", last_name:"aidmin", matricula:"12/3456789"}
+  @user = User.new(user_params)
+  @user.course = @course
+  @user.save!
+  topic_params = {title: string, description: "oi"}
+  @topic = Topic.new(topic_params)
+  @topic.user = @user
+  @topic.forum = @course.forum
+  @topic.save!
+  visit course_forum_path(@course.id, @course.forum)
+  expect(page).to have_content("Título")
+end
+
+Então("devo ir para a página de login") do
+  expect(current_path).to eq(user_session_path)
 end
