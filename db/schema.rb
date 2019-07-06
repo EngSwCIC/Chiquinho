@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_02_121248) do
+ActiveRecord::Schema.define(version: 2019_06_27_152737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
     t.bigint "user_id"
     t.bigint "professor_subject_id"
     t.bigint "subject_id"
+    t.bigint "topic_id"
     t.index ["professor_subject_id"], name: "index_comments_on_professor_subject_id"
     t.index ["subject_id"], name: "index_comments_on_subject_id"
+    t.index ["topic_id"], name: "index_comments_on_topic_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -182,7 +184,9 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
     t.bigint "forum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["forum_id"], name: "index_topics_on_forum_id"
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "user_like_comments", force: :cascade do |t|
@@ -219,6 +223,7 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
 
   add_foreign_key "comments", "professor_subjects"
   add_foreign_key "comments", "subjects"
+  add_foreign_key "comments", "topics"
   add_foreign_key "comments", "users"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "subjects"
@@ -236,6 +241,7 @@ ActiveRecord::Schema.define(version: 2018_07_02_121248) do
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"
   add_foreign_key "topics", "forums"
+  add_foreign_key "topics", "users"
   add_foreign_key "user_like_comments", "comments"
   add_foreign_key "user_like_comments", "users"
   add_foreign_key "users", "courses"
