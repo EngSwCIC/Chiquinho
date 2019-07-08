@@ -8,7 +8,7 @@ class Schedule < ApplicationRecord
   def find_and_remove_subject(subject)
     SCHEDULES.each do |schedule|
       send(schedule).each_with_index do |_day, i|
-        self.send(schedule)[i] = nil if self.send(schedule)[i] == subject
+        send(schedule)[i] = nil if send(schedule)[i] == subject
       end
     end
     save
