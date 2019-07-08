@@ -29,10 +29,12 @@
             <% if user_signed_in? %>
               <% if comment.user_id == current_user.id %>
                 <%=link_to course_forum_topic_comment_path(@topic.forum, @topic.forum, @topic, comment), method: :delete,class:'btn btn-danger btn-circle btn-sm', style:'float: right' do %> 
-                  <i class="fa fa-minus"></i>
+                  <!--<i class="fa fa-minus"></i>-->
+                  Deletar
                 <% end %>
                 <%=link_to edit_course_forum_topic_comment_path(@topic.forum, @topic.forum, @topic, comment), class:'btn btn-success btn-circle btn-sm', style:'float: right' do %> 
-                  <i class="fa fa-edit"></i>
+                  Editar
+                 <!-- <i class="fa fa-edit"></i>-->
                 <% end %>
               <% end %> 
             <% end %>
