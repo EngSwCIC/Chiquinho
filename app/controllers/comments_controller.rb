@@ -21,12 +21,12 @@ class CommentsController < ApplicationController
     if @comment.user_id == current_user.id 
       @comment.destroy
       respond_to do |format|
-        format.html { redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário foi removido com sucesso.' }
+        format.html { redirect_to request.referrer, notice: 'O comentário foi removido com sucesso.' }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário não foi removido!' }
+        format.html { redirect_to request.referrer, notice: 'O comentário não foi removido.' }
         format.json { head :no_content }
       end
     end
