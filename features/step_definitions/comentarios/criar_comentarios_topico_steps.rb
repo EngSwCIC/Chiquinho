@@ -34,7 +34,7 @@ Quando("eu pressionar o botão enviar comentário") do
 end
 
 Então("devo ir para a página do tópico") do
-  expect(current_path).to eq(course_forum_topic_path(@course.id, @course.forum, @topic.id))
+  expect(current_path).to eq(course_forum_topic_path(@course.id, @course.forum.id, @topic.id))
 end
 
 Então("enxergar o meu comentário com os dados:") do |table|

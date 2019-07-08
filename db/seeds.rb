@@ -166,6 +166,8 @@ departments = [{code: "052", initial: "CDT", name: "CENTRO DE APOIO AO DESENVOLV
                {code: "560", initial: "IQD",	 name: "INSTITUTO DE QUÍMICA"},
                {code: "589", initial: "REL",	 name: "INSTITUTO DE RELAÇÕES INTERNACIONAIS"},
                {code: "372", initial: "NMT",	 name: "NÚCLEO DE MEDICINA TROPICAL"}]
+users = [{email: "admin@admin.com", password:"a123456", first_name:"admin", last_name:"aidmin", matricula:"12/3456789"},
+         {email: "user@user.com", password:"u123456", first_name:"user", last_name:"usuario", matricula:"98/7654321"}]
 
 ProfessorSubject.delete_all
 CourseSubject.delete_all
@@ -173,6 +175,21 @@ Professor.delete_all
 Course.delete_all
 Subject.delete_all
 Department.delete_all
+
+
+=begin
+puts "Criando usuários"
+users.each do |user|
+  @user = User.new
+  user.each do |key,value|
+    @user[key] = value
+  end
+  @user.save
+end
+
+puts "Criando tópicos"
+=end
+
 
 puts "Populando Departamentos"
 departments.each do |department|
