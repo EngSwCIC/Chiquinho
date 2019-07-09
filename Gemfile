@@ -81,6 +81,7 @@ group :development do
   gem 'flog'
   gem 'annotate'
   gem 'rubocop', require: false
+  gem 'rubocop-rspec'
 end
 
 
