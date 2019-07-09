@@ -5,7 +5,7 @@ Funcionalidade: Apagar comentário feito
 -Eu,como usário autenticado, ou não
 -Quero apagar um comentário feito por mim sobre um tópico de discussão do curso
 
-#Happy Path
+#Caminho feliz
   Cenario: Apagar um comentário sobre o tópico
     Dado que eu tenha me cadastrado e me autenticado
     E que estou na página do fórum do curso de "CIÊNCIA DA COMPUTAÇÃO"
