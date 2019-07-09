@@ -12,5 +12,5 @@ Funcionalidade: Apagar comentário feito
     E que eu tenha criado o comentário
     Quando eu clicar no botão Comentários
     E eu clicar no botão de remover comentário
-    Então o comentário deve ser removido
-    E devo ir para a página do tópico atual
+    Então Na pagina do topico o comentário deve ser removido
+    
