@@ -13,4 +13,11 @@ Funcionalidade: Apagar comentário feito
     Quando eu clicar no botão Comentários
     E eu clicar no botão de remover comentário
     Então Na pagina do topico o comentário deve ser removido
-    
+
+#Caminho triste
+  Cenario: Apagar um comentário sem estar logado
+    Dado que estou na página do fórum do curso "CIÊNCIA DA COMPUTAÇÃO"
+    E exista um comentário criado
+    Quando eu clicar no botão Comentários
+    Então devo ir para a página do tópico
+    E não enxergar nenhum botão de deletar
