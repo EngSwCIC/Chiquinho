@@ -14,12 +14,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
+# Grade do aluno
 class Schedule < ApplicationRecord
   belongs_to :user
   has_many :schedule_subjects
   has_many :subjects, through: :schedule_subjects
 
+  # Horarios de inicio da grade
   SCHEDULES = %i[time_8 time_10 time_12 time_14 time_16 time_19 time_21].freeze
 
   # Itera pela grade para encontrar um dado subject e quando encontrado limpa o campo
