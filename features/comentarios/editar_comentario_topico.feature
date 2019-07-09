@@ -18,3 +18,11 @@ Funcionalidade: Editar comentário feito
     Então devo ir para a página do tópico escolhido
     E o comentario deverá ser editado:
     |content|Editado|
+
+#Sad Path
+  Cenario: Editar um comentário sem estar logado
+    Dado que estou na página do fórum do curso "CIÊNCIA DA COMPUTAÇÃO"
+    E exista um comentário criado
+    Quando eu clicar no botão Comentários
+    Então devo ir para a página do tópico
+    E não enxergar nenhum botão de editar

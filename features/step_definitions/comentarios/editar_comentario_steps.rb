@@ -21,3 +21,8 @@ Então("o comentario deverá ser editado:") do |table|
     expect(page).to eq(valor)
   end
 end
+
+#Sad Path
+Então("não enxergar nenhum botão de editar") do
+  expect(page).not_to have_link('Editar', href:edit_course_forum_topic_comment_path(@course.id, @course.forum, @topic.id, @comment.id))
+end
