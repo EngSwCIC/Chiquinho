@@ -8,12 +8,16 @@ class Schedule < ApplicationRecord
   def find_and_remove_subject(subject)
     SCHEDULES.each do |schedule|
       send(schedule).each_with_index do |_day, i|
-        send(schedule)[i] = nil if send(schedule)[i] == subject
+        remove_subject(schedule, subject, i)
       end
     end
-    save
     subject_id = subjects.find_by(name: subject).id
     schedule_subjects.find_by(subject_id: subject_id).destroy
+  end
+
+  def remove_subject(schedule, subject, index)
+    send(schedule)[index] = nil if send(schedule)[index] == subject
+    save
   end
 
   def get_avg
