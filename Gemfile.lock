@@ -427,6 +427,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker!
+  flog
   font-awesome-rails
   gemaina (~> 1.0)
   jbuilder (~> 2.5)

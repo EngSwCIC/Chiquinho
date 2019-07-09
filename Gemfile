@@ -65,6 +65,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'railroady'
+  gem 'flog'
 end
 
 group :test do
