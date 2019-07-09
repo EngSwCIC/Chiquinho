@@ -1,0 +1,20 @@
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - "app/views/**/*"
+    - "config/**/*.rb"
+    - "bin/*"
+    - "db/**/*.rb"
+    - "lib/**/*.rake"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
