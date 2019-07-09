@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id         :bigint           not null, primary key
+#  time_8     :string           default([]), is an Array
+#  time_10    :string           default([]), is an Array
+#  time_12    :string           default([]), is an Array
+#  time_14    :string           default([]), is an Array
+#  time_16    :string           default([]), is an Array
+#  time_19    :string           default([]), is an Array
+#  time_21    :string           default([]), is an Array
+#  user_id    :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+#
 class Schedule < ApplicationRecord
   belongs_to :user
   has_many :schedule_subjects
@@ -5,6 +23,7 @@ class Schedule < ApplicationRecord
 
   SCHEDULES = %i[time_8 time_10 time_12 time_14 time_16 time_19 time_21].freeze
 
+  # Itera pela grade para encontrar um dado subject e quando encontrado limpa o campo
   def find_and_remove_subject(subject)
     SCHEDULES.each do |schedule|
       send(schedule).each_with_index do |_day, i|
@@ -15,6 +34,7 @@ class Schedule < ApplicationRecord
     schedule_subjects.find_by(subject_id: subject_id).destroy
   end
 
+  # Remove um subject de um local da grade se corresponder ao subject buscado
   def remove_subject(schedule, subject, index)
     send(schedule)[index] = nil if send(schedule)[index] == subject
     save

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: subjects
+#
+#  id         :bigint           not null, primary key
+#  code       :integer
+#  name       :string
+#  credits    :string
+#  area       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Subject < ApplicationRecord
   has_one :rating
   has_and_belongs_to_many :schedules

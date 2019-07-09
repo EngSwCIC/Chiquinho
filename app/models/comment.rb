@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id                   :bigint           not null, primary key
+#  content              :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  user_id              :bigint
+#  professor_subject_id :bigint
+#  subject_id           :bigint
+#
+
 class Comment < ApplicationRecord
   belongs_to :user
   has_many :user_like_comments
