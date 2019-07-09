@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: %i[show edit update destroy]
 
   # GET /courses
   # GET /courses.json
@@ -14,16 +14,13 @@ class CoursesController < ApplicationController
     @obrigatorias = []
     @optativas = []
     @subjects.each do |subject|
-      if subject.course_subjects.find_by(course_id: @course.id).kind == "obrigatória"
+      if subject.course_subjects.find_by(course_id: @course.id).kind == 'obrigatória'
         @obrigatorias << subject
       else
         @optativas << subject
       end
     end
-    if @course.professors_id != nil
-      @coordinator = Professor.find_by(id: @course.professors_id)
-    end
-
+    @coordinator = Professor.find_by(id: @course.professors_id) unless @course.professors_id.nil?
   end
 
   # GET /courses/new
@@ -32,8 +29,7 @@ class CoursesController < ApplicationController
   end
 
   # GET /courses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /courses
   # POST /courses.json
@@ -81,13 +77,14 @@ class CoursesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def course_params
-      params.require(:course).permit(:kind, :code, :name, :turn, :type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def course_params
+    params.require(:course).permit(:kind, :code, :name, :turn, :type)
+  end
 end

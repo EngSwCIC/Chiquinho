@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  before_action :require_current_user,only: [:update_user_schedule,:clean_user_schedule]
+  before_action :require_current_user, only: %i[update_user_schedule clean_user_schedule]
   # skip_before_action :verify_authenticity_token, only: [:update_user_schedule]
   require 'i18n'
 
@@ -22,71 +22,67 @@ class MainController < ApplicationController
 
   def clean_user_schedule
     current_user.schedule.delete
-    current_user.schedule = Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
+    current_user.schedule = Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
 
-    flash[:notice] = "Grade horária apagada."
+    flash[:notice] = 'Grade horária apagada.'
     redirect_to user_schedule_path
   end
 
   def update_user_schedule
-    current_user.schedule ||= Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))
+    current_user.schedule ||= Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
 
-    mater = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:name].downcase)}%")
+    mater = Subject.where('unaccent(lower(name)) LIKE ?', "%#{I18n.transliterate(params[:name].downcase)}%")
     mater.each do |mat|
       puts mat.name
     end
     if mater.length == 1
       current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = mater.first.name
-      if !(current_user.schedule.subjects.any?{ |m| m.name == mater.first.name })
+      unless current_user.schedule.subjects.any? { |m| m.name == mater.first.name }
         current_user.schedule.subjects << mater.first
       end
       respond_to do |format|
         if current_user.schedule.save
-          format.html { redirect_to user_schedule_path, notice: "Grade Atualizada."}
-          format.js { @subject = "ola" }
+          format.html { redirect_to user_schedule_path, notice: 'Grade Atualizada.' }
+          format.js { @subject = 'ola' }
           format.json
         else
-          format.html { redirect_to user_schedule_path, danger: "Erro ao Atualizar."}
-          format.js { @subject = "ola" }
+          format.html { redirect_to user_schedule_path, danger: 'Erro ao Atualizar.' }
+          format.js { @subject = 'ola' }
           format.json
         end
       end
     else
-      if mater.length == 0
+      if mater.empty?
         respond_to do |format|
-          format.html { redirect_to user_schedule_path,flash: {danger: "Matéria não encontrada."} }
+          format.html { redirect_to user_schedule_path, flash: { danger: 'Matéria não encontrada.' } }
         end
       else
         respond_to do |format|
-          format.html { redirect_to user_schedule_path,flash: {danger: "Mais de uma matéria encontrada. Tente especificar mais o nome."} }
+          format.html { redirect_to user_schedule_path, flash: { danger: 'Mais de uma matéria encontrada. Tente especificar mais o nome.' } }
         end
       end
     end
   end
 
   def search_subject
-    if params[:professor] == nil
+    if params[:professor].nil?
       @subjects = Subject.where("subjects.name LIKE '%" + params[:name].upcase + "%'")
-    elsif params[:name] != "" || params[:professor] != "" || params[:area] != "" || params[:creditos] != "" ||  params[:codigo] != "" 
-      pesquisa = ""
-      if(params[:creditos] != "")
-        pesquisa = pesquisa + " AND subjects.credits LIKE '00"+ params[:creditos] + "%' "
-      end
-      if(params[:codigo] != "")
-        pesquisa = pesquisa + " AND subjects.code = " + params[:codigo]
-      end
+    elsif params[:name] != '' || params[:professor] != '' || params[:area] != '' || params[:creditos] != '' || params[:codigo] != ''
+      pesquisa = ''
+      pesquisa = pesquisa + " AND subjects.credits LIKE '00" + params[:creditos] + "%' " if params[:creditos] != ''
+      pesquisa = pesquisa + ' AND subjects.code = ' + params[:codigo] if params[:codigo] != ''
       @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%'")
-    else 
-      flash[:danger] = "Nenhum filtro aplicado"
-      redirect_to root_path  
-    end                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    else
+      flash[:danger] = 'Nenhum filtro aplicado'
+      redirect_to root_path
+    end
   end
 
   private
 
   def require_current_user
     if current_user.nil?
-      flash[:danger] = "Apenas próprio usuário tem acesso à isso."
+      flash[:danger] = 'Apenas próprio usuário tem acesso à isso.'
       redirect_to root_path
     end
   end

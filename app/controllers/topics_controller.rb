@@ -9,9 +9,9 @@ class TopicsController < ApplicationController
     forum = Forum.find_by(course_id: params[:course_id])
     @topic.forum_id = forum.id
     if @topic.save
-        redirect_to course_forums_path(params[:course_id])
+      redirect_to course_forums_path(params[:course_id])
     else
-        render :new
+      render :new
     end
   end
 
@@ -25,10 +25,9 @@ class TopicsController < ApplicationController
     end
   end
 
-  
   private
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
 
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
 end

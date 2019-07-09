@@ -15,7 +15,8 @@ class StudyMaterialsController < ApplicationController
   end
 
   private
-    def study_material_params
-      params.require(:study_material).permit(:name, :file, :subject_id, :description)
-    end
+
+  def study_material_params
+    params.require(:study_material).permit(:name, :file, :subject_id, :description)
+  end
 end
