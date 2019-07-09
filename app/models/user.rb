@@ -34,8 +34,8 @@ class User < ApplicationRecord
   has_many :professor_subjects, through: :professor_subject_users
 
   validates :matricula, presence: true
-  validates :first_name,presence: true
-  validates :last_name,presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -48,12 +48,12 @@ class User < ApplicationRecord
 
   def create_user_schedule
     self.schedule = Schedule.new
-    self.schedule.time_8 = Array.new(6)
-    self.schedule.time_10 = Array.new(6)
-    self.schedule.time_12 = Array.new(6)
-    self.schedule.time_14 = Array.new(6)
-    self.schedule.time_16 = Array.new(6)
-    self.schedule.time_19 = Array.new(6)
-    self.schedule.time_21 = Array.new(6)
+    schedule.time_8 = Array.new(6)
+    schedule.time_10 = Array.new(6)
+    schedule.time_12 = Array.new(6)
+    schedule.time_14 = Array.new(6)
+    schedule.time_16 = Array.new(6)
+    schedule.time_19 = Array.new(6)
+    schedule.time_21 = Array.new(6)
   end
 end
