@@ -80,6 +80,7 @@ group :development do
   gem 'metric_fu-Saikuro'
   gem 'flog'
   gem 'annotate'
+  gem 'rubocop', require: false
 end
 
 
