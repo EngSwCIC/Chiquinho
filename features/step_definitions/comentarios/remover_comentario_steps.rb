@@ -15,10 +15,6 @@ Quando("eu clicar no botão de remover comentário") do
   click_link "Deletar"
 end
 
-Então("o comentário deve ser removido") do
+Então("Na pagina do topico o comentário deve ser removido") do
   expect(page).to have_content("O comentário foi removido com sucesso.")
-end
-
-Então("devo ir para a página do tópico atual") do
-  expect(current_path).to eq(course_forum_topic_path(@course.id, @course.forum, @topic.id))
 end
