@@ -13,6 +13,13 @@ class MainController < ApplicationController
   def schedule
     @grade = current_user.schedule
   end
+
+  def clear_subject
+    current_user.schedule.find_and_remove_subject(params[:name]) if params[:name]
+
+    redirect_to user_schedule_path
+  end
+
   def clean_user_schedule
     current_user.schedule.delete
     current_user.schedule = Schedule.new(time_8: Array.new(6),time_10: Array.new(6),time_12: Array.new(6),time_14: Array.new(6),time_16: Array.new(6),time_19: Array.new(6),time_21: Array.new(6))

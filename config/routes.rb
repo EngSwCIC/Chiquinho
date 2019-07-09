@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'topics/new'
+  get 'topics/create'
+  get 'forums/show'
   resources :subjects do
     resources :professors, :controller => :professor_subjects
   end
@@ -9,9 +13,11 @@ Rails.application.routes.draw do
       resource :topics
     end
   end
+
   resources :department, only: [:index, :show]
   resources :professors
   resources :courses
+
   get 'course/:id/professors', to: "courses#course_professors", as: "course_professors"
   resources :subjects do
     resources :study_materials, only: [:create, :new]
@@ -19,6 +25,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
   devise_for :users, :controllers => { registrations: 'registrations/registrations' }
   root to: 'main#index'
+  post '/clear_subject',to: "main#clear_subject",as: "clear_subject"
   post '/update_user_schedule',to: "main#update_user_schedule",as: "update_user_schedule"
   post '/update_user_professor_subject_rating',to: "professor_subjects#update_user_professor_subject_rating",as: "update_user_professor_subject_rating"
   get '/clean_user_schedule',to: "main#clean_user_schedule",as: "clean_user_schedule"
