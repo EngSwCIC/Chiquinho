@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :forum do
-    course nil
+    course { nil }
   end
 end
