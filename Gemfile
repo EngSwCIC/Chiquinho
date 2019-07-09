@@ -79,6 +79,7 @@ group :development do
   gem 'rails-erd'
   gem 'metric_fu-Saikuro'
   gem 'flog'
+  gem 'annotate'
 end
 
 
