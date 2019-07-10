@@ -31,30 +31,21 @@ class TopicsController < ApplicationController
 
   def update
     if @topic.user_id == current_user.id
-      respond_to do |format|
         if @topic.update(topic_params)
-          format.html { redirect_to course_forum_path(params[:course_id], params[:forum_id]), notice: 'Topic was successfully updated.' }
-          format.json { render :show, status: :ok, location: @topic }
+          redirect_to course_forum_path(params[:course_id], params[:forum_id]), notice: 'Topic was successfully updated.' 
         else
-          format.html { render :edit }
-          format.json { render json: @topic.errors, status: :unprocessable_entity }
+          render :edit
         end 
-      end
     end
   end
+  
 
   def destroy
     if @topic.user_id == current_user.id 
       @topic.destroy
-      respond_to do |format|
-        format.html { redirect_to course_forum_path(params[:course_id],params[:forum_id]), notice: 'O tópico foi removido com sucesso.' }
-        format.json { head :no_content }
-      end
+      redirect_to course_forum_path(params[:course_id],params[:forum_id]), notice: 'O tópico foi removido com sucesso.' 
     else
-      respond_to do |format|
-        format.html { redirect_to course_forum_path(params[:course_id],params[:forum_id]), notice: 'O tópico não foi removido com sucesso!' }
-        format.json { head :no_content }
-      end
+      redirect_to course_forum_path(params[:course_id],params[:forum_id]), notice: 'O tópico não foi removido com sucesso!' 
     end
   end
 
