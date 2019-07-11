@@ -127,6 +127,7 @@ RSpec.describe CommentsController, type: :controller do
                 end
                 it "não edita o comentário" do
                     @comment.reload
+                    expect(response).to have_http_status(204)
                     expect(@comment.content).to eq("Conteudo")
                 end 
             end

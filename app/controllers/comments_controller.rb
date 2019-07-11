@@ -7,10 +7,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comments_params)
     @comment[:subject_id] = params[:comment][:subject_id]
     if @comment.save
-      respond_to do |format|
-        format.html {redirect_to request.referrer}
-        format.json
-      end
+        redirect_to request.referrer
     else
       flash[:error] = 'Não foi possível salvar seu comentário'
       redirect_to request.referrer
@@ -20,15 +17,9 @@ class CommentsController < ApplicationController
   def destroy
     if @comment.user_id == current_user.id 
       @comment.destroy
-      respond_to do |format|
-        format.html { redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário foi removido com sucesso.' }
-        format.json { head :no_content }
-      end
+        redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário foi removido com sucesso.'
     else
-      respond_to do |format|
-        format.html { redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário não foi removido!' }
-        format.json { head :no_content }
-      end
+        redirect_to course_forum_topic_path(params[:course_id],params[:forum_id], params[:topic_id]), notice: 'O comentário não foi removido.'
     end
   end
 
@@ -38,14 +29,8 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.user_id == current_user.id
-      respond_to do |format|
-        if @comment.update(comments_params)
-          format.html { redirect_to course_forum_topic_path(params[:course_id], params[:forum_id], params[:topic_id]), notice: 'comment was successfully updated.' }
-          format.json { render :show, status: :ok, location: @comment }
-        else
-          format.html { render :edit }
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-        end 
+      if @comment.update(comments_params)
+        redirect_to course_forum_topic_path(params[:course_id], params[:forum_id], params[:topic_id]), notice: 'comment was successfully updated.'
       end
     end
   end

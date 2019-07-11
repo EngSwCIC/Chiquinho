@@ -37,11 +37,11 @@ class MainController < ApplicationController
         if current_user.schedule.save
           format.html { redirect_to user_schedule_path, notice: "Grade Atualizada."}
           format.js { @subject = "ola" }
-          format.json
+          #format.json
         else
           format.html { redirect_to user_schedule_path, danger: "Erro ao Atualizar."}
           format.js { @subject = "ola" }
-          format.json
+          #format.json
         end
       end
     else
@@ -56,6 +56,7 @@ class MainController < ApplicationController
       end
     end
   end
+
 
   def search_subject
     @subjects = Subject.where("unaccent(lower(name)) LIKE ?", "%#{I18n.transliterate(params[:name].downcase)}%")

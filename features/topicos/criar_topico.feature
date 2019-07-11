@@ -10,7 +10,7 @@ Funcionalidade: Criar um novo tópico dentro do fórum do curso
   Cenario: Adicionar um novo tópico ao fórum
     Dado que eu tenha me cadastrado e me autenticado
     Dado que estou na página do curso de "CIÊNCIA DA COMPUTAÇÃO"
-    Quando eu clicar no botão Forum
+    Quando eu clicar no botão de Forum
     E eu pressionar o botão Criar novo tópico
     E eu escrever no formulario:
     |title|Evasão no Curso de CiC|

@@ -10,7 +10,7 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-6">
-              <%= form_for @topic, url: course_forum_topic_path(@forum,@forum,@topic) do |f| %>
+              <%= form_for @topic, url: course_forum_topic_path(@forum.course,@forum,@topic) do |f| %>
                 <%= f.label :title %><br />
                 <%= f.text_field :title, id: :title, class: "form-control" %><br />
                 <%= f.label :description %><br />
