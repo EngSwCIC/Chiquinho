@@ -1,19 +1,30 @@
-<table>
-    <thead>
+<div class="panel-body">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
         <tr>
-            <th>Título</th>
-            <th>Descrição</th>
+          <th>#</th>
+          <th>#forum</th>
+          <th>#curso</th>
+          <th>Título</th>
+          <th>Descrição</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr>
-            <% @forum.topics.each do |topic| %>
-                <tr>
-                    <td><%= topic.title %></td>
-                    <td><%= topic.description %></td>
-                </tr>
-            <% end %>
+          <% @forum.topics.each do |topic| %>
+            <tr>
+              <td><%= topic.id %></td>
+              <td><%= topic.forum_id %></td>
+              <td><%= topic.forum.course_id %></td>
+              <td><%= topic.title %></td>
+              <td><%= topic.description %></td>
+              <td><%= link_to 'Deletar', course_forums_topics_path(topic.forum_id), method: :delete%>
+            </tr>
+          <% end %>
         </tr>
-    </tbody>
-</table>
-<%= link_to 'Criar novo tópico',new_course_forums_topics_path %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%= link_to 'Criar novo tópico',new_course_forums_topics_path%>

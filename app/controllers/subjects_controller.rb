@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_subject, only: %i[show edit update destroy]
 
   # GET /subjects
   # GET /subjects.json
@@ -16,7 +16,7 @@ class SubjectsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = Comment.where(subject_id: set_subject.id)
-    #@professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
+    # @professors_subject = ProfessorSubject.where(subject_id: @subject.id).where(professor_id: nil)
     @studyMaterials = StudyMaterial.where(subject_id: @subject.id)
     @averages = @subject.get_avg
   end
@@ -27,8 +27,7 @@ class SubjectsController < ApplicationController
   end
 
   # GET /subjects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /subjects
   # POST /subjects.json
@@ -71,13 +70,14 @@ class SubjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def subject_params
-      params.require(:subject).permit(:code, :name, :credits, :area)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subject
+    @subject = Subject.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def subject_params
+    params.require(:subject).permit(:code, :name, :credits, :area)
+  end
 end

@@ -64,11 +64,12 @@
               </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id='subjects-list'>
               <% current_user.schedule.subjects.each do |materia| %>
                 <tr>
                   <td><%= materia.name %></td>
                   <td><%= materia.credits %></td>
+                  <td><%= link_to "<i class='fa fa-trash'></i>".html_safe, "", class: "btn btn-secondary" %> </td>
                 </tr>
                 <% total_credits += (materia.credits[2].to_i + materia.credits[6].to_i) %>
               <% end %>
@@ -167,8 +168,8 @@
           </div>
           <br>
           <h4 align="center">
-            <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas],total_credits*0.00) %>
-            <% media =  (@grade.get_avg[:trabalhos] + @grade.get_avg[:provas] + @grade.get_avg[:tarefas])/3.0 %>
+            <%= dificuldade_semestre_frase(@schedule.get_avg[:trabalhos],@schedule.get_avg[:provas],@schedule.get_avg[:tarefas],total_credits*0.00) %>
+            <% media =  (@schedule.get_avg[:trabalhos] + @schedule.get_avg[:provas] + @schedule.get_avg[:tarefas])/3.0 %>
           </h4>
           <p align="center">Sua média: <%= media + (total_credits*0.00) %>
           </p>
@@ -208,9 +209,9 @@
             datasets: [{
                 label: '',
                 data: [
-                    <%= @grade.get_avg[:trabalhos]%>,
-                    <%= @grade.get_avg[:provas]%>,
-                    <%= @grade.get_avg[:tarefas] %>
+                    <%= @schedule.get_avg[:trabalhos]%>,
+                    <%= @schedule.get_avg[:provas]%>,
+                    <%= @schedule.get_avg[:tarefas] %>
                 ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -244,6 +245,7 @@
 <script>
     var url = '<%= subjects_path %>.json';
     var url_schedule = '<%= update_user_schedule_path %>';
+    var url_clear_subject = '<%= clear_subject_path %>';
     var materias;
 
     var id_td;
@@ -251,7 +253,7 @@
     var time_td;
     var materia_name;
     $.get(url,function (data) {
-        console.log(data);
+        // console.log(data);
         materias = data;
     });
     // console.log(materias);
@@ -310,12 +312,12 @@
     })
 
     $("#table-grade").bind("DOMSubtreeModified",function(){
-        console.log("oiers");
-        console.log(time_td);
-        console.log(id_td);
-        console.log(column_td);
+        // console.log("oiers");
+        // console.log(time_td);
+        // console.log(id_td);
+        // console.log(column_td);
         materia_name = $("#"+id_td).html();
-        console.log(materia_name);
+        // console.log(materia_name);
         $.ajax({
             type: "POST",
             url: url_schedule,
@@ -330,5 +332,24 @@
             }
         });
     });
+
+
+    $("#subjects-list").on("click",".btn",function () {
+      subjectName = $(this).closest('tr').find('td:first-child').text()
+
+      $.ajax({
+          type: "POST",
+          url: url_clear_subject,
+          headers: {
+              'X-Transaction': 'POST Example',
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+              name: subjectName
+          }
+      });
+
+
+    })
 
 </script>
