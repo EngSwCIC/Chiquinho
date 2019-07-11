@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :professor_subject_users
   has_many :professor_subjects, through: :professor_subject_users
   has_many :topics
+  has_many :responses
 
   validates :matricula, presence: true
   validates :first_name,presence: true

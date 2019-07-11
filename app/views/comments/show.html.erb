@@ -1,0 +1,43 @@
+  <div class="card" style="margin-top: 10px">
+    <h5 class="card-header">
+      <i class="fa fa-user-circle"><%= @comment.user.full_name%></i>
+      <div style="padding-left:1px">
+    </h5>
+    <div class="card-body">
+      <div class="comments">
+        <h5> <%= @comment.content %> </h5>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-top: 10px;">
+    <h5 class="card-header">
+      Respostas
+    </h5>
+    <div class="card-body">
+      <div class="comments">
+        <% if flash[:error] %>
+          <div id='error_explanation'>
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+        <% @comment.responses.each do |response| %> 
+          <div class="comentario-header">
+            <i class="fa fa-user-circle"></i> <%= response.user.full_name %>
+          </div>
+          <div class="comentario-body">
+            <p><%= response.content %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form_with model: Response,url: responses_path,method: :created, local: true, remote: true do |t|%>
+        <div class="form-group">
+          <%= t.label :Responda_aqui %><br>
+          <%= t.text_area :content, class:"form-control"%><br>
+          <%= t.number_field :comment_id, class: "form-hidden", value: @comment.id, style: "display: none;" %>
+          <%= t.submit "Enviar Resposta", class: "btn btn-primary btn-md" %>
+        </div>
+      <% end %>
+    </div>
+  </div>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy, :update, :edit]
   before_action :set_comment, only: [:destroy, :update, :edit]
 
   def create
@@ -12,6 +12,11 @@ class CommentsController < ApplicationController
       flash[:error] = 'Não foi possível salvar seu comentário'
       redirect_to request.referrer
     end
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
+    
   end
 
   def destroy
