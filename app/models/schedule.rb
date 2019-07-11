@@ -23,6 +23,24 @@ class Schedule < ApplicationRecord
   # Horarios de inicio da grade
   SCHEDULES = %i[time_8 time_10 time_12 time_14 time_16 time_19 time_21].freeze
 
+  after_initialize :initialize_fields
+
+  def initialize_fields
+    self.time_8 = Array.new(6)
+    self.time_10 = Array.new(6)
+    self.time_12 = Array.new(6)
+    self.time_14 = Array.new(6)
+    self.time_16 = Array.new(6)
+    self.time_19 = Array.new(6)
+    self.time_21 = Array.new(6)
+  end
+
+  def reset
+    SCHEDULES.each do |schedule|
+      send(schedule).map! { |t| t = nil }
+    end
+  end
+
   # Itera pela grade para encontrar um dado subject e quando encontrado limpa o campo
   def find_and_remove_subject(subject)
     SCHEDULES.each do |schedule|

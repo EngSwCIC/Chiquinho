@@ -21,15 +21,14 @@ class MainController < ApplicationController
   end
 
   def clean_user_schedule
-    current_user.schedule.delete
-    current_user.schedule = Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
+    current_user.schedule.reset
 
     flash[:notice] = 'Grade horária apagada.'
     redirect_to user_schedule_path
   end
 
   def update_user_schedule
-    current_user.schedule ||= Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
+    current_user.schedule ||= Schedule.new
 
     mater = Subject.where('unaccent(lower(name)) LIKE ?', "%#{I18n.transliterate(params[:name].downcase)}%")
     mater.each do |mat|
