@@ -65,8 +65,12 @@ class MainController < ApplicationController
   end
 
   def search_subject
-      @subjects = Subject.joins(:professors).find_by_name(params[:name]).find_by_professor(params[:professor]).find_by_area(params[:area]).find_by_creditos(params[:creditos]).find_by_code(params[:codigo])
-      byebug
+    @subjects = Subject.joins(:professors)
+                       .find_by_name(params[:name])
+                       .find_by_professor(params[:professor])
+                       .find_by_area(params[:area])
+                       .find_by_creditos(params[:creditos])
+                       .find_by_code(params[:codigo])
   end
 
   private
