@@ -55,7 +55,7 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_area(area)
-    where("professors.name LIKE '%" + area.upcase + "%'")
+    where("subjects.area LIKE '%" + area.upcase + "%'")
   end
 
   def self.find_by_code(code)
