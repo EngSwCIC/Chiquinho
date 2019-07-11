@@ -25,6 +25,7 @@ class Schedule < ApplicationRecord
 
   after_initialize :initialize_fields
 
+  # Inicializa com os dias (inicialmente com valor nil)
   def initialize_fields
     self.time_8 = Array.new(6)
     self.time_10 = Array.new(6)
@@ -35,10 +36,17 @@ class Schedule < ApplicationRecord
     self.time_21 = Array.new(6)
   end
 
+  # Reseta os campos da grade
   def reset
     SCHEDULES.each do |schedule|
       send(schedule).map! { |t| t = nil }
     end
+  end
+
+  # Adiciona uma matéria na grade
+  def add_subject(time, day, subject)
+    send(time)[day] = subject.name
+    subjects << subject unless subjects.any? { |m| m.name == subject.name }
   end
 
   # Itera pela grade para encontrar um dado subject e quando encontrado limpa o campo
