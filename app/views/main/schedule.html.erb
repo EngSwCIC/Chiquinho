@@ -168,8 +168,8 @@
           </div>
           <br>
           <h4 align="center">
-            <%= dificuldade_semestre_frase(@grade.get_avg[:trabalhos],@grade.get_avg[:provas],@grade.get_avg[:tarefas],total_credits*0.00) %>
-            <% media =  (@grade.get_avg[:trabalhos] + @grade.get_avg[:provas] + @grade.get_avg[:tarefas])/3.0 %>
+            <%= dificuldade_semestre_frase(@schedule.get_avg[:trabalhos],@schedule.get_avg[:provas],@schedule.get_avg[:tarefas],total_credits*0.00) %>
+            <% media =  (@schedule.get_avg[:trabalhos] + @schedule.get_avg[:provas] + @schedule.get_avg[:tarefas])/3.0 %>
           </h4>
           <p align="center">Sua média: <%= media + (total_credits*0.00) %>
           </p>
@@ -209,9 +209,9 @@
             datasets: [{
                 label: '',
                 data: [
-                    <%= @grade.get_avg[:trabalhos]%>,
-                    <%= @grade.get_avg[:provas]%>,
-                    <%= @grade.get_avg[:tarefas] %>
+                    <%= @schedule.get_avg[:trabalhos]%>,
+                    <%= @schedule.get_avg[:provas]%>,
+                    <%= @schedule.get_avg[:tarefas] %>
                 ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
