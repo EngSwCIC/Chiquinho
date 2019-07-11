@@ -51,11 +51,11 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_professor(professor)
-    where("professors.name LIKE '%" + professor.upcase + "%'")
+    joins(:professors).where("unaccent(lower(professors.name)) LIKE '%" + professor.downcase + "%'")
   end
 
   def self.find_by_area(area)
-    where("subjects.area LIKE '%" + area.upcase + "%'")
+    where("unaccent(lower(subjects.area)) LIKE '%" + area.downcase + "%'")
   end
 
   def self.find_by_code(code)
