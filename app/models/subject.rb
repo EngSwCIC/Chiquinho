@@ -58,7 +58,11 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_code(code)
-    where(code: code.to_s)
+    if code.present? 
+      where(code: code.to_s) 
+    else
+      all  
+    end 
   end
 
   def self.find_by_creditos(creditos)
