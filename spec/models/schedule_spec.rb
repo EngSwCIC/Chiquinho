@@ -65,4 +65,23 @@ RSpec.describe Schedule, type: :model do
       end
     end
   end
+
+  describe '#reset' do
+    let(:empty_schedule) { Schedule.new }
+
+    before do
+      schedule.time_10[0] = 'Engenharia de Software'
+    end
+
+    it 'retorna uma grade vazia' do
+      schedule.reset
+      expect(schedule.time_8).to eq(empty_schedule.time_8)
+      expect(schedule.time_10).to eq(empty_schedule.time_10)
+      expect(schedule.time_12).to eq(empty_schedule.time_12)
+      expect(schedule.time_14).to eq(empty_schedule.time_14)
+      expect(schedule.time_16).to eq(empty_schedule.time_16)
+      expect(schedule.time_19).to eq(empty_schedule.time_19)
+      expect(schedule.time_21).to eq(empty_schedule.time_21)
+    end
+  end
 end
