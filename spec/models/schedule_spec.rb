@@ -88,5 +88,9 @@ RSpec.describe Schedule, type: :model do
     it 'return schedule with subject added' do
       expect(schedule.time_8[2]).to eq(subject.name)
     end
+
+    it 'add subject in schedule subjects list' do
+      expect(schedule.subjects).to include(subject)
+    end
   end
 end
