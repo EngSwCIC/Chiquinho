@@ -20,6 +20,7 @@ class Subject < ApplicationRecord
   has_many :study_materials
   has_many :professors, through: :professor_subjects
   has_many :comments
+
   def get_avg
     trabalhos = 0
     provas = 0
@@ -46,7 +47,7 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_name(name)
-    where("subjects.name LIKE '%" + name.upcase + "%'")
+    where('unaccent(lower(name)) LIKE ?', "%#{name.downcase}%")
   end
 
   def self.find_by_professor(professor)
@@ -54,19 +55,18 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_area(area)
-    where("professors.name LIKE '%" + area.upcase + "%'")
+    where("subjects.area LIKE '%" + area.upcase + "%'")
   end
 
   def self.find_by_code(code)
-    if code.present? 
-      where(code: code.to_s) 
+    if code.present?
+      where(code: code.to_s)
     else
-      all  
-    end 
+      all
+    end
   end
 
   def self.find_by_creditos(creditos)
     where("subjects.credits LIKE '00" + creditos.to_s + "%' ")
   end
-
 end

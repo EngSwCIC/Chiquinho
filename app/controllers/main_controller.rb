@@ -1,7 +1,7 @@
 class MainController < ApplicationController
   before_action :require_current_user, only: %i[update_user_schedule clean_user_schedule]
+  before_action :set_schedule, only: %i[schedule clear_subject clean_user_schedule update_user_schedule]
   # skip_before_action :verify_authenticity_token, only: [:update_user_schedule]
-  require 'i18n'
 
   def index
     @users = User.all
@@ -10,65 +10,61 @@ class MainController < ApplicationController
     @subjects = Subject.all
   end
 
-  def schedule
-    @grade = current_user.schedule
-  end
+  def schedule; end
 
   def clear_subject
-    current_user.schedule.find_and_remove_subject(params[:name]) if params[:name]
+    @schedule.find_and_remove_subject(params[:name]) if params[:name]
 
     redirect_to user_schedule_path
   end
 
   def clean_user_schedule
-    current_user.schedule.delete
-    current_user.schedule = Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
+    @schedule.reset
 
     flash[:notice] = 'Grade horária apagada.'
     redirect_to user_schedule_path
   end
 
   def update_user_schedule
-    current_user.schedule ||= Schedule.new(time_8: Array.new(6), time_10: Array.new(6), time_12: Array.new(6), time_14: Array.new(6), time_16: Array.new(6), time_19: Array.new(6), time_21: Array.new(6))
+    @schedule ||= Schedule.new
 
-    mater = Subject.where('unaccent(lower(name)) LIKE ?', "%#{I18n.transliterate(params[:name].downcase)}%")
-    mater.each do |mat|
-      puts mat.name
-    end
-    if mater.length == 1
-      current_user.schedule["time_#{params[:time]}"][params[:day].to_i] = mater.first.name
-      unless current_user.schedule.subjects.any? { |m| m.name == mater.first.name }
-        current_user.schedule.subjects << mater.first
-      end
+    @subjects = Subject.find_by_name(params[:name])
+
+    if @subjects.length == 1
+      @schedule.add_subject("time_#{params[:time]}", params[:day].to_i, @subjects.first)
       respond_to do |format|
-        if current_user.schedule.save
+        if @schedule.save
           format.html { redirect_to user_schedule_path, notice: 'Grade Atualizada.' }
-          format.js { @subject = 'ola' }
-          format.json
         else
           format.html { redirect_to user_schedule_path, danger: 'Erro ao Atualizar.' }
-          format.js { @subject = 'ola' }
-          format.json
         end
       end
+    elsif @subjects.empty?
+      respond_to do |format|
+        format.html { redirect_to user_schedule_path, flash: { danger: 'Matéria não encontrada.' } }
+      end
     else
-      if mater.empty?
-        respond_to do |format|
-          format.html { redirect_to user_schedule_path, flash: { danger: 'Matéria não encontrada.' } }
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to user_schedule_path, flash: { danger: 'Mais de uma matéria encontrada. Tente especificar mais o nome.' } }
-        end
+      respond_to do |format|
+        format.html { redirect_to user_schedule_path, flash: { danger: 'Mais de uma matéria encontrada. Tente especificar mais o nome.' } }
       end
     end
   end
 
   def search_subject
-      @subjects = Subject.joins(:professors).find_by_name(params[:name]).find_by_professor(params[:professor]).find_by_area(params[:area]).find_by_creditos(params[:creditos]).find_by_code(params[:codigo])
+
+    @subjects = Subject.joins(:professors)
+                       .find_by_name(params[:name])
+                       .find_by_professor(params[:professor])
+                       .find_by_area(params[:area])
+                       .find_by_creditos(params[:creditos])
+                       .find_by_code(params[:codigo])
   end
 
   private
+
+  def set_schedule
+    @schedule = current_user.schedule
+  end
 
   def require_current_user
     if current_user.nil?
