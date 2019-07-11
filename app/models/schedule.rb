@@ -41,23 +41,23 @@ class Schedule < ApplicationRecord
   end
 
   def get_avg
-    @trabalhos = 0
-    @provas = 0
-    @tarefas = 0
     qtd_materias = subjects.length
-    if qtd_materias > 0
-      subjects.each do |subject|
-        @trabalhos += subject.get_avg[:trabalhos]
-        @provas += subject.get_avg[:provas]
-        @tarefas += subject.get_avg[:tarefas]
-      end
-
-      @trabalhos /= qtd_materias
-      @provas /= qtd_materias
-      @tarefas /= qtd_materias
-      { trabalhos: @trabalhos.round(2), provas: @provas.round(2), tarefas: @tarefas.round(2) }
+    if qtd_materias.positive?
+      { trabalhos: avg_trabalhos, provas: avg_provas, tarefas: avg_tarefas }
     else
       { trabalhos: 0, provas: 0, tarefas: 0 }
     end
+  end
+
+  def avg_trabalhos
+    subjects.map { |s| s.get_avg[:trabalhos] }.sum.round(2)
+  end
+
+  def avg_provas
+    subjects.map { |s| s.get_avg[:provas] }.sum.round(2)
+  end
+
+  def avg_tarefas
+    subjects.map { |s| s.get_avg[:tarefas] }.sum.round(2)
   end
 end
