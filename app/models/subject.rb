@@ -47,7 +47,7 @@ class Subject < ApplicationRecord
   end
 
   def self.find_by_name(name)
-    where('unaccent(lower(name)) LIKE ?', "%#{name.downcase}%")
+    where('unaccent(lower(subjects.name)) LIKE ?', "%#{name.downcase}%")
   end
 
   def self.find_by_professor(professor)
