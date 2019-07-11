@@ -25,4 +25,16 @@ RSpec.describe Subject, type: :model do
       expect(Subject.find_by_area('AC').count).to eq(2)
     end
   end
+
+  describe '#find_by_code' do
+    it 'return subject by code' do
+      expect(Subject.find_by_code('116441').count).to eq(1)
+    end
+  end
+
+  describe '#find_by_creditos' do
+    it 'return subjects by creditos' do
+      expect(Subject.find_by_creditos('4').count).to eq(2)
+    end
+  end
 end
