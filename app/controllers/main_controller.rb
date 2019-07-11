@@ -65,17 +65,7 @@ class MainController < ApplicationController
   end
 
   def search_subject
-    if params[:professor].nil?
-      @subjects = Subject.where("subjects.name LIKE '%" + params[:name].upcase + "%'")
-    elsif params[:name] != '' || params[:professor] != '' || params[:area] != '' || params[:creditos] != '' || params[:codigo] != ''
-      pesquisa = ''
-      pesquisa = pesquisa + " AND subjects.credits LIKE '00" + params[:creditos] + "%' " if params[:creditos] != ''
-      pesquisa = pesquisa + ' AND subjects.code = ' + params[:codigo] if params[:codigo] != ''
-      @subjects = Subject.joins(:professors).where("subjects.name LIKE '%" + params[:name].upcase + "%' AND professors.name LIKE '%" + params[:professor].upcase + "%' AND subjects.area LIKE '%" + params[:area].upcase + "%'")
-    else
-      flash[:danger] = 'Nenhum filtro aplicado'
-      redirect_to root_path
-    end
+      @subjects = Subject.joins(:professors).find_by_name(params[:name]).find_by_professor(params[:professor]).find_by_area(params[:area]).find_by_code(params[:codigo]).find_by_creditos(params[:creditos])
   end
 
   private

@@ -44,4 +44,25 @@ class Subject < ApplicationRecord
     averages = get_avg
     (averages[:trabalhos] + averages[:provas] + averages[:tarefas]) / 3.0
   end
+
+  def self.find_by_name(name)
+    where("subjects.name LIKE '%" + name.upcase + "%'")
+  end
+
+  def self.find_by_professor(professor)
+    where("professors.name LIKE '%" + professor.upcase + "%'")
+  end
+
+  def self.find_by_area(area)
+    where("professors.name LIKE '%" + area.upcase + "%'")
+  end
+
+  def self.find_by_code(code)
+    where(code: code.to_s)
+  end
+
+  def self.find_by_creditos(creditos)
+    where("subjects.credits LIKE '00" + creditos.to_s + "%' ")
+  end
+
 end
