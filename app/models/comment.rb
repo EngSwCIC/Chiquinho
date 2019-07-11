@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
   has_one :professor_subject
   has_one :subject
   has_one :topic
+  has_many :responses, :dependent => :delete_all
 
 
   cattr_accessor :current_user

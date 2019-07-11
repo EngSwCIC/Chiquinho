@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_152737) do
+ActiveRecord::Schema.define(version: 2019_07_11_034952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,16 @@ ActiveRecord::Schema.define(version: 2019_06_27_152737) do
     t.index ["subject_id"], name: "index_ratings_on_subject_id"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "comment_id"
+    t.index ["comment_id"], name: "index_responses_on_comment_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.string "time_8", default: [], array: true
     t.string "time_10", default: [], array: true
@@ -237,6 +247,8 @@ ActiveRecord::Schema.define(version: 2019_06_27_152737) do
   add_foreign_key "professors", "courses", column: "courses_id"
   add_foreign_key "professors", "departments", column: "departments_id"
   add_foreign_key "ratings", "subjects"
+  add_foreign_key "responses", "comments"
+  add_foreign_key "responses", "users"
   add_foreign_key "schedules", "users"
   add_foreign_key "study_materials", "subjects"
   add_foreign_key "study_materials", "users"

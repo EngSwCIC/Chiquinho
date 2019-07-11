@@ -41,7 +41,11 @@
           </div>
           <div class="comentario-body">
             <p><%= comment.content %></p>
+          <h6 class="comentario-header">
+            <%= link_to "Respostas", course_forum_topic_comment_path(@topic.forum.course, @topic.forum, @topic, comment)%>
+          </h6>
           </div>
+
         <% end %>
       </div>
 
